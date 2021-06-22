@@ -1,0 +1,47 @@
+#intor .imggg {
+    width           : 300px;
+    /* height       : 300px;
+    background-color: #aaa; */
+}
+
+#intor .imggg a {
+    /* display: block 讓元素以區塊的方式呈現 */
+    /* display: inline 讓所有文字或圖片均不換行 全都是同一行 */
+
+    /* block 區塊物件可以設定 寬 跟 高  */
+    /* inline 行物件 只能設定 寬 不能設定 高 */
+
+    /* inline-block 行物件內的區塊物件 */
+
+
+    /* div可以不設定 靠內容和內容稱 */
+    /* 寬度300 內框距離10px  底色灰*/
+    display         : block;
+    /* width        : 300px; */
+    padding         : 10px;
+    background-color: #aaa;
+
+
+}
+
+#intor .imggg img {
+    /* 圖片大小 100% */
+    width: 100%;
+}
+
+
+
+#intor .div22222 {
+    /* 改變成行物件  不會讓div占掉一整行 */
+    display         : inline;
+    background-color: burlywood;
+}
+
+#intor span{
+    display         : block;
+    width           : 300px;
+    height          : 200px;
+    background-color: coral;
+
+
+}
