@@ -1,0 +1,22 @@
+
+.box {
+    width: 900px;
+    margin: 0px auto;
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.item {
+    
+    width: 100%;
+    max-width: 280px;
+    margin: 0px 10px 10px;
+    
+    
+
+}
+
+.item img{
+    width: 100%;
+    vertical-align: top;
+}
