@@ -1,0 +1,42 @@
+.asd {
+  background-color: aqua;
+  width: 300px;
+  height: 300px;
+}
+
+.bbbb {
+  position: relative;
+}
+
+.aaaaaa {
+  display: block;
+  width: 100px;
+  height: 100px;
+  background-color: blueviolet;
+  text-align: center;
+  color: white;
+  position: absolute;
+  
+
+  /* transition: all 1s 0s cubic-bezier(0.66, -1.37, 0.34, 2.26); */
+}
+
+.aaaaaa:hover {
+  background-color: black;
+  /* opacity: 0%; */
+  /* transition: all 1s 0s cubic-bezier(0.66, -1.37, 0.34, 2.26); */
+  animation: ani 1s forwards;
+  /*角度 transform: rotate(45deg); */
+  
+}
+
+@keyframes ani {
+  0% {
+    opacity: 0%;
+    transform: translateY(-20%);
+  }
+  100% {
+    opacity: 100%;
+    transform:translateY(0%);
+  }
+}

@@ -1,0 +1,33 @@
+.topjumboimage{
+    background: url(https://i.pinimg.com/originals/ea/46/79/ea4679ef3d0bd1aded8dad18f83d8704.jpg)
+    no-repeat center center / cover;
+}
+
+
+/* .topjumboimage_2 {
+  background: url(https://advcloudfiles.advantech.com/web/Images/home/banners/home-large-1920x400/c1672509/Advantech-Homepage-KV-0108jpg)
+    no-repeat center center / cover;
+    
+} */
+
+.path {
+  background-color: #ccc;
+}
+
+.main-footer {
+  padding: 10px 0;
+  background-color: rgb(153, 153, 153);
+  color: #fff;
+}
+
+@keyframes image_animation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
