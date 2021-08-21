@@ -1,4 +1,84 @@
-* {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
     /* 字體 */
     font-family: "M PLUS Rounded 1c", sans-serif;
     font-family: "Noto Sans TC", sans-serif;
@@ -18,7 +98,6 @@ li {
 }
 
 
-/* 漢堡按鈕優化 */
 
 /*
 把bs的 navbar-toggler 預設的focus樣式全設回預設
@@ -26,30 +105,23 @@ li {
 */
 .navbar-toggler:focus {
     text-decoration: none;
-    outline        : auto;
-    box-shadow     : none;
+    outline: auto;
+    box-shadow:none;
 }
-
 .navbar-toggler:active {
     text-decoration: none;
     outline        : 0;
     box-shadow     : 0 0 0 0.25rem;
 }
-
 /* 漢堡按鈕優化結束 */
 
-
-
 /* 錨點 */
-/* .anchorPoint {
+.anchorPoint {
     display   : block;
     position  : relative;
     top       : -85.8px;
     visibility: hidden;
-} */
-/* 錨點結束 */
-
-
+}
 
 .headerImageBox {
     /* 首頁大圖往下推 */
@@ -60,34 +132,6 @@ li {
     /* 蓋掉bs圖片的 max-width */
     width: 100%;
 }
-
-/* 關於我們開始 */
-/* #aboutUs button {
-    width: auto;
-} */
-
-/* 關於我們結束 */
-
-
-
-/* 首頁業務導航按鈕縮圖 */
-/* @media screen and (min-width: 375px) {
-    #business_navigation img {
-        width : 38px;
-        height: 38px;
-    }
-}
-
-@media screen and (min-width: 768px) {
-    #business_navigation img {
-        width : 75px;
-        height: 75px;
-    }
-
-} */
-/* 首頁業務導航按鈕縮圖結束 */
-
-
 
 footer .logo {
     width: 250px;
