@@ -19,7 +19,7 @@ function makePastExperiencePhotoDiv() {
         if (a == 0) {
             // 檢查是否為第一個 如果是要加入active標籤
             dataBox = `
-            <div class="carousel-item active">
+                <div class="carousel-item active">
                     <div class="PastExperiencePhoto  text-center">
                         <img src="image/FakerLogo${a}.jpg" style="width: 200px;" alt="">
                         <p>說明文字</p>
@@ -48,4 +48,4 @@ function makePastExperiencePhotoDiv() {
 
 }
 
-makePastExperiencePhotoDiv();
+makePastExperiencePhotoDiv();   //執行製作歷年實績相片函式
