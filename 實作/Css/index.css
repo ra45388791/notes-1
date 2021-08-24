@@ -69,23 +69,25 @@ li {
 /* 關於我們結束 */
 
 
+/* 歷年實積內容放置區 */
+.achievementContent {
+    background-color: rgba(0, 0, 0, 0.500);
 
-/* 首頁業務導航按鈕縮圖 */
-/* @media screen and (min-width: 375px) {
-    #business_navigation img {
-        width : 38px;
-        height: 38px;
-    }
 }
 
-@media screen and (min-width: 768px) {
-    #business_navigation img {
-        width : 75px;
-        height: 75px;
-    }
+.achievementContent button {
+    opacity: 1;
 
-} */
-/* 首頁業務導航按鈕縮圖結束 */
+}
+
+.modal-header{
+    border: none;
+}
+
+
+
+
+/* 歷年實積內容放置區結束 */
 
 
 
