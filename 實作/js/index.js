@@ -6,6 +6,9 @@ let photoNameArray = []; //相片名稱
 const resultsPhotoButton = document.getElementsByClassName('resultsPhotoButton');
 const modalStorageArea = document.getElementById('modalStorageArea');
 
+
+
+
 //取得相片名子
 function getPhotoNameString() {
     const photoNameId = document.getElementsByTagName('template')[0];
@@ -30,9 +33,11 @@ function getPhotoNameString() {
             numberOfPhotos: photo,
             photoExtension: extension
         });
+        
 
     });
 
+    
 }
 getPhotoNameString();
 
@@ -66,7 +71,7 @@ function makePastExperiencePhotoDiv() {
                 <div class="carousel-item text-center active">
                     <button type="button" class="btn shadow-none " data-bs-toggle="modal"
                         data-bs-target="#${item.englishName}">
-                        <img src="image/logo/${item.chineseName}.${item.photoExtension}" style="width: ${photoSize}px; height: ${photoSize}px;" alt="">
+                        <img src="images/logo/${item.chineseName}.${item.photoExtension}" style="width: ${photoSize}px; height: ${photoSize}px;" alt="">
                         <p>${item.chineseName}</p>
                     </button>
                 </div>
@@ -77,7 +82,7 @@ function makePastExperiencePhotoDiv() {
                 <div class="carousel-item text-center">
                     <button type="button" class="btn shadow-none " data-bs-toggle="modal"
                         data-bs-target="#${item.englishName}">
-                        <img src="image/logo/${item.chineseName}.${item.photoExtension}" style="width: ${photoSize}px; height: ${photoSize}px;" alt="">
+                        <img src="images/logo/${item.chineseName}.${item.photoExtension}" style="width: ${photoSize}px; height: ${photoSize}px;" alt="">
                         <p>${item.chineseName}</p>
                     </button>
                 </div>
@@ -164,7 +169,7 @@ function makeModalStorageAreaDiv() {
         for (let a = 0; a < item.numberOfPhotos; a++) {     //根據當下item的相片數量製造幾次裝相片的div
             dataBox = `
                 <div class="col-6">
-                    <img src="image/photo/${item.chineseName}/${item.chineseName}${a}.${item.photoExtension}" style="width: ${ModalphotoSize}px;" alt="">
+                    <img src="images/photo/${item.chineseName}/${item.chineseName}${a}.${item.photoExtension}" style="width: ${ModalphotoSize}px;" alt="">
                 </div>
             `
             dataArray.push(dataBox);                //推至dataArray
@@ -182,8 +187,6 @@ function makeModalStorageAreaDiv() {
 
 makePastExperiencePhotoDiv();       //執行製作歷年實績相片函式
 makeModalStorageAreaDiv();          //執行歷年實績互動視窗內容函式
-
-
 
 
 
