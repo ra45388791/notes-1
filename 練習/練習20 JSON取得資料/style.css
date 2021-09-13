@@ -1,0 +1,8 @@
+#jsonContent div {
+    margin: 10px 10px;
+    border-bottom: solid 1px rgb(0, 0, 0);
+}
+#jsonContent p {
+    margin: 2px auto;
+}
+
