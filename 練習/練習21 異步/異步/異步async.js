@@ -21,5 +21,3 @@ btn.addEventListener('click', () => {
 worker.onmessage = function (e) {
     console.log(e.data.age);
 }
-
-console.log(document.cookie);
