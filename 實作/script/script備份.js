@@ -92,20 +92,8 @@ window.onload = function () {
 
 
 //**歷年實績區 開始 */
-const leftButton = document.getElementById('leftButton');       //左按紐
-const rightButton = document.getElementById('rightButton');     //右按紐
-
-//滾動條區
-const scrollLeftDiv = document.getElementById('scrollLeftDiv');  //照片按紐區
-const scrollLeftWidth = scrollLeftDiv.clientWidth;               // 滾動條區寬度
-//內容區
-const navDiv = document.querySelector('#carouselExampleControlsNoTouching>div>nav');
-//位置
-let divPosition = 0;
-
-
-
-//相片內容存放區位置
+//取得相片按鈕的div位置
+const resultsPhotoButton = document.getElementsByClassName('resultsPhotoButton');
 const modalStorageArea = document.getElementById('modalStorageArea');
 
 //取得相片名子
@@ -121,6 +109,7 @@ function getPhotoNameString() {
             if (xhr.status === 200) {
                 let protoDataArray = xhr.response;
                 makePastExperiencePhotoDiv(protoDataArray);
+                // console.log(protoDataArray);
             }
         }
     }
@@ -129,71 +118,58 @@ function getPhotoNameString() {
 getPhotoNameString();
 
 
+
 //製作相片按鈕
 function makePastExperiencePhotoDiv(event) {
+    /**
+     * 製造字串動態更改 img 元素中的相片編號
+     * 把每一次結果都加入dataArray中
+     * 把dataArray的內容變成string
+     * 再把變成字串的內容加入javaTestClass 的class標籤之下
+    */
+
+    let dataBox;            //暫時存放製作好的字串
+    let dataArray = [];     //製作好的字串會加入到這個宣告中
+
     //圖片大小
-    let photoSizeWidth;              //決定圖片大小
-    if (vw < 767) {
-        photoSizeWidth = 30;
-    } else if (vw < 1399) {
-        photoSizeWidth = 30;
+    let photoSize;              //決定圖片大小
+    if (vw <= 767) {            //檢查裝置大小 決定圖片大小
+        photoSize = 200;
     } else {
-        photoSizeWidth = 25;
+        photoSize = 400;
     };
 
     event.forEach(function (item, index) {
-        //製作存放box元素
-        let divBox = document.createElement('div');
-        //按紐
-        let buttonBox = document.createElement('button');
-        //圖片 內文
-        let imgBox = document.createElement('img');
-        let pBox = document.createElement('p');
-
-
-        //外框divBox
-        if (index === 0) {
-            divBox.classList.add('navClass', 'carousel-item', 'text-center', 'active');
-            divBox.style.left = `${divPosition}px`
-            divPosition += scrollLeftWidth;
+        if (index == 0) {
+            // 檢查是否為第一個 如果是要加入active標籤
+            dataBox = `
+                <div class="carousel-item text-center active">
+                    <button type="button" class="btn shadow-none " data-bs-toggle="modal"
+                        data-bs-target="#${item.englishName}">
+                        <img src="images/logo/${item.chineseName}.${item.photoExtension}" style="width: ${photoSize}px; height: ${photoSize}px;" alt="">
+                        <p>${item.chineseName}</p>
+                    </button>
+                </div>
+            `;
+            dataArray.push(dataBox);        //把結果推入陣列中
         } else {
-            divBox.classList.add('navClass', 'carousel-item', 'text-center');
-            divBox.style.left = `${divPosition}px`
-            divPosition += scrollLeftWidth;
-
-            //設定最後一個圖片的右邊寬度
-            if (index + 1 === event.length) {
-                let positionSet = document.createElement('div');
-                positionSet.style.position = 'absolute';
-                positionSet.style.right = '-25px';      //參數與圖片之間的寬度配合
-                positionSet.style.padding = '0.1px'
-                divBox.append(positionSet);
-            }
+            dataBox = `
+                <div class="carousel-item text-center">
+                    <button type="button" class="btn shadow-none " data-bs-toggle="modal"
+                        data-bs-target="#${item.englishName}">
+                        <img src="images/logo/${item.chineseName}.${item.photoExtension}" style="width: ${photoSize}px; height: ${photoSize}px;" alt="">
+                        <p>${item.chineseName}</p>
+                    </button>
+                </div>
+            `;
+            dataArray.push(dataBox);         //把結果推入陣列中
         }
-        //照片按紐
-        buttonBox.type = 'button';
-        buttonBox.classList.add('btn', 'shadow-none');
-        buttonBox.setAttribute('data-bs-toggle', 'modal');
-        buttonBox.setAttribute('data-bs-target', `#${item.englishName}`);
-        //圖片
-        imgBox.src = `images/logo/${item.chineseName}.${item.photoExtension}`
-        imgBox.style.width = `100%`;           //照片寬度
-        imgBox.style.height = `${photoSizeWidth}vw`; //照片高度
-        imgBox.alt = `${item.chineseName}圖片按紐`;
-        //內文
-        pBox.innerHTML = item.chineseName;
-        pBox.classList.add('fs-4')
-
-
-        //依序插入 divBox>按紐>圖片>內文
-        divBox.append(buttonBox);
-        buttonBox.append(imgBox);
-        buttonBox.append(pBox);
-
-        // navDiv元素 > divBox
-        navDiv.append(divBox);
     });
 
+
+
+    let getStringData = dataArray.join('');                 //把陣列資料轉成字串給getStringData
+    resultsPhotoButton[0].innerHTML = getStringData;    //把getStringData的內容取代javaTestClass中的內容
 
 
     makeModalStorageAreaDiv(event);
@@ -291,66 +267,6 @@ function makeModalStorageAreaDiv(event) {
     });
 
 }
-
-
-
-// 歷年實績區按紐
-//左
-leftButton.addEventListener('click', () => {
-    //按下按鈕後先將按鈕關起來
-    leftButton.disabled = true;
-
-    if (scrollLeftDiv.scrollLeft % scrollLeftWidth !== 0) {
-        //迴圈持續加 滾動條寬度 直到比目前滾動條位置還大
-        let count = 0;
-        while (count < scrollLeftDiv.scrollLeft) {
-            //count 將超過的參數減去滾動條寬度
-            count += scrollLeftWidth;
-            //判斷如果已經比目前滾動條位置大時進行處理
-            if (count > scrollLeftDiv.scrollLeft) {
-                //將i取得的參數 減去一次滾動條寬度
-                let n = count - scrollLeftWidth;
-                //取得目前滾動條位置減掉取得的n參數
-                let b = scrollLeftDiv.scrollLeft - n;
-                //滾動條 參數 減掉 上方取得的參數 來移動到指定位置
-                scrollLeftDiv.scrollLeft -= b;
-                break;
-            }
-        }
-    } else {
-        scrollLeftDiv.scrollLeft -= scrollLeftWidth;
-    }
-    setTimeout(() => {
-        leftButton.disabled = false;
-    }, 600);
-})
-//右
-rightButton.addEventListener('click', () => {
-    rightButton.disabled = true;
-    if (scrollLeftDiv.scrollLeft % scrollLeftWidth !== 0) {
-        //迴圈持續加 滾動條寬度 直到比目前滾動條位置還大
-        let count = 0;
-        while (count < scrollLeftDiv.scrollLeft) {
-            //迴圈持續加 滾動條寬度 直到比目前滾動條位置還大
-            count += scrollLeftWidth;
-            //判斷如果已經比目前滾動條位置大時進行處理
-            if (count > scrollLeftDiv.scrollLeft) {
-                // count - 目前位置 會得到目前位置與最右方的下一個元素之間的距離。
-                let b = count - scrollLeftDiv.scrollLeft;
-                scrollLeftDiv.scrollLeft += b;
-                break;
-            }
-        }
-    } else {
-        scrollLeftDiv.scrollLeft += scrollLeftWidth;
-    }
-    setTimeout(() => {
-        rightButton.disabled = false;
-    }, 600);
-})
-
-
-
 //**歷年實績區 結束 */
 
 

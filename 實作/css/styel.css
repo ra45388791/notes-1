@@ -130,9 +130,74 @@ li {
 
 /*服務項目結束*/
 
+/* 歷年實績開始 */
+#carouselExampleControlsNoTouching {
+    position: relative;
+}
+
+#carouselExampleControlsNoTouching>div {
 
 
+    scroll-behavior  : smooth;
+    scroll-snap-align: left;
 
+    overflow-x: scroll;
+
+    /* overflow寬度 */
+    width: 100%;
+
+    height: 40vw;
+    border: solid 1px rgb(0, 0, 0);
+
+}
+
+/* 滾動條 */
+#carouselExampleControlsNoTouching>div::-webkit-scrollbar {
+    display: none;
+}
+
+#carouselExampleControlsNoTouching>div>nav {
+    position        : relative;
+    scroll-snap-type: x mandatory;
+    height          : 100%;
+}
+
+#carouselExampleControlsNoTouching .navClass {
+    display        : flex;
+    justify-content: center;
+    align-content  : center;
+
+    position: absolute;
+
+    margin : auto 25px;
+    padding: 0px;
+
+    width : calc(100% - 50px);
+    height: 100%;
+
+    border: solid 3px rgb(226, 10, 10);
+
+}
+
+/* .navClass div {
+    margin: auto;
+} */
+
+#leftButton {
+    /* 左按鈕定位 */
+    position: absolute;
+    top     : 50%;
+    left    : 2%;
+}
+
+#rightButton {
+    /* 右按紐定位 */
+    position: absolute;
+    top     : 50%;
+    right   : 2%;
+}
+
+/* 歷年實績結束 */
 
 .img-fluid {
     /* 蓋掉bs圖片的 max-width */
@@ -237,7 +302,7 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
         border       : 6px solid rgba(255, 255, 255, 0.192);
         border-top   : 0px;
         border-bottom: 0px;
-        
+
     }
 
     #serviceItems .article1 h3 {
@@ -257,7 +322,7 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
         border-top         : 0px;
         border-bottom      : 0px;
         box-sizing         : border-box;
-        
+
     }
 
     #serviceItems .article2 h3 {
@@ -350,6 +415,12 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
 
     /*服務項目結束*/
 
+    /* 歷年實績開始 */
+    #carouselExampleControlsNoTouching>div {
+        height: 35vw;
+    }
+
+    /* 歷年實績結束 */
 }
 
 
@@ -375,9 +446,9 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
 
     /*服務項目開始*/
     #serviceItems .containerBox {
-        width    : auto;
-        height   : 31vw;
-        
+        width : auto;
+        height: 31vw;
+
         /* height: 37rem; 測試 保留 */
     }
 
@@ -423,6 +494,13 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
     #straightStrip {
         display: block;
     }
+
+    /* 歷年實績開始 */
+    #carouselExampleControlsNoTouching>div {
+        height: 30vw;
+    }
+
+    /* 歷年實績結束 */
 }
 
 
@@ -438,31 +516,45 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
 
 
 
-#asdfgqwert{
-    scroll-behavior: smooth;
+
+
+/* 
+
+#asdfgqwert {
+    scroll-behavior  : smooth;
     scroll-snap-align: left;
 }
 
 
-#asdfgqwert >div {
-    overflow-x: scroll;
+#asdfgqwert>div {
+    overflow-x     : scroll;
     scroll-behavior: smooth;
 
-    width: 3400px;
+    width : 3400px;
     height: 80px;
-    
-}
-#asdfgqwert >div>nav {
-    position: relative;
-    
+
 }
 
-#asdfgqwert >div>nav div {
+#asdfgqwert>div>nav {
+    position        : relative;
+    scroll-snap-type: x mandatory;
+
+}
+
+#asdfgqwert>div>nav .navClass {
+    display    : flex;
+    align-items: center;
+
     position: absolute;
 
-    margin: auto 30px;
-    padding:  10px 5px;
+    margin : auto 25px;
+    padding: 0px;
 
-    width: 200px; 
+    width : calc(100% - 50px);
+    height: 60px;
 
 }
+
+.navClass div {
+    margin: auto;
+} */
