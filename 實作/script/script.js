@@ -99,14 +99,37 @@ const rightButton = document.getElementById('rightButton');     //右按紐
 const scrollLeftDiv = document.getElementById('scrollLeftDiv');  //照片按紐區
 const scrollLeftWidth = scrollLeftDiv.clientWidth;               // 滾動條區寬度
 //內容區
-const navDiv = document.querySelector('#carouselExampleControlsNoTouching>div>nav');
-//位置
+const navDiv = document.querySelector('#scrollLeftDiv>nav');
+//幻燈片位置
 let divPosition = 0;
-
-
+let slideUl = document.querySelector('#slideButton>ul');
 
 //相片內容存放區位置
 const modalStorageArea = document.getElementById('modalStorageArea');
+let slideObjectArray = [];  //存放按鈕實例化物件
+let slidePhotoCount;        //幻燈片中同時顯示照片的數量
+let slideCount = 0;         //按鈕編號
+
+// 幻燈片按鈕物件
+function SlideObject(slidePosition) {
+
+    // 位置
+    this.slidePosition = slidePosition;
+}
+
+
+
+
+
+//判斷幻燈片中的同時顯示照片數量
+if (vw < 768) {
+    slidePhotoCount = 1;
+} else if (vw < 1399) {
+    slidePhotoCount = 2;
+} else {
+    slidePhotoCount = 3;
+}
+
 
 //取得相片名子
 function getPhotoNameString() {
@@ -131,16 +154,6 @@ getPhotoNameString();
 
 //製作相片按鈕
 function makePastExperiencePhotoDiv(event) {
-    //圖片大小
-    let photoSizeWidth;              //決定圖片大小
-    if (vw < 767) {
-        photoSizeWidth = 30;
-    } else if (vw < 1399) {
-        photoSizeWidth = 30;
-    } else {
-        photoSizeWidth = 25;
-    };
-
     event.forEach(function (item, index) {
         //製作存放box元素
         let divBox = document.createElement('div');
@@ -148,53 +161,91 @@ function makePastExperiencePhotoDiv(event) {
         let buttonBox = document.createElement('button');
         //圖片 內文
         let imgBox = document.createElement('img');
+        let pDivBox = document.createElement('div');
         let pBox = document.createElement('p');
 
-
         //外框divBox
-        if (index === 0) {
-            divBox.classList.add('navClass', 'carousel-item', 'text-center', 'active');
-            divBox.style.left = `${divPosition}px`
-            divPosition += scrollLeftWidth;
-        } else {
-            divBox.classList.add('navClass', 'carousel-item', 'text-center');
-            divBox.style.left = `${divPosition}px`
-            divPosition += scrollLeftWidth;
+        divBox.classList.add('navClass', 'carousel-item', 'p-0', 'text-center');
 
-            //設定最後一個圖片的右邊寬度
-            if (index + 1 === event.length) {
-                let positionSet = document.createElement('div');
-                positionSet.style.position = 'absolute';
-                positionSet.style.right = '-25px';      //參數與圖片之間的寬度配合
-                positionSet.style.padding = '0.1px'
-                divBox.append(positionSet);
-            }
+        // 設定最後一個圖片的右邊寬度
+        if (index + 1 === event.length) {
+            let positionSet = document.createElement('div');
+            positionSet.style.position = 'absolute';
+            positionSet.style.right = '-25px';      //參數與圖片之間的寬度配合
+            positionSet.style.padding = '0.1px'
+            divBox.append(positionSet);
         }
+
         //照片按紐
         buttonBox.type = 'button';
-        buttonBox.classList.add('btn', 'shadow-none');
+        buttonBox.classList.add('d-flex', 'flex-column', 'justify-content-start', 'align-items-center', 'btn', 'shadow-none', 'p-0');
         buttonBox.setAttribute('data-bs-toggle', 'modal');
         buttonBox.setAttribute('data-bs-target', `#${item.englishName}`);
         //圖片
-        imgBox.src = `images/logo/${item.chineseName}.${item.photoExtension}`
-        imgBox.style.width = `100%`;           //照片寬度
-        imgBox.style.height = `${photoSizeWidth}vw`; //照片高度
+        imgBox.src = `images/logo/${item.chineseName}.${item.photoExtension}`;
         imgBox.alt = `${item.chineseName}圖片按紐`;
         //內文
+        pDivBox.classList.add('mb-3');
         pBox.innerHTML = item.chineseName;
-        pBox.classList.add('fs-4')
+        pBox.classList.add('fs-6');
 
-
-        //依序插入 divBox>按紐>圖片>內文
+        //依序插入 divBox>按紐>內文>圖片
         divBox.append(buttonBox);
+
+        pDivBox.append(pBox);
+        buttonBox.append(pDivBox);
+
         buttonBox.append(imgBox);
-        buttonBox.append(pBox);
 
         // navDiv元素 > divBox
         navDiv.append(divBox);
+
+
+        // slideButton位移按鈕製作
+        if (index % slidePhotoCount === 0) {
+            //製作按鈕物件
+            let slideObject = new SlideObject(divPosition);
+
+            //用按鈕物件的參數製作 ol 和 button元素
+            let slideOl = document.createElement('ol');
+            let slideOlButton = document.createElement('button');
+
+            //指定 id class type 等參數 
+            slideOl.classList.add('p-0');
+
+            slideOlButton.type = 'button';
+            slideOlButton.setAttribute('id', `slideMoveButton${slideCount + 1}`);
+
+            slideOlButton.classList.add('d-block', 'p-0', 'm-0');
+            if (slideCount === 0) {
+                slideOlButton.style.backgroundColor = 'red';
+            }
+
+            //放入html
+            slideOl.append(slideOlButton);
+            slideUl.append(slideOl);
+
+            //按鈕id編號
+            slideCount++;
+            //給每個按鈕指定位置
+            divPosition += scrollLeftWidth;
+
+            //監控按鈕按下事件
+            slideOlButton.addEventListener('click', () => {
+                //把所有按鈕顏色去除
+                for (let i = 0; i < slideCount; i++) {
+                    const e = document.getElementById(`slideMoveButton${(i + 1)}`);
+                    e.style.backgroundColor = '';
+                }
+                //指定按鈕變色
+                slideOlButton.style.backgroundColor = 'red'
+
+                //移動到指定位置
+                scrollLeftDiv.scrollLeft = slideObject.slidePosition;
+                console.log(slideObject);
+            })
+        }
     });
-
-
 
     makeModalStorageAreaDiv(event);
 }
@@ -270,8 +321,8 @@ function makeModalStorageAreaDiv(event) {
          *  抓取英文名子後方 + 上'Id'來對應上方相片按鈕的id名稱
          *  只有上方做出來之後才能抓到id名稱所以doc寫在這
          */
-        let idName = item.englishName + 'Id';
-        let getId = document.getElementById(idName);        //取得ID
+        const idName = item.englishName + 'Id';
+        const getId = document.getElementById(idName);        //取得ID
 
         for (let a = 0; a < item.numberOfPhotos; a++) {     //根據當下item的相片數量製造幾次裝相片的div
             dataBox = `
@@ -294,60 +345,61 @@ function makeModalStorageAreaDiv(event) {
 
 
 
-// 歷年實績區按紐
-//左
-leftButton.addEventListener('click', () => {
-    //按下按鈕後先將按鈕關起來
-    leftButton.disabled = true;
 
-    if (scrollLeftDiv.scrollLeft % scrollLeftWidth !== 0) {
-        //迴圈持續加 滾動條寬度 直到比目前滾動條位置還大
-        let count = 0;
-        while (count < scrollLeftDiv.scrollLeft) {
-            //count 將超過的參數減去滾動條寬度
-            count += scrollLeftWidth;
-            //判斷如果已經比目前滾動條位置大時進行處理
-            if (count > scrollLeftDiv.scrollLeft) {
-                //將i取得的參數 減去一次滾動條寬度
-                let n = count - scrollLeftWidth;
-                //取得目前滾動條位置減掉取得的n參數
-                let b = scrollLeftDiv.scrollLeft - n;
-                //滾動條 參數 減掉 上方取得的參數 來移動到指定位置
-                scrollLeftDiv.scrollLeft -= b;
-                break;
-            }
-        }
-    } else {
-        scrollLeftDiv.scrollLeft -= scrollLeftWidth;
-    }
-    setTimeout(() => {
-        leftButton.disabled = false;
-    }, 600);
-})
-//右
-rightButton.addEventListener('click', () => {
-    rightButton.disabled = true;
-    if (scrollLeftDiv.scrollLeft % scrollLeftWidth !== 0) {
-        //迴圈持續加 滾動條寬度 直到比目前滾動條位置還大
-        let count = 0;
-        while (count < scrollLeftDiv.scrollLeft) {
-            //迴圈持續加 滾動條寬度 直到比目前滾動條位置還大
-            count += scrollLeftWidth;
-            //判斷如果已經比目前滾動條位置大時進行處理
-            if (count > scrollLeftDiv.scrollLeft) {
-                // count - 目前位置 會得到目前位置與最右方的下一個元素之間的距離。
-                let b = count - scrollLeftDiv.scrollLeft;
-                scrollLeftDiv.scrollLeft += b;
-                break;
-            }
-        }
-    } else {
-        scrollLeftDiv.scrollLeft += scrollLeftWidth;
-    }
-    setTimeout(() => {
-        rightButton.disabled = false;
-    }, 600);
-})
+// // 歷年實績區按紐
+// //左
+// leftButton.addEventListener('click', () => {
+//     //按下按鈕後先將按鈕關起來
+//     leftButton.disabled = true;
+
+//     if (scrollLeftDiv.scrollLeft % scrollLeftWidth !== 0) {
+//         //迴圈持續加 滾動條寬度 直到比目前滾動條位置還大
+//         let count = 0;
+//         while (count < scrollLeftDiv.scrollLeft) {
+//             //count 將超過的參數減去滾動條寬度
+//             count += scrollLeftWidth;
+//             //判斷如果已經比目前滾動條位置大時進行處理
+//             if (count > scrollLeftDiv.scrollLeft) {
+//                 //將i取得的參數 減去一次滾動條寬度
+//                 let n = count - scrollLeftWidth;
+//                 //取得目前滾動條位置減掉取得的n參數
+//                 let b = scrollLeftDiv.scrollLeft - n;
+//                 //滾動條 參數 減掉 上方取得的參數 來移動到指定位置
+//                 scrollLeftDiv.scrollLeft -= b;
+//                 break;
+//             }
+//         }
+//     } else {
+//         scrollLeftDiv.scrollLeft -= scrollLeftWidth;
+//     }
+//     setTimeout(() => {
+//         leftButton.disabled = false;
+//     }, 400);
+// })
+// //右
+// rightButton.addEventListener('click', () => {
+//     rightButton.disabled = true;
+//     if (scrollLeftDiv.scrollLeft % scrollLeftWidth !== 0) {
+//         //迴圈持續加 滾動條寬度 直到比目前滾動條位置還大
+//         let count = 0;
+//         while (count < scrollLeftDiv.scrollLeft) {
+//             //迴圈持續加 滾動條寬度 直到比目前滾動條位置還大
+//             count += scrollLeftWidth;
+//             //判斷如果已經比目前滾動條位置大時進行處理
+//             if (count > scrollLeftDiv.scrollLeft) {
+//                 // count - 目前位置 會得到目前位置與最右方的下一個元素之間的距離。
+//                 let b = count - scrollLeftDiv.scrollLeft;
+//                 scrollLeftDiv.scrollLeft += b;
+//                 break;
+//             }
+//         }
+//     } else {
+//         scrollLeftDiv.scrollLeft += scrollLeftWidth;
+//     }
+//     setTimeout(() => {
+//         rightButton.disabled = false;
+//     }, 400);
+// })
 
 
 

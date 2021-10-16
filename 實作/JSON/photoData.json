@@ -19,5 +19,33 @@
         "numberOfPhotos": 7,
         "photoExtension": "webp",
         "date": "2021/1/27"
+    },
+    {
+        "chineseName": "呼哇呼哇",
+        "englishName": "Huwahuwa",
+        "numberOfPhotos": 7,
+        "photoExtension": "jpg",
+        "date": "2021/2/16"
+    },
+    {
+        "chineseName": "帥呱",
+        "englishName": "Handsomefrog",
+        "numberOfPhotos": 7,
+        "photoExtension": "png",
+        "date": "2021/2/23"
+    },
+    {
+        "chineseName": "飽呱呱",
+        "englishName": "Fullfrog",
+        "numberOfPhotos": 3,
+        "photoExtension": "png",
+        "date": "2021/3/5"
+    },
+    {
+        "chineseName": "工商巨魔",
+        "englishName": "BusinessTroll",
+        "numberOfPhotos": 11,
+        "photoExtension": "png",
+        "date": "2021/3/19"
     }
 ]

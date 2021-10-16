@@ -135,67 +135,91 @@ li {
     position: relative;
 }
 
-#carouselExampleControlsNoTouching>div {
+/* 滾動條 */
+#scrollLeftDiv::-webkit-scrollbar {
+    display: none;
+}
 
-
+#scrollLeftDiv {
     scroll-behavior  : smooth;
     scroll-snap-align: left;
 
     overflow-x: scroll;
 
     /* overflow寬度 */
-    width: 100%;
-
-    height: 40vw;
+    width : 350px;
+    height: 100%;
     border: solid 1px rgb(0, 0, 0);
-
+    box-sizing: border-box;
 }
 
-/* 滾動條 */
-#carouselExampleControlsNoTouching>div::-webkit-scrollbar {
-    display: none;
+#scrollLeftDiv>nav {
+    /* position: relative; */
+
+    height: 100%;
 }
 
-#carouselExampleControlsNoTouching>div>nav {
-    position        : relative;
-    scroll-snap-type: x mandatory;
-    height          : 100%;
-}
-
-#carouselExampleControlsNoTouching .navClass {
-    display        : flex;
+#scrollLeftDiv .navClass {
+    display        : block;
     justify-content: center;
     align-content  : center;
 
-    position: absolute;
+    margin: 0px 25px;
+    width : 300px;
 
-    margin : auto 25px;
-    padding: 0px;
-
-    width : calc(100% - 50px);
-    height: 100%;
-
-    border: solid 3px rgb(226, 10, 10);
-
+    /* border: solid 3px rgb(226, 10, 10); */
 }
 
-/* .navClass div {
-    margin: auto;
-} */
+#scrollLeftDiv .navClass button {
+    width        : 100%;
+    height       : 100%;
+    /* background: rgb(255, 137, 137); */
+}
 
-#leftButton {
-    /* 左按鈕定位 */
+#scrollLeftDiv .navClass img {
+    object-fit: contain;
+    margin    : auto 0px;
+    width     : 100%;
+}
+
+/* 導航按鈕 開始 */
+#slideButton {}
+
+#slideButton ul {
+    list-style: none;
+}
+
+#slideButton ol {
+    margin: 0px 10px;
+
+    width : 15px;
+    height: 15px;
+}
+
+#slideButton ol>button {
+    width        : 100%;
+    height       : 100%;
+    border-radius: 100%;
+
+    /* 把框線去掉 */
+    border: none;
+}
+
+/* 導航按鈕 結束 */
+
+/* #leftButton {
+    
     position: absolute;
     top     : 50%;
     left    : 2%;
 }
 
 #rightButton {
-    /* 右按紐定位 */
+    
     position: absolute;
     top     : 50%;
     right   : 2%;
-}
+} */
 
 /* 歷年實績結束 */
 
@@ -207,12 +231,10 @@ li {
 /* 歷年實積內容放置區 */
 .achievementContent {
     background-color: rgba(0, 0, 0, 0.500);
-
 }
 
 .achievementContent button {
     opacity: 1;
-
 }
 
 .modal-header {
@@ -244,7 +266,12 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
     display: none;
 }
 
-@media only screen and (min-width: 768px) {}
+@media only screen and (min-width: 768px) {
+    #scrollLeftDiv {
+        /* overflow寬度 */
+        width: 700px;
+    }
+}
 
 /*等於1024*/
 @media only screen and (min-width: 992px) {
@@ -416,9 +443,7 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
     /*服務項目結束*/
 
     /* 歷年實績開始 */
-    #carouselExampleControlsNoTouching>div {
-        height: 35vw;
-    }
+
 
     /* 歷年實績結束 */
 }
@@ -496,65 +521,10 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
     }
 
     /* 歷年實績開始 */
-    #carouselExampleControlsNoTouching>div {
-        height: 30vw;
+    #scrollLeftDiv {
+        /* overflow寬度 */
+        width: 1050px;
     }
 
     /* 歷年實績結束 */
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 
-
-#asdfgqwert {
-    scroll-behavior  : smooth;
-    scroll-snap-align: left;
-}
-
-
-#asdfgqwert>div {
-    overflow-x     : scroll;
-    scroll-behavior: smooth;
-
-    width : 3400px;
-    height: 80px;
-
-}
-
-#asdfgqwert>div>nav {
-    position        : relative;
-    scroll-snap-type: x mandatory;
-
-}
-
-#asdfgqwert>div>nav .navClass {
-    display    : flex;
-    align-items: center;
-
-    position: absolute;
-
-    margin : auto 25px;
-    padding: 0px;
-
-    width : calc(100% - 50px);
-    height: 60px;
-
-}
-
-.navClass div {
-    margin: auto;
-} */
