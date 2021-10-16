@@ -97,7 +97,8 @@ const rightButton = document.getElementById('rightButton');     //右按紐
 
 //滾動條區
 const scrollLeftDiv = document.getElementById('scrollLeftDiv');  //照片按紐區
-const scrollLeftWidth = scrollLeftDiv.clientWidth;               // 滾動條區寬度
+// const scrollLeftWidth = scrollLeftDiv.clientWidth+2;               // 滾動條區寬度
+
 //內容區
 const navDiv = document.querySelector('#scrollLeftDiv>nav');
 //幻燈片位置
@@ -106,17 +107,54 @@ let slideUl = document.querySelector('#slideButton>ul');
 
 //相片內容存放區位置
 const modalStorageArea = document.getElementById('modalStorageArea');
-let slideObjectArray = [];  //存放按鈕實例化物件
 let slidePhotoCount;        //幻燈片中同時顯示照片的數量
 let slideCount = 0;         //按鈕編號
 
 // 幻燈片按鈕物件
 function SlideObject(slidePosition) {
-
     // 位置
     this.slidePosition = slidePosition;
 }
 
+SlideObject.prototype.createButton = function (overflowDiv, id, idNumber, ulElement) {
+    /**
+     * 指定參數 (需要移動滾動條的父div元素, 按鈕id, id編號, 要放入按鈕的父ul元素)
+     */
+
+    //用按鈕物件的參數製作 ol 和 button元素
+    let ol = document.createElement('ol');
+    let olButton = document.createElement('button');
+
+    //指定 id class type 等參數 
+    ol.classList.add('p-0');
+
+    olButton.type = 'button';
+    olButton.setAttribute('id', `${id}${idNumber + 1}`);
+    olButton.classList.add('d-block', 'p-0', 'm-0');
+    //第一個按鈕需要變色
+    if (idNumber === 0) {
+        olButton.style.backgroundColor = 'red';
+    }
+
+    //放入html
+    ol.append(olButton);
+    ulElement.append(ol);
+
+    // 監控按鈕按下事件
+    olButton.addEventListener('click', () => {
+        //把所有按鈕顏色去除
+        // const bElement = document.querySelectorAll();
+        for (let i = 0; i < slideCount; i++) {
+            const e = document.getElementById(`${id}${(i + 1)}`);
+            e.style.backgroundColor = '';
+        }
+        //指定按鈕變色
+        olButton.style.backgroundColor = 'red'
+
+        //移動到指定位置
+        overflowDiv.scrollLeft = this.slidePosition;
+    })
+}
 
 
 
@@ -171,7 +209,7 @@ function makePastExperiencePhotoDiv(event) {
         if (index + 1 === event.length) {
             let positionSet = document.createElement('div');
             positionSet.style.position = 'absolute';
-            positionSet.style.right = '-25px';      //參數與圖片之間的寬度配合
+            positionSet.style.right = '-23px';      //參數與圖片之間的寬度配合
             positionSet.style.padding = '0.1px'
             divBox.append(positionSet);
         }
@@ -194,56 +232,35 @@ function makePastExperiencePhotoDiv(event) {
 
         pDivBox.append(pBox);
         buttonBox.append(pDivBox);
-
         buttonBox.append(imgBox);
 
         // navDiv元素 > divBox
         navDiv.append(divBox);
 
 
+
         // slideButton位移按鈕製作
+        const scrollContantBox = document.querySelector('#scrollLeftDiv .navClass');
+        //取得本體寬度
+        const navClassBodyWidth = scrollContantBox.clientWidth;
+        //取得 左右margin寬度 並將字串轉換成數字
+        const navClassMarginLeft = getComputedStyle(scrollContantBox).marginLeft;
+        const navClassMarginRight = getComputedStyle(scrollContantBox).marginRight;
+        const navClassMarginX = Number(navClassMarginLeft.replace('px', '')) + Number(navClassMarginRight.replace('px', ''));
+
+        //照片按鈕本體x軸大小+上 margin大小
+        const navClassWidth = navClassBodyWidth + navClassMarginX;
+
         if (index % slidePhotoCount === 0) {
             //製作按鈕物件
             let slideObject = new SlideObject(divPosition);
 
-            //用按鈕物件的參數製作 ol 和 button元素
-            let slideOl = document.createElement('ol');
-            let slideOlButton = document.createElement('button');
-
-            //指定 id class type 等參數 
-            slideOl.classList.add('p-0');
-
-            slideOlButton.type = 'button';
-            slideOlButton.setAttribute('id', `slideMoveButton${slideCount + 1}`);
-
-            slideOlButton.classList.add('d-block', 'p-0', 'm-0');
-            if (slideCount === 0) {
-                slideOlButton.style.backgroundColor = 'red';
-            }
-
-            //放入html
-            slideOl.append(slideOlButton);
-            slideUl.append(slideOl);
+            slideObject.createButton(scrollLeftDiv, 'slideMoveButton', slideCount, slideUl);
 
             //按鈕id編號
             slideCount++;
             //給每個按鈕指定位置
-            divPosition += scrollLeftWidth;
-
-            //監控按鈕按下事件
-            slideOlButton.addEventListener('click', () => {
-                //把所有按鈕顏色去除
-                for (let i = 0; i < slideCount; i++) {
-                    const e = document.getElementById(`slideMoveButton${(i + 1)}`);
-                    e.style.backgroundColor = '';
-                }
-                //指定按鈕變色
-                slideOlButton.style.backgroundColor = 'red'
-
-                //移動到指定位置
-                scrollLeftDiv.scrollLeft = slideObject.slidePosition;
-                console.log(slideObject);
-            })
+            divPosition += navClassWidth * slidePhotoCount;
         }
     });
 
