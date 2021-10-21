@@ -1,122 +1,53 @@
-let vw = Math.max(document.documentElement.clientWidth)  //取得視口寬度
+vw = Math.max(document.documentElement.clientWidth);  //取得視口寬度
 
-// 等待視窗全部載好才執行
-window.onload = function () {
-    // **hader橫版面動畫 開始**
-    setTimeout(() => {
-        let bannerMask = document.getElementById('bannerMask');
-        bannerMask.style.animation = 'banner 2s ease forwards';
+//!物件開始
+//fadein and fadeout動畫物件OOP 開始
+function BannerAnimetion(sectionId, className, article1Class, article2Class, bannerMaskClass, opacityCss1, opacityCss2) {
 
-    }, 300)
-    // **hader橫版面動畫 結束**
-
-    // **服務項目淡入淡出動畫 開始**
-    if (vw >= 1024) {
-        const serviceItems = document.getElementById('serviceItems');
-
-        //監視進入事件
-        serviceItems.addEventListener('mouseover', e => {
-
-            const getDivEvente = e.target;                                  //當下移入的元素
-            const getDivFather = getDivEvente.parentNode;                   //動畫遮罩父元素
-            const getDivFatherClass = getDivEvente.parentNode.classList;    //取得該元素的class名稱
-            let getClassName;                                               //用來存取找到的class用來檢查
-
-            for (let i = 0; i < getDivFatherClass.length; i++) {
-                if (getDivFatherClass[i] === 'SoundEngineer') {
-                    getClassName = getDivFatherClass[i];
-                    break;  //跳出迴圈
-
-                } else if (getDivFatherClass[i] === 'Light') {
-                    getClassName = getDivFatherClass[i];
-                    break;  //跳出迴圈
-
-                } else if (i === getDivFatherClass.length - 1) {
-                    break;
-
-                }
-            }
-
-            if (getClassName === undefined) {
-                //檢查進來的資料是不是字串
-                return;
-
-            } else if (getClassName === 'SoundEngineer') {
-                //取得遮罩相關的元素
-                let article1 = document.querySelector('#serviceItems .SoundEngineer .article1');
-                let bannerMask = document.querySelector('#serviceItems .SoundEngineer .bannerMask');
-                let article2 = document.querySelector('#serviceItems .SoundEngineer .article2');
-
-                //加入透明動畫class
-                article1.classList.add('opacityOpaque');
-                bannerMask.classList.add('opacityOpaque');
-                article2.classList.add('opacityTransparent');
-
-                //加入滑鼠移出監視器
-                getDivFather.addEventListener('mouseout', function deletListen() {
-                    article1.classList.remove('opacityOpaque');
-                    bannerMask.classList.remove('opacityOpaque');
-                    article2.classList.remove('opacityTransparent');
-
-                    // 滑鼠移出時刪除監聽器
-                    getDivFather.removeEventListener('mouseout', deletListen);
-                })
-
-            } else if (getClassName === 'Light') {
-
-                let article1 = document.querySelector('#serviceItems .Light .article1');
-                let bannerMask = document.querySelector('#serviceItems .Light .bannerMask');
-                let article2 = document.querySelector('#serviceItems .Light .article2');
-
-                article1.classList.add('opacityOpaque');
-                bannerMask.classList.add('opacityOpaque');
-                article2.classList.add('opacityTransparent');
-
-                getDivFather.addEventListener('mouseout', function deletListen() {
-                    article1.classList.remove('opacityOpaque');
-                    bannerMask.classList.remove('opacityOpaque');
-                    article2.classList.remove('opacityTransparent');
-
-                    // 滑鼠移出時刪除監聽器
-                    getDivFather.removeEventListener('mouseout', deletListen);
-                })
-
-            }
-        })
-    }
-    // **服務項目淡入淡出動畫 結束**
+    this.sectionId = sectionId;         //動畫所在的section id
+    this.className = className;         //需要跑動畫的div class(如果是以委託觸發方式 此參數要設undefined 並在target宣告後加入參數)
+    this.introduction = {               //介紹
+        article1Class,                  //mask隱藏(前)介紹文字
+        article2Class                   //mask隱藏(後)介紹文字
+    };
+    this.bannerMaskClass = bannerMaskClass; //動畫遮罩
+    this.opacityCss1 = opacityCss1;         //透明化動畫1(變透明)
+    this.opacityCss2 = opacityCss2;         //透明化動畫1(變不透明)
 }
-
-
-
-
-
-//**歷年實績區 開始 */
-const leftButton = document.getElementById('leftButton');       //左按紐
-const rightButton = document.getElementById('rightButton');     //右按紐
-
-//滾動條區
-const scrollLeftDiv = document.getElementById('scrollLeftDiv');  //照片按紐區
-// const scrollLeftWidth = scrollLeftDiv.clientWidth+2;               // 滾動條區寬度
-
-//內容區
-const navDiv = document.querySelector('#scrollLeftDiv>nav');
-//幻燈片位置
-let divPosition = 0;
-let slideUl = document.querySelector('#slideButton>ul');
-
-//相片內容存放區位置
-const modalStorageArea = document.getElementById('modalStorageArea');
-let slidePhotoCount;        //幻燈片中同時顯示照片的數量
-let slideCount = 0;         //按鈕編號
-
-// 幻燈片按鈕物件
-function SlideObject(slidePosition) {
-    // 位置
-    this.slidePosition = slidePosition;
+BannerAnimetion.prototype.fadein = function () {
+    //取得遮罩相關的元素
+    let article1 = document.querySelector(`#${this.sectionId} .${this.className} .${this.introduction.article1Class}`);
+    let article2 = document.querySelector(`#${this.sectionId} .${this.className} .${this.introduction.article2Class}`);
+    let bannerMask = document.querySelector(`#${this.sectionId} .${this.className} .${this.bannerMaskClass}`);
+    //加入透明動畫class
+    article1.classList.add(this.opacityCss1);
+    bannerMask.classList.add(this.opacityCss1);
+    article2.classList.add(this.opacityCss2);
 }
+BannerAnimetion.prototype.fadeout = function () {
+    //取得目標class
+    let article1 = document.querySelector(`#${this.sectionId} .${this.className} .${this.introduction.article1Class}`);
+    let article2 = document.querySelector(`#${this.sectionId} .${this.className} .${this.introduction.article2Class}`);
+    let bannerMask = document.querySelector(`#${this.sectionId} .${this.className} .${this.bannerMaskClass}`);
+    //把指定class刪除
+    article1.classList.remove(this.opacityCss1);
+    bannerMask.classList.remove(this.opacityCss1);
+    article2.classList.remove(this.opacityCss2);
+}
+//動畫物件OOP 結束
 
-SlideObject.prototype.createButton = function (overflowDiv, id, idNumber, ulElement) {
+//歷年實績 幻燈片按鈕物件 開始
+function SlideObject(scrollDiv, id, idNumber, ulElement, slidePosition) {
+    /**
+     * 指定參數 (需要移動滾動條的父div元素, 按鈕id, id編號, 要放入按鈕的父ul元素, 幻燈片位移參數)
+     */
+    this.scrollDiv = scrollDiv;             //幻燈片區域最底層div
+    this.id = id;                           //幻燈片按鈕id屬性
+    this.idNumber = idNumber;               //id編號 (如果有多個按鈕)
+    this.ulElement = ulElement;             //要放入按鈕的ul標籤 
+    this.slidePosition = slidePosition;     // 位移位置 //如果要位移則要額外增加 例如:(原位置 += 位移參數;) 
+}
+SlideObject.prototype.createButton = function () {
     /**
      * 指定參數 (需要移動滾動條的父div元素, 按鈕id, id編號, 要放入按鈕的父ul元素)
      */
@@ -129,47 +60,130 @@ SlideObject.prototype.createButton = function (overflowDiv, id, idNumber, ulElem
     ol.classList.add('p-0');
 
     olButton.type = 'button';
-    olButton.setAttribute('id', `${id}${idNumber + 1}`);
+    olButton.setAttribute('id', `${this.id}${this.idNumber + 1}`);
     olButton.classList.add('d-block', 'p-0', 'm-0');
     //第一個按鈕需要變色
-    if (idNumber === 0) {
+    if (this.idNumber === 0) {
         olButton.style.backgroundColor = 'red';
     }
 
     //放入html
     ol.append(olButton);
-    ulElement.append(ol);
+    this.ulElement.append(ol);
 
     // 監控按鈕按下事件
     olButton.addEventListener('click', () => {
-        //把所有按鈕顏色去除
+        //取得所有按鈕id把所有按鈕顏色去除
         // const bElement = document.querySelectorAll();
         for (let i = 0; i < slideCount; i++) {
-            const e = document.getElementById(`${id}${(i + 1)}`);
+            const e = document.getElementById(`${this.id}${(i + 1)}`);
             e.style.backgroundColor = '';
         }
-        //指定按鈕變色
+        //指定這個按鈕變色
         olButton.style.backgroundColor = 'red'
 
         //移動到指定位置
-        overflowDiv.scrollLeft = this.slidePosition;
+        this.scrollDiv.scrollLeft = this.slidePosition;
+
     })
+}
+//歷年實績 幻燈片按鈕物件 結束
+//!物件結束
+
+
+// 等待視窗全部載好才執行
+window.onload = function () {
+    // **hader橫版面動畫 開始**
+    setTimeout(() => {
+        let bannerMask = document.getElementById('bannerMask');
+        bannerMask.style.animation = 'banner 2s ease forwards';
+
+    }, 100)
+    // **hader橫版面動畫 結束**
+
+
+    // **服務項目淡入淡出動畫 開始**
+    if (vw >= 1024) {
+        const serviceItems = document.getElementById('serviceItems');
+
+        //實例化banner物件
+        let bannerAnimetion = new BannerAnimetion('serviceItems', undefined, 'article1', 'article2', 'bannerMask', 'opacityOpaque', 'opacityTransparent');
+
+        //監視進入事件
+        serviceItems.addEventListener('mouseover', e => {
+
+            const getDivEvente = e.target;                                  //當下移入的元素
+            const getDivFather = getDivEvente.parentNode;                   //動畫遮罩父元素
+            const getDivFatherClass = getDivEvente.parentNode.classList;    //取得該元素的class名稱
+            let getClassName;                                             //用來存取找到的class用來檢查(如果是指定參數 就把該參數加入物件中)
+
+            for (let i = 0; i < getDivFatherClass.length; i++) {
+                if (getDivFatherClass[i] === 'SoundEngineer') {
+                    getClassName = getDivFatherClass[i];
+                    //在物件中加入指定目標class名稱
+                    bannerAnimetion.className = getClassName;
+                    break;  //跳出迴圈
+
+                } else if (getDivFatherClass[i] === 'Light') {
+                    getClassName = getDivFatherClass[i];
+                    //在物件中加入指定目標class名稱
+                    bannerAnimetion.className = getClassName;
+                    break;  //跳出迴圈
+                }
+            }
+
+            if (getClassName === 'SoundEngineer') {
+                bannerAnimetion.fadein();
+
+                getDivFather.addEventListener('mouseout', function deletListen() {
+                    bannerAnimetion.fadeout();
+                    // 滑鼠移出時刪除監聽器
+                    getDivFather.removeEventListener('mouseout', deletListen);
+                })
+            } else if (getClassName === 'Light') {
+                bannerAnimetion.fadein();
+
+                getDivFather.addEventListener('mouseout', function deletListen() {
+                    bannerAnimetion.fadeout();
+                    // 滑鼠移出時刪除監聽器
+                    getDivFather.removeEventListener('mouseout', deletListen);
+                })
+            }
+        })
+    }
+    // **服務項目淡入淡出動畫 結束**
 }
 
 
 
 
+
+//**歷年實績區 開始 */
+//滾動條區
+const scrollLeftDiv = document.getElementById('scrollLeftDiv');  //照片按紐區
+//內容區
+const navDiv = document.querySelector('#scrollLeftDiv>nav');
+//幻燈片位置
+let divPosition = 0;
+let slideUl = document.querySelector('#slideButton>ul');
+
+//相片內容存放區位置
+const modalStorageArea = document.getElementById('modalStorageArea');
+let slidePhotoCount;        //幻燈片中同時顯示照片的數量
+let slideCount = 0;         //按鈕編號
+
+
+
 //判斷幻燈片中的同時顯示照片數量
+
 if (vw < 768) {
     slidePhotoCount = 1;
-} else if (vw < 1399) {
-    slidePhotoCount = 2;
 } else {
     slidePhotoCount = 3;
 }
 
 
-//取得相片名子
+//取得相片名子 json
 function getPhotoNameString() {
     let url = '../JSON/photoData.json';
     let xhr = new XMLHttpRequest();
@@ -177,11 +191,12 @@ function getPhotoNameString() {
     xhr.open('GET', url, true);
     xhr.responseType = 'json';
 
+
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                let protoDataArray = xhr.response;
-                makePastExperiencePhotoDiv(protoDataArray);
+                let jsonData = xhr.response;
+                makePhotoDiv(jsonData);
             }
         }
     }
@@ -191,15 +206,25 @@ getPhotoNameString();
 
 
 //製作相片按鈕
-function makePastExperiencePhotoDiv(event) {
+function makePhotoDiv(event) {
+    let slideObjectArray = [];
+
     event.forEach(function (item, index) {
         //製作存放box元素
         let divBox = document.createElement('div');
         //按紐
         let buttonBox = document.createElement('button');
-        //圖片 內文
+        //圖片
         let imgBox = document.createElement('img');
-        let pDivBox = document.createElement('div');
+        //敘述
+        let narrateBox = document.createElement('div');
+        //活動類型
+        let pTypeDiv1 = document.createElement('div');
+        let pTypeDiv2 = document.createElement('div');
+        let pType = document.createElement('p');
+        //活動敘述
+        let pDivBox1 = document.createElement('div');
+        let pDivBox2 = document.createElement('div');
         let pBox = document.createElement('p');
 
         //外框divBox
@@ -222,17 +247,40 @@ function makePastExperiencePhotoDiv(event) {
         //圖片
         imgBox.src = `images/logo/${item.chineseName}.${item.photoExtension}`;
         imgBox.alt = `${item.chineseName}圖片按紐`;
-        //內文
-        pDivBox.classList.add('mb-3');
+
+
+
+        //敘述盒子
+        narrateBox.classList.add('text-light', 'mb-5', 'mt-4');
+        //活動類型
+        pTypeDiv1.classList.add('activityType', 'px-1');
+        pTypeDiv2.classList.add('py-1');
+
+        pType.classList.add('fs-5', 'fw-bold');
+        pType.innerHTML = item.activityType;
+
+        //照片敘述
+        // pDivBox1.classList.add('activityNarrate','mt-4','py-2','border','border-3');
+        pDivBox1.classList.add('activityNarrate', 'mt-4');
+        pBox.classList.add('fs-4', 'my-2');
         pBox.innerHTML = item.chineseName;
-        pBox.classList.add('fs-6');
 
         //依序插入 divBox>按紐>內文>圖片
         divBox.append(buttonBox);
 
-        pDivBox.append(pBox);
-        buttonBox.append(pDivBox);
+        //活動類型
+        pTypeDiv1.append(pTypeDiv2);
+        pTypeDiv2.append(pType);
+        //敘述
+        pDivBox1.append(pDivBox2);
+        pDivBox2.append(pBox);
+        //類型和敘述組合進div中
+        narrateBox.append(pTypeDiv1);
+        narrateBox.append(pDivBox1);
+
+        //圖片和敘述插入button
         buttonBox.append(imgBox);
+        buttonBox.append(narrateBox);
 
         // navDiv元素 > divBox
         navDiv.append(divBox);
@@ -253,14 +301,16 @@ function makePastExperiencePhotoDiv(event) {
 
         if (index % slidePhotoCount === 0) {
             //製作按鈕物件
-            let slideObject = new SlideObject(divPosition);
+            let slideObject = new SlideObject(scrollLeftDiv, 'slideMoveButton', slideCount, slideUl, divPosition);
+            slideObjectArray.push(slideObject);
 
-            slideObject.createButton(scrollLeftDiv, 'slideMoveButton', slideCount, slideUl);
+            slideObject.createButton();
 
-            //按鈕id編號
+            //按鈕id編號++
             slideCount++;
             //給每個按鈕指定位置
             divPosition += navClassWidth * slidePhotoCount;
+            console.log(slideObjectArray);
         }
     });
 
@@ -358,66 +408,34 @@ function makeModalStorageAreaDiv(event) {
         getStringData = '';
     });
 
+    achievementAnimetion();
+
 }
 
+//歷年實績背板動畫 開始
+let bgColorAnime = document.querySelector('#achievement .bgColorAnime');
+let bgColorAnimeScrollLength = 0;
 
+function achievementAnimetion() {
+    //控制位移
+    if (vw < 768) {
+        bgColorAnime.scrollLeft += 1;
+    } else if (vw < 1399) {
+        bgColorAnime.scrollLeft += 3;
+    } else {
+        bgColorAnime.scrollLeft += 5;
+    }
 
+    //判斷如果 目前位置和 下方存放上一個位置的物件相同 把位置設為0
+    if (bgColorAnime.scrollLeft === bgColorAnimeScrollLength) {
+        bgColorAnime.scrollLeft = 0;
+    }
+    //經過判斷並沒有到終點 將目前的位置給 bgColorAnimeScrollLength
+    bgColorAnimeScrollLength = bgColorAnime.scrollLeft;
 
-// // 歷年實績區按紐
-// //左
-// leftButton.addEventListener('click', () => {
-//     //按下按鈕後先將按鈕關起來
-//     leftButton.disabled = true;
-
-//     if (scrollLeftDiv.scrollLeft % scrollLeftWidth !== 0) {
-//         //迴圈持續加 滾動條寬度 直到比目前滾動條位置還大
-//         let count = 0;
-//         while (count < scrollLeftDiv.scrollLeft) {
-//             //count 將超過的參數減去滾動條寬度
-//             count += scrollLeftWidth;
-//             //判斷如果已經比目前滾動條位置大時進行處理
-//             if (count > scrollLeftDiv.scrollLeft) {
-//                 //將i取得的參數 減去一次滾動條寬度
-//                 let n = count - scrollLeftWidth;
-//                 //取得目前滾動條位置減掉取得的n參數
-//                 let b = scrollLeftDiv.scrollLeft - n;
-//                 //滾動條 參數 減掉 上方取得的參數 來移動到指定位置
-//                 scrollLeftDiv.scrollLeft -= b;
-//                 break;
-//             }
-//         }
-//     } else {
-//         scrollLeftDiv.scrollLeft -= scrollLeftWidth;
-//     }
-//     setTimeout(() => {
-//         leftButton.disabled = false;
-//     }, 400);
-// })
-// //右
-// rightButton.addEventListener('click', () => {
-//     rightButton.disabled = true;
-//     if (scrollLeftDiv.scrollLeft % scrollLeftWidth !== 0) {
-//         //迴圈持續加 滾動條寬度 直到比目前滾動條位置還大
-//         let count = 0;
-//         while (count < scrollLeftDiv.scrollLeft) {
-//             //迴圈持續加 滾動條寬度 直到比目前滾動條位置還大
-//             count += scrollLeftWidth;
-//             //判斷如果已經比目前滾動條位置大時進行處理
-//             if (count > scrollLeftDiv.scrollLeft) {
-//                 // count - 目前位置 會得到目前位置與最右方的下一個元素之間的距離。
-//                 let b = count - scrollLeftDiv.scrollLeft;
-//                 scrollLeftDiv.scrollLeft += b;
-//                 break;
-//             }
-//         }
-//     } else {
-//         scrollLeftDiv.scrollLeft += scrollLeftWidth;
-//     }
-//     setTimeout(() => {
-//         rightButton.disabled = false;
-//     }, 400);
-// })
-
+    requestAnimationFrame(achievementAnimetion);
+}
+//歷年實績背板動畫 結束
 
 
 //**歷年實績區 結束 */
