@@ -271,15 +271,11 @@ let url = '../JSON/photoData.json';
 //先呼叫 ajaxGetJson 方法並傳入網址參數 Promise 回傳結果會在.then處裡
 ajaxGetJson(url)
     .then((xhrJson) => {
-        //
+        //把成功取得的回傳值當作參數呼叫製作像片按鈕方法
         makePhotoDiv(xhrJson);
-        return xhrJson
-    })
-    .then((xhrJson)=>{
-        console.log('這是第二次');
-        console.log(xhrJson);
     })
     .catch((err) => {
+        //如果失敗值行這裡
         console.log('Json讀取失敗: ' + err);
     })
 
