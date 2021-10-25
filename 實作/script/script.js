@@ -98,6 +98,10 @@ SlideObject.prototype.chengeButtonColor = function () {
 
 // 等待視窗全部載好才執行
 window.onload = function () {
+    //取得loading圖片
+    const loadingClass = document.querySelector('.loadingClass');
+    
+
     // **hader橫版面動畫 開始**
     const bannerMask = document.getElementById('bannerMask');
     const bannerLogo = document.querySelector('header .bannerLogo>img');        //logo
@@ -105,6 +109,7 @@ window.onload = function () {
     const bannerSamp = document.querySelectorAll('header .bannerIcon samp');    //h2文字底線
 
     setTimeout(() => {
+        loadingClass.remove();      //刪除loading圖片
         //網頁load完成不要馬上執行
         bannerMask.style.animation = 'banner 1s ease forwards';
         setTimeout(() => {
@@ -127,7 +132,7 @@ window.onload = function () {
                 }, 100);
             }, 750);
         }, 500);
-    }, 500);
+    }, 500);//500
     // **hader橫版面動畫 結束**
 
 

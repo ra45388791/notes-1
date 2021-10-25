@@ -50,7 +50,9 @@ li {
 
 
 /* banner開始 */
-
+header{
+    position: relative;
+}
 
 header .headerImageBox {
     /* 首頁大圖往下推 */
@@ -447,14 +449,29 @@ footer .footerCopyright {
 /*頁尾結束*/
 
 
-
-
+/* 雜物區開始 */
 .img-fluid {
     /* 蓋掉bs圖片的 max-width */
     width: 100%;
 }
 
+/* loading gif圖片 */
+.loadingClass{
+    display: flex;
+    justify-content: center;
 
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.loadingClass img{
+    margin: auto auto;
+    width: 4rem;
+    z-index: 99;
+}
 
 /* 圖片之間的長條 */
 #straightStrip {
@@ -472,6 +489,7 @@ footer .footerCopyright {
     background: rgb(155, 155, 155);
 
 }
+/* 雜物區結束 */
 
 img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"] {
     display: none;
