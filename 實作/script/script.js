@@ -82,16 +82,12 @@ SlideObject.prototype.createButton = function () {
             item.style.backgroundColor = '';
         });
 
-
         //指定這個按鈕變色
         olButton.style.backgroundColor = 'red'
 
         //移動到指定位置
         this.scrollDiv.scrollLeft = this.slidePosition;
-
     });
-
-
 }
 SlideObject.prototype.chengeButtonColor = function () {
     //!監聽滾動條距離按鈕自動變色功能
@@ -103,11 +99,35 @@ SlideObject.prototype.chengeButtonColor = function () {
 // 等待視窗全部載好才執行
 window.onload = function () {
     // **hader橫版面動畫 開始**
-    setTimeout(() => {
-        let bannerMask = document.getElementById('bannerMask');
-        bannerMask.style.animation = 'banner 2s ease forwards';
+    const bannerMask = document.getElementById('bannerMask');
+    const bannerLogo = document.querySelector('header .bannerLogo>img');        //logo
+    const bannerIcon = document.querySelectorAll('header .bannerIcon h2');      //h2標題
+    const bannerSamp = document.querySelectorAll('header .bannerIcon samp');    //h2文字底線
 
-    }, 100)
+    setTimeout(() => {
+        //網頁load完成不要馬上執行
+        bannerMask.style.animation = 'banner 1s ease forwards';
+        setTimeout(() => {
+            //logo
+            bannerLogo.style.animation = 'bannerFadein 1s cubic-bezier(0.22, 0.61, 0.36, 1) forwards';
+            setTimeout(() => {
+                //h2文字
+                let i = 0;
+                let bannerH2Ani = setInterval(() => {
+                    bannerIcon[i].style.animation = 'bannerFadein 1s ease-out forwards';
+                    i++
+                    if (i === 5) {
+                        bannerSamp.forEach(e => {
+                            setTimeout(() => {
+                                e.style.animation = 'bannerSamp 1s ease-out forwards'
+                            }, 1000)
+                        });
+                        clearInterval(bannerH2Ani);     //停止動畫重複
+                    }
+                }, 100);
+            }, 750);
+        }, 500);
+    }, 500);
     // **hader橫版面動畫 結束**
 
 
@@ -117,7 +137,6 @@ window.onload = function () {
 
         //實例化banner物件
         let bannerAnimetion = new BannerAnimetion('serviceItems', undefined, 'article1', 'article2', 'bannerMask', 'opacityOpaque', 'opacityTransparent');
-
 
         //監視進入事件
         serviceItems.addEventListener('mouseover', e => {
@@ -162,37 +181,7 @@ window.onload = function () {
         })
     }
     // **服務項目淡入淡出動畫 結束**
-
-
-    //!這裡記得做筆記
-    //取得每一張圖片
-    const images = document.querySelectorAll('img');
-    //透過observer實例callback此方法
-    const callback = entries => {
-        //傳入的參數中有一個 isIntersecting 屬性 (true : 圖片被看到) (false : 圖片沒被看到)
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {     //如果為true代表看到圖片
-                const image = entry.target;                         //被看到的圖片
-                const data_src = image.getAttribute('data-src');    //取得圖片中的data-src屬性值
-                image.setAttribute('src', data_src);                //創造src屬性 並賦予他上面取得的 data-src 屬性
-                image.removeAttribute('data-src');                  //刪除 data-src 屬性
-                observer.unobserve(image);                          //刪除觀察動作  不要讓他繼續觀察
-            }
-        })
-    }
-    //實例化IntersectionObserver api
-    const observer = new IntersectionObserver(callback);
-    //遍歷每一個圖片 把 observer中的 observe 方法都加到圖片中 觀察圖片
-    images.forEach(image => {
-        observer.observe(image);
-    })
-    //!這裡記得做筆記
-
-
-
 }
-
-
 
 
 
@@ -469,7 +458,47 @@ function makeModalStorageAreaDiv(event) {
         dataArray = [];
         getStringData = '';
     }
+
+
+
+
+    ImageLazyLoading();
 }
+
+function ImageLazyLoading() {
+
+    //!這裡記得做筆記
+    //取得每一張圖片
+    const achievementImages = document.querySelectorAll('#achievement img');
+    const modalStorageAreaImages = document.querySelectorAll('#modalStorageArea img');
+
+    //透過observer實例callback此方法
+    const callback = entries => {
+        //傳入的參數中有一個 isIntersecting 屬性 (true : 圖片被看到) (false : 圖片沒被看到)
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {     //如果為true代表看到圖片
+                const image = entry.target;                         //被看到的圖片
+                const data_src = image.getAttribute('data-src');    //取得圖片中的data-src屬性值
+                image.setAttribute('src', data_src);                //創造src屬性 並賦予他上面取得的 data-src 屬性
+                image.removeAttribute('data-src');  //刪除 data-src 屬性
+                // console.log(image.getAttribute('src'));
+                observer.unobserve(image);                          //刪除觀察動作  不要讓他繼續觀察
+            }
+        })
+    }
+    //實例化IntersectionObserver api
+    const observer = new IntersectionObserver(callback);
+    //遍歷每一個圖片 把 observer中的 observe 方法都加到圖片中 觀察圖片
+    achievementImages.forEach(image => {
+        observer.observe(image);
+    })
+    modalStorageAreaImages.forEach(image => {
+        observer.observe(image)
+    })
+
+    //!這裡記得做筆記
+}
+
 
 /*
 //歷年實績背板動畫 開始

@@ -70,6 +70,53 @@ header .headerImageBox {
     background-color: #000;
 }
 
+header .bannerLogo {
+    position: absolute;
+    top     : 30%;
+    width   : 100%;
+}
+
+header .bannerLogo>img {
+    position: absolute;
+    opacity : 0;
+    width   : 6rem;
+}
+
+header .bannerIcon {
+    position: absolute;
+    bottom  : 5%;
+    width   : 100%;
+}
+
+header .bannerIcon>div div {
+    position: relative;
+    height  : 50px;
+}
+
+header .bannerIcon h2 {
+    position: absolute;
+    opacity: 0;
+
+    left               : 0px;
+    top                : 0px;
+
+    width              : 100%;
+    height             : 42px;
+
+    font-size          : 2rem;
+    font-weight        : bold;
+    -webkit-text-stroke: 1px black;
+    color: white;
+}
+
+header .bannerIcon samp {
+
+    /* box-shadow: 0px 5px 5px -5px #ffbb00; */
+    /* box-shadow: 0px 5px 5px -5px #ffffff; */
+    box-shadow   : 0px 0px 5px -5px #fffb00;
+}
+
+
 #bannerMask {
     position        : absolute;
     left            : 0;
@@ -87,6 +134,27 @@ header .headerImageBox {
     100% {
         background-color: rgba(0, 0, 0, 0);
     }
+}
+
+@keyframes bannerFadein {
+    0% {
+        opacity: 0;
+        top    : -40px;
+    }
+    
+    100% {
+        opacity: 1;
+        top    : 0px;
+    }
+}
+@keyframes bannerSamp {
+    0%{
+        box-shadow   : 0px 5px 0px -5px #fffb00;
+    }
+    100%{
+        box-shadow   : 0px 5px 5px -5px #fffb00;
+    }
+
 }
 
 /* banner結束 */
@@ -111,8 +179,9 @@ header .headerImageBox {
 
     background: url(/images/non-javaScript/ServiceItems/ServiceItemsBackGround.webp);
 
-    background-size  : cover;
-    background-repeat: no-repeat;
+    background-size    : cover;
+    background-position: top center;
+    background-repeat  : no-repeat;
 
 
 }
@@ -209,11 +278,11 @@ header .headerImageBox {
 }
 
 #scrollLeftDiv .navClass img {
-    object-fit: cover;
+    object-fit     : cover;
     object-position: center center;
-    margin    : 0px 0px;
-    width     : 100%;
-    height    : 100%;
+    margin         : 0px 0px;
+    width          : 100%;
+    height         : 100%;
 }
 
 #scrollLeftDiv .navClass button>div {
@@ -249,8 +318,6 @@ header .headerImageBox {
 
     padding: 2px 0px;
 
-    /* width : 100%;
-    height: 95%; */
     /*外斜切角*/
     background: linear-gradient(-135deg, transparent 12px, #ffffff 0) right,
         linear-gradient(45deg, transparent 12px, #ffffff 0) left;
@@ -337,18 +404,57 @@ header .headerImageBox {
 
 /*歷年實積背板動畫 結束*/
 
-
-
 /* 歷年實績結束 */
+
+
+/*頁尾開始*/
+footer {
+    background-color: #000000;
+
+}
+
+footer a {
+    text-decoration: none;
+    color          : #999;
+}
+
+footer a:hover {
+    color: #a7a7a7;
+}
+
+footer .logo {
+    width : 165px;
+    height: 60px;
+}
+
+footer .icon {
+    width : 40px;
+    height: 40px;
+}
+
+footer .footerConnectionrow a {
+    box-shadow: 0px 2px 2px -1px #999;
+}
+
+footer .footerConnectionrow a:hover {
+    box-shadow: 0px 2px 2px -1px #a7a7a7;
+}
+
+footer .footerCopyright {
+    color: #999;
+}
+
+/*頁尾結束*/
+
+
+
 
 .img-fluid {
     /* 蓋掉bs圖片的 max-width */
     width: 100%;
 }
 
-footer .logo {
-    width: 250px;
-}
+
 
 /* 圖片之間的長條 */
 #straightStrip {
@@ -373,6 +479,14 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
 
 @media only screen and (min-width: 768px) {
 
+    /* banner開始 */
+    header .bannerIcon {
+        bottom: 10%;
+    }
+
+    /* banner結束 */
+
+
     /*歷年實績開始*/
     #scrollLeftDiv {
         /* overflow寬度 */
@@ -385,6 +499,14 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
     }
 
     /*歷年實績結束*/
+
+
+    /*頁尾開始*/
+    footer .footerUrl li {
+        height: 35px;
+    }
+
+    /*頁尾結束*/
 }
 
 /*等於1024*/
@@ -393,9 +515,22 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
     /*banner開始*/
     header .headerImageBox {
         background         : url(/images/non-javaScript/Banner/BannerLg.webp);
-        background-position: center center;
+        background-position: 46% center;
+        /*圖片有點偏左*/
         background-size    : cover;
         background-repeat  : no-repeat;
+    }
+
+    header .bannerLogo>img {
+        width: 8rem;
+    }
+
+    header .bannerIcon {
+        bottom: 15%;
+    }
+
+    header .bannerIcon h2 {
+        font-size: 2.5rem;
     }
 
     /*banner結束*/
@@ -570,8 +705,8 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
     /*歷年實積背板動畫 開始*/
 
     #achievement .bgColorAnime>div {
-        width     : 200%;
-        background: linear-gradient(90deg, #00ffff, #fbff00, #00ffff, #fbff00, #00ffff);
+        width        : 200%;
+        background   : linear-gradient(90deg, #00ffff, #fbff00, #00ffff, #fbff00, #00ffff);
         /* background: linear-gradient(90deg, #00ffff, #fbff00, #00ffff, #fbff00, #00ffff, #fbff00, #00ffff, #fbff00, #00ffff, #fbff00, #00ffff, #fbff00, #00ffff, #fbff00, #00ffff, #fbff00, #00ffff, #fbff00, #00ffff, #fbff00); */
 
         animation: achievementAnime 5s cubic-bezier(0, 0, 0, 0) infinite;
@@ -602,6 +737,12 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
         background-position: center center;
         background-size    : cover;
         background-repeat  : no-repeat;
+    }
+
+
+
+    header .bannerIcon h2 {
+        font-size: 3rem;
     }
 
     /*banner結束*/
@@ -656,12 +797,22 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
 
     /*服務項目結束*/
 
-    /* 歷年實績開始 */
-
-    /* 歷年實績結束 */
-
     /* 圖片間長條 */
     #straightStrip {
         display: block;
     }
+}
+
+@media only screen and (min-width: 2500px) {
+
+    /* banner開始 */
+    header .bannerLogo>img {
+        width: 10rem;
+    }
+
+    header .bannerIcon h2 {
+        font-size: 4.5rem;
+    }
+
+    /* banner結束 */
 }
