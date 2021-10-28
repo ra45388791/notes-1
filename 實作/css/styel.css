@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'TaipeiSansTCBeta-Bold';
+    src        : url(/Font/TaipeiSansTCBeta-Bold.ttf);
+}
+
 * {
     /* 字體 */
     font-family: "M PLUS Rounded 1c", sans-serif;
@@ -13,12 +18,44 @@ p {
     margin-bottom: 0px;
 }
 
+h2 {
+    font-family: 'TaipeiSansTCBeta-Bold';
+}
+
 ol,
 ul,
 li {
     list-style-type: none;
     text-align     : start;
 }
+
+/* 漢堡 只有在筆電以下才會出現 */
+#topNav {
+    background      : linear-gradient(20deg, rgba(0, 0, 255, 0.452) 0%, transparent 80%);
+    background-color: rgb(0, 0, 0);
+    height          : 85px;
+}
+
+#topNav>div {
+    padding         : 8px 0px;
+    background      : linear-gradient(40deg, rgba(0, 0, 255, 0.452) 0%, transparent 80%);
+    background-color: rgb(0, 0, 0);
+}
+
+#topNav .navHamburger {
+    position: absolute;
+    right   : 15px;
+    top     : 25px;
+    z-index : 99;
+}
+
+#topNav .active>samp {
+    padding-bottom: 2px;
+    border-bottom : 3px solid rgb(87, 106, 189);
+}
+
+
+
 
 /* 漢堡按鈕優化 */
 /*
@@ -39,25 +76,19 @@ li {
 
 /* 漢堡按鈕優化結束 */
 
-/* 錨點 */
-/* .anchorPoint {
-    display   : block;
-    position  : relative;
-    top       : -85.8px;
-    visibility: hidden;
-} */
-/* 錨點結束 */
 
 
 /* banner開始 */
 header {
+    /* 首頁大圖往下推 */
+    margin-top: 85px;
+
     position: relative;
-    height: calc(100vh - 85px);
+    height  : calc(100vh - 85px);
+    height  : calc((var(--vh, 1vh) * 100) - 85px);
 }
 
 header .headerImageBox {
-    /* 首頁大圖往下推 */
-    margin-top: 85px;
 
     width           : 100%;
     /* height       : calc(100vh - (85px + 42px)); */
@@ -153,11 +184,13 @@ header .bannerIcon samp {
 
 @keyframes bannerSamp {
     0% {
-        box-shadow: 0px 5px 0px -5px #fffb00;
+        /* box-shadow: 0px 5px 0px -5px #fffb00; */
+        box-shadow: 0px 5px 0px -5px #ff9100;
     }
 
     100% {
-        box-shadow: 0px 5px 5px -5px #fffb00;
+        /* box-shadow: 0px 5px 5px -5px #fffb00; */
+        box-shadow: 0px 5px 5px -5px #ff9100;
     }
 
 }
@@ -165,30 +198,54 @@ header .bannerIcon samp {
 /* banner結束 */
 
 
-
-
-
-
 /* aboutUs開始 */
 #aboutUs {
+
     background-color: rgb(26, 26, 126);
+}
+
+#aboutUs .aboutUsContant p {
+    display: block;
+
+    text-indent: 2em;
+}
+
+#aboutUs .aboutUsContant samp {
+    color: #00eaff;
+}
+
+#aboutUs button {
+
+    width : auto;
+    height: 35px;
+
+}
+
+#aboutUs button:hover {
+    /* background: rgb(0, 153, 255); */
+    box-shadow: inset 6px 0px 0px 0px #ffffff, inset 146px 0px 0px 0px rgb(0, 153, 255);
+}
+
+#aboutUs .icon {
+    margin-left: auto;
+    width      : auto;
+    height     : 100%;
 }
 
 /* aboutUs結束 */
 
 
-
-
 /*服務項目開始*/
 #serviceItems {
-
     background: url(/images/non-javaScript/ServiceItems/ServiceItemsBackGround.webp);
 
     background-size    : cover;
     background-position: top center;
     background-repeat  : no-repeat;
 
-
+    /* 文字左右對齊 */
+    text-align  : justify;
+    text-justify: inter-ideograph;
 }
 
 #serviceItems {
@@ -217,6 +274,7 @@ header .bannerIcon samp {
 #achievement {
     position: relative;
 
+
     background         : url(/images/non-javaScript/Achievement/AchievementBgNoBackground.png);
     background-size    : cover;
     background-position: center center;
@@ -224,12 +282,13 @@ header .bannerIcon samp {
 }
 
 #achievement .container {
-    /* background:rgba(255, 255, 255, 0.027); */
+
     background: rgba(0, 0, 0, 0.575);
 }
 
 #carouselExampleControlsNoTouching {
     position: relative;
+
 }
 
 /* 滾動條 */
@@ -276,10 +335,11 @@ header .bannerIcon samp {
     margin : 0px;
     padding: 0px;
 
-    position     : relative;
-    width        : 100%;
-    height       : 100%;
-    /* background: rgb(255, 137, 137); */
+    position  : relative;
+    width     : 100%;
+    height    : 100%;
+    /* 設定最小高度 不然背景圖片會被壓縮 */
+    min-height: 277px;
 }
 
 #scrollLeftDiv .navClass img {
@@ -292,8 +352,7 @@ header .bannerIcon samp {
 
 #scrollLeftDiv .navClass button>div {
     margin-top: 10px;
-
-    width: 100%;
+    width     : 100%;
 }
 
 #scrollLeftDiv .activityType {
@@ -313,8 +372,6 @@ header .bannerIcon samp {
     background-size  : 51% 100%;
     background-repeat: no-repeat;
 }
-
-
 
 #scrollLeftDiv .activityNarrate {
     display        : flex;
@@ -342,7 +399,6 @@ header .bannerIcon samp {
 }
 
 
-
 /* 導航按鈕 開始 */
 
 #slideButton ul {
@@ -352,19 +408,19 @@ header .bannerIcon samp {
 #slideButton ol {
     margin: 0px 10px;
 
-    width : 15px;
-    height: 15px;
+    width : 20px;
+    height: 10px;
 }
 
 #slideButton ol>button {
-    width        : 100%;
-    height       : 100%;
-    border-radius: 100%;
+    width : 100%;
+    height: 100%;
+
+    border-radius: 20%;
 
     /* 把框線去掉 */
     border: none;
 }
-
 
 /* 導航按鈕 結束 */
 
@@ -474,7 +530,30 @@ footer .footerCopyright {
     margin : auto auto;
     width  : 4rem;
     z-index: 99;
+
 }
+
+/*淡入動畫*/
+.DOMFadeinAni {
+
+    opacity: 0;
+}
+
+@keyframes textDomLook {
+    0% {
+        position: relative;
+        top     : -25px;
+        opacity : 0;
+    }
+
+    100% {
+        position: relative;
+        top     : 0px;
+        opacity : 1;
+    }
+
+}
+
 
 /* 圖片之間的長條 */
 #straightStrip {
@@ -568,7 +647,6 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
     }
 
     #aboutUs .aboutUs-Set {
-        /* background: linear-gradient(110deg, rgb(0, 47, 96) 50%, transparent 0%); */
         background: linear-gradient(110deg, rgb(26, 26, 126) 48%, rgba(255, 166, 0, 0.015) 50%, transparent 0%);
     }
 
@@ -576,9 +654,6 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
 
 
     /*服務項目開始*/
-    #serviceItems {
-        /* background-color: rgba(0, 0, 0, 0); */
-    }
 
     #serviceItems .containerBox {
         /* 模擬 container */
@@ -725,6 +800,11 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
 
     /* 歷年實績開始 */
 
+    #scrollLeftDiv .navClass button {
+        /* 設定最小高度 不然背景圖片會被壓縮 */
+        min-height: 379px;
+    }
+
     /*歷年實積背板動畫 開始*/
 
     #achievement .bgColorAnime>div {
@@ -753,6 +833,11 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
 
 
 @media only screen and (min-width: 1399px) {
+
+    #topNav>div {
+        background      : linear-gradient(40deg, rgba(0, 0, 255, 0) 0%, transparent 80%);
+        background-color: rgba(0, 0, 0, 0);
+    }
 
     /*banner開始*/
     header .headerImageBox {
