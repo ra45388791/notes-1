@@ -94,5 +94,17 @@
             "month": "1",
             "day": "27"
         }
+    },
+    {
+        "chineseName": "呼哇呼哇二",
+        "englishName": "HuwahuwaTow",
+        "activityType": "畢業典禮",
+        "numberOfPhotos": 7,
+        "photoExtension": "jpg",
+        "date": {
+            "year": "2021",
+            "month": "1",
+            "day": "13"
+        }
     }
 ]

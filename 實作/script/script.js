@@ -1,4 +1,5 @@
 vw = Math.max(document.documentElement.clientWidth);  //取得視口寬度
+let vh = window.innerHeight * 0.01;         //手機端動態調整banner高度
 
 //!物件開始
 //fadein and fadeout動畫物件OOP 開始
@@ -37,7 +38,7 @@ BannerAnimetion.prototype.fadeout = function () {
 //動畫物件OOP 結束
 
 //歷年實績 幻燈片按鈕物件 開始
-function SlideObject(scrollDiv, id, idNumber, className, ulElement, slidePosition) {
+function SlideObject(scrollDiv, id, idNumber, className, ulElement, objSize, slidePosition) {
     /**
      * 指定參數 (需要移動滾動條的父div元素, 按鈕id, id編號, 要放入按鈕的父ul元素, 幻燈片位移參數)
      */
@@ -46,6 +47,7 @@ function SlideObject(scrollDiv, id, idNumber, className, ulElement, slidePositio
     this.idNumber = idNumber;               //id編號 (如果有多個按鈕)
     this.className = className;
     this.ulElement = ulElement;             //要放入按鈕的ul標籤 
+    this.objSize = objSize;                  //物件實體大小 + margin的總和大小
     this.slidePosition = slidePosition;     // 位移位置 //如果要位移則要額外增加 例如:(原位置 += 位移參數;) 
 }
 SlideObject.prototype.createButton = function () {
@@ -77,30 +79,45 @@ SlideObject.prototype.createButton = function () {
         //取得所有按鈕id把所有按鈕顏色去除
         // const bElement = document.querySelectorAll();
 
-        let e = document.querySelectorAll(`.${this.className}`);
-        e.forEach(function (item) {
-            item.style.backgroundColor = '';
-        });
+        setTimeout(() => {
+            let e = document.querySelectorAll(`.${this.className}`);
+            e.forEach(function (item) {
+                item.style.backgroundColor = '';
+            });
 
-        //指定這個按鈕變色
-        olButton.style.backgroundColor = 'red'
+            //指定這個按鈕變色
+            olButton.style.backgroundColor = 'red'
 
+        }, 200);
         //移動到指定位置
         this.scrollDiv.scrollLeft = this.slidePosition;
     });
-}
-SlideObject.prototype.chengeButtonColor = function () {
-    //!監聽滾動條距離按鈕自動變色功能
+
+    //如果滾動條的值發生變化
+    this.scrollDiv.addEventListener('scroll', () => {
+
+        if (this.scrollDiv.scrollLeft >= this.slidePosition - 50) {
+            let e = document.querySelectorAll(`.${this.className}`);
+
+            e.forEach(function (item) {
+                item.style.backgroundColor = '';
+            });
+            olButton.style.backgroundColor = 'red'
+        }
+    });
 }
 //歷年實績 幻燈片按鈕物件 結束
 //!物件結束
 
+//設定header的大小 如果是行動端就要減去瀏覽器上方導覽條的高度
+const header = document.querySelector('header');
+header.style.setProperty('--vh', `${vh}px`);
 
 // 等待視窗全部載好才執行
 window.onload = function () {
     //取得loading圖片
     const loadingClass = document.querySelector('.loadingClass');
-    
+
 
     // **hader橫版面動畫 開始**
     const bannerMask = document.getElementById('bannerMask');
@@ -166,6 +183,10 @@ window.onload = function () {
                 }
             }
 
+
+
+
+
             if (getClassName === 'SoundEngineer') {
                 bannerAnimetion.fadein();
 
@@ -192,7 +213,7 @@ window.onload = function () {
 
 //**歷年實績區 開始 */
 //要製作的次數
-const photoCount = 8;
+const photoCount = 9;
 //滾動條區
 const scrollLeftDiv = document.getElementById('scrollLeftDiv');  //照片按紐區
 //內容區
@@ -206,8 +227,7 @@ const modalStorageArea = document.getElementById('modalStorageArea');
 
 //滾動按鈕
 let slidePhotoCount;        //幻燈片中同時顯示照片的數量
-let slideCount = 0;         //按鈕編號
-// let slideObjectArray = [];
+let slideCount = 0;         //按鈕編
 
 
 //判斷幻燈片中的同時顯示照片數量
@@ -218,28 +238,7 @@ if (vw < 768) {
     slidePhotoCount = 3;
 }
 
-
-// // 取得相片名子 json
-// function getPhotoNameString() {
-//     let url = '../JSON/photoData.json';
-//     let xhr = new XMLHttpRequest();
-
-//     xhr.open('GET', url, true);
-//     xhr.responseType = 'json';
-
-
-//     xhr.onreadystatechange = function () {
-//         if (xhr.readyState === 4) {
-//             if (xhr.status === 200) {
-//                 let jsonData = xhr.response;
-//                 makePhotoDiv(jsonData);
-//             }
-//         }
-//     }
-//     xhr.send()
-// }
-// getPhotoNameString();
-
+// 取得相片名子 json
 function ajaxGetJson(url) {
     return new Promise((resolve, reject) => {
         let xhr = new XMLHttpRequest();
@@ -261,16 +260,25 @@ function ajaxGetJson(url) {
     });
 }
 
+//json檔案位置
 let url = '../JSON/photoData.json';
 //先呼叫 ajaxGetJson 方法並傳入網址參數 Promise 回傳結果會在.then處裡
 ajaxGetJson(url)
     .then((xhrJson) => {
         //把成功取得的回傳值當作參數呼叫製作像片按鈕方法
         makePhotoDiv(xhrJson);
+        return xhrJson;
+    })
+    .then((xhrJson) => {
+        makeModalStorageAreaDiv(xhrJson);
     })
     .catch((err) => {
         //如果失敗值行這裡
         console.log('Json讀取失敗: ' + err);
+    })
+    .finally(() => {
+        //不管怎樣最後一定執行觀測方法
+        contantLazyLoading();
     })
 
 
@@ -318,7 +326,6 @@ function makePhotoDiv(event) {
         imgBox.alt = `${event[i].chineseName}圖片按紐`;
 
 
-
         //敘述盒子
         narrateBox.classList.add('text-light', 'mt-4');
         //活動類型
@@ -333,6 +340,7 @@ function makePhotoDiv(event) {
         pBox.classList.add('fs-4', 'my-2');
 
         pBox.innerHTML = event[i].chineseName;
+
 
         //依序插入 divBox>按紐>內文>圖片
         divBox.append(buttonBox);
@@ -359,8 +367,6 @@ function makePhotoDiv(event) {
             ModalStorageAreaDivScrollButton();
         }
     }
-
-    makeModalStorageAreaDiv(event);
 }
 
 //歷年實績滾動按鈕
@@ -379,8 +385,7 @@ function ModalStorageAreaDivScrollButton() {
     const navClassWidth = navClassBodyWidth + navClassMarginX;
 
     //製作按鈕物件
-    let slideObject = new SlideObject(scrollLeftDiv, 'slideMoveButton', slideCount, 'achievementClass', slideUl, divPosition);
-    // slideObjectArray.push(slideObject);
+    let slideObject = new SlideObject(scrollLeftDiv, 'slideMoveButton', slideCount, 'achievementClass', slideUl, navClassMarginX, divPosition);
 
     slideObject.createButton();
 
@@ -463,22 +468,21 @@ function makeModalStorageAreaDiv(event) {
         dataArray = [];
         getStringData = '';
     }
-
-
-
-
-    ImageLazyLoading();
 }
 
-function ImageLazyLoading() {
+//觀察
+function contantLazyLoading() {
 
-    //!這裡記得做筆記
     //取得每一張圖片
     const achievementImages = document.querySelectorAll('#achievement img');
     const modalStorageAreaImages = document.querySelectorAll('#modalStorageArea img');
+    //每個擁有DOMFadeinAni 的class名稱都要執行淡入動畫
+    const DOMFadeinAni = document.querySelectorAll('.DOMFadeinAni');
+
 
     //透過observer實例callback此方法
-    const callback = entries => {
+    //圖片觀察
+    const imageCallback = entries => {
         //傳入的參數中有一個 isIntersecting 屬性 (true : 圖片被看到) (false : 圖片沒被看到)
         entries.forEach(entry => {
             if (entry.isIntersecting) {     //如果為true代表看到圖片
@@ -487,21 +491,48 @@ function ImageLazyLoading() {
                 image.setAttribute('src', data_src);                //創造src屬性 並賦予他上面取得的 data-src 屬性
                 image.removeAttribute('data-src');  //刪除 data-src 屬性
                 // console.log(image.getAttribute('src'));
-                observer.unobserve(image);                          //刪除觀察動作  不要讓他繼續觀察
+                imageObserver.unobserve(image);                          //刪除觀察動作  不要讓他繼續觀察
             }
         })
     }
-    //實例化IntersectionObserver api
-    const observer = new IntersectionObserver(callback);
-    //遍歷每一個圖片 把 observer中的 observe 方法都加到圖片中 觀察圖片
-    achievementImages.forEach(image => {
-        observer.observe(image);
-    })
-    modalStorageAreaImages.forEach(image => {
-        observer.observe(image)
-    })
 
-    //!這裡記得做筆記
+    //文字觀察
+    const textCallback = entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const text = entry.target;
+                setTimeout(() => {
+                    text.style.animation = 'textDomLook 1s ease-out forwards';
+                    setTimeout(() => {
+                        text.classList.remove('DOMFadeinAni');
+                        text.style.animation = '';
+                        textObserver.unobserve(text);
+                    }, 1000);
+                }, 300);
+            }
+        })
+    }
+
+
+    //實例化IntersectionObserver api
+    const imageObserver = new IntersectionObserver(imageCallback);  //圖片
+    const textObserver = new IntersectionObserver(textCallback);    //文字
+
+
+    //遍歷每一個圖片 把 observer中的 observe 方法都加到圖片中 觀察圖片
+
+    //圖片
+    registerObserveEvent(achievementImages, imageObserver);
+    registerObserveEvent(modalStorageAreaImages, imageObserver);
+    //文字
+    registerObserveEvent(DOMFadeinAni, textObserver);
+
+}
+//forEach每一個物件都註冊觀察事件
+function registerObserveEvent(eventArray, observeObject) {
+    eventArray.forEach(image => {
+        observeObject.observe(image);
+    })
 }
 
 
