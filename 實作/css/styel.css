@@ -33,13 +33,20 @@ li {
 #topNav {
     background      : linear-gradient(20deg, rgba(0, 0, 255, 0.452) 0%, transparent 80%);
     background-color: rgb(0, 0, 0);
-    height          : 85px;
+    height          : 90px;
 }
 
 #topNav>div {
-    padding         : 8px 0px;
+    /* 如果漢堡按鈕造成logo上下移動 調整此padding */
+    padding         : 12px 0px;
     background      : linear-gradient(40deg, rgba(0, 0, 255, 0.452) 0%, transparent 80%);
     background-color: rgb(0, 0, 0);
+}
+
+#topNav .navLogo img {
+    padding: 0px;
+    width  : 250px;
+
 }
 
 #topNav .navHamburger {
@@ -53,7 +60,6 @@ li {
     padding-bottom: 2px;
     border-bottom : 3px solid rgb(87, 106, 189);
 }
-
 
 
 
@@ -81,11 +87,12 @@ li {
 /* banner開始 */
 header {
     /* 首頁大圖往下推 */
-    margin-top: 85px;
+    margin-top: 90px;
 
     position: relative;
     height  : calc(100vh - 85px);
     height  : calc((var(--vh, 1vh) * 100) - 85px);
+
 }
 
 header .headerImageBox {
@@ -106,14 +113,13 @@ header .headerImageBox {
 
 header .bannerLogo {
     position: absolute;
-    top     : 30%;
+    top     : 10%;
     width   : 100%;
+    opacity : 0;
 }
 
-header .bannerLogo>img {
-    position: absolute;
-    opacity : 0;
-    width   : 6rem;
+header .bannerLogo img {
+    width: 200px;
 }
 
 header .bannerIcon {
@@ -147,7 +153,8 @@ header .bannerIcon samp {
 
     /* box-shadow: 0px 5px 5px -5px #ffbb00; */
     /* box-shadow: 0px 5px 5px -5px #ffffff; */
-    box-shadow: 0px 0px 5px -5px #fffb00;
+    /* box-shadow: 0px 0px 5px -5px #fffb00; */
+    box-shadow: 0px 0px 5px -5px #ffc107;
 }
 
 
@@ -172,6 +179,20 @@ header .bannerIcon samp {
 
 @keyframes bannerFadein {
     0% {
+        opacity   : 0;
+        /* top    : -40px; */
+        top       : 10%;
+    }
+
+    100% {
+        opacity   : 1;
+        /* top    : 0px; */
+        top       : 15%;
+    }
+}
+
+@keyframes bannerH2 {
+    0% {
         opacity: 0;
         top    : -40px;
     }
@@ -192,7 +213,6 @@ header .bannerIcon samp {
         /* box-shadow: 0px 5px 5px -5px #fffb00; */
         box-shadow: 0px 5px 5px -5px #ff9100;
     }
-
 }
 
 /* banner結束 */
@@ -200,18 +220,25 @@ header .bannerIcon samp {
 
 /* aboutUs開始 */
 #aboutUs {
-
     background-color: rgb(26, 26, 126);
 }
 
-#aboutUs .aboutUsContant p {
-    display: block;
+#aboutUs>div>div>h3 {
+    border-bottom: 2px solid rgb(87, 106, 189);
+}
 
+#aboutUs>div>div samp {
+    color: rgb(151, 170, 255);
+}
+
+#aboutUs .aboutUsContant p {
+    display    : block;
     text-indent: 2em;
 }
 
 #aboutUs .aboutUsContant samp {
-    color: #00eaff;
+    /* color: #00eaff; */
+    color: #fff;
 }
 
 #aboutUs button {
@@ -237,19 +264,17 @@ header .bannerIcon samp {
 
 /*服務項目開始*/
 #serviceItems {
-    background: url(/images/non-javaScript/ServiceItems/ServiceItemsBackGround.webp);
-
+    /* background: url(/images/non-javaScript/ServiceItems/ServiceItemsBackGround.webp);
+    
     background-size    : cover;
     background-position: top center;
-    background-repeat  : no-repeat;
+    background-repeat  : no-repeat; */
+    position  : relative;
+    background: linear-gradient(180deg, rgb(6, 6, 6)100%, rgb(0, 26, 255)100%, transparent);
 
     /* 文字左右對齊 */
     text-align  : justify;
     text-justify: inter-ideograph;
-}
-
-#serviceItems {
-    background-color: rgba(0, 0, 0, 0.692);
 }
 
 #serviceItems img {
@@ -263,17 +288,57 @@ header .bannerIcon samp {
 }
 
 #serviceItems .bannerImgSet {
-    width        : 100%;
-    height       : 100%;
-    /* box-shadow: 0px 0px 15px rgb(128, 128, 128); */
+    width : 100%;
+    height: 100%;
 }
 
 /*服務項目結束*/
 
+/* 聯絡條開始 */
+/* ! 醒來做這裡 聯絡條觸碰到時展開特效 */
+#connection {
+    background: linear-gradient(255deg, rgba(255, 0, 242, 0.767) 0%, rgb(0, 0, 255) 100%, transparent 65%);
+}
+
+#connection .connectionBox {
+    overflow  : hidden;
+    width     : 40px;
+    height    : 40px;
+    background: none;
+    color     : #fff;
+    border    : none;
+    z-index   : 1;
+    box-shadow: 0px 0px 1px -1px rgb(255, 255, 255);
+    transition: width 0.5s 0s ease, box-shadow 0.5s 0s ease;
+}
+
+#connection .connectionBox:hover {
+    width     : calc(40px + 12em);
+    box-shadow: 3px 0px 1px -1px rgb(255, 255, 255);
+}
+
+#connection button {
+    z-index: 1;
+}
+
+#connection img {
+    width : 40px;
+    height: 40px;
+}
+
+#connection p {
+    /* background : #000; */
+    margin-left: 10px;
+    min-width  : 10em;
+    font-weight: bold;
+}
+
+/* 聯絡條結束 */
+
+
 /* 歷年實績開始 */
 #achievement {
     position: relative;
-
 
     background         : url(/images/non-javaScript/Achievement/AchievementBgNoBackground.png);
     background-size    : cover;
@@ -281,20 +346,14 @@ header .bannerIcon samp {
     background-repeat  : no-repeat;
 }
 
-#achievement .container {
-
-    background: rgba(0, 0, 0, 0.575);
-}
 
 #carouselExampleControlsNoTouching {
     position: relative;
-
 }
 
 /* 滾動條 */
 #scrollLeftDiv::-webkit-scrollbar {
     display: none;
-
 }
 
 #scrollLeftDiv {
@@ -556,7 +615,7 @@ footer .footerCopyright {
 
 
 /* 圖片之間的長條 */
-#straightStrip {
+.straightStrip {
     display: none;
 
     margin: auto auto;
@@ -623,8 +682,9 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
         background-repeat  : no-repeat;
     }
 
-    header .bannerLogo>img {
-        width: 8rem;
+
+    header .bannerLogo img {
+        width: 250px;
     }
 
     header .bannerIcon {
@@ -646,6 +706,14 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
         background-color: rgba(0, 46, 96, 0.972);
     }
 
+    #aboutUs>div>div:first-child {
+        border-left: 2px solid rgb(87, 106, 189);
+    }
+
+    #aboutUs>div>div>h3 {
+        border-bottom: none;
+    }
+
     #aboutUs .aboutUs-Set {
         background: linear-gradient(110deg, rgb(26, 26, 126) 48%, rgba(255, 166, 0, 0.015) 50%, transparent 0%);
     }
@@ -654,6 +722,7 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
 
 
     /*服務項目開始*/
+
 
     #serviceItems .containerBox {
         /* 模擬 container */
@@ -872,6 +941,7 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
 
 
     /*服務項目開始*/
+
     #serviceItems .containerBox {
         width : auto;
         height: 31vw;
@@ -906,7 +976,7 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
     /*服務項目結束*/
 
     /* 圖片間長條 */
-    #straightStrip {
+    .straightStrip {
         display: block;
     }
 }
@@ -914,8 +984,8 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
 @media only screen and (min-width: 2500px) {
 
     /* banner開始 */
-    header .bannerLogo>img {
-        width: 10rem;
+    header .bannerLogo img {
+        width: 350px;
     }
 
     header .bannerIcon h2 {

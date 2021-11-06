@@ -93,18 +93,48 @@ SlideObject.prototype.createButton = function () {
         this.scrollDiv.scrollLeft = this.slidePosition;
     });
 
-    //如果滾動條的值發生變化
-    this.scrollDiv.addEventListener('scroll', () => {
+    //防抖函數執行顏色變換
+    function changeButtonColor(slidePosition, className) {
 
-        if (this.scrollDiv.scrollLeft >= this.slidePosition - 50) {
-            let e = document.querySelectorAll(`.${this.className}`);
-
+        //!這裡的this已經變成scrollDiv了
+        if (this.scrollLeft >= (slidePosition - 50)) {
+            let e = document.querySelectorAll(`.${className}`);
+            console.log(className);
             e.forEach(function (item) {
                 item.style.backgroundColor = '';
             });
             olButton.style.backgroundColor = 'red'
         }
-    });
+    };
+    //防抖函數 要執行的方法 和 延遲時間
+    function debounce(func, SPosition, CName, delay) {
+        let timer;              //先宣告時間變量才能執行 刪除延遲 設定延遲
+        return function () {
+            let context = this;     //此時this是指向呼叫這個方法的 this.scrollDiv，因為return this會指向window 把this 儲存起來。
+            clearTimeout(timer);    //清除延遲來達成重新計時的功能
+            timer = setTimeout(function () {
+                func.call(context, SPosition, CName); //!用call 綁定 this 給 changeButtonColor，apply 參數需要是陣列的樣子
+            }, delay);
+        }
+    };
+
+    this.scrollDiv.addEventListener('scroll', debounce(changeButtonColor, this.slidePosition, this.className, 50));
+
+
+
+    // //如果滾動條的值發生變化
+    // this.scrollDiv.addEventListener('scroll', () => {
+    //     console.log(this.scrollDiv);
+
+    //     if (this.scrollDiv.scrollLeft >= this.slidePosition - 50) {
+    //         let e = document.querySelectorAll(`.${this.className}`);
+
+    //         e.forEach(function (item) {
+    //             item.style.backgroundColor = '';
+    //         });
+    //         olButton.style.backgroundColor = 'red'
+    //     }
+    // });
 }
 //歷年實績 幻燈片按鈕物件 結束
 //!物件結束
@@ -121,22 +151,29 @@ window.onload = function () {
 
     // **hader橫版面動畫 開始**
     const bannerMask = document.getElementById('bannerMask');
-    const bannerLogo = document.querySelector('header .bannerLogo>img');        //logo
+    // const bannerLogo = document.querySelectorAll('header .bannerLogo img');        //logo
+    const bannerLogo = document.querySelector('header .bannerLogo');        //logo
     const bannerIcon = document.querySelectorAll('header .bannerIcon h2');      //h2標題
     const bannerSamp = document.querySelectorAll('header .bannerIcon samp');    //h2文字底線
 
+    console.log(bannerLogo);
     setTimeout(() => {
         loadingClass.remove();      //刪除loading圖片
         //網頁load完成不要馬上執行
         bannerMask.style.animation = 'banner 1s ease forwards';
         setTimeout(() => {
+            
             //logo
+            // bannerLogo.forEach(e => {
+            //     e.style.animation = 'bannerFadein 1s cubic-bezier(0.22, 0.61, 0.36, 1) forwards';
+            // })
             bannerLogo.style.animation = 'bannerFadein 1s cubic-bezier(0.22, 0.61, 0.36, 1) forwards';
+            
             setTimeout(() => {
                 //h2文字
                 let i = 0;
                 let bannerH2Ani = setInterval(() => {
-                    bannerIcon[i].style.animation = 'bannerFadein 1s ease-out forwards';
+                    bannerIcon[i].style.animation = 'bannerH2 1s ease-out forwards';
                     i++
                     if (i === 5) {
                         bannerSamp.forEach(e => {
@@ -212,7 +249,7 @@ window.onload = function () {
 
 
 //**歷年實績區 開始 */
-//要製作的次數
+//!要製作的次數
 const photoCount = 9;
 //滾動條區
 const scrollLeftDiv = document.getElementById('scrollLeftDiv');  //照片按紐區
@@ -534,6 +571,13 @@ function registerObserveEvent(eventArray, observeObject) {
         observeObject.observe(image);
     })
 }
+
+
+
+
+
+
+
 
 
 /*
