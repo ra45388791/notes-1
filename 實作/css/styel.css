@@ -122,18 +122,18 @@ header .bannerLogo img {
     width: 200px;
 }
 
-header .bannerIcon {
+header .bannerH2Title {
     position: absolute;
     bottom  : 5%;
     width   : 100%;
 }
 
-header .bannerIcon>div div {
+header .bannerH2Title>div div {
     position: relative;
     height  : 50px;
 }
 
-header .bannerIcon h2 {
+header .bannerH2Title h2 {
     position: absolute;
     opacity : 0;
 
@@ -149,7 +149,7 @@ header .bannerIcon h2 {
     color              : white;
 }
 
-header .bannerIcon samp {
+header .bannerH2Title samp {
 
     /* box-shadow: 0px 5px 5px -5px #ffbb00; */
     /* box-shadow: 0px 5px 5px -5px #ffffff; */
@@ -234,11 +234,6 @@ header .bannerIcon samp {
 #aboutUs .aboutUsContant p {
     display    : block;
     text-indent: 2em;
-}
-
-#aboutUs .aboutUsContant samp {
-    /* color: #00eaff; */
-    color: #fff;
 }
 
 #aboutUs button {
@@ -641,7 +636,7 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
 
     /* banner開始 */
 
-    header .bannerIcon {
+    header .bannerH2Title {
         bottom: 10%;
     }
 
@@ -687,11 +682,11 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
         width: 250px;
     }
 
-    header .bannerIcon {
+    header .bannerH2Title {
         bottom: 15%;
     }
 
-    header .bannerIcon h2 {
+    header .bannerH2Title h2 {
         font-size: 2.5rem;
     }
 
@@ -918,7 +913,7 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
 
 
 
-    header .bannerIcon h2 {
+    header .bannerH2Title h2 {
         font-size: 3rem;
     }
 
@@ -988,7 +983,7 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
         width: 350px;
     }
 
-    header .bannerIcon h2 {
+    header .bannerH2Title h2 {
         font-size: 4.5rem;
     }
 

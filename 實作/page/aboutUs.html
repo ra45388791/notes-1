@@ -2,23 +2,55 @@
 <html lang="zh-Hant-TW">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>燈光音響</title>
+    <title>輝昇聲光</title>
+    <!-- <link rel="shortcut icon" href="http://shocksweet.ga/images/logo/favicon.ico" type="image/x-icon"> -->
+    <link rel="shortcut icon" href="http://shocksweet.ga/images/logo/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <!-- Bs -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <!-- 禁止把數字轉化為撥號連結 -->
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="alternate" hreflang="x-default" href="http://shocksweet.ga">
+    <link rel="alternate" hreflang="zh" href="http://shocksweet.ga/">
+    <link rel="alternate" hreflang="zh-TW" href="http://shocksweet.ga/">
+
+    <meta name="Description"
+        content="輝昇聲光擁有至少20年的經驗，提供最專業的現場音響硬體規劃和燈光特效，在北台灣執行過各式大大小小的活動，對於執行的每一場活動都是保持著戰戰兢兢絕不馬虎的態度來面對。">
+
+    <!-- og -->
+    <meta property="og:image" content="http://shocksweet.ga/images/logo/ogImage.jpg">
+    <meta property="og:title" content="輝昇聲光">
+    <meta property="og:description"
+        content="輝昇聲光擁有至少20年的經驗，提供最專業的現場音響硬體規劃和燈光特效，在北台灣執行過各式大大小小的活動，對於執行的每一場活動都是保持著戰戰兢兢絕不馬虎的態度來面對。我們執行過的活動包含尾牙、園遊會、婚禮、學生表演、畢業典禮、開幕典禮...等等，不論是甚麼活動我們都擁有相當豐富的經驗以及最專業的設備可以讓您的活動圓滿的舉辦完成。">
+    <meta property="og:url" content="http://shocksweet.ga">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:site_name" content="輝昇聲光(首頁)">
+    <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://shocksweet.ga/images/logo/ogImage.jpg">
+
     <!-- 字體 -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300&family=Noto+Sans+TC:wght@300&display=swap"
         rel="stylesheet">
 
+    <link rel="stylesheet" href="../css/normalize.css">
+    <!-- Bs -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+
     <!-- 自製css -->
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="../css/styel.css">
+
+    <!-- 自製js -->
+    <!-- <script async src="../script/script.js"></script> -->
 </head>
 
 
@@ -28,41 +60,49 @@
 <body class="bg-dark">
 
     <!-- 導覽列開始 -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container-fluid ">
-            <a class="navbar-brand " href="../index.html">
-                <!-- logo -->
-                <h1>
-                    <img src="https://picsum.photos/200/300" alt="xxLogo" width="165" height="60">
-                </h1>
-            </a>
+    <nav id="topNav" class="navbar navbar-expand-lg navbar-dark fixed-top p-0">
+        <div class="container-fluid container-lg">
+            <div class="navLogo navbar-brand mx-auto">
+                <a class="" href="../index.html">
+                    <!-- logo -->
+                    <h1>
+                        <img src="/images/logo/logo加字.svg" class="" alt="輝昇聲光Logo">
+                    </h1>
+                </a>
+            </div>
+
 
             <!-- 漢堡 -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navHamburger navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <!-- 漢堡結束 -->
-            <!-- justify-content-end 移到右邊 -->
-            <div class="collapse navbar-collapse justify-content-end " id="navbarNav">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav ">
+
                     <li class="nav-item">
-                        <a class="nav-link fs-5 text-center" href="../index.html">首頁</a>
-                    </li>
-                    <li class="nav-item">
-                        <!-- 目前所在頁面 -->
-                        <a class="nav-link fs-5 text-center active bg-secondary" aria-current="true" href="#">關於我們</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fs-5 text-center" href="#">演出實績</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link fs-5 text-center" href="#">服務項目</a>
+                        <!-- 目前頁面 -->
+                        <a class="nav-link fs-5 text-center" href="../index.html"><samp>首頁</samp></a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link fs-5 text-center" href="#contactUsAnchorPoint">聯絡我們</a>
+                        <a class="nav-link fs-5 text-center active" aria-current="true"
+                            href="page/aboutUs.html"><samp>關於我們</samp></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link fs-5 text-center" href="#"><samp>服務項目</samp></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link fs-5 text-center" href="#"><samp>歷年實績</samp></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link fs-5 text-center" href="#contactUsAnchorPoint"><samp>聯絡我們</samp></a>
                     </li>
 
                 </ul>
@@ -71,111 +111,65 @@
     </nav>
     <!-- 導覽列結束 -->
 
-
-
     <!-- 頁首大圖開始 -->
-    <header>
-        <div id="carouselExampleFade" class=" headerImageBox carousel slide carousel-fade" data-bs-ride="carousel"
-            data-bs-pause="false">
-            <div class="carousel-inner">
-
-                <div class="carousel-item active" data-bs-interval="5000">
-                    <picture>
-                        <source srcset="https://wallpaperaccess.com/full/4205651.jpg" media="(min-width: 768px)"
-                            class="d-block img-fluid" alt="頁首理念圖">
-                        <img src="https://babyou-media.nownews.com/images/2020/05/DSC2726-%E9%99%B3%E4%BA%A6%E7%B6%AD-%E6%94%9D-768x512.jpg"
-                            class="d-block img-fluid" alt="頁首理念圖">
-                    </picture>
-                </div>
-
-                <div class="carousel-item" data-bs-interval="5000">
-                    <picture>
-                        <source srcset="https://wallpaperaccess.com/full/4205645.jpg" media="(min-width: 768px)"
-                            class="d-block img-fluid" alt="頁首理念圖">
-                        <img src="https://pansci.asia/wp-content/uploads/2020/05/771de5417757f70cf872e833a6e7739b.jpg"
-                            class="d-block img-fluid" alt="頁首理念圖">
-                    </picture>
-                </div>
-
-            </div>
+    <header class="d-flex flex-column justify-content-center" style="background-color: black;">
+        <div class="d-flex justify-content-center" style="">
+            <img src="../images/logo/UnderConstructionLOGO.svg" class="" style="max-width: 30%;" alt="施工中圖示">
         </div>
     </header>
     <!-- 頁首大圖結束 -->
 
-    <!-- 關於我們介紹開始 -->
-    <section id="aboutUs">
-        <div id="aboutUsAnchorPoint" class="anchorPoint"></div><!-- 錨點 -->
+
+    <footer class=" bg-gradient">
         <div class="container">
-            <!-- 背景顏色 -->
-            <div class="row bg-info p-3">
-                <div class="col-12">
 
-                    <h2 class=" display-2 text-center fw-bold">關於我們</h2>
-                    <h3 class=" display-6 text-center fw-bold">About us</h3>
-                    <p class=" fs-5 px-2  ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, dicta
-                        dolore neque inveritatis quas culpa repellendus aut non ipsa sit, officia reiciendis vel
-                        laudantium ducimusnobis,minus numquam? Quidem!Lorem ipsum dolor
-                    </p>
-                    <img src="https://www.supermoto8.net/images/data/1_DSCF6933.jpg" class="d-block img-fluid my-2"
-                        alt="關於我們">
-                    <p class=" fs-5 px-2 ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, dicta
-                        dolore neque inveritatis quas culpa repellendus aut non ipsa sit, officia reiciendis vel
-                        laudantium ducimusnobis,minus numquam? Quidem!Lorem ipsum dolor
-                    </p>
-                    <img src="https://www.supermoto8.net/images/data/1_DSCF6933.jpg" class="d-block img-fluid my-2"
-                        alt="關於我們">
+            <div class="row justify-content-center text-center py-4      offset-md-1      offset-lg-0">
+                <div class="row col-lg-4 m-lg-auto">
+                    <img src="https://fakeimg.pl/200x300/" class="logo col-12 my-4 mx-auto" alt="xxlogo">
                 </div>
 
+                <ul class="footerConnectionrow row col-12 justify-content-center px-5      col-md-7     col-lg-4">
+                    <li class="row col-12 my-2 flex-nowrap text-start text-light      ">
+                        <img src="../images/icon/footer/facebook.svg" class="icon m-0 p-0" alt="">
+                        <div class="my-2 p-0">
+                            ：<a href="">xxx師傅FB</a>
+                        </div>
+                    </li>
+                    <li class="row col-12 my-2 flex-nowrap text-start text-light      ">
+                        <img src="../images/icon/footer/LINE_Brand_icon.png" class="icon m-0 p-0" alt="">
+                        <div class="my-2 p-0">
+                            <p class=" p-0">：xxxxxxxxx</p>
+                        </div>
+                    </li>
+                    <li class="row col-12 my-2 flex-nowrap text-start text-light      ">
+                        <img src="../images/icon/footer/phone.svg" class="icon m-0 p-0" alt="">
+                        <div class="my-2 p-0">
+                            <p class=" p-0">：09-xxxxxxxx</p>
+                        </div>
+                    </li>
+                    <li class="row col-12 my-2 flex-nowrap text-start text-light      ">
+                        <img src="../images/icon/footer/gmail.png" class="icon m-0 p-0" alt="">
+                        <div class="my-2 p-0">
+                            <p class=" p-0">：xxxxxxxxxx@gmail.com</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <ul
+                    class="footerUrl row col-9 justify-content-center      align-self-md-start col-md-5 pt-md-2      col-lg-4">
+                    <li class="col-12"><a href="">首頁</a></li>
+                    <li class="col-6      col-md-12"><a href="">關於我們</a></li>
+                    <li class="col-6      col-md-12"><a href="">服務項目</a></li>
+                    <li class="col-6      col-md-12"><a href="">歷年實績</a></li>
+                    <li class="col-6      col-md-12"><a href="">聯絡我們</a></li>
+                </ul>
+            </div>
+            <div class="footerCopyright mx-auto py-4 text-center">
+                <p>&copy; www.shocksweet.ga, All rights reserved.</p>
             </div>
         </div>
-    </section>
-    <!-- 關於我們介紹結束 -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-    <footer>
-        <div class="container-fluid">
-            <div class="row py-4 bg-primary">
-                <!-- 文字置中 -->
-                <div class="col-12 text-center">
-
-                    <img src="image/FakerLogo.jpg" class="logo img-fluid my-4" alt="xxlogo">
-                    <ul class="">
-                        <li class="my-3 text-light">電話：09-xxxxxxxx</li>
-                        <li class="my-3 text-light">line ID：xxxxxxxxx</li>
-                        <li class="my-3 text-light">信箱：xxxxxxxxxx@xxxxx.xxx</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row bg-white py-4 text-center">
-                <p>&copy; www.xxxxxx.com.tw, All rights reserved. 此網頁所有圖片文字均為測試用途</p>
-            </div>
-        </div>
     </footer>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
     <!-- Bs js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"

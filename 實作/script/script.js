@@ -1,6 +1,3 @@
-vw = Math.max(document.documentElement.clientWidth);  //取得視口寬度
-let vh = window.innerHeight * 0.01;         //手機端動態調整banner高度
-
 //!物件開始
 //fadein and fadeout動畫物件OOP 開始
 function BannerAnimetion(sectionId, className, article1Class, article2Class, bannerMaskClass, opacityCss1, opacityCss2) {
@@ -93,6 +90,7 @@ SlideObject.prototype.createButton = function () {
         this.scrollDiv.scrollLeft = this.slidePosition;
     });
 
+
     //防抖函數執行顏色變換
     function changeButtonColor(slidePosition, className) {
 
@@ -120,24 +118,14 @@ SlideObject.prototype.createButton = function () {
 
     this.scrollDiv.addEventListener('scroll', debounce(changeButtonColor, this.slidePosition, this.className, 50));
 
-
-
-    // //如果滾動條的值發生變化
-    // this.scrollDiv.addEventListener('scroll', () => {
-    //     console.log(this.scrollDiv);
-
-    //     if (this.scrollDiv.scrollLeft >= this.slidePosition - 50) {
-    //         let e = document.querySelectorAll(`.${this.className}`);
-
-    //         e.forEach(function (item) {
-    //             item.style.backgroundColor = '';
-    //         });
-    //         olButton.style.backgroundColor = 'red'
-    //     }
-    // });
 }
 //歷年實績 幻燈片按鈕物件 結束
 //!物件結束
+
+// !程式開始
+
+vw = Math.max(document.documentElement.clientWidth);  //取得視口寬度
+let vh = window.innerHeight * 0.01;         //手機端動態調整banner高度
 
 //設定header的大小 如果是行動端就要減去瀏覽器上方導覽條的高度
 const header = document.querySelector('header');
@@ -148,21 +136,19 @@ window.onload = function () {
     //取得loading圖片
     const loadingClass = document.querySelector('.loadingClass');
 
-
     // **hader橫版面動畫 開始**
     const bannerMask = document.getElementById('bannerMask');
     // const bannerLogo = document.querySelectorAll('header .bannerLogo img');        //logo
     const bannerLogo = document.querySelector('header .bannerLogo');        //logo
-    const bannerIcon = document.querySelectorAll('header .bannerIcon h2');      //h2標題
-    const bannerSamp = document.querySelectorAll('header .bannerIcon samp');    //h2文字底線
+    const bannerH2Title = document.querySelectorAll('header .bannerH2Title h2');      //h2標題
+    const bannerSamp = document.querySelectorAll('header .bannerH2Title samp');    //h2文字底線
 
-    console.log(bannerLogo);
     setTimeout(() => {
         loadingClass.remove();      //刪除loading圖片
         //網頁load完成不要馬上執行
         bannerMask.style.animation = 'banner 1s ease forwards';
         setTimeout(() => {
-            
+
             //logo
             // bannerLogo.forEach(e => {
             //     e.style.animation = 'bannerFadein 1s cubic-bezier(0.22, 0.61, 0.36, 1) forwards';
@@ -173,7 +159,7 @@ window.onload = function () {
                 //h2文字
                 let i = 0;
                 let bannerH2Ani = setInterval(() => {
-                    bannerIcon[i].style.animation = 'bannerH2 1s ease-out forwards';
+                    bannerH2Title[i].style.animation = 'bannerH2 1s ease-out forwards';
                     i++
                     if (i === 5) {
                         bannerSamp.forEach(e => {
