@@ -97,7 +97,6 @@ SlideObject.prototype.createButton = function () {
         //!這裡的this已經變成scrollDiv了
         if (this.scrollLeft >= (slidePosition - 50)) {
             let e = document.querySelectorAll(`.${className}`);
-            console.log(className);
             e.forEach(function (item) {
                 item.style.backgroundColor = '';
             });
@@ -154,7 +153,7 @@ window.onload = function () {
             //     e.style.animation = 'bannerFadein 1s cubic-bezier(0.22, 0.61, 0.36, 1) forwards';
             // })
             bannerLogo.style.animation = 'bannerFadein 1s cubic-bezier(0.22, 0.61, 0.36, 1) forwards';
-            
+
             setTimeout(() => {
                 //h2文字
                 let i = 0;
@@ -319,12 +318,11 @@ function makePhotoDiv(event) {
         //敘述
         let narrateBox = document.createElement('div');
         //活動類型
-        let pTypeDiv1 = document.createElement('div');
-        let pTypeDiv2 = document.createElement('div');
+        let pTypeDiv = document.createElement('div');
         let pType = document.createElement('p');
+        let pTypeSamp = document.createElement('samp');
         //活動敘述
         let pDivBox1 = document.createElement('div');
-        let pDivBox2 = document.createElement('div');
         let pBox = document.createElement('p');
 
         //外框divBox
@@ -350,17 +348,15 @@ function makePhotoDiv(event) {
 
 
         //敘述盒子
-        narrateBox.classList.add('text-light', 'mt-4');
+        narrateBox.classList.add('activityNarrate', 'text-dark', 'my-4');
         //活動類型
-        pTypeDiv1.classList.add('activityType', 'px-1', 'mb-4');
-        pTypeDiv2.classList.add('py-1');
-
-        pType.classList.add('fs-5', 'fw-bold');
-        pType.innerHTML = event[i].activityType;
+        pTypeDiv.classList.add('px-1', 'my-2');
+        pType.classList.add('activityC1', 'fs-5', 'fw-bold');
+        pTypeSamp.innerHTML = event[i].activityType;
 
         //照片敘述
-        pDivBox1.classList.add('activityNarrate');
-        pBox.classList.add('fs-4', 'my-2');
+        pDivBox1.classList.add('my-3');
+        pBox.classList.add('activityC2', 'fs-4', 'fw-bold');
 
         pBox.innerHTML = event[i].chineseName;
 
@@ -369,13 +365,12 @@ function makePhotoDiv(event) {
         divBox.append(buttonBox);
 
         //活動類型
-        pTypeDiv1.append(pTypeDiv2);
-        pTypeDiv2.append(pType);
+        pTypeDiv.append(pType);
+        pType.append(pTypeSamp);
         //敘述
-        pDivBox1.append(pDivBox2);
-        pDivBox2.append(pBox);
+        pDivBox1.append(pBox);
         //類型和敘述組合進div中
-        narrateBox.append(pTypeDiv1);
+        narrateBox.append(pTypeDiv);
         narrateBox.append(pDivBox1);
 
         //圖片和敘述插入button
@@ -497,8 +492,10 @@ function makeModalStorageAreaDiv(event) {
 function contantLazyLoading() {
 
     //取得每一張圖片
-    const achievementImages = document.querySelectorAll('#achievement img');
-    const modalStorageAreaImages = document.querySelectorAll('#modalStorageArea img');
+    // const achievementImages = document.querySelectorAll('#achievement img');
+    // const modalStorageAreaImages = document.querySelectorAll('#modalStorageArea img');
+    const images = document.querySelectorAll('img');
+
     //每個擁有DOMFadeinAni 的class名稱都要執行淡入動畫
     const DOMFadeinAni = document.querySelectorAll('.DOMFadeinAni');
 
@@ -545,8 +542,9 @@ function contantLazyLoading() {
     //遍歷每一個圖片 把 observer中的 observe 方法都加到圖片中 觀察圖片
 
     //圖片
-    registerObserveEvent(achievementImages, imageObserver);
-    registerObserveEvent(modalStorageAreaImages, imageObserver);
+    // registerObserveEvent(achievementImages, imageObserver);
+    // registerObserveEvent(modalStorageAreaImages, imageObserver);
+    registerObserveEvent(images, imageObserver);
     //文字
     registerObserveEvent(DOMFadeinAni, textObserver);
 

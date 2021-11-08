@@ -1,8 +1,3 @@
-@font-face {
-    font-family: 'TaipeiSansTCBeta-Bold';
-    src        : url(/Font/TaipeiSansTCBeta-Bold.ttf);
-}
-
 * {
     /* 字體 */
     font-family: "M PLUS Rounded 1c", sans-serif;
@@ -16,10 +11,6 @@ img {
 h1,
 p {
     margin-bottom: 0px;
-}
-
-h2 {
-    font-family: 'TaipeiSansTCBeta-Bold';
 }
 
 ol,
@@ -409,7 +400,26 @@ header .bannerH2Title samp {
     width     : 100%;
 }
 
-#scrollLeftDiv .activityType {
+#scrollLeftDiv .activityNarrate {
+    background: #fff;
+
+    /* box-shadow: -15px -15px 0px 0px #1eff00, 15px 15px 0px 0px #0011ff; */
+    /* box-shadow: 8px 8px 0px 0px #0011ff; */
+    box-shadow:
+        inset 10px 0px 0px 0px #0011ff,
+        inset -10px 0px 0px 0px #0011ff;
+}
+
+#scrollLeftDiv .activityNarrate .activityC1 samp {
+    padding      : 5px 20px;
+    /* box-shadow: 3px 0px 0px 0px #0011ff, -3px 0px 0px 0px #0011ff; */
+    box-shadow   : 0px 5px 0px -1px #000000;
+}
+
+#scrollLeftDiv .activityNarrate .activityC2 {}
+
+
+/* #scrollLeftDiv .activityType {
     background: linear-gradient(300deg, transparent 25px, #00ffff 0) right,
         linear-gradient(120deg, transparent 25px, #fbff00 0) left;
     background-size  : 50% 100%;
@@ -434,7 +444,7 @@ header .bannerH2Title samp {
 
     padding: 2px 0px;
 
-    /*外斜切角*/
+
     background: linear-gradient(-135deg, transparent 12px, #ffffff 0) right,
         linear-gradient(45deg, transparent 12px, #ffffff 0) left;
     background-size  : 50% 100%;
@@ -445,12 +455,13 @@ header .bannerH2Title samp {
 
     width : calc(100% - 6px);
     height: calc(100% - 6px);
-    /*內斜切角*/
+
+    
     background: linear-gradient(-135deg, transparent 11px, #080808 0) right,
         linear-gradient(45deg, transparent 11px, #080808 0) left;
     background-size  : 51% 100%;
     background-repeat: no-repeat;
-}
+} */
 
 
 /* 導航按鈕 開始 */
@@ -780,7 +791,7 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
 
     /* 音響底圖 */
     #serviceItems .SoundEngineer {
-        background         : url(/images/non-javaScript/ServiceItems/機器後製xl.jpg);
+        background         : url(/images/non-javaScript/ServiceItems/機器後製xl.webp);
         background-size    : cover;
         background-position: 100% 100%;
         background-repeat  : no-repeat;
