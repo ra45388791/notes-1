@@ -326,7 +326,7 @@ header .bannerH2Title samp {
 #achievement {
     position: relative;
 
-    background         : url(/images/non-javaScript/Achievement/AchievementBgNoBackground.png);
+    background         : url(/images/non-javaScript/Achievement/AchievementBgNoBackground.webp);
     background-size    : cover;
     background-position: center center;
     background-repeat  : no-repeat;
@@ -416,53 +416,6 @@ header .bannerH2Title samp {
     box-shadow   : 0px 5px 0px -1px #000000;
 }
 
-#scrollLeftDiv .activityNarrate .activityC2 {}
-
-
-/* #scrollLeftDiv .activityType {
-    background: linear-gradient(300deg, transparent 25px, #00ffff 0) right,
-        linear-gradient(120deg, transparent 25px, #fbff00 0) left;
-    background-size  : 50% 100%;
-    background-repeat: no-repeat;
-}
-
-#scrollLeftDiv .activityType>div {
-    width : calc(100% -10px);
-    height: calc(100%-10px);
-
-    background: #000;
-    background: linear-gradient(300deg, transparent 25px, #3d3d3d 0) right,
-        linear-gradient(120deg, transparent 25px, #3d3d3d 0) left;
-    background-size  : 51% 100%;
-    background-repeat: no-repeat;
-}
-
-#scrollLeftDiv .activityNarrate {
-    display        : flex;
-    justify-content: center;
-    align-items    : center;
-
-    padding: 2px 0px;
-
-
-    background: linear-gradient(-135deg, transparent 12px, #ffffff 0) right,
-        linear-gradient(45deg, transparent 12px, #ffffff 0) left;
-    background-size  : 50% 100%;
-    background-repeat: no-repeat;
-}
-
-#scrollLeftDiv .activityNarrate>div {
-
-    width : calc(100% - 6px);
-    height: calc(100% - 6px);
-
-    
-    background: linear-gradient(-135deg, transparent 11px, #080808 0) right,
-        linear-gradient(45deg, transparent 11px, #080808 0) left;
-    background-size  : 51% 100%;
-    background-repeat: no-repeat;
-} */
-
 
 /* 導航按鈕 開始 */
 
@@ -549,13 +502,17 @@ footer a:hover {
 }
 
 footer .logo {
-    width : 165px;
-    height: 60px;
+    width: 225px;
+    height: auto;
 }
 
 footer .icon {
     width : 40px;
     height: 40px;
+}
+
+footer .footerConnectionrow li {
+    width: 205px;
 }
 
 footer .footerConnectionrow a {
@@ -807,7 +764,7 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
 
     /* 機器遮罩 在第0層 */
     #serviceItems .SoundEngineer .bannerMask {
-        background         : url(/images/non-javaScript/ServiceItems/機器遮罩xl.png);
+        background         : url(/images/non-javaScript/ServiceItems/機器遮罩xl.webp);
         background-size    : cover;
         background-position: left 100%;
 
@@ -822,7 +779,7 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
 
     /* 燈光遮罩 */
     #serviceItems .Light .bannerMask {
-        background         : url(/images/non-javaScript/ServiceItems/燈光遮罩xl.png);
+        background         : url(/images/non-javaScript/ServiceItems/燈光遮罩xl.webp);
         background-size    : cover;
         background-position: right 100%;
 
