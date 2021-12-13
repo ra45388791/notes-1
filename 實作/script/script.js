@@ -64,7 +64,7 @@ SlideObject.prototype.createButton = function () {
     olButton.classList.add(this.className, 'd-block', 'p-0', 'm-0');
     //第一個按鈕需要變色
     if (this.idNumber === 0) {
-        olButton.style.backgroundColor = 'red';
+        olButton.style.backgroundColor = '#000';
     }
 
     //放入html
@@ -83,7 +83,7 @@ SlideObject.prototype.createButton = function () {
             });
 
             //指定這個按鈕變色
-            olButton.style.backgroundColor = 'red'
+            olButton.style.backgroundColor = '#000'
 
         }, 200);
         //移動到指定位置
@@ -100,7 +100,7 @@ SlideObject.prototype.createButton = function () {
             e.forEach(function (item) {
                 item.style.backgroundColor = '';
             });
-            olButton.style.backgroundColor = 'red'
+            olButton.style.backgroundColor = '#000'
         }
     };
     //防抖函數 要執行的方法 和 延遲時間
@@ -177,13 +177,13 @@ window.onload = function () {
 
     // **服務項目淡入淡出動畫 開始**
     if (vw >= 1024) {
-        const serviceItems = document.getElementById('serviceItems');
+        const hardwareItems = document.getElementById('hardwareItems');
 
         //實例化banner物件
-        let bannerAnimetion = new BannerAnimetion('serviceItems', undefined, 'article1', 'article2', 'bannerMask', 'opacityOpaque', 'opacityTransparent');
+        let bannerAnimetion = new BannerAnimetion('hardwareItems', undefined, 'article1', 'article2', 'bannerMask', 'opacityOpaque', 'opacityTransparent');
 
         //監視進入事件
-        serviceItems.addEventListener('mouseover', e => {
+        hardwareItems.addEventListener('mouseover', e => {
 
             const getDivEvente = e.target;                                  //當下移入的元素
             const getDivFather = getDivEvente.parentNode;                   //動畫遮罩父元素
@@ -270,6 +270,7 @@ function ajaxGetJson(url) {
                 if (xhr.status === 200) {
                     //把取得的json 轉換成物件 否則沒辦法用
                     let jsonData = JSON.parse(xhr.response);
+                    
                     //成功時回傳
                     resolve(jsonData);
                 } else {
@@ -283,26 +284,43 @@ function ajaxGetJson(url) {
 }
 
 //json檔案位置
-let url = '../JSON/photoData.json';
+// const url = '../JSON/photoData.json';
+const url = 'http://huesheng.com/JSON/photoData.json';
 //先呼叫 ajaxGetJson 方法並傳入網址參數 Promise 回傳結果會在.then處裡
 ajaxGetJson(url)
     .then((xhrJson) => {
-        //把成功取得的回傳值當作參數呼叫製作像片按鈕方法
-        makePhotoDiv(xhrJson);
-        return xhrJson;
+        // 過濾json檔案 取得 frontPage第一個屬性為true的物件
+        let showFrontPage = xhrJson.filter(e => e.frontPage.showThisPhoto && e.frontPage.rank !== null);
+        // 泡沫排序 透過 frontPage中的rank屬性來排序
+        for (let i = 0; i < showFrontPage.length - 1; i++) {
+            for (let j = 0; j < showFrontPage.length - 1 - i; j++) {
+                if (showFrontPage[j].frontPage.rank > showFrontPage[j + 1].frontPage.rank) {
+                    let temp;
+                    temp = showFrontPage[j];
+                    showFrontPage[j] = showFrontPage[j + 1];
+                    showFrontPage[j + 1] = temp;
+                }
+            }
+        }
+
+        return showFrontPage;
     })
-    .then((xhrJson) => {
-        makeModalStorageAreaDiv(xhrJson);
+    .then((showFrontPage) => {
+        //把成功取得的回傳值當作參數呼叫製作相片按鈕方法
+        makePhotoDiv(showFrontPage);
+        return showFrontPage
+    })
+    .then((showFrontPage) => {
+        makeModalStorageAreaDiv(showFrontPage);
     })
     .catch((err) => {
-        //如果失敗值行這裡
+        //如果失敗執行這裡
         console.log('Json讀取失敗: ' + err);
     })
     .finally(() => {
         //不管怎樣最後一定執行觀測方法
         contantLazyLoading();
     })
-
 
 
 
@@ -356,7 +374,7 @@ function makePhotoDiv(event) {
 
         //照片敘述
         pDivBox1.classList.add('my-3');
-        pBox.classList.add('activityC2', 'fs-4', 'fw-bold');
+        pBox.classList.add('activityC2', 'fw-bold');
 
         pBox.innerHTML = event[i].chineseName;
 
@@ -555,47 +573,6 @@ function registerObserveEvent(eventArray, observeObject) {
         observeObject.observe(image);
     })
 }
-
-
-
-
-
-
-
-
-
-/*
-//歷年實績背板動畫 開始
-
-let bgColorAnime = document.querySelector('#achievement .bgColorAnime');
-let bgColorAnimeScrollLength = 0;
-
-if (vw >= 992) {
-    achievementAnimetion();
-}
-
-function achievementAnimetion() {
-    //控制位移
-    if (vw < 768) {
-        bgColorAnime.scrollLeft += 1;
-    } else if (vw < 1399) {
-        bgColorAnime.scrollLeft += 3;
-    } else {
-        bgColorAnime.scrollLeft += 5;
-    }
-
-    //判斷如果 目前位置和 下方存放上一個位置的物件相同 把位置設為0
-    if (bgColorAnime.scrollLeft === bgColorAnimeScrollLength) {
-        bgColorAnime.scrollLeft = 0;
-    }
-    //經過判斷並沒有到終點 將目前的位置給 bgColorAnimeScrollLength
-    bgColorAnimeScrollLength = bgColorAnime.scrollLeft;
-
-    requestAnimationFrame(achievementAnimetion);
-}
-//歷年實績背板動畫 結束
- */
-
 
 //**歷年實績區 結束 */
 

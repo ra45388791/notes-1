@@ -4,6 +4,8 @@
     font-family: "Noto Sans TC", sans-serif;
 }
 
+
+
 img {
     vertical-align: bottom;
 }
@@ -19,6 +21,23 @@ li {
     list-style-type: none;
     text-align     : start;
 }
+
+/* '更多'換頁按鈕 */
+.changePageButton {
+    width : auto;
+    height: 35px;
+}
+
+.changePageButton:hover {
+    box-shadow: inset 6px 0px 0px 0px #ffffff, inset 146px 0px 0px 0px rgb(0, 153, 255);
+}
+
+.changePageButton .icon {
+    margin-left: auto;
+    width      : auto !important;
+    height     : 100%;
+}
+
 
 /* 漢堡 只有在筆電以下才會出現 */
 #topNav {
@@ -73,8 +92,6 @@ li {
 
 /* 漢堡按鈕優化結束 */
 
-
-
 /* banner開始 */
 header {
     /* 首頁大圖往下推 */
@@ -83,11 +100,9 @@ header {
     position: relative;
     height  : calc(100vh - 85px);
     height  : calc((var(--vh, 1vh) * 100) - 85px);
-
 }
 
 header .headerImageBox {
-
     width           : 100%;
     /* height       : calc(100vh - (85px + 42px)); */
     height          : 100%;
@@ -214,7 +229,7 @@ header .bannerH2Title samp {
     background-color: rgb(26, 26, 126);
 }
 
-#aboutUs>div>div>h3 {
+#aboutUs h3 samp {
     border-bottom: 2px solid rgb(87, 106, 189);
 }
 
@@ -227,15 +242,12 @@ header .bannerH2Title samp {
     text-indent: 2em;
 }
 
-#aboutUs button {
-
+/* #aboutUs button {
     width : auto;
     height: 35px;
-
 }
 
 #aboutUs button:hover {
-    /* background: rgb(0, 153, 255); */
     box-shadow: inset 6px 0px 0px 0px #ffffff, inset 146px 0px 0px 0px rgb(0, 153, 255);
 }
 
@@ -243,14 +255,16 @@ header .bannerH2Title samp {
     margin-left: auto;
     width      : auto;
     height     : 100%;
-}
+} */
+
+
 
 /* aboutUs結束 */
 
 
 /*服務項目開始*/
-#serviceItems {
-    /* background: url(/images/non-javaScript/ServiceItems/ServiceItemsBackGround.webp);
+#hardwareItems {
+    /* background: url(/images/non-javaScript/hardwareItems/hardwareItemsBackGround.webp);
     
     background-size    : cover;
     background-position: top center;
@@ -263,25 +277,28 @@ header .bannerH2Title samp {
     text-justify: inter-ideograph;
 }
 
-#serviceItems img {
+#hardwareItems img {
     width: 100%;
 }
 
-#serviceItems .contentSet picture,
-#serviceItems .contentSet img {
+#hardwareItems .contentSet picture,
+#hardwareItems .contentSet img {
     width : 120px;
     height: auto;
 }
 
-#serviceItems .bannerImgSet {
+#hardwareItems .bannerImgSet {
     width : 100%;
     height: 100%;
+}
+
+#hardwareItems .changePageButton:hover {
+    box-shadow: inset 6px 0px 0px 0px #ffffff, inset 146px 0px 0px 0px rgb(135, 135, 135);
 }
 
 /*服務項目結束*/
 
 /* 聯絡條開始 */
-/* ! 醒來做這裡 聯絡條觸碰到時展開特效 */
 #connection {
     background: linear-gradient(255deg, rgba(255, 0, 242, 0.767) 0%, rgb(0, 0, 255) 100%, transparent 65%);
 }
@@ -303,8 +320,18 @@ header .bannerH2Title samp {
     box-shadow: 3px 0px 1px -1px rgb(255, 255, 255);
 }
 
-#connection button {
-    z-index: 1;
+#connection .connectionBox p,
+#connection .connectionBox a,
+#connection .connectionBox>div {
+    min-width: 173px;
+}
+
+#connection .connectionBox a {
+    color: #fff;
+}
+
+#connection .connectionBox a:hover {
+    color: #ffc107;
 }
 
 #connection img {
@@ -319,19 +346,25 @@ header .bannerH2Title samp {
     font-weight: bold;
 }
 
+#connection a {
+    text-decoration: none;
+}
+
+#connection a:hover {
+    color: red;
+}
+
 /* 聯絡條結束 */
 
 
 /* 歷年實績開始 */
 #achievement {
     position: relative;
-
-    background         : url(/images/non-javaScript/Achievement/AchievementBgNoBackground.webp);
-    background-size    : cover;
-    background-position: center center;
-    background-repeat  : no-repeat;
 }
 
+#achievement>div {
+    background-color: rgb(250, 250, 250);
+}
 
 #carouselExampleControlsNoTouching {
     position: relative;
@@ -348,10 +381,9 @@ header .bannerH2Title samp {
     overflow-x      : scroll;
 
     /* overflow寬度 */
-    width        : 350px;
-    height       : 100%;
-    /* border    : solid 1px rgb(0, 0, 0); */
-    box-sizing   : border-box;
+    width     : 350px;
+    height    : 100%;
+    box-sizing: border-box;
 }
 
 #scrollLeftDiv>nav {
@@ -372,19 +404,18 @@ header .bannerH2Title samp {
     /* 相片在移動時 有時會掉到後方圖層 要固定他 */
     z-index: 1;
 
-    transition: box-shadow 0.5s 0s ease;
+    /* transition: box-shadow 0.5s 0s ease; */
 }
-
 
 #scrollLeftDiv .navClass button {
     margin : 0px;
     padding: 0px;
 
-    position  : relative;
-    width     : 100%;
-    height    : 100%;
+    position     : relative;
+    width        : 100%;
+    height       : 100%;
     /* 設定最小高度 不然背景圖片會被壓縮 */
-    min-height: 277px;
+    /* min-height: 277px; */
 }
 
 #scrollLeftDiv .navClass img {
@@ -401,21 +432,25 @@ header .bannerH2Title samp {
 }
 
 #scrollLeftDiv .activityNarrate {
-    background: #fff;
+    max-height: 105px;
 
-    /* box-shadow: -15px -15px 0px 0px #1eff00, 15px 15px 0px 0px #0011ff; */
-    /* box-shadow: 8px 8px 0px 0px #0011ff; */
+    background: rgb(255, 255, 255);
+    border    : 1px solid #a7a7a7;
+
     box-shadow:
         inset 10px 0px 0px 0px #0011ff,
         inset -10px 0px 0px 0px #0011ff;
 }
 
 #scrollLeftDiv .activityNarrate .activityC1 samp {
-    padding      : 5px 20px;
-    /* box-shadow: 3px 0px 0px 0px #0011ff, -3px 0px 0px 0px #0011ff; */
-    box-shadow   : 0px 5px 0px -1px #000000;
+    padding   : 5px 20px;
+    box-shadow: 0px 5px 0px -1px #000000;
 }
 
+#scrollLeftDiv .activityNarrate .activityC2 {
+    margin   : 0px 5px;
+    font-size: 1rem;
+}
 
 /* 導航按鈕 開始 */
 
@@ -428,16 +463,17 @@ header .bannerH2Title samp {
 
     width : 20px;
     height: 10px;
+
 }
 
 #slideButton ol>button {
     width : 100%;
     height: 100%;
 
-    border-radius: 20%;
-
+    border-radius   : 20%;
+    background-color: #c2c2c2;
     /* 把框線去掉 */
-    border: none;
+    border          : none;
 }
 
 /* 導航按鈕 結束 */
@@ -455,33 +491,15 @@ header .bannerH2Title samp {
     border: none;
 }
 
+#achievement .changePageButton {
+    color: #000;
+}
+
+#achievement .changePageButton:hover {
+    box-shadow: inset 6px 0px 0px 0px #000000, inset 146px 0px 0px 0px rgb(212, 212, 212);
+}
+
 /* 歷年實積內容放置區結束 */
-
-/*歷年實積背板動畫 開始*/
-#achievement .bgColorAnime {
-    overflow-x: hidden;
-
-    position: absolute;
-    left    : 0px;
-    top     : 0px;
-
-    width : 100%;
-    height: 100%;
-
-    z-index: -1;
-}
-
-#achievement .bgColorAnime>div {
-    position: absolute;
-    left    : 0px;
-    top     : 0px;
-
-    width     : 100%;
-    height    : 100%;
-    background: linear-gradient(90deg, #00ffff, #fbff00);
-}
-
-/*歷年實積背板動畫 結束*/
 
 /* 歷年實績結束 */
 
@@ -502,7 +520,7 @@ footer a:hover {
 }
 
 footer .logo {
-    width: 225px;
+    width : 225px;
     height: auto;
 }
 
@@ -512,16 +530,10 @@ footer .icon {
 }
 
 footer .footerConnectionrow li {
-    width: 205px;
+    width: 225px;
 }
 
-footer .footerConnectionrow a {
-    box-shadow: 0px 2px 2px -1px #999;
-}
 
-footer .footerConnectionrow a:hover {
-    box-shadow: 0px 2px 2px -1px #a7a7a7;
-}
 
 footer .footerCopyright {
     color: #999;
@@ -573,8 +585,9 @@ footer .footerCopyright {
         top     : 0px;
         opacity : 1;
     }
-
 }
+
+
 
 
 /* 圖片之間的長條 */
@@ -673,7 +686,7 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
         border-left: 2px solid rgb(87, 106, 189);
     }
 
-    #aboutUs>div>div>h3 {
+    #aboutUs h3 samp {
         border-bottom: none;
     }
 
@@ -687,7 +700,7 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
     /*服務項目開始*/
 
 
-    #serviceItems .containerBox {
+    #hardwareItems .containerBox {
         /* 模擬 container */
         width: 95vw;
 
@@ -697,40 +710,40 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
         box-sizing      : border-box;
     }
 
-    #serviceItems .contentSet {
+    #hardwareItems .contentSet {
         position: relative;
     }
 
-    #serviceItems .article1 {
+    #hardwareItems .article1 {
         /* 預設: 1,1 */
         z-index: 1;
         opacity: 1;
     }
 
-    #serviceItems .contentSet picture,
-    #serviceItems .contentSet img {
+    #hardwareItems .contentSet picture,
+    #hardwareItems .contentSet img {
         width : 90px;
         height: auto;
     }
 
-    #serviceItems .article1 p {
+    #hardwareItems .article1 p {
         border       : 6px solid rgba(255, 255, 255, 0.192);
         border-top   : 0px;
         border-bottom: 0px;
 
     }
 
-    #serviceItems .article1 h3 {
+    #hardwareItems .article1 h3 {
         display: none;
     }
 
-    #serviceItems .article2 {
+    #hardwareItems .article2 {
         /* 預設:0,0 */
         z-index: 0;
         opacity: 0;
     }
 
-    #serviceItems .article2 p {
+    #hardwareItems .article2 p {
         background-color: rgba(0, 0, 0, 0.4);
         border          : solid 6px rgb(30, 210, 255);
         border-top      : 0px;
@@ -739,7 +752,7 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
 
     }
 
-    #serviceItems .article2 h3 {
+    #hardwareItems .article2 h3 {
         width      : 32vw;
         font-size  : 16vw;
         font-weight: bold;
@@ -747,24 +760,25 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
     }
 
     /* 音響底圖 */
-    #serviceItems .SoundEngineer {
-        background         : url(/images/non-javaScript/ServiceItems/機器後製xl.webp);
+    #hardwareItems .SoundEngineer {
+        background         : url(http://huesheng.com/images/non-javaScript/HardwareItems/machineXl.webp);
         background-size    : cover;
         background-position: 100% 100%;
         background-repeat  : no-repeat;
     }
 
     /* 燈光底圖 */
-    #serviceItems .Light {
-        background         : url(/images/non-javaScript/ServiceItems/燈光xl.jpg);
+    #hardwareItems .Light {
+        /* background         : url(/images/non-javaScript/hardwareItems/lightXl.webp); */
+        background         : url(http://huesheng.com/images/non-javaScript/HardwareItems/lightXl.webp);
         background-size    : cover;
         background-position: 100% 100%;
         background-repeat  : no-repeat;
     }
 
     /* 機器遮罩 在第0層 */
-    #serviceItems .SoundEngineer .bannerMask {
-        background         : url(/images/non-javaScript/ServiceItems/機器遮罩xl.webp);
+    #hardwareItems .SoundEngineer .bannerMask {
+        background         : url(http://huesheng.com/images/non-javaScript/HardwareItems/machineMaskXl.webp);
         background-size    : cover;
         background-position: left 100%;
 
@@ -778,8 +792,8 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
     }
 
     /* 燈光遮罩 */
-    #serviceItems .Light .bannerMask {
-        background         : url(/images/non-javaScript/ServiceItems/燈光遮罩xl.webp);
+    #hardwareItems .Light .bannerMask {
+        background         : url(http://huesheng.com/images/non-javaScript/HardwareItems/lightMaskXl.webp);
         background-size    : cover;
         background-position: right 100%;
 
@@ -793,7 +807,6 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
     }
 
     #AniBannerMask {
-        /* background-color: blueviolet; */
         position: absolute;
         left    : 0px;
         top     : 0px;
@@ -804,24 +817,24 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
     }
 
     /* 筆電上 sm大小圖片隱藏 */
-    #serviceItems .bannerImgSet {
+    #hardwareItems .bannerImgSet {
         display: none;
     }
 
-    #serviceItems .article1,
-    #serviceItems .article2,
-    #serviceItems .bannerMask {
+    #hardwareItems .article1,
+    #hardwareItems .article2,
+    #hardwareItems .bannerMask {
         transition: opacity 0.2s 0s cubic-bezier(0.32, 0.32, 0.44, 0.88);
     }
 
 
 
     /* 動畫class開始 */
-    #serviceItems .opacityTransparent {
+    #hardwareItems .opacityTransparent {
         opacity: 1;
     }
 
-    #serviceItems .opacityOpaque {
+    #hardwareItems .opacityOpaque {
         opacity: 0;
     }
 
@@ -836,28 +849,6 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
         /* 設定最小高度 不然背景圖片會被壓縮 */
         min-height: 379px;
     }
-
-    /*歷年實積背板動畫 開始*/
-
-    #achievement .bgColorAnime>div {
-        width        : 200%;
-        background   : linear-gradient(90deg, #00ffff, #fbff00, #00ffff, #fbff00, #00ffff);
-        /* background: linear-gradient(90deg, #00ffff, #fbff00, #00ffff, #fbff00, #00ffff, #fbff00, #00ffff, #fbff00, #00ffff, #fbff00, #00ffff, #fbff00, #00ffff, #fbff00, #00ffff, #fbff00, #00ffff, #fbff00, #00ffff, #fbff00); */
-
-        animation: achievementAnime 5s cubic-bezier(0, 0, 0, 0) infinite;
-    }
-
-    @keyframes achievementAnime {
-        0% {
-            left: 0px;
-        }
-
-        100% {
-            left: -100%;
-        }
-    }
-
-    /*歷年實積背板動畫 結束*/
 
     /* 歷年實績結束 */
 }
@@ -905,23 +896,23 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
 
     /*服務項目開始*/
 
-    #serviceItems .containerBox {
+    #hardwareItems .containerBox {
         width : auto;
         height: 31vw;
     }
 
-    #serviceItems .contentSet picture,
-    #serviceItems .contentSet img {
+    #hardwareItems .contentSet picture,
+    #hardwareItems .contentSet img {
         width : 4vw;
         height: auto;
     }
 
-    #serviceItems .article1 p,
-    #serviceItems .article2 p {
+    #hardwareItems .article1 p,
+    #hardwareItems .article2 p {
         font-size: 1.1vw !important;
     }
 
-    #serviceItems .article2 p {
+    #hardwareItems .article2 p {
         background-color: rgba(0, 0, 0, 0.4);
         border          : solid 6px rgb(30, 210, 255);
         border-top      : 0px;
@@ -929,7 +920,7 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
         box-sizing      : border-box;
     }
 
-    #serviceItems .article2 h3 {
+    #hardwareItems .article2 h3 {
         width      : 18vw;
         font-size  : 9vw;
         font-weight: bold;
@@ -937,6 +928,27 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
     }
 
     /*服務項目結束*/
+
+    /* 歷年實績開始 */
+    /* ! */
+
+    #achievement {
+        background: url(/images/non-javaScript/Achievement/AchievementLeftEdit.jpg), url(/images/non-javaScript/Achievement/AchievementRightEdit.jpg);
+
+        background-size    : contain, contain;
+        background-position: left center, right center;
+        background-repeat  : no-repeat, no-repeat;
+    }
+
+    #achievement>div {
+        /* background         : linear-gradient(270deg, rgba(15, 15, 15) 95%, transparent), linear-gradient(90deg, rgba(15, 15, 15) 95%, transparent); */
+        background         : linear-gradient(270deg, rgb(250, 250, 250) 95%, transparent), linear-gradient(90deg, rgb(250, 250, 250) 95%, transparent);
+        background-size    : 51%, 51%;
+        background-position: left center, right center;
+        background-repeat  : no-repeat;
+    }
+
+    /* 歷年實績結束 */
 
     /* 圖片間長條 */
     .straightStrip {
@@ -956,4 +968,6 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
     }
 
     /* banner結束 */
+
+
 }

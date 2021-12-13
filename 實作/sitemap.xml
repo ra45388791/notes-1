@@ -8,18 +8,33 @@
 
 
 <url>
-  <loc>http://shocksweet.ga/</loc>
-  <lastmod>2021-11-07T20:44:56+00:00</lastmod>
+  <loc>http://huesheng.com/</loc>
+  <lastmod>2021-11-20T20:09:19+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>http://shocksweet.ga/index.html</loc>
-  <lastmod>2021-11-07T20:44:56+00:00</lastmod>
+  <loc>http://huesheng.com/index.html</loc>
+  <lastmod>2021-11-20T20:09:19+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://shocksweet.ga/page/aboutUs.html</loc>
-  <lastmod>2021-11-07T20:44:56+00:00</lastmod>
+  <loc>http://huesheng.com/page/aboutUs.html</loc>
+  <lastmod>2021-11-20T20:09:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://huesheng.com/page/hardwareItems.html</loc>
+  <lastmod>2021-11-20T20:09:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://huesheng.com/page/achievement.html</loc>
+  <lastmod>2021-11-20T20:09:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://huesheng.com/page/contactUs.html</loc>
+  <lastmod>2021-11-20T20:09:19+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 
