@@ -1,0 +1,106 @@
+/* 漢堡 只有在筆電以下才會出現 */
+#topNav {
+    background      : linear-gradient(20deg, rgba(0, 0, 255, 0.452) 0%, transparent 80%);
+    background-color: rgb(0, 0, 0);
+    height          : 90px;
+}
+
+#topNav>div {
+    /* 如果漢堡按鈕造成logo上下移動 調整此padding */
+    padding         : 12px 0px;
+    background      : linear-gradient(40deg, rgba(0, 0, 255, 0.452) 0%, transparent 80%);
+    background-color: rgb(0, 0, 0);
+}
+
+#topNav .navLogo img {
+    padding: 0px;
+    width  : 250px;
+
+}
+
+#topNav .navHamburger {
+    position: absolute;
+    right   : 15px;
+    top     : 25px;
+    z-index : 99;
+}
+
+#topNav .active>samp {
+    padding-bottom: 2px;
+    border-bottom : 3px solid rgb(87, 106, 189);
+}
+
+
+
+/* 漢堡按鈕優化 */
+/*
+把bs的 navbar-toggler 預設的focus樣式全設回預設
+然後多寫一個active蓋過去
+*/
+.navbar-toggler:focus {
+    text-decoration: none;
+    outline        : auto;
+    box-shadow     : none;
+}
+
+.navbar-toggler:active {
+    text-decoration: none;
+    outline        : 0;
+    box-shadow     : 0 0 0 0.25rem;
+}
+
+/* 漢堡按鈕優化結束 */
+
+
+/*頁尾開始*/
+footer {
+    background-color: #000000;
+}
+
+footer a {
+    text-decoration: none;
+    color          : #999;
+}
+
+footer a:hover {
+    color: #a7a7a7;
+}
+
+footer .logo {
+    width : 225px;
+    height: auto;
+}
+
+footer .icon {
+    width : 40px;
+    height: 40px;
+}
+
+footer .footerCopyright {
+    color: #999;
+}
+
+/*頁尾結束*/
+
+
+/* 雜物區開始 */
+.img-fluid {
+    /* 蓋掉bs圖片的 max-width */
+    width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+
+    /*頁尾開始*/
+    footer .footerUrl li {
+        height: 35px;
+    }
+    /*頁尾結束*/
+}
+
+@media only screen and (min-width: 1399px) {
+    #topNav>div {
+        background      : linear-gradient(40deg, rgba(0, 0, 255, 0) 0%, transparent 80%);
+        background-color: rgba(0, 0, 0, 0);
+    }
+}
