@@ -1,3 +1,13 @@
+* {
+    /* 字體 */
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-family: "Noto Sans TC", sans-serif;
+}
+
+img {
+    vertical-align: bottom;
+}
+
 /* 漢堡 只有在筆電以下才會出現 */
 #topNav {
     background      : linear-gradient(20deg, rgba(0, 0, 255, 0.452) 0%, transparent 80%);
@@ -10,11 +20,13 @@
     padding         : 12px 0px;
     background      : linear-gradient(40deg, rgba(0, 0, 255, 0.452) 0%, transparent 80%);
     background-color: rgb(0, 0, 0);
+    z-index: 99999;
 }
 
 #topNav .navLogo img {
     padding: 0px;
     width  : 250px;
+    height : 57.25px;
 
 }
 
@@ -26,6 +38,7 @@
 }
 
 #topNav .active>samp {
+    padding-right : 1px;
     padding-bottom: 2px;
     border-bottom : 3px solid rgb(87, 106, 189);
 }
@@ -68,7 +81,7 @@ footer a:hover {
 
 footer .logo {
     width : 225px;
-    height: auto;
+    height: 188.55px;
 }
 
 footer .icon {
@@ -95,6 +108,7 @@ footer .footerCopyright {
     footer .footerUrl li {
         height: 35px;
     }
+
     /*頁尾結束*/
 }
 

@@ -126,335 +126,335 @@ SlideObject.prototype.createButton = function () {
 const titleName = document.querySelector('head title').outerText; //取得title名子用來判斷
 
 //檢查是不是首頁
-if (titleName === '輝昇聲光燈光音響工程') {
 
-    vw = Math.max(document.documentElement.clientWidth);  //取得視口寬度
-    let vh = window.innerHeight * 0.01;         //手機端動態調整banner高度
 
-    //設定header的大小 如果是行動端就要減去瀏覽器上方導覽條的高度
-    const header = document.querySelector('header');
-    header.style.setProperty('--vh', `${vh}px`);
+vw = Math.max(document.documentElement.clientWidth);  //取得視口寬度
+let vh = window.innerHeight * 0.01;         //手機端動態調整banner高度
 
-    // 等待視窗全部載好才執行
-    window.onload = function () {
-        //取得loading圖片
-        const loadingClass = document.querySelector('.loadingClass');
+//設定header的大小 如果是行動端就要減去瀏覽器上方導覽條的高度
+const header = document.querySelector('header');
+header.style.setProperty('--vh', `${vh}px`);
 
-        // **hader橫版面動畫 開始**
-        const bannerMask = document.getElementById('bannerMask');
-        const bannerLogo = document.querySelector('header .bannerLogo');        //logo
-        const bannerH2Title = document.querySelectorAll('header .bannerH2Title h2');      //h2標題
-        const bannerSamp = document.querySelectorAll('header .bannerH2Title samp');    //h2文字底線
+// 等待視窗全部載好才執行
+window.onload = function () {
+    //取得loading圖片
+    const loadingClass = document.querySelector('.loadingClass');
 
+    // **hader橫版面動畫 開始**
+    const bannerMask = document.getElementById('bannerMask');
+    const bannerLogo = document.querySelector('header .bannerLogo');        //logo
+    const bannerH2Title = document.querySelectorAll('header .bannerH2Title h2');      //h2標題
+    const bannerSamp = document.querySelectorAll('header .bannerH2Title samp');    //h2文字底線
+
+    setTimeout(() => {
+        loadingClass.remove();      //刪除loading圖片
+        //網頁load完成不要馬上執行
+        bannerMask.style.animation = 'banner 1s ease forwards';
         setTimeout(() => {
-            loadingClass.remove();      //刪除loading圖片
-            //網頁load完成不要馬上執行
-            bannerMask.style.animation = 'banner 1s ease forwards';
+            bannerLogo.style.animation = 'bannerFadein 1s cubic-bezier(0.22, 0.61, 0.36, 1) forwards';
+
             setTimeout(() => {
-                bannerLogo.style.animation = 'bannerFadein 1s cubic-bezier(0.22, 0.61, 0.36, 1) forwards';
-
-                setTimeout(() => {
-                    //h2文字
-                    let i = 0;
-                    let bannerH2Ani = setInterval(() => {
-                        bannerH2Title[i].style.animation = 'bannerH2 1s ease-out forwards';
-                        i++
-                        if (i === 5) {
-                            bannerSamp.forEach(e => {
-                                setTimeout(() => {
-                                    e.style.animation = 'bannerSamp 1s ease-out forwards'
-                                }, 1000)
-                            });
-                            clearInterval(bannerH2Ani);     //停止動畫重複
-                        }
-                    }, 100);
-                }, 750);
-            }, 500);
-        }, 500);//500
-        // **hader橫版面動畫 結束**
-
-
-        // **服務項目淡入淡出動畫 開始**
-        if (vw >= 1024) {
-            const hardwareItems = document.getElementById('hardwareItems');
-
-            //實例化banner物件
-            let bannerAnimetion = new BannerAnimetion('hardwareItems', undefined, 'article1', 'article2', 'bannerMask', 'opacityOpaque', 'opacityTransparent');
-
-            //監視進入事件
-            hardwareItems.addEventListener('mouseover', e => {
-
-                const getDivEvente = e.target;                                  //當下移入的元素
-                const getDivFather = getDivEvente.parentNode;                   //動畫遮罩父元素
-                const getDivFatherClass = getDivEvente.parentNode.classList;    //取得該元素的class名稱
-                let getClassName;                                             //用來存取找到的class用來檢查(如果是指定參數 就把該參數加入物件中)
-
-                for (let i = 0; i < getDivFatherClass.length; i++) {
-                    if (getDivFatherClass[i] === 'SoundEngineer') {
-                        getClassName = getDivFatherClass[i];
-                        //在物件中加入指定目標class名稱
-                        bannerAnimetion.className = getClassName;
-                        break;  //跳出迴圈
-
-                    } else if (getDivFatherClass[i] === 'Light') {
-                        getClassName = getDivFatherClass[i];
-                        //在物件中加入指定目標class名稱
-                        bannerAnimetion.className = getClassName;
-                        break;  //跳出迴圈
+                //h2文字
+                let i = 0;
+                let bannerH2Ani = setInterval(() => {
+                    bannerH2Title[i].style.animation = 'bannerH2 1s ease-out forwards';
+                    i++
+                    if (i === 5) {
+                        bannerSamp.forEach(e => {
+                            setTimeout(() => {
+                                e.style.animation = 'bannerSamp 1s ease-out forwards'
+                            }, 1000)
+                        });
+                        clearInterval(bannerH2Ani);     //停止動畫重複
                     }
+                }, 100);
+            }, 750);
+        }, 500);
+    }, 500);//500
+    // **hader橫版面動畫 結束**
+
+
+    // **服務項目淡入淡出動畫 開始**
+    if (vw >= 1024) {
+        const serviceItems = document.getElementById('serviceItems');
+
+        //實例化banner物件
+        let bannerAnimetion = new BannerAnimetion('serviceItems', undefined, 'article1', 'article2', 'bannerMask', 'opacityOpaque', 'opacityTransparent');
+
+        //監視進入事件
+        serviceItems.addEventListener('mouseover', e => {
+
+            const getDivEvente = e.target;                                  //當下移入的元素
+            const getDivFather = getDivEvente.parentNode;                   //動畫遮罩父元素
+            const getDivFatherClass = getDivEvente.parentNode.classList;    //取得該元素的class名稱
+            let getClassName;                                             //用來存取找到的class用來檢查(如果是指定參數 就把該參數加入物件中)
+
+            for (let i = 0; i < getDivFatherClass.length; i++) {
+                if (getDivFatherClass[i] === 'SoundEngineer') {
+                    getClassName = getDivFatherClass[i];
+                    //在物件中加入指定目標class名稱
+                    bannerAnimetion.className = getClassName;
+                    break;  //跳出迴圈
+
+                } else if (getDivFatherClass[i] === 'Light') {
+                    getClassName = getDivFatherClass[i];
+                    //在物件中加入指定目標class名稱
+                    bannerAnimetion.className = getClassName;
+                    break;  //跳出迴圈
                 }
+            }
 
 
 
 
 
-                if (getClassName === 'SoundEngineer') {
-                    bannerAnimetion.fadein();
+            if (getClassName === 'SoundEngineer') {
+                bannerAnimetion.fadein();
 
-                    getDivFather.addEventListener('mouseout', function deletListen() {
-                        bannerAnimetion.fadeout();
-                        // 滑鼠移出時刪除監聽器
-                        getDivFather.removeEventListener('mouseout', deletListen);
-                    })
-                } else if (getClassName === 'Light') {
-                    bannerAnimetion.fadein();
+                getDivFather.addEventListener('mouseout', function deletListen() {
+                    bannerAnimetion.fadeout();
+                    // 滑鼠移出時刪除監聽器
+                    getDivFather.removeEventListener('mouseout', deletListen);
+                })
+            } else if (getClassName === 'Light') {
+                bannerAnimetion.fadein();
 
-                    getDivFather.addEventListener('mouseout', function deletListen() {
-                        bannerAnimetion.fadeout();
-                        // 滑鼠移出時刪除監聽器
-                        getDivFather.removeEventListener('mouseout', deletListen);
-                    })
+                getDivFather.addEventListener('mouseout', function deletListen() {
+                    bannerAnimetion.fadeout();
+                    // 滑鼠移出時刪除監聽器
+                    getDivFather.removeEventListener('mouseout', deletListen);
+                })
+            }
+        })
+    }
+    // **服務項目淡入淡出動畫 結束**
+}
+
+
+
+//**歷年實績區 開始 */
+
+
+
+//json檔案位置
+const url = 'http://huesheng.com/JSON/photoData.json';
+
+//!要製作的次數
+const photoCount = 9;
+//滾動條區
+const scrollLeftDiv = document.getElementById('scrollLeftDiv');  //照片按紐區
+//內容區
+const navDiv = document.querySelector('#scrollLeftDiv>nav');
+//幻燈片位置
+let divPosition = 0;
+let slideUl = document.querySelector('#slideButton>ul');
+
+//相片內容存放區位置
+const modalStorageArea = document.getElementById('modalStorageArea');
+
+//滾動按鈕
+let slidePhotoCount;        //幻燈片中同時顯示照片的數量
+let slideCount = 0;         //按鈕編號
+
+
+//判斷幻燈片中的同時顯示照片數量
+
+if (vw < 768) {
+    slidePhotoCount = 1;
+} else {
+    slidePhotoCount = 3;
+}
+
+// 取得相片名子 json
+function ajaxGetJson(url) {
+    return new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    //把取得的json 轉換成物件 否則沒辦法用
+
+                    let jsonData = JSON.parse(xhr.response);
+
+                    //成功時回傳
+                    resolve(jsonData);
+                } else {
+                    //否則回傳錯誤
+                    reject(new Error(xhr));
                 }
-            })
-        }
-        // **服務項目淡入淡出動畫 結束**
-    }
-
-
-
-    //**歷年實績區 開始 */
-
-
-
-    //json檔案位置
-    const url = 'http://huesheng.com/JSON/photoData.json';
-
-    //!要製作的次數
-    const photoCount = 9;
-    //滾動條區
-    const scrollLeftDiv = document.getElementById('scrollLeftDiv');  //照片按紐區
-    //內容區
-    const navDiv = document.querySelector('#scrollLeftDiv>nav');
-    //幻燈片位置
-    let divPosition = 0;
-    let slideUl = document.querySelector('#slideButton>ul');
-
-    //相片內容存放區位置
-    const modalStorageArea = document.getElementById('modalStorageArea');
-
-    //滾動按鈕
-    let slidePhotoCount;        //幻燈片中同時顯示照片的數量
-    let slideCount = 0;         //按鈕編號
-
-
-    //判斷幻燈片中的同時顯示照片數量
-
-    if (vw < 768) {
-        slidePhotoCount = 1;
-    } else {
-        slidePhotoCount = 3;
-    }
-
-    // 取得相片名子 json
-    function ajaxGetJson(url) {
-        return new Promise((resolve, reject) => {
-            let xhr = new XMLHttpRequest();
-            xhr.open('GET', url);
-            xhr.onreadystatechange = () => {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        //把取得的json 轉換成物件 否則沒辦法用
-
-                        let jsonData = JSON.parse(xhr.response);
-
-                        //成功時回傳
-                        resolve(jsonData);
-                    } else {
-                        //否則回傳錯誤
-                        reject(new Error(xhr));
-                    }
-                };
             };
-            xhr.send();
-        });
-    }
+        };
+        xhr.send();
+    });
+}
 
 
-    //先呼叫 ajaxGetJson 方法並傳入網址參數 Promise 回傳結果會在.then處裡
-    ajaxGetJson(url)
-        .then((xhrJson) => {
-            // 過濾json檔案 取得 frontPage第一個屬性為true的物件
-            let showFrontPage = xhrJson.filter(e => e.frontPage.showThisPhoto && e.frontPage.rank !== null);
-            // 泡沫排序 透過 frontPage中的rank屬性來排序
-            for (let i = 0; i < showFrontPage.length - 1; i++) {
-                for (let j = 0; j < showFrontPage.length - 1 - i; j++) {
-                    if (showFrontPage[j].frontPage.rank > showFrontPage[j + 1].frontPage.rank) {
-                        let temp;
-                        temp = showFrontPage[j];
-                        showFrontPage[j] = showFrontPage[j + 1];
-                        showFrontPage[j + 1] = temp;
-                    }
+//先呼叫 ajaxGetJson 方法並傳入網址參數 Promise 回傳結果會在.then處裡
+ajaxGetJson(url)
+    .then((xhrJson) => {
+        // 過濾json檔案 取得 frontPage第一個屬性為true的物件
+        let showFrontPage = xhrJson.filter(e => e.frontPage.showThisPhoto && e.frontPage.rank !== null);
+        // 泡沫排序 透過 frontPage中的rank屬性來排序
+        for (let i = 0; i < showFrontPage.length - 1; i++) {
+            for (let j = 0; j < showFrontPage.length - 1 - i; j++) {
+                if (showFrontPage[j].frontPage.rank > showFrontPage[j + 1].frontPage.rank) {
+                    let temp;
+                    temp = showFrontPage[j];
+                    showFrontPage[j] = showFrontPage[j + 1];
+                    showFrontPage[j + 1] = temp;
                 }
             }
+        }
 
+        return showFrontPage;
+    })
+    .then((showFrontPage) => {
+        //把成功取得的回傳值當作參數呼叫製作相片按鈕方法
+        //檢查是不是首頁
+        if (titleName === '輝昇聲光燈光音響工程') {
+            makePhotoDiv(showFrontPage);
             return showFrontPage;
-        })
-        .then((showFrontPage) => {
-            //把成功取得的回傳值當作參數呼叫製作相片按鈕方法
-            //檢查是不是首頁
-            if (titleName === '輝昇聲光燈光音響工程') {
-                makePhotoDiv(showFrontPage);
-                return showFrontPage;
-            } else {
-                return null;
-            }
-        })
-        .then((showFrontPage) => {
-            if (showFrontPage !== null) {
-                makeModalStorageAreaDiv(showFrontPage);
-            }
-        })
-        .catch((err) => {
-            //如果失敗執行這裡
-            console.log('Json讀取失敗: ' + err);
-        })
-        .finally(() => {
-            //不管怎樣最後一定執行觀測方法
-            contantLazyLoading();
-        })
+        } else {
+            return null;
+        }
+    })
+    .then((showFrontPage) => {
+        if (showFrontPage !== null) {
+            makeModalStorageAreaDiv(showFrontPage);
+        }
+    })
+    .catch((err) => {
+        //如果失敗執行這裡
+        console.log('Json讀取失敗: ' + err);
+    })
+    .finally(() => {
+        //不管怎樣最後一定執行觀測方法
+        contantLazyLoading();
+    })
 
 
 
-    //製作相片按鈕
-    function makePhotoDiv(event) {
-        for (let i = 0; i < photoCount; i++) {
-            //製作存放box元素
-            let divBox = document.createElement('div');
-            //按紐
-            let buttonBox = document.createElement('button');
-            //圖片
-            let imgBox = document.createElement('img');
-            //敘述
-            let narrateBox = document.createElement('div');
-            //活動類型
-            let pTypeDiv = document.createElement('div');
-            let pType = document.createElement('p');
-            let pTypeSamp = document.createElement('samp');
-            //活動敘述
-            let pDivBox1 = document.createElement('div');
-            let pBox = document.createElement('p');
+//製作相片按鈕
+function makePhotoDiv(event) {
+    for (let i = 0; i < photoCount; i++) {
+        //製作存放box元素
+        let divBox = document.createElement('div');
+        //按紐
+        let buttonBox = document.createElement('button');
+        //圖片
+        let imgBox = document.createElement('img');
+        //敘述
+        let narrateBox = document.createElement('div');
+        //活動類型
+        let pTypeDiv = document.createElement('div');
+        let pType = document.createElement('p');
+        let pTypeSamp = document.createElement('samp');
+        //活動敘述
+        let pDivBox1 = document.createElement('div');
+        let pBox = document.createElement('p');
 
-            //外框divBox
-            divBox.classList.add('navClass', 'carousel-item', 'p-0', 'text-center');
+        //外框divBox
+        divBox.classList.add('navClass', 'carousel-item', 'p-0', 'text-center');
 
-            // 設定最後一個圖片的右邊寬度
-            if (i === photoCount - 1) {
-                let positionSet = document.createElement('div');
-                positionSet.style.position = 'absolute';
-                positionSet.style.right = '-23px';      //參數與圖片之間的寬度配合
-                positionSet.style.padding = '0.1px'
-                divBox.append(positionSet);
-            }
+        // 設定最後一個圖片的右邊寬度
+        if (i === photoCount - 1) {
+            let positionSet = document.createElement('div');
+            positionSet.style.position = 'absolute';
+            positionSet.style.right = '-23px';      //參數與圖片之間的寬度配合
+            positionSet.style.padding = '0.1px'
+            divBox.append(positionSet);
+        }
 
-            //照片按紐
-            buttonBox.type = 'button';
-            buttonBox.classList.add('d-flex', 'flex-column', 'justify-content-start', 'align-items-center', 'btn', 'shadow-none', 'p-0');
-            buttonBox.setAttribute('data-bs-toggle', 'modal');
-            buttonBox.setAttribute('data-bs-target', `#${event[i].englishName}`);
-            //圖片(因為有用懶加載所以使用 data-src)
-            imgBox.setAttribute('data-src', `images/photo/${event[i].date.year}/${event[i].date.month}/${event[i].date.day}/${event[i].chineseName}/${event[i].chineseName}0.${event[i].photoExtension}`)
-            imgBox.alt = `${event[i].chineseName}圖片按紐`;
-
-
-            //敘述盒子
-            narrateBox.classList.add('activityNarrate', 'text-dark', 'my-4');
-            //活動類型
-            pTypeDiv.classList.add('px-1', 'my-2');
-            pType.classList.add('activityC1', 'fs-5', 'fw-bold');
-            pTypeSamp.innerHTML = event[i].activityType;
-
-            //照片敘述
-            pDivBox1.classList.add('my-3');
-            pBox.classList.add('activityC2', 'fw-bold');
-
-            pBox.innerHTML = event[i].chineseName;
+        //照片按紐
+        buttonBox.type = 'button';
+        buttonBox.classList.add('d-flex', 'flex-column', 'justify-content-start', 'align-items-center', 'btn', 'shadow-none', 'p-0');
+        buttonBox.setAttribute('data-bs-toggle', 'modal');
+        buttonBox.setAttribute('data-bs-target', `#${event[i].englishName}`);
+        //圖片(因為有用懶加載所以使用 data-src)
+        imgBox.setAttribute('data-src', `images/photo/${event[i].date.year}/${event[i].date.month}/${event[i].date.day}/${event[i].chineseName}/${event[i].chineseName}0.${event[i].photoExtension}`)
+        imgBox.alt = `${event[i].chineseName}預覽圖`;
 
 
-            //依序插入 divBox>按紐>內文>圖片
-            divBox.append(buttonBox);
+        //敘述盒子
+        narrateBox.classList.add('activityNarrate', 'text-dark', 'my-4');
+        //活動類型
+        pTypeDiv.classList.add('px-1', 'my-2');
+        pType.classList.add('activityC1', 'fs-5', 'fw-bold');
+        pTypeSamp.innerHTML = event[i].activityType;
 
-            //活動類型
-            pTypeDiv.append(pType);
-            pType.append(pTypeSamp);
-            //敘述
-            pDivBox1.append(pBox);
-            //類型和敘述組合進div中
-            narrateBox.append(pTypeDiv);
-            narrateBox.append(pDivBox1);
+        //照片敘述
+        pDivBox1.classList.add('my-3');
+        pBox.classList.add('activityC2', 'fw-bold');
 
-            //圖片和敘述插入button
-            buttonBox.append(imgBox);
-            buttonBox.append(narrateBox);
+        pBox.innerHTML = event[i].chineseName;
 
-            // navDiv元素 > divBox
-            navDiv.append(divBox);
 
-            //如果照片已經填滿顯示畫面就製作一個按紐
-            if (i % slidePhotoCount === 0) {
-                ModalStorageAreaDivScrollButton();
-            }
+        //依序插入 divBox>按紐>內文>圖片
+        divBox.append(buttonBox);
+
+        //活動類型
+        pTypeDiv.append(pType);
+        pType.append(pTypeSamp);
+        //敘述
+        pDivBox1.append(pBox);
+        //類型和敘述組合進div中
+        narrateBox.append(pTypeDiv);
+        narrateBox.append(pDivBox1);
+
+        //圖片和敘述插入button
+        buttonBox.append(imgBox);
+        buttonBox.append(narrateBox);
+
+        // navDiv元素 > divBox
+        navDiv.append(divBox);
+
+        //如果照片已經填滿顯示畫面就製作一個按紐
+        if (i % slidePhotoCount === 0) {
+            ModalStorageAreaDivScrollButton();
         }
     }
+}
 
-    //歷年實績滾動按鈕
-    function ModalStorageAreaDivScrollButton() {
+//歷年實績滾動按鈕
+function ModalStorageAreaDivScrollButton() {
 
-        // slideButton位移按鈕製作  ( 這裡是依靠上面製作出的div物件 必須在這裡 )
-        const scrollContantBox = document.querySelector('#scrollLeftDiv .navClass');
-        //取得本體寬度
-        const navClassBodyWidth = scrollContantBox.clientWidth;
-        //取得 左右margin寬度 並將字串轉換成數字
-        const navClassMarginLeft = getComputedStyle(scrollContantBox).marginLeft;
-        const navClassMarginRight = getComputedStyle(scrollContantBox).marginRight;
-        const navClassMarginX = Number(navClassMarginLeft.replace('px', '')) + Number(navClassMarginRight.replace('px', ''));
+    // slideButton位移按鈕製作  ( 這裡是依靠上面製作出的div物件 必須在這裡 )
+    const scrollContantBox = document.querySelector('#scrollLeftDiv .navClass');
+    //取得本體寬度
+    const navClassBodyWidth = scrollContantBox.clientWidth;
+    //取得 左右margin寬度 並將字串轉換成數字
+    const navClassMarginLeft = getComputedStyle(scrollContantBox).marginLeft;
+    const navClassMarginRight = getComputedStyle(scrollContantBox).marginRight;
+    const navClassMarginX = Number(navClassMarginLeft.replace('px', '')) + Number(navClassMarginRight.replace('px', ''));
 
-        //照片按鈕本體x軸大小+上 margin大小
-        const navClassWidth = navClassBodyWidth + navClassMarginX;
+    //照片按鈕本體x軸大小+上 margin大小
+    const navClassWidth = navClassBodyWidth + navClassMarginX;
 
-        //製作按鈕物件
-        let slideObject = new SlideObject(scrollLeftDiv, 'slideMoveButton', slideCount, 'achievementClass', slideUl, navClassMarginX, divPosition);
+    //製作按鈕物件
+    let slideObject = new SlideObject(scrollLeftDiv, 'slideMoveButton', slideCount, 'achievementClass', slideUl, navClassMarginX, divPosition);
 
-        slideObject.createButton();
+    slideObject.createButton();
 
-        //按鈕id編號++
-        slideCount++;
-        //給每個按鈕指定位置
-        divPosition += navClassWidth * slidePhotoCount;
-    }
+    //按鈕id編號++
+    slideCount++;
+    //給每個按鈕指定位置
+    divPosition += navClassWidth * slidePhotoCount;
+}
 
 
-    //歷年實績互動視窗內容
-    function makeModalStorageAreaDiv(event) {
-        let dataBox;            //暫時存放製作好的字串
-        let dataArray = [];     //製作好的字串會加入到這個宣告中
-        let getStringData;      //取得dataArray中轉換成字串的資料
+//歷年實績互動視窗內容
+function makeModalStorageAreaDiv(event) {
+    let dataBox;            //暫時存放製作好的字串
+    let dataArray = [];     //製作好的字串會加入到這個宣告中
+    let getStringData;      //取得dataArray中轉換成字串的資料
 
-        //製作用於抓取的ID名稱
+    //製作用於抓取的ID名稱
 
-        for (let i = 0; i < photoCount; i++) {
-            let idName = event[i].englishName + 'Id';   //統一化id命名否則有機率出bug
+    for (let i = 0; i < photoCount; i++) {
+        let idName = event[i].englishName + 'Id';   //統一化id命名否則有機率出bug
 
-            dataBox = `
+        dataBox = `
             <div class="modal fade" id="${event[i].englishName}" data-bs-backdrop="true" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
@@ -477,46 +477,46 @@ if (titleName === '輝昇聲光燈光音響工程') {
                 </div>
             </div>
         `;
-            dataArray.push(dataBox);
-        }
+        dataArray.push(dataBox);
+    }
 
 
-        getStringData = dataArray.join('');
-        modalStorageArea.innerHTML = getStringData; //先將殼推入html
+    getStringData = dataArray.join('');
+    modalStorageArea.innerHTML = getStringData; //先將殼推入html
 
-        dataBox = '';                               //上方動作都做完了才清空儲存區防止bug
-        dataArray = [];
-        getStringData = '';
+    dataBox = '';                               //上方動作都做完了才清空儲存區防止bug
+    dataArray = [];
+    getStringData = '';
 
 
-        for (let i = 0; i < photoCount; i++) {
-            /**
-            *  巢狀迴圈 
-            *      第一層抓JSON的資料數 決定要執行幾次
-            *          第二層抓指定的相片數量來製作對應數量的div DOM             * 
-            *  抓取英文名子後方 + 上'Id'來對應上方相片按鈕的id名稱                 *  只有上方做出來之後才能抓到id名稱所以doc寫在這
-            */
-            const idName = event[i].englishName + 'Id';
-            const getId = document.getElementById(idName);        //取得ID
+    for (let i = 0; i < photoCount; i++) {
+        /**
+        *  巢狀迴圈 
+        *      第一層抓JSON的資料數 決定要執行幾次
+        *          第二層抓指定的相片數量來製作對應數量的div DOM             * 
+        *  抓取英文名子後方 + 上'Id'來對應上方相片按鈕的id名稱                 *  只有上方做出來之後才能抓到id名稱所以doc寫在這
+        */
+        const idName = event[i].englishName + 'Id';
+        const getId = document.getElementById(idName);        //取得ID
 
-            for (let a = 0; a < event[i].numberOfPhotos; a++) {     //根據當下event[i]的相片數量製造幾次裝相片的div
-                dataBox = `
+        for (let a = 0; a < event[i].numberOfPhotos; a++) {     //根據當下event[i]的相片數量製造幾次裝相片的div
+            dataBox = `
                 <div class="col-12 col-lg-6">
-                    <img data-src="images/photo/${event[i].date.year}/${event[i].date.month}/${event[i].date.day}/${event[i].chineseName}/${event[i].chineseName}${a}.${event[i].photoExtension}" style="width: 100%; hight: 100%;" alt="">
+                    <img data-src="images/photo/${event[i].date.year}/${event[i].date.month}/${event[i].date.day}/${event[i].chineseName}/${event[i].chineseName}${a}.${event[i].photoExtension}" style="width: 100%; hight: 100%;" alt="${event[i].chineseName}${[a]}">
                 </div>
             `
-                dataArray.push(dataBox);                //推至dataArray
-            }
-
-            getStringData = dataArray.join('');         //取得做好的dataBox
-            getId.innerHTML = getStringData;            //把dataBox推入getId
-
-            dataBox = '';                               //清空儲存區防止bug
-            dataArray = [];
-            getStringData = '';
+            dataArray.push(dataBox);                //推至dataArray
         }
+
+        getStringData = dataArray.join('');         //取得做好的dataBox
+        getId.innerHTML = getStringData;            //把dataBox推入getId
+
+        dataBox = '';                               //清空儲存區防止bug
+        dataArray = [];
+        getStringData = '';
     }
 }
+
 
 //**歷年實績區 結束 */
 

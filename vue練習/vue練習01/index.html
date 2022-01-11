@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="css/styel.css">
+
+
+    <script defer src="script/vue.js"></script>
+    <script defer src="script/index.js"></script>
+</head>
+
+<body>
+    <select id="isTrueOrFalse">
+        <option value="" selected>--請選擇--</option>
+        <option value="true">true</option>
+        <option value="false">false</option>
+    </select>
+
+    <div id="app" style="margin-bottom: 20px;">
+        {{ message }}
+        <!-- v-html使用此模版寫法傳進來的字串會以html元素格式呈現 -->
+        <div v-html="divdom"></div>
+    </div>
+
+
+
+
+</body>
+
+</html>

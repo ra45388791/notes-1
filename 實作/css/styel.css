@@ -1,13 +1,3 @@
-* {
-    /* 字體 */
-    font-family: "M PLUS Rounded 1c", sans-serif;
-    font-family: "Noto Sans TC", sans-serif;
-}
-
-img {
-    vertical-align: bottom;
-}
-
 h1,
 p {
     margin-bottom: 0px;
@@ -71,7 +61,8 @@ header .bannerLogo {
 }
 
 header .bannerLogo img {
-    width: 200px;
+    width : 200px;
+    height: 187.61px;
 }
 
 header .bannerH2Title {
@@ -204,12 +195,7 @@ header .bannerH2Title samp {
 
 
 /*服務項目開始*/
-#hardwareItems {
-    /* background: url(/images/non-javaScript/hardwareItems/hardwareItemsBackGround.webp);
-    
-    background-size    : cover;
-    background-position: top center;
-    background-repeat  : no-repeat; */
+#serviceItems {
     position  : relative;
     background: linear-gradient(180deg, rgb(6, 6, 6)100%, rgb(0, 26, 255)100%, transparent);
 
@@ -218,22 +204,22 @@ header .bannerH2Title samp {
     text-justify: inter-ideograph;
 }
 
-#hardwareItems img {
+#serviceItems img {
     width: 100%;
 }
 
-#hardwareItems .contentSet picture,
-#hardwareItems .contentSet img {
+#serviceItems .contentSet picture,
+#serviceItems .contentSet img {
     width : 120px;
     height: auto;
 }
 
-#hardwareItems .bannerImgSet {
+#serviceItems .bannerImgSet {
     width : 100%;
     height: 100%;
 }
 
-#hardwareItems .changePageButton:hover {
+#serviceItems .changePageButton:hover {
     box-shadow: inset 6px 0px 0px 0px #ffffff, inset 146px 0px 0px 0px rgb(135, 135, 135);
 }
 
@@ -366,6 +352,7 @@ header .bannerH2Title samp {
     margin         : 0px 0px;
     width          : 100%;
     height         : 100%;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.500);
 }
 
 #scrollLeftDiv .navClass button>div {
@@ -553,6 +540,7 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
 
     header .bannerLogo img {
         width: 250px;
+        height: 234.52px;
     }
 
     header .bannerH2Title {
@@ -592,7 +580,7 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
     /*服務項目開始*/
 
 
-    #hardwareItems .containerBox {
+    #serviceItems .containerBox {
         /* 模擬 container */
         width: 95vw;
 
@@ -602,40 +590,40 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
         box-sizing      : border-box;
     }
 
-    #hardwareItems .contentSet {
+    #serviceItems .contentSet {
         position: relative;
     }
 
-    #hardwareItems .article1 {
+    #serviceItems .article1 {
         /* 預設: 1,1 */
         z-index: 1;
         opacity: 1;
     }
 
-    #hardwareItems .contentSet picture,
-    #hardwareItems .contentSet img {
+    #serviceItems .contentSet picture,
+    #serviceItems .contentSet img {
         width : 90px;
         height: auto;
     }
 
-    #hardwareItems .article1 p {
+    #serviceItems .article1 p {
         border       : 6px solid rgba(255, 255, 255, 0.192);
         border-top   : 0px;
         border-bottom: 0px;
 
     }
 
-    #hardwareItems .article1 h3 {
+    #serviceItems .article1 h3 {
         display: none;
     }
 
-    #hardwareItems .article2 {
+    #serviceItems .article2 {
         /* 預設:0,0 */
         z-index: 0;
         opacity: 0;
     }
 
-    #hardwareItems .article2 p {
+    #serviceItems .article2 p {
         background-color: rgba(0, 0, 0, 0.4);
         border          : solid 6px rgb(30, 210, 255);
         border-top      : 0px;
@@ -644,7 +632,7 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
 
     }
 
-    #hardwareItems .article2 h3 {
+    #serviceItems .article2 h3 {
         width      : 32vw;
         font-size  : 16vw;
         font-weight: bold;
@@ -652,25 +640,24 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
     }
 
     /* 音響底圖 */
-    #hardwareItems .SoundEngineer {
-        background         : url(http://huesheng.com/images/non-javaScript/HardwareItems/machineXl.webp);
+    #serviceItems .SoundEngineer {
+        background         : url(http://huesheng.com/images/non-javaScript/serviceItems/machineXl.webp);
         background-size    : cover;
         background-position: 100% 100%;
         background-repeat  : no-repeat;
     }
 
     /* 燈光底圖 */
-    #hardwareItems .Light {
-        /* background         : url(/images/non-javaScript/hardwareItems/lightXl.webp); */
-        background         : url(http://huesheng.com/images/non-javaScript/HardwareItems/lightXl.webp);
+    #serviceItems .Light {
+        background         : url(http://huesheng.com/images/non-javaScript/serviceItems/lightXl.webp);
         background-size    : cover;
         background-position: 100% 100%;
         background-repeat  : no-repeat;
     }
 
     /* 機器遮罩 在第0層 */
-    #hardwareItems .SoundEngineer .bannerMask {
-        background         : url(http://huesheng.com/images/non-javaScript/HardwareItems/machineMaskXl.webp);
+    #serviceItems .SoundEngineer .bannerMask {
+        background         : url(http://huesheng.com/images/non-javaScript/serviceItems/machineMaskXl.webp);
         background-size    : cover;
         background-position: left 100%;
 
@@ -684,8 +671,8 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
     }
 
     /* 燈光遮罩 */
-    #hardwareItems .Light .bannerMask {
-        background         : url(http://huesheng.com/images/non-javaScript/HardwareItems/lightMaskXl.webp);
+    #serviceItems .Light .bannerMask {
+        background         : url(http://huesheng.com/images/non-javaScript/serviceItems/lightMaskXl.webp);
         background-size    : cover;
         background-position: right 100%;
 
@@ -709,24 +696,24 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
     }
 
     /* 筆電上 sm大小圖片隱藏 */
-    #hardwareItems .bannerImgSet {
+    #serviceItems .bannerImgSet {
         display: none;
     }
 
-    #hardwareItems .article1,
-    #hardwareItems .article2,
-    #hardwareItems .bannerMask {
+    #serviceItems .article1,
+    #serviceItems .article2,
+    #serviceItems .bannerMask {
         transition: opacity 0.2s 0s cubic-bezier(0.32, 0.32, 0.44, 0.88);
     }
 
 
 
     /* 動畫class開始 */
-    #hardwareItems .opacityTransparent {
+    #serviceItems .opacityTransparent {
         opacity: 1;
     }
 
-    #hardwareItems .opacityOpaque {
+    #serviceItems .opacityOpaque {
         opacity: 0;
     }
 
@@ -783,23 +770,23 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
 
     /*服務項目開始*/
 
-    #hardwareItems .containerBox {
+    #serviceItems .containerBox {
         width : auto;
         height: 31vw;
     }
 
-    #hardwareItems .contentSet picture,
-    #hardwareItems .contentSet img {
+    #serviceItems .contentSet picture,
+    #serviceItems .contentSet img {
         width : 4vw;
         height: auto;
     }
 
-    #hardwareItems .article1 p,
-    #hardwareItems .article2 p {
+    #serviceItems .article1 p,
+    #serviceItems .article2 p {
         font-size: 1.1vw !important;
     }
 
-    #hardwareItems .article2 p {
+    #serviceItems .article2 p {
         background-color: rgba(0, 0, 0, 0.4);
         border          : solid 6px rgb(30, 210, 255);
         border-top      : 0px;
@@ -807,7 +794,7 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
         box-sizing      : border-box;
     }
 
-    #hardwareItems .article2 h3 {
+    #serviceItems .article2 h3 {
         width      : 18vw;
         font-size  : 9vw;
         font-weight: bold;
@@ -851,6 +838,7 @@ img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhos
     /* banner開始 */
     header .bannerLogo img {
         width: 350px;
+        height:328.33px
     }
 
     header .bannerH2Title h2 {
