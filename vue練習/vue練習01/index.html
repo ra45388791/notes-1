@@ -9,22 +9,65 @@
 
     <link rel="stylesheet" href="css/styel.css">
 
-
     <script defer src="script/vue.js"></script>
     <script defer src="script/index.js"></script>
 </head>
 
 <body>
-    <select id="isTrueOrFalse">
-        <option value="" selected>--請選擇--</option>
-        <option value="true">true</option>
-        <option value="false">false</option>
-    </select>
 
-    <div id="app" style="margin-bottom: 20px;">
-        {{ message }}
-        <!-- v-html使用此模版寫法傳進來的字串會以html元素格式呈現 -->
-        <div v-html="divdom"></div>
+    <div id="app">
+
+        <div class="inputclass">
+            <select v-on:change="vueSelect" v-model="isTrueOrFalse">
+                <option value="" selected>--請選擇--</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+            </select>
+            <!-- input輸入和點擊監聽事件 -->
+            <input v-on:keydown.enter="appbtn" v-model="vueInput" type='type' name="username">
+            <input v-on:click="appbtn" type="button" value="送出">
+            <input v-on:input="vueColorF" v-model="vueColorData" type="color">
+        </div>
+
+        <template v-if="vueDomShow">
+            <!-- 操作class 套用css變色 -->
+            <span v-bind:class="color">{{ message }}</span>
+
+            <div>
+                <button @click="vueDomShow = false"> 將vueDomShow設為false </button>
+            </div>
+
+            <!-- v-html使用此模版寫法傳進來的字串會以html元素格式呈現 -->
+            <div v-html="divdom"></div>
+
+            <span>{{ reversedMessage }}</span>
+            <div v-if="seeIf === '' " v-bind:class="color">測試 if 區域是否被看到</div>
+            <div v-else-if='seeIf === true'> if為true </div>
+            <div v-else-if='seeIf === false'> if為false </div>
+            <div>
+                <ul>
+                    <li v-for="vueForItem1,index in vueForItems1" v-bind:key="index">
+                        {{index}}:{{vueForItem1.forMessage}}
+                    </li>
+                </ul>
+                <ul>
+                    <li v-for="vueForItem2, key in vueForItems2" v-bind:key="key">
+                        {{ key }} : {{vueForItem2}}
+                    </li>
+                </ul>
+            </div>
+            <div v-bind:style="vueBgColor"
+                style="margin: auto; width: 13em; height: 50px; color: white; border: black 1px solid; ">
+                測試背景色彩跟著表單變色
+            </div>
+
+
+        </template>
+        <template v-else>
+            <div> vueDomShow屬性為 : false </div>
+            <button @click="vueDomShow = true"> 將vueDomShow設為true </button>
+        </template>
+
     </div>
 
 
