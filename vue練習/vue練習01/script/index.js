@@ -1,8 +1,8 @@
 let data = {
-    vueDomShow: 6,
+    vueDomShow: 1,
     isTrueOrFalse: '',                       //v-model 選項輸入測試
     message: '---請選擇---',                    //第一行訊息
-    message2: '倒轉插值',                   //倒轉插值
+    message2: 50,                   //倒轉插值
     color: '',                              //顏色
     divdom: '<div>這是一個測試圖片的div</div>', //圖片
     a: 1,                                   //watch測試
@@ -219,7 +219,7 @@ Vue.component('base-button', {
     }
 });
 
-//插槽 and 父組件直接操作子組件插槽屬性
+//插槽 and 父組件直接操作子組件屬性
 Vue.component('base-layout', {
     data: function () {
         return {
@@ -349,7 +349,8 @@ let app = new Vue({
                 });
         },
         getSqlData: function (e) {
-            /*  //sql資料
+            let vm = this;
+            //sql資料
             let url1;
             if (location.href === 'http://localhost:5500/') {
                 url1 = `http://localhost:5000/?pagenumber=4`;
@@ -365,11 +366,18 @@ let app = new Vue({
             })
                 .then(function (response) {
                     console.log(response);
-                    console.log(`資料類型:${typeof response}`);
-                }).catch(function (error) {
-
+                    // console.log(`資料類型:${typeof response}`);
+                    return response.data[0];
+                }).then(function (response) {
+                    console.log(response);
+                    let id = response.data_id;
+                    let name = response.data_name;
+                    vm.sqldata = `<div>員工id: ${id} </br> 員工姓名: ${name}</div>`
                 })
-            */
+                .catch(function (error) {
+                    // throw new Error(error);
+                })
+
 
         },
         vueEmitTest: function (count) {
@@ -378,13 +386,21 @@ let app = new Vue({
         },
         onFocus() {
             console.log('focus');
-
         }
     },
     computed: {
         //寫法1
-        reversedMessage() {
-            return this.message2.split('').reverse().join('')
+        reversedMessage: {
+            get() {
+                //然後偵測到message2 被修改後回傳 message2 到指定的位置。
+                console.log('觸發get');
+                return this.message2;
+            },
+            set(value) {
+                //button 傳入 0.5 參數後用來修改 message2 
+                console.log('觸發set' + value);
+                this.message2 = this.message2 * value;
+            }
         }
 
         //寫法2
