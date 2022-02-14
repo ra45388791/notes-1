@@ -375,7 +375,7 @@ let app = new Vue({
                     vm.sqldata = `<div>員工id: ${id} </br> 員工姓名: ${name}</div>`
                 })
                 .catch(function (error) {
-                    // throw new Error(error);
+                    console.log(error);
                 })
 
 
