@@ -25,6 +25,7 @@
             <button @click="vueDomShow = 4"> 4 </button>
             <button @click="vueDomShow = 5"> 5 </button>
             <button @click="vueDomShow = 6"> 6 </button>
+            <button @click="vueDomShow = 7"> 7 </button>
 
         </div>
 
@@ -180,6 +181,13 @@
                     <div>{{child.soltelement="直接操控子組件屬性"}}</div>
                 </template>
             </base-layout>
+
+
+
+        </template>
+        <template v-else-if="vueDomShow === 7">
+            <div>api練習</div>
+            <button @click="meteorologicalApiTest">點擊</button>
 
 
 

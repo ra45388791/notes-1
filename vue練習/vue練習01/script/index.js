@@ -1,5 +1,5 @@
 let data = {
-    vueDomShow: 1,
+    vueDomShow: 7,
     isTrueOrFalse: '',                       //v-model 選項輸入測試
     message: '---請選擇---',                    //第一行訊息
     message2: 50,                   //倒轉插值
@@ -386,6 +386,29 @@ let app = new Vue({
         },
         onFocus() {
             console.log('focus');
+        },
+        meteorologicalApiTest: function () {
+            //  天氣預報api
+            //  opendataapi:資料id        Authorization : 會員授權碼
+            const url = 'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-EC139BA3-6665-4AEE-9A2E-D3B8D1DF96DB&format=JSON&locationName=%E8%87%BA%E5%8C%97%E5%B8%82'
+            console.log(encodeURIComponent('臺北市'));
+
+            axios({
+                method: 'GET',
+                url: url,
+            })
+                .then(function (response) {
+
+                    // console.log(response);
+                    console.log(response.data);
+
+                    // console.log(`資料類型:${typeof response}`);
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+
         }
     },
     computed: {
