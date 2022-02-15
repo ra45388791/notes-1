@@ -14,7 +14,7 @@
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
         crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script defer src="script/vue.js"></script>
@@ -30,13 +30,13 @@
 
             <div class="row flex-row col-8">
                 <div>
-                    <div class="col-12 mb-7">
+                    <div class="col-12">
                         <button v-for="city in citys" @click="hostMap(city.zhName,city.enName)"
                             class="col-1">{{city.zhName}}</button>
                     </div>
                     <div v-show="showState" class="row flex-wrap justify-content-around text-center">
 
-                        <h2 class="col-12">{{showData.cityName}}</h2>
+                        <h2 class="col-12 my-4">{{showData.cityName}}</h2>
 
                         <div class="col-2">
                             <h3>天氣現象</h3>
