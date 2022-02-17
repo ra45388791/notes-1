@@ -244,6 +244,7 @@ let app = new Vue({
                 .then(function (response) {
                     // console.log(response);
                     //提取資料
+                    console.log(response);
                     const datas = response.data.records
                     vm.dataDescription = datas.datasetDescription;
                     console.log(datas);
@@ -260,6 +261,28 @@ let app = new Vue({
                     });
                 })
         })
+
+
+
+        for (let i = 0; i < 5; i++) {
+            let arr = [];
+            for (let j = 0; j < i; j++) {
+                arr.push('*')
+            }
+            console.log(arr.join(''));
+        }
+
+        for (let i = 0; i < 5; i++) {
+            let arr = [];
+            for (let j = 5; j > i; j--) {
+                arr.push('*')
+            }
+            console.log(arr.join(''));
+        }
+
+
+
+
 
     },
     methods: {
@@ -328,6 +351,9 @@ let app = new Vue({
                 }
             })
 
+            this.showMap(en);
+        },
+        showMap: function (en) {
             // console.log(this.showData.MinT);
             document.querySelectorAll('path').forEach(event => {
                 event.style = '';
@@ -336,7 +362,6 @@ let app = new Vue({
 
             //秀出資訊區
             this.showState = true;
-
         }
     }
 
