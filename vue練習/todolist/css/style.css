@@ -1,0 +1,413 @@
+* {
+    /* 字體 */
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-family: "Noto Sans TC", sans-serif;
+}
+
+/****************************************************************
+                        vue過度動畫
+****************************************************************/
+/* 刪除文章 */
+.v-enter-to,
+.v-leave {
+    opacity: 1;
+}
+
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 1s;
+}
+
+.v-enter,
+.v-leave-to {
+    opacity: 0;
+}
+
+/* 添加代辦事項進入 */
+
+.article-form-enter,
+.article-form-leave-to {
+
+    transform: translateY(100vh);
+    opacity  : 0;
+}
+
+.article-form-enter-active,
+.article-form-leave-active {
+    transition: 1s ease;
+}
+
+.article-form-enter-to,
+.article-form-leave {
+
+    transform: translateY(0px);
+    opacity  : 1;
+}
+
+
+
+/****************************************************************
+                            內容開始
+****************************************************************/
+
+body {
+    position   : relative;
+    padding-top: 64px;
+    background : #0C4553;
+}
+
+nav {
+    position: fixed;
+    left    : 0px;
+    top     : 0px;
+
+    padding-top   : 0.5rem;
+    padding-bottom: 0.5rem;
+
+    width: 100%;
+
+    background: #126376;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    z-index: 2;
+}
+
+nav img {
+    width : 3em;
+    height: 3em;
+}
+
+nav a {
+    font-style     : normal;
+    font-weight    : normal;
+    font-size      : 36px;
+    line-height    : 42px;
+    text-decoration: none;
+
+    color: #FFFFFF;
+}
+
+nav a:hover {
+    color: #FFFFFF;
+}
+
+/**************************************************************** 
+                            按鈕區
+*****************************************************************/
+
+.bottonMenu {
+    position: fixed;
+    width   : 100%;
+    height  : 61px;
+    left    : 0px;
+    bottom  : 0px;
+
+    background: #1BAACB;
+    box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
+
+    z-index: 2;
+}
+
+.bottonMenu button {
+    /* width : 73px;
+    height: 61px; */
+    position: relative;
+
+    border: 0px;
+
+    background: #1BAACB;
+
+    color: #FFFFFF;
+}
+
+.bottonMenu button:active {
+    background: #0C4553;
+}
+
+.bottonMenu p {
+    margin: 0;
+}
+
+.bottonMenu button:not(:first-child):before {
+    content    : "";
+    position   : absolute;
+    left       : 0;
+    top        : 15%;
+    width      : 1px;
+    height     : 75%;
+    border-left: solid 2px #ffffff;
+}
+
+.articlePlus {
+    position: fixed;
+    width   : 87px;
+    height  : 87px;
+    right   : 13px;
+    bottom  : 80px;
+
+    background: #00CFFF;
+    border    : 1px solid #00CFFF;
+
+    border-radius: 100%;
+
+}
+
+/****************************************************************
+                        代辦事項按鈕
+****************************************************************/
+
+#listContent {
+    position      : relative;
+    padding-top   : 25px;
+    padding-bottom: 90px;
+
+    max-width: 500px;
+    height   : auto;
+
+    z-index: 0;
+}
+
+#listContent .article {
+
+    position: relative;
+
+    padding-top: 35px;
+
+    width : 297px;
+    height: 250px;
+
+    background   : #0084A3;
+    box-shadow   : 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 40px;
+}
+
+#listContent .article h3 {
+    max-width     : 164px;
+    color         : #fff;
+    /* background : #838383; */
+}
+
+#listContent .article p {
+    display      : block;
+    max-width    : 265px;
+    color        : #fff;
+    /* background: #838383; */
+
+    line-height: 1.5em;
+    text-indent: 2em;
+    text-align : justify;
+    word-break : break-all;
+}
+
+#listContent .article .listState {
+
+    position: absolute;
+    width   : 68px;
+    height  : 43px;
+    left    : calc(50% - 34px);
+    bottom  : 13px;
+
+    background   : #0084A3;
+    border       : 1px solid #00CFFF;
+    box-sizing   : border-box;
+    border-radius: 30px;
+}
+
+#listContent .listState img {
+    position: absolute;
+    left    : calc(50% - 15px);
+    top     : calc(50% - 15px);
+
+    width : 30px;
+    height: 30px;
+}
+
+/* 設定按鈕 */
+
+
+.itemList .setButton {
+    position: absolute;
+    width   : 49px;
+    height  : 49px;
+
+    left: calc(50% - 49px/2 + 88.5px);
+    top : 22px;
+
+    border       : none;
+    border-radius: 30px;
+    background   : rgba(196, 196, 196, 0.37);
+    transition   : 0.1s;
+
+}
+
+.itemList .setButton:active {
+    background: rgba(255, 255, 255, 0.37);
+}
+
+
+.itemList .setButton div {
+    /* 設定按鈕中的小圓點 */
+    position: absolute;
+    left    : calc(50% - 3.5px);
+    top     : calc(50% - 3.5px);
+
+    width        : 7px;
+    height       : 7px;
+    border-radius: 30px;
+    background   : rgba(255, 255, 255, 0.7);
+
+    box-shadow: 0px 12px 0px 0px rgba(255, 255, 255, 0.7),
+        0px -12px 0px 0px rgba(255, 255, 255, 0.7);
+}
+
+.itemList ul {
+    overflow: hidden;
+    position: absolute;
+
+    top  : 45px;
+    right: 65px;
+
+    width: 120px;
+
+    background: #0084A3;
+
+    border       : solid 1px #00FFF0;
+    border-radius: 15px;
+    box-sizing   : border-box;
+    list-style   : none;
+
+    transition: 0.5s;
+}
+
+.itemList li {
+    min-height: 28px;
+}
+
+.itemList ul button {
+    width: 100%;
+
+    color     : #fff;
+    background: #0084A3;
+    border    : 1px solid #0093B6;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.itemList ul button:active {
+    background: #00CFFF;
+}
+
+.openItem {
+    height    : 140px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    opacity   : 1;
+}
+
+.closeItem {
+    height    : 0px;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    opacity   : 0;
+}
+
+
+/****************************************************************
+                        文章撰寫區
+****************************************************************/
+
+#postArticle {
+    position: fixed;
+    top     : 0;
+    left    : 0;
+
+    padding-top: 61px;
+
+    width : 100%;
+    height: 100%;
+
+    background: #0C4553;
+    z-index   : 2;
+}
+
+#postArticle nav {
+    position: absolute;
+    top     : 0;
+    left    : 0;
+    width   : 100%;
+    height  : 50px;
+
+    background: #126376;
+}
+
+#postArticle nav button {
+    background: none;
+    border    : none;
+}
+
+#postArticle nav button:active {
+    background   : #00d0ff8c;
+    border-radius: 30px;
+}
+
+#postArticle nav img {
+    width : 100%;
+    height: 100%;
+}
+
+#postArticle #articleForm {
+    max-width: 30.1rem;
+}
+
+#postArticle form .inputForm {
+    font-size: 1.2em;
+
+    padding: 0px 0.4rem;
+
+    color: #FFFFFF;
+
+    background   : #126376;
+    border       : 1px solid #00FFF0;
+    box-sizing   : border-box;
+    box-shadow   : 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+#postArticle form .inputForm::placeholder {
+    color: rgb(206, 206, 206);
+}
+
+#postArticle form .inputTitle {
+    margin-bottom: 1rem;
+
+    width : 100%;
+    height: 35px;
+}
+
+#postArticle form .inputContent {
+    padding-top: 0.2rem;
+    width      : 100%;
+    height     : 100%;
+}
+
+/****************************************************************
+                        完整文章區
+****************************************************************/
+
+.fullArticle {
+    position: fixed;
+    top     : 0;
+    left    : 0;
+
+
+    padding-top: 70px;
+
+    width : 100vw;
+    height: 100vh;
+
+    background: #0C4553;
+    z-index   : 1;
+}
+
+.fullArticle div {
+    margin   : auto;
+    max-width: 30.1rem;
+}

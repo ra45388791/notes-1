@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mytodolist</title>
+
+    <!-- 字體 -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300&family=Noto+Sans+TC:wght@300&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/normalize.css">
+
+    <!-- bs -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+
+    <!-- css -->
+    <link rel="stylesheet" href="css/style.css">
+
+
+    <!-- js -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="script/vue.js"></script>
+    <script defer src="script/index.js"></script>
+</head>
+
+<body>
+
+    <nav class="d-flex justify-content-center align-content-center">
+
+        <div class="d-flex align-content-center">
+            <img src="/images/notebook.png" class="me-1" alt="">
+            <a class="" href="#">To-Do-List</a>
+        </div>
+
+    </nav>
+
+    <div id="app">
+
+
+
+
+        <div id="listContent" class="d-flex flex-wrap justify-content-center mx-auto">
+
+            <!-- 使用v-for動態更新貼文 -->
+            <!-- 組件還沒製作 -->
+            <transition v-for="n in articleDataArray" key="n.id">
+                <!-- !itemShow   @click 控制父組件ui隱藏 和 文章淡入 -->
+                <div v-if="itemShow" @click.self="articleState($event, n.id)"
+                    class="article d-flex flex-column justify-content-start text-start col-12 mb-3 px-3">
+                    <!-- 內文 -->
+                    <!-- !標題、內文 。@click.self="articleState"  內文用v-html 因為要用 </br> -->
+                    <h3 @click.self="articleState($event, n.id)" class="mb-4 px-1">{{n.title}}</h3>
+                    <p @click.self="articleState($event, n.id)" v-html="n.shortContent" class="px-1"></p>
+
+
+                    <!-- 狀態圖片 -->
+                    <div class="listState">
+                        <!-- !itemState -->
+                        <img :src="itemState" alt="">
+                    </div>
+                    <!-- 設定選單 -->
+                    <div class="itemList">
+                        <!-- !setItem -->
+                        <button @click.stop="setItem" class="setButton" type="button">
+                            <div></div>
+                        </button>
+                        <!-- !clickButton ( 傳入兩個參數 此ul 和 id )  -->
+                        <ul @click.stop="clickButton($event ,n.id)"
+                            class="closeItem d-flex flex-column justify-content-around px-3">
+                            <li>
+                                <button>待辦</button>
+                            </li>
+                            <li>
+                                <button>結案</button>
+                            </li>
+                            <li>
+                                <button>修改</button>
+                            </li>
+                            <li>
+                                <button>刪除</button>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                </div>
+            </transition>
+
+
+            <!-- <article-box v-for="sss in test"></article-box> -->
+            <!-- <div class=" article col-12 mb-3">
+
+            </div>
+
+            <div class="article col-12 mb-3">
+
+            </div>
+
+            <div class="article col-12 mb-3">
+
+            </div>
+
+            <div class="article col-12 mb-3">
+
+            </div>
+
+            <div class="article col-12 mb-3">
+
+            </div>
+
+            <div class="article col-12 mb-3">
+
+            </div>
+
+            <div class="article col-12 mb-3">
+
+            </div> -->
+
+            <!-- 按鈕 -->
+        </div>
+
+        <transition>
+            <div v-if="UIShow" class="bottonMenu d-flex justify-content-around">
+                <button class="col-3">
+                    <p>所有事項</p>
+                </button>
+                <button class="col-3">
+                    <p>待辦</p>
+                </button>
+                <button class="col-3">
+                    <p>結案</p>
+                </button>
+                <button class="col-3">
+                    <p>行事曆</p>
+                </button>
+            </div>
+        </transition>
+
+
+
+
+
+
+        <!-- 全文章顯示區 -->
+        <transition>
+            <!-- ! v-if="articleShow" -->
+            <section v-if="articleShow" class="fullArticle px-3 text-light">
+                <div class="d-flex justify-content-center text-center">
+                    <!-- !文章標題 -->
+                    <h3 class="pb-1 border-bottom">{{form.title}}</h3>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <!-- !文章內容  內文用v-html 因為要用 </br>-->
+                    <p v-html="form.content"></p>
+                </div>
+
+                <!-- ! v-if="articleShow"  @click="articleState"-->
+                <button v-if="articleShow" @click="articleState" class="articlePlus">
+                    <img src="/images/添加代辦事項/back.svg" alt="">
+                </button>
+
+            </section>
+        </transition>
+
+
+
+
+
+        <!-- 新增、修改清單區域 -->
+        <transition name="article-form">
+            <div v-show="articleForm" id="postArticle">
+                <nav class="d-flex justify-content-between px-2">
+                    <button @click="closeEditArticle"><img src="/images/添加代辦事項/X.svg" alt=""></button>
+                    <h2 class="text-light">{{editArticleH2}}</h2>
+
+                    <button type="submit" form="articleForm"><img src="/images/添加代辦事項/O.svg" alt=""></button>
+                </nav>
+                <!-- !已經改成用v-model -->
+                <form id="articleForm" method="POST" action="/" @submit.prevent="formSubmit"
+                    class="container d-flex flex-column">
+
+                    <!-- !v-model="form.title" -->
+                    <input v-model="form.title" type="text" name="title" placeholder="標題" class="inputForm inputTitle">
+
+                    <!-- !v-model="form.content" -->
+                    <textarea v-model="form.content" name="content" id="" cols="30" rows="18" placeholder="內文"
+                        class="inputForm inputContent"></textarea>
+                </form>
+            </div>
+        </transition>
+
+
+        <button v-if="UIShow" @click="articleForm = true" class="articlePlus">
+            <img src="/images/添加代辦事項/plus.svg" alt="">
+        </button>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
