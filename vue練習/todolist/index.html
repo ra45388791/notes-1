@@ -52,85 +52,19 @@
 
         <div id="listContent" class="d-flex flex-wrap justify-content-center mx-auto">
 
-            <!-- 使用v-for動態更新貼文 -->
-            <!-- 組件還沒製作 -->
-            <transition v-for="n in articleDataArray" key="n.id">
-                <!-- !itemShow   @click 控制父組件ui隱藏 和 文章淡入 -->
-                <div v-if="itemShow" @click.self="articleState($event, n.id)"
-                    class="article d-flex flex-column justify-content-start text-start col-12 mb-3 px-3">
-                    <!-- 內文 -->
-                    <!-- !標題、內文 。@click.self="articleState"  內文用v-html 因為要用 </br> -->
-                    <h3 @click.self="articleState($event, n.id)" class="mb-4 px-1">{{n.title}}</h3>
-                    <p @click.self="articleState($event, n.id)" v-html="n.shortContent" class="px-1"></p>
+            <!-- 文章組件 -->
+            <!-- ! @remove-article-temp 刪除文章功能還未完成 -->
+            <article-box v-for="n in articleDataArray" :key="n.id" :article-data="n" @article-state-temp="articleState"
+                @set-article-state-temp="setArticleState" @edit-article-temp="editArticle"
+                @item-button-temp="n.itemButton = $event" @remove-article-temp="removeArticle">
+
+            </article-box>
 
 
-                    <!-- 狀態圖片 -->
-                    <div class="listState">
-                        <!-- !itemState -->
-                        <img :src="itemState" alt="">
-                    </div>
-                    <!-- 設定選單 -->
-                    <div class="itemList">
-                        <!-- !setItem -->
-                        <button @click.stop="setItem" class="setButton" type="button">
-                            <div></div>
-                        </button>
-                        <!-- !clickButton ( 傳入兩個參數 此ul 和 id )  -->
-                        <ul @click.stop="clickButton($event ,n.id)"
-                            class="closeItem d-flex flex-column justify-content-around px-3">
-                            <li>
-                                <button>待辦</button>
-                            </li>
-                            <li>
-                                <button>結案</button>
-                            </li>
-                            <li>
-                                <button>修改</button>
-                            </li>
-                            <li>
-                                <button>刪除</button>
-                            </li>
-                        </ul>
-                    </div>
-
-
-                </div>
-            </transition>
-
-
-            <!-- <article-box v-for="sss in test"></article-box> -->
-            <!-- <div class=" article col-12 mb-3">
-
-            </div>
-
-            <div class="article col-12 mb-3">
-
-            </div>
-
-            <div class="article col-12 mb-3">
-
-            </div>
-
-            <div class="article col-12 mb-3">
-
-            </div>
-
-            <div class="article col-12 mb-3">
-
-            </div>
-
-            <div class="article col-12 mb-3">
-
-            </div>
-
-            <div class="article col-12 mb-3">
-
-            </div> -->
-
-            <!-- 按鈕 -->
         </div>
 
         <transition>
+
             <div v-if="UIShow" class="bottonMenu d-flex justify-content-around">
                 <button class="col-3">
                     <p>所有事項</p>
@@ -147,15 +81,10 @@
             </div>
         </transition>
 
-
-
-
-
-
         <!-- 全文章顯示區 -->
         <transition>
             <!-- ! v-if="articleShow" -->
-            <section v-if="articleShow" class="fullArticle px-3 text-light">
+            <section v-if="articleShow" class="fullArticle px-3 py-3 text-light">
                 <div class="d-flex justify-content-center text-center">
                     <!-- !文章標題 -->
                     <h3 class="pb-1 border-bottom">{{form.title}}</h3>
@@ -173,12 +102,9 @@
             </section>
         </transition>
 
-
-
-
-
         <!-- 新增、修改清單區域 -->
         <transition name="article-form">
+
             <div v-show="articleForm" id="postArticle">
                 <nav class="d-flex justify-content-between px-2">
                     <button @click="closeEditArticle"><img src="/images/添加代辦事項/X.svg" alt=""></button>
@@ -200,13 +126,13 @@
             </div>
         </transition>
 
-
         <button v-if="UIShow" @click="articleForm = true" class="articlePlus">
             <img src="/images/添加代辦事項/plus.svg" alt="">
         </button>
 
-    </div>
 
+
+    </div>
 
 
 
