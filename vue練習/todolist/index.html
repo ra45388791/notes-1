@@ -39,26 +39,46 @@
     <nav class="d-flex justify-content-center align-content-center">
 
         <div class="d-flex align-content-center">
-            <img src="/images/notebook.png" class="me-1" alt="">
-            <a class="" href="#">To-Do-List</a>
+            <img src="/images/notebook.png" class="me-1" alt="To-Do-List圖示">
+            <a class="To-Do-List" href="#">To-Do-List</a>
         </div>
 
     </nav>
 
     <div id="app">
 
-
-
-
         <div id="listContent" class="d-flex flex-wrap justify-content-center mx-auto">
 
-            <!-- 文章組件 -->
-            <!-- ! @remove-article-temp 刪除文章功能還未完成 -->
-            <article-box v-for="n in articleDataArray" :key="n.id" :article-data="n" @article-state-temp="articleState"
-                @set-article-state-temp="setArticleState" @edit-article-temp="editArticle"
-                @item-button-temp="n.itemButton = $event" @remove-article-temp="removeArticle">
+            <div v-show="appliedArea === 'allItem'">
+                <!-- 文章組件 -->
+                <!-- ! @remove-article-temp 刪除文章功能還未完成 -->
+                <article-box v-for="data in articleDataArray" :key="data.id" :article-data="data"
+                    @article-state-temp="articleState" @set-article-state-temp="setArticleState"
+                    @edit-article-temp="editArticle" @item-button-temp="itemButtonState"
+                    @remove-article-temp="removeArticle">
 
-            </article-box>
+                </article-box>
+            </div>
+
+            <div v-show="appliedArea === 'toDo'">
+                <article-box v-for="data in toDoData" :key="data.id" :article-data="data"
+                    @article-state-temp="articleState" @set-article-state-temp="setArticleState"
+                    @edit-article-temp="editArticle" @item-button-temp="itemButtonState"
+                    @remove-article-temp="removeArticle">
+
+                </article-box>
+            </div>
+
+            <div v-show="appliedArea === 'getThingsDone'">
+                <article-box v-for="data in getThingsDoneData" :key="data.id" :article-data="data"
+                    @article-state-temp="articleState" @set-article-state-temp="setArticleState"
+                    @edit-article-temp="editArticle" @item-button-temp="itemButtonState"
+                    @remove-article-temp="removeArticle">
+
+                </article-box>
+            </div>
+
+
 
 
         </div>
@@ -66,13 +86,13 @@
         <transition>
 
             <div v-if="UIShow" class="bottonMenu d-flex justify-content-around">
-                <button class="col-3">
+                <button @click="appliedArea = 'allItem'" class="col-3">
                     <p>所有事項</p>
                 </button>
-                <button class="col-3">
+                <button @click="appliedArea = 'toDo'" class="col-3">
                     <p>待辦</p>
                 </button>
-                <button class="col-3">
+                <button @click="appliedArea = 'getThingsDone'" class="col-3">
                     <p>結案</p>
                 </button>
                 <button class="col-3">
@@ -96,7 +116,7 @@
 
                 <!-- ! v-if="articleShow"  @click="articleState"-->
                 <button v-if="articleShow" @click="articleState" class="articlePlus">
-                    <img src="/images/添加代辦事項/back.svg" alt="">
+                    <img src="/images/添加代辦事項/back.svg" alt="返回按鈕">
                 </button>
 
             </section>
@@ -107,10 +127,12 @@
 
             <div v-show="articleForm" id="postArticle">
                 <nav class="d-flex justify-content-between px-2">
-                    <button @click="closeEditArticle"><img src="/images/添加代辦事項/X.svg" alt=""></button>
+                    <button @click="closeEditArticle">
+                        <img src="/images/添加代辦事項/X.svg" alt="返回">
+                    </button>
                     <h2 class="text-light">{{editArticleH2}}</h2>
 
-                    <button type="submit" form="articleForm"><img src="/images/添加代辦事項/O.svg" alt=""></button>
+                    <button type="submit" form="articleForm"><img src="/images/添加代辦事項/O.svg" alt="提交按鈕"></button>
                 </nav>
                 <!-- !已經改成用v-model -->
                 <form id="articleForm" method="POST" action="/" @submit.prevent="formSubmit"
@@ -120,14 +142,14 @@
                     <input v-model="form.title" type="text" name="title" placeholder="標題" class="inputForm inputTitle">
 
                     <!-- !v-model="form.content" -->
-                    <textarea v-model="form.content" name="content" id="" cols="30" rows="18" placeholder="內文"
+                    <textarea v-model="form.content" name="content" cols="30" rows="18" placeholder="內文"
                         class="inputForm inputContent"></textarea>
                 </form>
             </div>
         </transition>
 
         <button v-if="UIShow" @click="articleForm = true" class="articlePlus">
-            <img src="/images/添加代辦事項/plus.svg" alt="">
+            <img src="/images/添加代辦事項/plus.svg" alt="添加代辦事項">
         </button>
 
 

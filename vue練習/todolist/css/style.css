@@ -15,7 +15,7 @@
 
 .v-enter-active,
 .v-leave-active {
-    transition: opacity 1s;
+    transition: opacity 0.5s;
 }
 
 .v-enter,
@@ -294,16 +294,23 @@ nav a:hover {
 
 .itemList li {
     min-height: 28px;
+    margin    : 5px 0px;
 }
 
 .itemList ul button {
+    padding: 2px 0px;
+
     width: 100%;
 
-    color     : #fff;
-    background: #0084A3;
-    border    : 1px solid #0093B6;
-    box-sizing: border-box;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color        : #fff;
+    /* background: #0084A3; */
+    background   : #0084A3;
+    /* border    : 1px solid #0093B6; */
+    border       : 1px solid #00ffff;
+    border-radius: 8px;
+    box-sizing   : border-box;
+    /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+    box-shadow: 0px 0px 4px #ffffff;
 }
 
 .itemList ul button:active {
@@ -311,7 +318,7 @@ nav a:hover {
 }
 
 .openItem {
-    height    : 140px;
+    height    : 170px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     opacity   : 1;
 }
@@ -411,8 +418,8 @@ nav a:hover {
     left    : 0;
 
 
-    margin-top : 64px;
-    padding-top: 10px;
+    margin-top: 64px;
+
 
     width : 100vw;
     height: calc(100vh - 64px);
