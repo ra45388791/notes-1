@@ -147,10 +147,20 @@ nav a:hover {
     bottom  : 80px;
 
     background: #00CFFF;
-    border    : 1px solid #00CFFF;
+    border    : none;
 
     border-radius: 100%;
+    box-shadow   : inset 0px 0px 0px rgb(255, 255, 255);
+    transition   : 0.2s;
 
+}
+
+.articlePlus:hover {
+    box-shadow: inset 0px 0px 20px #ffffff;
+}
+
+.articlePlus:active {
+    box-shadow: inset 0px 0px 5px rgb(0, 0, 0);
 }
 
 /****************************************************************
@@ -214,11 +224,11 @@ nav a:hover {
 
 #listContent .article .listState {
 
-    position: absolute;
-    width   : 68px;
-    height  : 43px;
-    left    : calc(50% - 34px);
-    bottom  : 13px;
+    position   : relative;
+    width      : 68px;
+    height     : 43px;
+    /* left    : calc(50% - 34px); */
+    /* bottom  : 13px; */
 
     background   : #0084A3;
     border       : 1px solid #00CFFF;
@@ -235,16 +245,37 @@ nav a:hover {
     height: 30px;
 }
 
-/* 設定按鈕 */
+#listContent #add {
+    color      : #00FFF0;
+    font-size  : 18px;
+    font-weight: bold;
+}
 
+#listContent #end {
+    color         : #00FFF0;
+    font-size     : 18px;
+    font-weight   : bold;
+    /* text-shadow: 1px 0px 1px #000; */
+}
+
+/* 設定按鈕 */
+.itemList {
+    position: absolute;
+    right   : 0px;
+    top     : 0px;
+    width   : 0px;
+    height  : 0px;
+}
 
 .itemList .setButton {
     position: absolute;
     width   : 49px;
     height  : 49px;
 
-    left: calc(50% - 49px/2 + 88.5px);
-    top : 22px;
+    /* left   : calc(50% - 49px/2 + 88.5px); */
+    /* top    : 22px */
+    right: 22px;
+    top  : 22px;
 
     border       : none;
     border-radius: 30px;
@@ -257,9 +288,8 @@ nav a:hover {
     background: rgba(255, 255, 255, 0.37);
 }
 
-
-.itemList .setButton div {
-    /* 設定按鈕中的小圓點 */
+.itemList .setButton::before {
+    content : "";
     position: absolute;
     left    : calc(50% - 3.5px);
     top     : calc(50% - 3.5px);
@@ -271,7 +301,9 @@ nav a:hover {
 
     box-shadow: 0px 12px 0px 0px rgba(255, 255, 255, 0.7),
         0px -12px 0px 0px rgba(255, 255, 255, 0.7);
+
 }
+
 
 .itemList ul {
     overflow: hidden;
@@ -284,12 +316,14 @@ nav a:hover {
 
     background: #0084A3;
 
-    border       : solid 1px #00FFF0;
     border-radius: 15px;
     box-sizing   : border-box;
-    list-style   : none;
+    box-shadow   : inset 0px 0px 0px 2px #00FFF0;
+
+    list-style: none;
 
     transition: 0.5s;
+    z-index   : 99;
 }
 
 .itemList li {
@@ -303,18 +337,20 @@ nav a:hover {
     width: 100%;
 
     color        : #fff;
-    /* background: #0084A3; */
     background   : #0084A3;
-    /* border    : 1px solid #0093B6; */
     border       : 1px solid #00ffff;
     border-radius: 8px;
     box-sizing   : border-box;
-    /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
-    box-shadow: 0px 0px 4px #ffffff;
+    box-shadow   : 0px 0px 4px #ffffff;
 }
 
 .itemList ul button:active {
     background: #00CFFF;
+}
+
+.itemList ul li {
+    box-shadow: none;
+
 }
 
 .openItem {
@@ -324,8 +360,9 @@ nav a:hover {
 }
 
 .closeItem {
+    margin    : 0px;
     height    : 0px;
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: none;
     opacity   : 0;
 }
 

@@ -74,41 +74,55 @@ Vue.component('ArticleBox', {
             return;
         },
     },
+    // !class="listState區域 要製作事項添加日期+預計達成日期
     template: `
         <transition>
 
             <div v-if="articleDatas.itemShow" @click.self="changeArticleState"
-                class="article d-flex flex-column justify-content-start text-start col-12 mb-3 px-3">
-                
-                <h3 @click.self="changeArticleState" class="mb-4 px-1">{{articleDatas.title}}</h3>
-                <p @click.self="changeArticleState" v-html="articleDatas.content" class="px-1"></p>
+                class="article d-flex flex-column justify-content-between text-start col-12 mb-3 px-3 pb-3">
+                <div>
 
-                <div class="listState">
-                    <img :src="articleDatas.stateImg" alt="">
+                    <h3 @click.self="changeArticleState" class="mb-4 px-1">{{articleDatas.title}}</h3>
+                    <p @click.self="changeArticleState" v-html="articleDatas.content" class="px-1"></p>
                 </div>
-
                 <div class="itemList">
 
-                    <button @click.stop="setItem" class="setButton" type="button">
-                        <div></div>
-                    </button>
+                <button @click.stop="setItem" class="setButton" type="button">
+                </button>
 
-                    <ul @click.stop="clickButton"
-                        class="closeItem d-flex flex-column justify-content-center px-3">
-                        <li>
-                            <button>待辦</button>
-                        </li>
-                        <li>
-                            <button>結案</button>
-                        </li>
-                        <li>
-                            <button>修改</button>
-                        </li>
-                        <li>
-                            <button>刪除</button>
-                        </li>
-                    </ul>
+                <ul @click.stop="clickButton"
+                    class="closeItem d-flex flex-column justify-content-center px-3">
+                    <li>
+                        <button>待辦</button>
+                    </li>
+                    <li>
+                        <button>結案</button>
+                    </li>
+                    <li>
+                        <button>修改</button>
+                    </li>
+                    <li>
+                        <button>刪除</button>
+                    </li>
+                </ul>
+            </div>
+                <div class="d-flex justify-content-around">
+                    
+                    <div id="add" class="listState d-flex justify-content-center align-items-center">
+                        <span>3/10</span>
+                    </div>
+                        
+                    <div class="listState">
+                        <img :src="articleDatas.stateImg" alt="">
+                    </div>
+
+                    <div id="end" class="listState d-flex justify-content-center align-items-center">
+                        <span>12/12</span>
+                    </div>
+
                 </div>
+                    
+                
 
 
             </div>
@@ -123,8 +137,8 @@ const data = {
     articleDataArray: [
         {
             id: 0,
-            // itemButton: false,              //設定按鈕
             itemShow: true, // 刪除文章淡出
+            menu: false,
             state: false,
             stateImg: '/images/close.png',
             title: '測試標題',
@@ -134,14 +148,15 @@ const data = {
         },
         {
             id: 1,
-            // itemButton: false,              //設定按鈕
             itemShow: true, // 刪除文章淡出
+            menu: false,
             state: true,
             stateImg: '/images/check.png',
             title: '測試標題2',
             content: '222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。',
             originalContent: '',
         },
+
     ],
     appliedArea: 'allItem',
     UIShow: true, // 介面顯示
@@ -191,9 +206,9 @@ const app = new Vue({
     },
     methods: {
 
-        /** **************************************************************
-                                        貼文設定按鈕
-            *****************************************************************/
+        /*
+        ********************************貼文設定按鈕********************************
+        */
         // 設定貼文
         editArticle: function (id) {
             const vm = this;
@@ -236,7 +251,7 @@ const app = new Vue({
         },
 
         /*
-        ****************************貼文狀態提醒****************************
+        *******************************貼文狀態提醒*******************************
         */
 
         // 開啟選單
@@ -328,13 +343,17 @@ const app = new Vue({
             const mainData = this.articleDataArray;
             const title = this.form.title;
             const content = this.form.content;
+            let idData = 0; // id預設為0
+
             if (title === '' || content === '') {
                 alert('標題或內文不能為空。');
                 return;
             }
 
             // 設定資料格式
-            const idData = mainData[mainData.length - 1].id + 1;
+            if (vm.articleDataArray.length !== 0) {
+                idData = mainData[mainData.length - 1].id + 1;
+            }
             // !也許儲存成 mysql 時要使用 /n 格式
             // 取得內文 然後把 \n 替換成</br>
             const contentData = content.replace(/\r?\n/g, '<br>');
@@ -342,8 +361,8 @@ const app = new Vue({
             // 包裝成object
             const box = {
                 id: idData,
-                itemButton: false, // 設定按鈕
                 itemShow: true, // 刪除文章淡出
+                menu: false,
                 state: false, // 預設false
                 stateImg: '/images/close.png', // 預設待辦
                 title: title, // 取得標題
@@ -358,3 +377,10 @@ const app = new Vue({
     },
 
 });
+
+let a = 0;
+for (let i = 0; i < 10; i++) {
+    a += i;
+    console.log(i);
+}
+console.log(a);
