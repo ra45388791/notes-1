@@ -53,17 +53,19 @@
                 <!-- 文章組件 -->
                 <!-- ! @remove-article-temp 刪除文章功能還未完成 -->
                 <article-box v-for="data in articleDataArray" :key="data.id" :article-data="data"
-                    @article-state-temp="articleState" @set-article-state-temp="setArticleState"
-                    @edit-article-temp="editArticle" @item-button-temp="itemButtonState"
+                    :item-state="itemButton" @change-menu="data.menu = $event" @item-button-temp="itemButton = $event"
+                    @item-class-temp="data.menuClass = $event" @article-state-temp="articleState"
+                    @set-article-state-temp="setArticleState" @edit-article-temp="editArticle"
                     @remove-article-temp="removeArticle">
 
                 </article-box>
             </div>
 
             <div v-show="appliedArea === 'toDo'">
-                <article-box v-for="data in toDoData" :key="data.id" :article-data="data"
-                    @article-state-temp="articleState" @set-article-state-temp="setArticleState"
-                    @edit-article-temp="editArticle" @item-button-temp="itemButtonState"
+                <article-box v-for="data in toDoData" :key="data.id" :article-data="data" :item-state="itemButton"
+                    @change-menu="data.menu = $event" @item-button-temp="itemButton = $event"
+                    @item-class-temp="data.menuClass = $event" @article-state-temp="articleState"
+                    @set-article-state-temp="setArticleState" @edit-article-temp="editArticle"
                     @remove-article-temp="removeArticle">
 
                 </article-box>
@@ -71,8 +73,9 @@
 
             <div v-show="appliedArea === 'getThingsDone'">
                 <article-box v-for="data in getThingsDoneData" :key="data.id" :article-data="data"
-                    @article-state-temp="articleState" @set-article-state-temp="setArticleState"
-                    @edit-article-temp="editArticle" @item-button-temp="itemButtonState"
+                    :item-state="itemButton" @change-menu="data.menu = $event" @item-button-temp="itemButton = $event"
+                    @item-class-temp="data.menuClass = $event" @article-state-temp="articleState"
+                    @set-article-state-temp="setArticleState" @edit-article-temp="editArticle"
                     @remove-article-temp="removeArticle">
 
                 </article-box>

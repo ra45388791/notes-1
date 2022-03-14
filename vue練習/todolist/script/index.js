@@ -4,17 +4,35 @@ Vue.component('ArticleBox', {
             type: Object,
             required: true,
         },
+        itemState: {
+            type: Boolean,
+            required: true,
+        },
     },
     data: function () {
         return {
             articleDatas: this.articleData, // 取得主資料
-            fatherItemButton: this.itemButtonState,
+            itemButtonState: this.itemState, // 選項清單是否打開
         };
     },
-    created () {
+    mounted () {
+        // console.log(this.itemButtonState);
+    },
+    computed: {
 
-        // console.log(this.articleDatas);
-
+    },
+    watch: {
+        // articleData 的 menu 屬性
+        'articleData.menu' (newV, oldV) {
+            this.articleDatas.menu = newV;
+        },
+        'articleData.menuClass' (newV, oldV) {
+            this.articleDatas.menuClass = newV;
+        },
+        // item是否打開
+        itemState (newV, oldV) {
+            this.itemButtonState = newV;
+        },
     },
     methods: {
         changeArticleState: function (e) { // 開啟全文章
@@ -24,23 +42,22 @@ Vue.component('ArticleBox', {
         },
         setItem: function (e) { // 展開選單
             const vm = this;
-            // 獲取button 跟ul的array資料
-            const fatherDiv = e.target.parentNode.childNodes;
-            let kidButton;
-            let kidUl;
-            // console.log(vm.fatherItemButton);
-            fatherDiv.forEach(function (e) {
-                switch (e.localName) {
-                    case 'button':
-                        kidButton = e; // 取得按鈕
-                        break;
-                    case 'ul':
-                        kidUl = e; // 取得清單
-                        break;
-                }
-            });
-
-            vm.$emit('item-button-temp', fatherDiv, kidButton, kidUl);
+            // !父組件的itemButton
+            if (vm.itemButtonState === false) {
+                // 把itemButton 設為true
+                vm.$emit('item-button-temp', true);
+                // 切換展開狀態
+                vm.$emit('item-class-temp', 'openItem');
+                // 如果按鈕失去焦點就收起清單
+                window.addEventListener('mouseup', function packUpItem2 () {
+                    vm.$emit('item-class-temp', 'closeItem');
+                    // 移除監聽
+                    window.removeEventListener('mouseup', packUpItem2);
+                    setTimeout(() => {
+                        vm.$emit('item-button-temp', false);
+                    }, 100);
+                });
+            }
         },
 
         clickButton: function (e) { // 按下選單按鈕時
@@ -59,22 +76,12 @@ Vue.component('ArticleBox', {
                     break;
                 case '刪除':
 
-                    // ! 製作到這
-                    // let rootElement = e.target.parentNode.parentNode.parentNode.parentNode
                     this.articleDatas.itemShow = false;
-                    console.log(vm.articleDatas.itemShow);
                     vm.$emit('remove-article-temp', vm.articleDatas.id);
                     break;
             }
         },
-        checkDataType: function (dataName, data, type) { // 檢查資料
-            if (typeof data !== type) {
-                throw new Error(`傳入的 ${dataName} 不是 ${type} : ${data}`);
-            }
-            return;
-        },
     },
-    // !class="listState區域 要製作事項添加日期+預計達成日期
     template: `
         <transition>
 
@@ -90,8 +97,8 @@ Vue.component('ArticleBox', {
                 <button @click.stop="setItem" class="setButton" type="button">
                 </button>
 
-                <ul @click.stop="clickButton"
-                    class="closeItem d-flex flex-column justify-content-center px-3">
+                <ul :class="articleDatas.menuClass" @click.stop="clickButton"
+                    class="d-flex flex-column justify-content-center px-3">
                     <li>
                         <button>待辦</button>
                     </li>
@@ -106,7 +113,7 @@ Vue.component('ArticleBox', {
                     </li>
                 </ul>
             </div>
-                <div class="d-flex justify-content-around">
+                <div @click="changeArticleState" class="d-flex justify-content-around">
                     
                     <div id="add" class="listState d-flex justify-content-center align-items-center">
                         <span>3/10</span>
@@ -129,7 +136,6 @@ Vue.component('ArticleBox', {
         </transition>
     
     `,
-
 });
 
 const data = {
@@ -139,6 +145,7 @@ const data = {
             id: 0,
             itemShow: true, // 刪除文章淡出
             menu: false,
+            menuClass: 'closeItem',
             state: false,
             stateImg: '/images/close.png',
             title: '測試標題',
@@ -150,6 +157,7 @@ const data = {
             id: 1,
             itemShow: true, // 刪除文章淡出
             menu: false,
+            menuClass: 'closeItem',
             state: true,
             stateImg: '/images/check.png',
             title: '測試標題2',
@@ -253,45 +261,26 @@ const app = new Vue({
         /*
         *******************************貼文狀態提醒*******************************
         */
-
-        // 開啟選單
-        itemButtonState: function (fatherDiv, kidButton, kidUl) {
-            const vm = this;
-            if (vm.itemButton === false &&
-                kidButton !== undefined &&
-                kidUl !== undefined) {
-                // 把itemButton 設為true
-                vm.itemButton = true;
-
-                // 切換展開狀態
-                kidUl.classList.toggle('closeItem');
-                kidUl.classList.toggle('openItem');
-                // 如果按鈕失去焦點就收起清單
-                window.addEventListener('mouseup', function packUpItem2 () {
-                    // 切換展開狀態
-                    kidUl.classList.toggle('closeItem');
-                    kidUl.classList.toggle('openItem');
-                    // 移除監聽
-                    window.removeEventListener('mouseup', packUpItem2);
-                    setTimeout(() => {
-                        // 把itemButton 設為false
-                        vm.itemButton = false;
-                    }, 100);
-                });
-            }
-        },
-
         //  開啟全文章閱讀區
         articleState: function (title, content) {
-            if (this.UIShow === true && this.itemButton === false) {
-                this.UIShow = false; // 是否顯示UI
-                this.articleShow = true; // 是否顯示文章
-            } else if (this.UIShow === false &&
-                this.itemButton === false &&
-                this.articleShow === true) {
+            const uiBl = this.UIShow;
+            const itemBtnBl = this.itemButton;
+            const articleBl = this.articleShow;
+
+            if (uiBl === true &&
+                itemBtnBl === false &&
+                articleBl === false) {
+                // 是否顯示UI
+                this.UIShow = false;
+                // 是否顯示文章
+                this.articleShow = true;
+            } else if (uiBl === false &&
+                itemBtnBl === false &&
+                articleBl === true) {
                 this.UIShow = true;
                 this.articleShow = false;
-                this.closeEditArticle(); // 清空顯示區
+                // 清空顯示區
+                this.closeEditArticle();
                 return;
             }
             this.form.title = title;
@@ -307,7 +296,7 @@ const app = new Vue({
                 vm.form.title = '';
                 vm.form.content = '';
                 vm.editArticleH2 = '添加代辦事項';
-            }, 700);
+            }, 300);
             vm.articleForm = false; // 修改文章區關閉
             vm.form.edit = false; // 修改文章狀態false
         },
@@ -363,6 +352,7 @@ const app = new Vue({
                 id: idData,
                 itemShow: true, // 刪除文章淡出
                 menu: false,
+                menuClass: 'closeItem',
                 state: false, // 預設false
                 stateImg: '/images/close.png', // 預設待辦
                 title: title, // 取得標題
@@ -377,10 +367,3 @@ const app = new Vue({
     },
 
 });
-
-let a = 0;
-for (let i = 0; i < 10; i++) {
-    a += i;
-    console.log(i);
-}
-console.log(a);
