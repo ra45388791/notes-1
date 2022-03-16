@@ -102,7 +102,7 @@ Vue.component('ArticleBox', {
                 </button>
 
                 <ul :class="articleDatas.menuClass" @click.stop="clickButton"
-                    class="d-flex flex-column justify-content-center px-3">
+                    class="d-flex flex-column justify-content-center py-2 px-3">
                     <li>
                         <button>待辦</button>
                     </li>
@@ -146,51 +146,65 @@ const data = {
 
     // !主資料
     articleDataArray: [
-        // {
-        //     id: 0,
-        //     itemShow: true, // 刪除文章淡出
-        //     menu: false,
-        //     menuClass: 'closeItem',
-        //     state: false,
-        //     stateImg: '/images/close.png',
-        //     title: '測試標題',
-        //     content: '對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。',
-        //     setDate: {
-        //         setY: 2022,
-        //         setM: 3,
-        //         setD: 16,
-        //     },
-        //     date: {
-        //         y: 2022,
-        //         m: 3,
-        //         d: 16,
-        //     },
+        {
+            id: 0,
+            itemShow: true, // 刪除文章淡出
+            menu: false,
+            menuClass: 'closeItem',
+            state: false,
+            stateImg: '/images/close.png',
+            title: '測試標題ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',
+            content: '對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。',
+            setDate: {
+                setY: 2022,
+                setM: 3,
+                setD: 16,
+            },
+            date: {
+                y: 2022,
+                m: 3,
+                d: 16,
+            },
 
-        // },
-        // {
-        //     id: 1,
-        //     itemShow: true, // 刪除文章淡出
-        //     menu: false,
-        //     menuClass: 'closeItem',
-        //     state: true,
-        //     stateImg: '/images/check.png',
-        //     title: '測試標題2',
-        //     content: '222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。',
-        //     setDate: {
-        //         setY: 2022,
-        //         setM: 3,
-        //         setD: 16,
-        //     },
-        //     date: {
-        //         y: 2022,
-        //         m: 3,
-        //         d: 16,
-        //     },
-        // },
+        },
+        {
+            id: 1,
+            itemShow: true, // 刪除文章淡出
+            menu: false,
+            menuClass: 'closeItem',
+            state: true,
+            stateImg: '/images/check.png',
+            title: '測試標題2',
+            // content: '222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。',
+            content: '222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。',
+            setDate: {
+                setY: 2022,
+                setM: 3,
+                setD: 16,
+            },
+            date: {
+                y: 2022,
+                m: 3,
+                d: 16,
+            },
+        },
 
     ],
+    viewScroll: '',
+    plusButton: {
+        width: 200,
+        height: 60,
+    },
+    // 增加文章按鈕動態更新大小
     appliedArea: 'allItem',
     UIShow: true, // 介面顯示
+    UIStyle: {
+        allItem: 'buttonMenuClick',
+        toDo: 'buttonMenuUnclick',
+        getThingsDone: 'buttonMenuUnclick',
+        calendar: 'buttonMenuUnclick',
+
+    },
     itemButton: false,
     articleShow: false, // 完整文章淡入
     articleForm: false, // 新增、修改清單區域淡入淡出
@@ -216,7 +230,6 @@ const app = new Vue({
     el: '#app',
     data: data,
     computed: {
-
         toDoData: function () {
             return this.articleDataArray.filter(function (e) {
                 return e.state === false;
@@ -229,15 +242,66 @@ const app = new Vue({
         },
     },
     watch: {
-        itemButton: function (newValue, oldValue) {
-            // console.log(newValue);
-            // console.log(oldValue);
+        viewScroll: function (newValue, oldValue) {
+            if (newValue > oldValue && this.plusButton.width === 0) {
+                this.plusButton.width = 87;
+                this.plusButton.height = 87;
+            } else if (newValue < oldValue && this.plusButton.width !== 0) {
+                this.plusButton.width = 0;
+                this.plusButton.height = 0;
+            }
         },
     },
-    created () {
+    mounted () {
+        const vm = this;
         // console.log(document.cookie);
+        const viewSize = window.innerWidth;
+
+        if (viewSize < 1024) {
+            vm.plusButton.width = 0;
+            vm.plusButton.height = 0;
+            window.addEventListener('scroll', function () {
+                vm.viewScroll = window.scrollY;
+            });
+        }
     },
     methods: {
+        /*
+        ********************************UI狀態style********************************
+        */
+        buttonMenuStyle: function (e) {
+            // this.UIStyle.forEach((element) => {
+            //     element = '';
+            // });
+
+            this.UIStyle = {
+                allItem: 'buttonMenuUnclick',
+                toDo: 'buttonMenuUnclick',
+                getThingsDone: 'buttonMenuUnclick',
+                calendar: 'buttonMenuUnclick',
+            };
+
+            switch (e.target.outerText) {
+                case '所有事項':
+                    this.UIStyle.allItem = 'buttonMenuClick';
+                    break;
+                case '待辦':
+                    this.UIStyle.toDo = 'buttonMenuClick';
+                    break;
+                case '結案':
+                    this.UIStyle.getThingsDone = 'buttonMenuClick';
+                    break;
+                case '行事曆':
+                    this.UIStyle.calendar = 'buttonMenuClick';
+                    break;
+            }
+
+
+            // console.log(button[0]);
+
+            // console.log(e.target);
+            // console.log(e.target.parentNode.childNodes);
+        },
 
         /*
         ********************************貼文設定按鈕********************************
@@ -335,11 +399,18 @@ const app = new Vue({
         updataArticle: function (e) { // 將修改好的內容推入陣列
             // !取得傳入的參數 再去articleDataArray 用id找對應的資料修改
             const vm = this;
+            const date = vm.form.date;
+            const dateData = {
+                y: parseInt(date.slice(0, 4)),
+                m: parseInt(date.slice(5, 7)),
+                d: parseInt(date.slice(8)),
+            };
 
             for (const event of vm.articleDataArray) { //
                 if (event.id === vm.form.id) {
                     event.title = vm.form.title; // 修改前的標題
                     event.content = vm.form.content; // 修改前的內容
+                    event.date = dateData;
                     break; // 如果id符合就跳出
                 }
             }
@@ -384,22 +455,20 @@ const app = new Vue({
                 setDate.setM = 1;
             }
 
-            // !日期 寫到這裡 月份大於設定日期 但日期小於設定日期時要通過
+            // 檢查年份是否為過去
             if (dateData.y < todayDate.getFullYear()) {
                 alert('日期不能是過去');
                 return;
-            } else {
-                if (dateData.m < todayDate.getMonth() + 1) {
+            }
+
+            // 檢查輸入日期是否是過去
+            if (dateData.m < todayDate.getMonth() + 1) {
+                alert('日期不能是過去');
+                return;
+            } else if (dateData.m === todayDate.getMonth() + 1) {
+                if (dateData.d < todayDate.getDate()) {
                     alert('日期不能是過去');
                     return;
-                } else {
-                    // // return;
-                    if (dateData.d < todayDate.getDate()) {
-                        alert('日期不能是過去');
-                        return;
-                    } else {
-
-                    }
                 }
             }
 

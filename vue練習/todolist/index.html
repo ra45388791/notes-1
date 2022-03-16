@@ -38,20 +38,22 @@
 
     <nav class="d-flex justify-content-center align-content-center">
 
-        <div class="d-flex align-content-center">
+        <div class="d-flex flex-lg-column justify-content-lg-around align-items-lg-center">
             <img src="/images/notebook.png" class="me-1" alt="To-Do-List圖示">
-            <a class="To-Do-List" href="#">To-Do-List</a>
+            <a class="To-Do-List" href="#">
+                To-Do-List
+            </a>
         </div>
 
     </nav>
 
     <div id="app">
 
-        <div id="listContent" class="d-flex flex-wrap justify-content-center mx-auto">
+        <div id="listContent" class="d-flex flex-wrap justify-content-center mx-auto ms-lg-auto me-lg-0">
 
-            <div v-show="appliedArea === 'allItem'">
+            <div v-show=" appliedArea==='allItem'">
                 <!-- 文章組件 -->
-                <article-box v-for="data in articleDataArray" :key="data.id" :article-data="data"
+                <article-box v-for=" data in articleDataArray" :key="data.id" :article-data="data"
                     :item-state="itemButton" @change-menu="data.menu = $event" @item-button-temp="itemButton = $event"
                     @item-class-temp="data.menuClass = $event" @article-state-temp="articleState"
                     @set-article-state-temp="setArticleState" @edit-article-temp="editArticle"
@@ -87,18 +89,18 @@
 
         <transition>
 
-            <div v-if="UIShow" class="bottonMenu d-flex justify-content-around">
-                <button @click="appliedArea = 'allItem'" class="col-3">
-                    <p>所有事項</p>
+            <div v-if="UIShow" @click="buttonMenuStyle" class="buttonMenu d-flex flex-lg-column justify-content-around">
+                <button :class="UIStyle.allItem" @click="appliedArea = 'allItem'" class="col-3 ps-lg-5">
+                    所有事項
                 </button>
-                <button @click="appliedArea = 'toDo'" class="col-3">
-                    <p>待辦</p>
+                <button :class="UIStyle.toDo" @click="appliedArea = 'toDo'" class="col-3 ps-lg-5">
+                    待辦
                 </button>
-                <button @click="appliedArea = 'getThingsDone'" class="col-3">
-                    <p>結案</p>
+                <button :class="UIStyle.getThingsDone" @click="appliedArea = 'getThingsDone'" class="col-3 ps-lg-5">
+                    結案
                 </button>
-                <button class="col-3">
-                    <p>行事曆</p>
+                <button :class="UIStyle.calendar" class="col-3 ps-lg-5">
+                    行事曆
                 </button>
             </div>
         </transition>
@@ -107,24 +109,26 @@
         <transition>
             <!-- ! v-if="articleShow" -->
             <article v-if="articleShow" class="fullArticle px-3 py-3 text-light">
-                <div class="d-flex justify-content-center text-center ">
-                    <!-- !文章標題 -->
-                    <h3 class="pb-1 border-bottom">{{form.title}}</h3>
-                </div>
-                <div class="articleDate py-2 text-center">
-                    <p>設定清單日期 : {{form.setDate.setY}}-{{form.setDate.setM}}-{{form.setDate.setD}}</p>
-                    <p>預計達成日期 : {{form.date.y}}-{{form.date.m}}-{{form.date.d}}</p>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <!-- !文章內容  內文用v-html 因為要用 </br>-->
-                    <p v-html="form.content"></p>
-                </div>
+                <section class="mx-auto p-4">
+                    <div class="d-flex justify-content-center text-center ">
+                        <!-- !文章標題 -->
+                        <h3 class="pb-2 border-bottom">{{form.title}}</h3>
+                    </div>
+                    <div class="articleDate py-2 text-center">
+                        <p>設定清單日期 : {{form.setDate.setY}}-{{form.setDate.setM}}-{{form.setDate.setD}}</p>
+                        <p>預計達成日期 : {{form.date.y}}-{{form.date.m}}-{{form.date.d}}</p>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <!-- !文章內容  內文用v-html 因為要用 </br>-->
+                        <p v-html="form.content"></p>
+                    </div>
 
-                <!-- ! v-if="articleShow"  @click="articleState"-->
-                <button v-if="articleShow" @click="articleState" class="articlePlus">
-                    <img src="/images/添加代辦事項/back.svg" alt="返回按鈕">
-                </button>
+                    <!-- ! v-if="articleShow"  @click="articleState"-->
+                    <button v-if="articleShow" @click="articleState" class="articlePlus returnButton">
+                        <img src="/images/添加代辦事項/back.svg" alt="返回按鈕">
+                    </button>
 
+                </section>
             </article>
         </transition>
 
@@ -153,8 +157,10 @@
             </div>
         </transition>
 
-        <button v-if="UIShow" @click="articleForm = true" class="articlePlus">
+        <button v-if="UIShow" @click="articleForm = true" class="articlePlus"
+            :style="{ width: plusButton.width + 'px', height: plusButton.height + 'px'}">
             <img src="/images/添加代辦事項/plus.svg" alt="添加代辦事項">
+            <!-- <div>{{buttonSize}}</div> -->
         </button>
 
 
