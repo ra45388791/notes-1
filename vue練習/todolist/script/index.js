@@ -36,13 +36,17 @@ Vue.component('ArticleBox', {
     },
     methods: {
         changeArticleState: function (e) { // 開啟全文章
-            const title = this.articleDatas.title;
-            const content = this.articleDatas.content;
-            this.$emit('article-state-temp', title, content);
+            const title = this.articleData.title;
+            const content = this.articleData.content;
+            const setDate = this.articleData.setDate;
+            const date = this.articleData.date;
+
+            this.$emit('article-state-temp', title, content, setDate, date);
         },
         setItem: function (e) { // 展開選單
             const vm = this;
             // !父組件的itemButton
+
             if (vm.itemButtonState === false) {
                 // 把itemButton 設為true
                 vm.$emit('item-button-temp', true);
@@ -116,7 +120,7 @@ Vue.component('ArticleBox', {
                 <div @click="changeArticleState" class="d-flex justify-content-around">
                     
                     <div id="add" class="listState d-flex justify-content-center align-items-center">
-                        <span>3/10</span>
+                        <span>{{articleData.setDate.setM}}/{{articleData.setDate.setD}}</span>
                     </div>
                         
                     <div class="listState">
@@ -124,7 +128,7 @@ Vue.component('ArticleBox', {
                     </div>
 
                     <div id="end" class="listState d-flex justify-content-center align-items-center">
-                        <span>12/12</span>
+                        <span>{{articleData.date.m}}/{{articleData.date.d}}</span>
                     </div>
 
                 </div>
@@ -139,31 +143,50 @@ Vue.component('ArticleBox', {
 });
 
 const data = {
+
     // !主資料
     articleDataArray: [
-        {
-            id: 0,
-            itemShow: true, // 刪除文章淡出
-            menu: false,
-            menuClass: 'closeItem',
-            state: false,
-            stateImg: '/images/close.png',
-            title: '測試標題',
-            content: '對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。',
-            originalContent: '',
+        // {
+        //     id: 0,
+        //     itemShow: true, // 刪除文章淡出
+        //     menu: false,
+        //     menuClass: 'closeItem',
+        //     state: false,
+        //     stateImg: '/images/close.png',
+        //     title: '測試標題',
+        //     content: '對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。',
+        //     setDate: {
+        //         setY: 2022,
+        //         setM: 3,
+        //         setD: 16,
+        //     },
+        //     date: {
+        //         y: 2022,
+        //         m: 3,
+        //         d: 16,
+        //     },
 
-        },
-        {
-            id: 1,
-            itemShow: true, // 刪除文章淡出
-            menu: false,
-            menuClass: 'closeItem',
-            state: true,
-            stateImg: '/images/check.png',
-            title: '測試標題2',
-            content: '222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。',
-            originalContent: '',
-        },
+        // },
+        // {
+        //     id: 1,
+        //     itemShow: true, // 刪除文章淡出
+        //     menu: false,
+        //     menuClass: 'closeItem',
+        //     state: true,
+        //     stateImg: '/images/check.png',
+        //     title: '測試標題2',
+        //     content: '222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。222對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。',
+        //     setDate: {
+        //         setY: 2022,
+        //         setM: 3,
+        //         setD: 16,
+        //     },
+        //     date: {
+        //         y: 2022,
+        //         m: 3,
+        //         d: 16,
+        //     },
+        // },
 
     ],
     appliedArea: 'allItem',
@@ -180,6 +203,8 @@ const data = {
         id: '',
         title: '',
         content: '',
+        setDate: {},
+        date: {},
     },
 
 
@@ -262,7 +287,7 @@ const app = new Vue({
         *******************************貼文狀態提醒*******************************
         */
         //  開啟全文章閱讀區
-        articleState: function (title, content) {
+        articleState: function (title, content, setDate, date) {
             const uiBl = this.UIShow;
             const itemBtnBl = this.itemButton;
             const articleBl = this.articleShow;
@@ -285,6 +310,8 @@ const app = new Vue({
             }
             this.form.title = title;
             this.form.content = content;
+            this.form.setDate = setDate;
+            this.form.date = date;
         },
 
         //  關閉設定或添加文章區
@@ -295,6 +322,7 @@ const app = new Vue({
                 vm.form.id = '';
                 vm.form.title = '';
                 vm.form.content = '';
+                vm.form.date = '';
                 vm.editArticleH2 = '添加代辦事項';
             }, 300);
             vm.articleForm = false; // 修改文章區關閉
@@ -332,20 +360,58 @@ const app = new Vue({
             const mainData = this.articleDataArray;
             const title = this.form.title;
             const content = this.form.content;
+            const todayDate = new Date();
+            const date = this.form.date;
+            const setDate = {
+                setY: parseInt(todayDate.getFullYear()),
+                setM: parseInt(todayDate.getMonth() + 1),
+                setD: parseInt(todayDate.getDate()),
+            };
+            const dateData = {
+                y: parseInt(date.slice(0, 4)),
+                m: parseInt(date.slice(5, 7)),
+                d: parseInt(date.slice(8)),
+            };
             let idData = 0; // id預設為0
 
-            if (title === '' || content === '') {
-                alert('標題或內文不能為空。');
+            if (title === '' || content === '' || date === '') {
+                alert('標題、內文或日期不能為空。');
                 return;
             }
 
-            // 設定資料格式
+            // 如果月份+1 = 13 代表是1月
+            if (todayDate.getMonth() + 1 === 13) {
+                setDate.setM = 1;
+            }
+
+            // !日期 寫到這裡 月份大於設定日期 但日期小於設定日期時要通過
+            if (dateData.y < todayDate.getFullYear()) {
+                alert('日期不能是過去');
+                return;
+            } else {
+                if (dateData.m < todayDate.getMonth() + 1) {
+                    alert('日期不能是過去');
+                    return;
+                } else {
+                    // // return;
+                    if (dateData.d < todayDate.getDate()) {
+                        alert('日期不能是過去');
+                        return;
+                    } else {
+
+                    }
+                }
+            }
+
+
+            // id
             if (vm.articleDataArray.length !== 0) {
                 idData = mainData[mainData.length - 1].id + 1;
             }
             // !也許儲存成 mysql 時要使用 /n 格式
             // 取得內文 然後把 \n 替換成</br>
             const contentData = content.replace(/\r?\n/g, '<br>');
+
 
             // 包裝成object
             const box = {
@@ -357,7 +423,8 @@ const app = new Vue({
                 stateImg: '/images/close.png', // 預設待辦
                 title: title, // 取得標題
                 content: contentData, // 取得處裡過後的內容
-                originalContent: '', // 原始內容
+                setDate: setDate,
+                date: dateData,
             };
 
             // !用set方法推入陣列，然後依靠 v-for來更新
