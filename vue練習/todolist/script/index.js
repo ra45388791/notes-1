@@ -147,7 +147,7 @@ const data = {
     // !主資料
     articleDataArray: [
         {
-            id: 0,
+            id: 'fb7c39f8-50d1-4409-938a-7f9d5db32636',
             itemShow: true, // 刪除文章淡出
             menu: false,
             menuClass: 'closeItem',
@@ -168,7 +168,7 @@ const data = {
 
         },
         {
-            id: 1,
+            id: 'b3803370-cf02-405d-bdf3-f2f7d68a93fa',
             itemShow: true, // 刪除文章淡出
             menu: false,
             menuClass: 'closeItem',
@@ -270,10 +270,6 @@ const app = new Vue({
         ********************************UI狀態style********************************
         */
         buttonMenuStyle: function (e) {
-            // this.UIStyle.forEach((element) => {
-            //     element = '';
-            // });
-
             this.UIStyle = {
                 allItem: 'buttonMenuUnclick',
                 toDo: 'buttonMenuUnclick',
@@ -283,7 +279,8 @@ const app = new Vue({
 
             switch (e.target.outerText) {
                 case '所有事項':
-                    this.UIStyle.allItem = 'buttonMenuClick';
+                    // this.UIStyle.allItem = 'buttonMenuClick';
+                    this.UIStyle.allItem = true;
                     break;
                 case '待辦':
                     this.UIStyle.toDo = 'buttonMenuClick';
@@ -324,7 +321,7 @@ const app = new Vue({
 
         // 設定貼文事項是否完成
         setArticleState: function (id, state, stateImg) {
-            if (typeof id !== 'number' && typeof state !== 'boolean' && typeof stateImg !== 'string') {
+            if (typeof id !== 'string' && typeof state !== 'boolean' && typeof stateImg !== 'string') {
                 return;
             }
 
@@ -348,7 +345,7 @@ const app = new Vue({
         },
 
         /*
-        *******************************貼文狀態提醒*******************************
+        *******************************閱讀功能*******************************
         */
         //  開啟全文章閱讀區
         articleState: function (title, content, setDate, date) {
@@ -378,20 +375,6 @@ const app = new Vue({
             this.form.date = date;
         },
 
-        //  關閉設定或添加文章區
-        closeEditArticle: function () {
-            const vm = this;
-            // 將v-model的內容清空
-            setTimeout(function () {
-                vm.form.id = '';
-                vm.form.title = '';
-                vm.form.content = '';
-                vm.form.date = '';
-                vm.editArticleH2 = '添加代辦事項';
-            }, 300);
-            vm.articleForm = false; // 修改文章區關閉
-            vm.form.edit = false; // 修改文章狀態false
-        },
 
         /*
         *******************************修改貼文*******************************
@@ -428,7 +411,7 @@ const app = new Vue({
 
             // 新增待辦事項方法
             const vm = this;
-            const mainData = this.articleDataArray;
+            const idData = this.uuid();
             const title = this.form.title;
             const content = this.form.content;
             const todayDate = new Date();
@@ -443,7 +426,6 @@ const app = new Vue({
                 m: parseInt(date.slice(5, 7)),
                 d: parseInt(date.slice(8)),
             };
-            let idData = 0; // id預設為0
 
             if (title === '' || content === '' || date === '') {
                 alert('標題、內文或日期不能為空。');
@@ -472,15 +454,9 @@ const app = new Vue({
                 }
             }
 
-
-            // id
-            if (vm.articleDataArray.length !== 0) {
-                idData = mainData[mainData.length - 1].id + 1;
-            }
             // !也許儲存成 mysql 時要使用 /n 格式
             // 取得內文 然後把 \n 替換成</br>
             const contentData = content.replace(/\r?\n/g, '<br>');
-
 
             // 包裝成object
             const box = {
@@ -499,6 +475,42 @@ const app = new Vue({
             // !用set方法推入陣列，然後依靠 v-for來更新
             vm.$set(vm.articleDataArray, vm.articleDataArray.length, box);
             vm.closeEditArticle(); // 清空顯示區
+        },
+
+        //  關閉設定或添加文章區
+        closeEditArticle: function () {
+            const vm = this;
+            // 將v-model的內容清空
+            setTimeout(function () {
+                vm.form.id = '';
+                vm.form.title = '';
+                vm.form.content = '';
+                vm.form.date = '';
+                vm.editArticleH2 = '添加代辦事項';
+            }, 300);
+            vm.articleForm = false; // 修改文章區關閉
+            vm.form.edit = false; // 修改文章狀態false
+        },
+
+        // 產生uuid方法
+        uuid: function () {
+            let time = Date.now();
+
+            if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
+                time += performance.now();
+            }
+
+            // 回傳經過替換的 x 。 y要經過特殊處裡
+            // x代表要被替換的每個字元
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+                .replace(/[xy]/g, function (c) {
+                    time = Math.floor(time / 16);
+                    const random = (time + Math.random() * 16) % 16 | 0;
+
+                    // 如果處裡的字串是x 回傳 random 。
+                    // 如果是 y 回傳16位元數 0x3 or 0x8 相當於 3 or 8
+                    return (c === 'x' ? random : (random & 0x3 | 0x8)).toString(16);
+                });
         },
     },
 
