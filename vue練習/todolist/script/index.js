@@ -148,26 +148,28 @@ const data = {
     articleDataArray: [
 
         // {
-        //     id: 'fb7c39f8-50d1-4409-938a-7f9d5db32636',
-        //     itemShow: true, // 刪除文章淡出
+        //     id: //id,
+        //     itemShow: true,                  // 刪除文章淡出
         //     menu: false,
-        //     menuClass: 'closeItem',
-        //     state: false,
-        //     stateImg: '/images/close.png',
-        //     title: '測試標題ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',
-        //     content: '對面大家引進性質，而且資源分類招聘長大更新時間人事部落格，老師我在民國電視二吸引看過網站，常常沉默，眾多。',
-        //     setDate: {
+        //     menuClass: 'closeItem',          //menu的開關class
+        //     state: false,                    //清單事項是否完成
+        //     stateImg: '/images/close.png',   //清單事項狀態圖片
+        //     title: '',                       //標題
+        //     content: '',                     //內容
+        //     setDate: {                       //設定當下的日期
         //         setY: 2022,
         //         setM: 3,
         //         setD: 16,
         //     },
-        //     date: {
+        //     date: {                          //預計完成事項日期
         //         y: 2022,
         //         m: 3,
         //         d: 16,
         //     },
 
     ],
+    // axiosUrl: 'https://mysterious-forest-30724.herokuapp.com/',
+    axiosUrl: 'http://localhost:3000/',
     viewScroll: '',
     plusButton: {
         width: 200,
@@ -231,13 +233,29 @@ const app = new Vue({
         },
     },
     created: async function () {
-        const url = 'https://mysterious-forest-30724.herokuapp.com/';
-        // const url = 'http://localhost:3000/';
+        const vm = this;
+        const ajaxData = await axios.get(this.axiosUrl);
+        const originalData = ajaxData.data.map(function (e) {
+            // 解析資料型態
+            e.itemShow = e.itemShow === 'true' ? true : false;
+            e.menu = e.menu === 'true' ? true : false;
+            e.state = e.state === 'true' ? true : false;
+            e.setDate = {
+                setY: parseInt(e.setDate.slice(0, 4)),
+                setM: parseInt(e.setDate.slice(5, 7)),
+                setD: parseInt(e.setDate.slice(8)),
+            };
+            e.date = {
+                setY: parseInt(e.date.slice(0, 4)),
+                setM: parseInt(e.date.slice(5, 7)),
+                setD: parseInt(e.date.slice(8)),
+            };
+            return e;
+        });
 
-        const ajaxData = await axios.get(url);
-        this.articleDataArray = ajaxData.data;
-        console.log(this.articleDataArray);
-        // console.log(ajaxData);
+        originalData.forEach(function (e) {
+            vm.$set(vm.articleDataArray, vm.articleDataArray.length, e);
+        });
     },
     mounted () {
         const vm = this;
@@ -267,7 +285,7 @@ const app = new Vue({
             switch (e.target.outerText) {
                 case '所有事項':
                     // this.UIStyle.allItem = 'buttonMenuClick';
-                    this.UIStyle.allItem = true;
+                    this.UIStyle.allItem = 'buttonMenuClick';
                     break;
                 case '待辦':
                     this.UIStyle.toDo = 'buttonMenuClick';
@@ -399,29 +417,35 @@ const app = new Vue({
             // 新增待辦事項方法
             const vm = this;
             const idData = this.uuid();
-            const title = this.form.title;
-            const content = this.form.content;
+            const formTitle = this.form.title;
+            const formContent = this.form.content;
             const todayDate = new Date();
-            const date = this.form.date;
-            const setDate = {
+            const formDate = this.form.date;
+
+            // !在 created 鉤子修改取得的日期
+            const formSetDate = {
                 setY: parseInt(todayDate.getFullYear()),
                 setM: parseInt(todayDate.getMonth() + 1),
                 setD: parseInt(todayDate.getDate()),
             };
-            const dateData = {
-                y: parseInt(date.slice(0, 4)),
-                m: parseInt(date.slice(5, 7)),
-                d: parseInt(date.slice(8)),
-            };
 
-            if (title === '' || content === '' || date === '') {
-                alert('標題、內文或日期不能為空。');
+
+            if (formTitle === '' || formContent === '' || typeof formDate !== 'string') {
+                // alert('標題、內文或日期不能為空。');
                 return;
             }
 
+            // !在 created 鉤子修改取得的日期
+            const dateData = {
+                y: parseInt(formDate.slice(0, 4)),
+                m: parseInt(formDate.slice(5, 7)),
+                d: parseInt(formDate.slice(8)),
+            };
+
+            console.log(formDate);
             // 如果月份+1 = 13 代表是1月
             if (todayDate.getMonth() + 1 === 13) {
-                setDate.setM = 1;
+                formSetDate.setM = 1;
             }
 
             // 檢查年份是否為過去
@@ -443,24 +467,47 @@ const app = new Vue({
 
             // !也許儲存成 mysql 時要使用 /n 格式
             // 取得內文 然後把 \n 替換成</br>
-            const contentData = content.replace(/\r?\n/g, '<br>');
+            const contentData = formContent.replace(/\r?\n/g, '<br>');
 
             // 包裝成object
-            const box = {
-                id: idData,
-                itemShow: true, // 刪除文章淡出
-                menu: false,
-                menuClass: 'closeItem',
-                state: false, // 預設false
-                stateImg: '/images/close.png', // 預設待辦
-                title: title, // 取得標題
-                content: contentData, // 取得處裡過後的內容
-                setDate: setDate,
-                date: dateData,
-            };
+            const box = [
+                {id: idData},
+                {itemShow: true}, // 刪除文章淡出
+                {menu: false},
+                {menuClass: 'closeItem'},
+                {state: false}, // 預設false
+                {stateImg: '/images/close.png'}, // 預設待辦
+                {title: formTitle}, // 取得標題
+                {content: contentData}, // 取得處裡過後的內容
+                {setDate: `${formSetDate.setY}-${formSetDate.setM}-${formSetDate.setD}`},
+                {date: formDate}, // 上傳格式 yyyy-mm-dd
+            ];
+            // console.log(box);
+
+            const formData = new FormData();
+
+            box.forEach(function (e) {
+                const key = Object.keys(e);
+                const value = Object.values(e);
+                formData.append(key[0], value[0]);
+            });
+
+            console.log(formData);
+
+
+            axios({
+                method: 'POST',
+                url: this.axiosUrl,
+                headers: {'Content-Type': 'multipart/form-data'},
+                data: formData,
+            });
+            // .then(() => {
+
+            // });
+
 
             // !用set方法推入陣列，然後依靠 v-for來更新
-            vm.$set(vm.articleDataArray, vm.articleDataArray.length, box);
+            // vm.$set(vm.articleDataArray, vm.articleDataArray.length, box);
             vm.closeEditArticle(); // 清空顯示區
         },
 
