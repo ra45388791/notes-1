@@ -77,8 +77,11 @@ Vue.component('ArticleBox', {
                     vm.$emit('edit-article-temp', vm.articleDatas.id);
                     break;
                 case '刪除':
+                    const check = confirm('此清單尚未結案，確定要刪除嗎?');
+                    if (check === false) return;
 
                     // this.articleDatas.itemShow = false;
+
                     vm.$emit('remove-article-temp', vm.articleDatas.id);
                     break;
             }
@@ -299,19 +302,10 @@ const app = new Vue({
         },
 
         removeArticle: function (id) { // 刪除功能
-            // 找到該資料的索引後刪除
-            const formData = new FormData();
-            formData.append('func', 'delete');
-            formData.append('data', JSON.stringify({id: id}));
-            axios({
-                method: 'DELETE',
-                url: this.axiosUrl,
-                headers: {'Content-Type': 'multipart/form-data'},
-                data: formData,
-            }).then((e) => {
-                console.log(e.data);
-                this.ajaxArticle(e.data);
-            });
+            // 包裝form
+            const formData = this.packageForm('DELETE', {id: id});
+            // 呼叫axios方法
+            this.axiosSubmit('DELETE', formData);
         },
 
         /*
@@ -440,7 +434,6 @@ const app = new Vue({
                 formSetDate.setD = `0${formSetDate.setD}`;
             }
 
-
             // !也許儲存成 mysql 時要使用 /n 格式
             // 取得內文 然後把 \n 替換成</br>
             const contentData = formContent.replace(/\r?\n/g, '<br>');
@@ -459,21 +452,10 @@ const app = new Vue({
                 date: formDate, // 上傳格式 yyyy-mm-dd
             };
 
-            const formData = new FormData();
-            // 轉換成text格式 否則後端會變成[object Object]
-            formData.append('func', 'addArticle');
-            formData.append('data', JSON.stringify(box));
-
-            axios({
-                method: 'POST',
-                url: this.axiosUrl,
-                headers: {'Content-Type': 'multipart/form-data'},
-                data: formData,
-            })
-                .then((e) => {
-                    console.log(e.data);
-                    this.ajaxArticle(e.data);
-                });
+            // 包裝form
+            const formData = this.packageForm('addArticle', box);
+            // 呼叫axios方法
+            this.axiosSubmit('POST', formData);
 
             vm.closeEditArticle(); // 清空顯示區
         },
@@ -519,6 +501,25 @@ const app = new Vue({
 
             originalData.forEach(function (e) {
                 vm.$set(vm.articleDataArray, vm.articleDataArray.length, e);
+            });
+        },
+        packageForm: function (funcName, dataContent) {
+            // 封裝 formData 表單
+            const formData = new FormData();
+            formData.append('func', funcName);
+            formData.append('data', JSON.stringify(dataContent));
+            return formData;
+        },
+        axiosSubmit: function (method, data) {
+            // axios方法提交至後端
+            axios({
+                method: method,
+                url: this.axiosUrl,
+                headers: {'Content-Type': 'multipart/form-data'},
+                data: data,
+            }).then((e) => {
+                console.log(e.data);
+                this.ajaxArticle(e.data);
             });
         },
         // 產生uuid方法
