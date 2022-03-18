@@ -57,9 +57,7 @@ Vue.component('ArticleBox', {
                     vm.$emit('item-class-temp', 'closeItem');
                     // 移除監聽
                     window.removeEventListener('mouseup', packUpItem2);
-                    setTimeout(() => {
-                        vm.$emit('item-button-temp', false);
-                    }, 100);
+                    vm.$emit('item-button-temp', false);
                 });
             }
         },
@@ -80,7 +78,7 @@ Vue.component('ArticleBox', {
                     break;
                 case '刪除':
 
-                    this.articleDatas.itemShow = false;
+                    // this.articleDatas.itemShow = false;
                     vm.$emit('remove-article-temp', vm.articleDatas.id);
                     break;
             }
@@ -145,31 +143,9 @@ Vue.component('ArticleBox', {
 const data = {
 
     // !主資料
-    articleDataArray: [
-
-        // {
-        //     id: //id,
-        //     itemShow: true,                  // 刪除文章淡出
-        //     menu: false,
-        //     menuClass: 'closeItem',          //menu的開關class
-        //     state: false,                    //清單事項是否完成
-        //     stateImg: '/images/close.png',   //清單事項狀態圖片
-        //     title: '',                       //標題
-        //     content: '',                     //內容
-        //     setDate: {                       //設定當下的日期
-        //         setY: 2022,
-        //         setM: 3,
-        //         setD: 16,
-        //     },
-        //     date: {                          //預計完成事項日期
-        //         y: 2022,
-        //         m: 3,
-        //         d: 16,
-        //     },
-
-    ],
-    axiosUrl: 'https://mysterious-forest-30724.herokuapp.com/',
-    // axiosUrl: 'http://localhost:3000/',
+    articleDataArray: [],
+    // axiosUrl: 'https://tranquil-gorge-87619.herokuapp.com/',
+    axiosUrl: 'http://localhost:3000/',
     viewScroll: '',
     plusButton: {
         width: 200,
@@ -200,10 +176,7 @@ const data = {
         setDate: {},
         date: {},
     },
-
-
 };
-
 
 // eslint-disable-next-line no-unused-vars
 const app = new Vue({
@@ -235,7 +208,6 @@ const app = new Vue({
     created: async function () {
         const ajaxData = await axios.get(this.axiosUrl);
         this.ajaxArticle(ajaxData.data);
-        console.log(ajaxData.data);
     },
     mounted () {
         const vm = this;
@@ -277,12 +249,6 @@ const app = new Vue({
                     this.UIStyle.calendar = 'buttonMenuClick';
                     break;
             }
-
-
-            // console.log(button[0]);
-
-            // console.log(e.target);
-            // console.log(e.target.parentNode.childNodes);
         },
 
         /*
@@ -311,22 +277,41 @@ const app = new Vue({
             }
 
             const vm = this;
+            let stateData;
+            let stateImgData;
+
             for (const event of vm.articleDataArray) {
                 if (event.id === id) {
+                    if (event.state === state && event.stateImg === stateImg) {
+                        return;
+                    }
                     event.state = state;
                     event.stateImg = stateImg;
+
+                    stateData = state;
+                    stateImgData = stateImg;
                     break; // 如果id符合就跳出
                 }
             }
+
+            console.log(stateData);
+            console.log(stateImgData);
         },
 
         removeArticle: function (id) { // 刪除功能
             // 找到該資料的索引後刪除
-            const index = this.articleDataArray.findIndex(function (e) {
-                return e.id === id;
+            const formData = new FormData();
+            formData.append('func', 'delete');
+            formData.append('data', JSON.stringify({id: id}));
+            axios({
+                method: 'DELETE',
+                url: this.axiosUrl,
+                headers: {'Content-Type': 'multipart/form-data'},
+                data: formData,
+            }).then((e) => {
+                console.log(e.data);
+                this.ajaxArticle(e.data);
             });
-
-            this.articleDataArray.splice(index, 1);
         },
 
         /*
@@ -396,10 +381,11 @@ const app = new Vue({
 
             // 新增待辦事項方法
             const vm = this;
+            const todayDate = new Date();
+
             const idData = this.uuid();
             const formTitle = this.form.title;
             const formContent = this.form.content;
-            const todayDate = new Date();
             const formDate = this.form.date;
 
             // !在 created 鉤子修改取得的日期
@@ -408,7 +394,6 @@ const app = new Vue({
                 setM: parseInt(todayDate.getMonth() + 1),
                 setD: parseInt(todayDate.getDate()),
             };
-
 
             if (formTitle === '' || formContent === '' || typeof formDate !== 'string') {
                 // alert('標題、內文或日期不能為空。');
@@ -421,12 +406,6 @@ const app = new Vue({
                 m: parseInt(formDate.slice(5, 7)),
                 d: parseInt(formDate.slice(8)),
             };
-
-            console.log(formDate);
-            // 如果月份+1 = 13 代表是1月
-            if (todayDate.getMonth() + 1 === 13) {
-                formSetDate.setM = 1;
-            }
 
             // 檢查年份是否為過去
             if (dateData.y < todayDate.getFullYear()) {
@@ -445,32 +424,45 @@ const app = new Vue({
                 }
             }
 
+            // 如果設定月份+1 = 13 代表是1月
+            if (todayDate.getMonth() + 1 === 13) {
+                formSetDate.setM = 1;
+            }
+
+            // 如果月份 日期是一位數會出bug
+            formSetDate.setY = String(formSetDate.setY);
+            formSetDate.setM = String(formSetDate.setM);
+            formSetDate.setD = String(formSetDate.setD);
+            if (formSetDate.setM.length === 1) {
+                formSetDate.setM = `0${formSetDate.setM}`;
+            }
+            if (formSetDate.setD.length === 1) {
+                formSetDate.setD = `0${formSetDate.setD}`;
+            }
+
+
             // !也許儲存成 mysql 時要使用 /n 格式
             // 取得內文 然後把 \n 替換成</br>
             const contentData = formContent.replace(/\r?\n/g, '<br>');
 
             // 包裝成object
-            const box = [
-                {id: idData},
-                {itemShow: true}, // 刪除文章淡出
-                {menu: false},
-                {menuClass: 'closeItem'},
-                {state: false}, // 預設false
-                {stateImg: '/images/close.png'}, // 預設待辦
-                {title: formTitle}, // 取得標題
-                {content: contentData}, // 取得處裡過後的內容
-                {setDate: `${formSetDate.setY}-${formSetDate.setM}-${formSetDate.setD}`},
-                {date: formDate}, // 上傳格式 yyyy-mm-dd
-            ];
-            // console.log(box);
+            const box = {
+                id: idData,
+                itemShow: true, // 刪除文章淡出
+                menu: false,
+                menuClass: 'closeItem',
+                state: false, // 預設false
+                stateImg: '/images/close.png', // 預設待辦
+                title: formTitle, // 取得標題
+                content: contentData, // 取得處裡過後的內容
+                setDate: `${formSetDate.setY}-${formSetDate.setM}-${formSetDate.setD}`,
+                date: formDate, // 上傳格式 yyyy-mm-dd
+            };
 
             const formData = new FormData();
-
-            box.forEach(function (e) {
-                const key = Object.keys(e);
-                const value = Object.values(e);
-                formData.append(key[0], value[0]);
-            });
+            // 轉換成text格式 否則後端會變成[object Object]
+            formData.append('func', 'addArticle');
+            formData.append('data', JSON.stringify(box));
 
             axios({
                 method: 'POST',
@@ -479,12 +471,10 @@ const app = new Vue({
                 data: formData,
             })
                 .then((e) => {
+                    console.log(e.data);
                     this.ajaxArticle(e.data);
                 });
 
-
-            // !用set方法推入陣列，然後依靠 v-for來更新
-            // vm.$set(vm.articleDataArray, vm.articleDataArray.length, box);
             vm.closeEditArticle(); // 清空顯示區
         },
 
@@ -512,9 +502,6 @@ const app = new Vue({
             const vm = this;
             const originalData = event.map(function (e) {
                 // 解析資料型態
-                e.itemShow = e.itemShow === 'true' ? true : false;
-                e.menu = e.menu === 'true' ? true : false;
-                e.state = e.state === 'true' ? true : false;
                 e.setDate = {
                     setY: parseInt(e.setDate.slice(0, 4)),
                     setM: parseInt(e.setDate.slice(5, 7)),
@@ -555,5 +542,4 @@ const app = new Vue({
                 });
         },
     },
-
 });
