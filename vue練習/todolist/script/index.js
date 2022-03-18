@@ -307,10 +307,6 @@ const app = new Vue({
 
             const formData = this.packageForm('chengeState', box);
             this.axiosSubmit('POST', formData);
-
-
-            console.log(stateData);
-            console.log(stateImgData);
         },
 
         removeArticle: function (id) { // 刪除功能
@@ -355,9 +351,12 @@ const app = new Vue({
         /*
         *******************************修改貼文*******************************
         */
-        updataArticle: function (e) { // 將修改好的內容推入陣列
+        updataArticle: function () { // 將修改好的內容推入陣列
             // !取得傳入的參數 再去articleDataArray 用id找對應的資料修改
             const vm = this;
+            const id = vm.form.id;
+            const title = vm.form.title;
+            const content = vm.form.content;
             const date = vm.form.date;
             const dateData = {
                 y: parseInt(date.slice(0, 4)),
@@ -366,13 +365,25 @@ const app = new Vue({
             };
 
             for (const event of vm.articleDataArray) { //
-                if (event.id === vm.form.id) {
-                    event.title = vm.form.title; // 修改前的標題
-                    event.content = vm.form.content; // 修改前的內容
+                if (event.id === id) {
+                    event.title = title; // 修改前的標題
+                    event.content = content; // 修改前的內容
                     event.date = dateData;
                     break; // 如果id符合就跳出
                 }
             }
+
+            const box = {
+                id: id,
+                title: title,
+                content: content,
+                date: date,
+            };
+
+            // 包裝form
+            const formData = this.packageForm('reviseArticle', box);
+            // 呼叫axios方法
+            this.axiosSubmit('POST', formData);
 
             vm.closeEditArticle(); // 清空顯示區
         },
@@ -530,6 +541,7 @@ const app = new Vue({
                 headers: {'Content-Type': 'multipart/form-data'},
                 data: data,
             }).then((e) => {
+                if (!e) return;
                 console.log(e.data);
                 this.ajaxArticle(e.data);
             });
