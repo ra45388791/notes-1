@@ -29,6 +29,12 @@ Vue.component('ArticleBox', {
         'articleData.menuClass' (newV, oldV) {
             this.articleDatas.menuClass = newV;
         },
+        'articleData.state' (newV, oldV) {
+            this.articleDatas.state = newV;
+        },
+        'articleData.stateImg' (newV, oldV) {
+            this.articleDatas.stateImg = newV;
+        },
         // item是否打開
         itemState (newV, oldV) {
             this.itemButtonState = newV;
@@ -77,8 +83,10 @@ Vue.component('ArticleBox', {
                     vm.$emit('edit-article-temp', vm.articleDatas.id);
                     break;
                 case '刪除':
-                    const check = confirm('此清單尚未結案，確定要刪除嗎?');
-                    if (check === false) return;
+                    if (vm.articleDatas.state === false) {
+                        const check = confirm('此清單尚未結案，確定要刪除嗎?');
+                        if (check === false) return;
+                    }
 
                     // this.articleDatas.itemShow = false;
 
@@ -280,8 +288,6 @@ const app = new Vue({
             }
 
             const vm = this;
-            let stateData;
-            let stateImgData;
 
             for (const event of vm.articleDataArray) {
                 if (event.id === id) {
@@ -290,12 +296,18 @@ const app = new Vue({
                     }
                     event.state = state;
                     event.stateImg = stateImg;
-
-                    stateData = state;
-                    stateImgData = stateImg;
                     break; // 如果id符合就跳出
                 }
             }
+            const box = {
+                id: id,
+                state: state,
+                stateImg: stateImg,
+            };
+
+            const formData = this.packageForm('chengeState', box);
+            this.axiosSubmit('POST', formData);
+
 
             console.log(stateData);
             console.log(stateImgData);
