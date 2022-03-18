@@ -572,13 +572,7 @@ nav a:hover {
         height    : 4.5rem;
         font-size : 2rem;
         text-align: start;
-
-        /* box-shadow: inset 0px 0px 0px 0px #65e3ff; */
     }
-
-    /* .buttonMenu button:hover {
-        box-shadow: inset 0px -5px 0px 0px #65e3ff;
-    } */
 
     .buttonMenuClick {
         color        : #15778f;
