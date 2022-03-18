@@ -168,8 +168,8 @@ const data = {
         //     },
 
     ],
-    // axiosUrl: 'https://mysterious-forest-30724.herokuapp.com/',
-    axiosUrl: 'http://localhost:3000/',
+    axiosUrl: 'https://mysterious-forest-30724.herokuapp.com/',
+    // axiosUrl: 'http://localhost:3000/',
     viewScroll: '',
     plusButton: {
         width: 200,
@@ -233,29 +233,9 @@ const app = new Vue({
         },
     },
     created: async function () {
-        const vm = this;
         const ajaxData = await axios.get(this.axiosUrl);
-        const originalData = ajaxData.data.map(function (e) {
-            // 解析資料型態
-            e.itemShow = e.itemShow === 'true' ? true : false;
-            e.menu = e.menu === 'true' ? true : false;
-            e.state = e.state === 'true' ? true : false;
-            e.setDate = {
-                setY: parseInt(e.setDate.slice(0, 4)),
-                setM: parseInt(e.setDate.slice(5, 7)),
-                setD: parseInt(e.setDate.slice(8)),
-            };
-            e.date = {
-                setY: parseInt(e.date.slice(0, 4)),
-                setM: parseInt(e.date.slice(5, 7)),
-                setD: parseInt(e.date.slice(8)),
-            };
-            return e;
-        });
-
-        originalData.forEach(function (e) {
-            vm.$set(vm.articleDataArray, vm.articleDataArray.length, e);
-        });
+        this.ajaxArticle(ajaxData.data);
+        console.log(ajaxData.data);
     },
     mounted () {
         const vm = this;
@@ -492,18 +472,15 @@ const app = new Vue({
                 formData.append(key[0], value[0]);
             });
 
-            console.log(formData);
-
-
             axios({
                 method: 'POST',
                 url: this.axiosUrl,
                 headers: {'Content-Type': 'multipart/form-data'},
                 data: formData,
-            });
-            // .then(() => {
-
-            // });
+            })
+                .then((e) => {
+                    this.ajaxArticle(e.data);
+                });
 
 
             // !用set方法推入陣列，然後依靠 v-for來更新
@@ -526,6 +503,37 @@ const app = new Vue({
             vm.form.edit = false; // 修改文章狀態false
         },
 
+        /*
+        *******************************其他功能*******************************
+        */
+
+        // 解析ajax取得的文章資料方法
+        ajaxArticle: function (event) {
+            const vm = this;
+            const originalData = event.map(function (e) {
+                // 解析資料型態
+                e.itemShow = e.itemShow === 'true' ? true : false;
+                e.menu = e.menu === 'true' ? true : false;
+                e.state = e.state === 'true' ? true : false;
+                e.setDate = {
+                    setY: parseInt(e.setDate.slice(0, 4)),
+                    setM: parseInt(e.setDate.slice(5, 7)),
+                    setD: parseInt(e.setDate.slice(8)),
+                };
+                e.date = {
+                    y: parseInt(e.date.slice(0, 4)),
+                    m: parseInt(e.date.slice(5, 7)),
+                    d: parseInt(e.date.slice(8)),
+                };
+                return e;
+            });
+
+            vm.articleDataArray = [];
+
+            originalData.forEach(function (e) {
+                vm.$set(vm.articleDataArray, vm.articleDataArray.length, e);
+            });
+        },
         // 產生uuid方法
         uuid: function () {
             let time = Date.now();
