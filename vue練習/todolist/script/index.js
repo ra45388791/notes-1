@@ -15,12 +15,6 @@ Vue.component('ArticleBox', {
             itemButtonState: this.itemState, // 選項清單是否打開
         };
     },
-    mounted () {
-        // console.log(this.itemButtonState);
-    },
-    computed: {
-
-    },
     watch: {
         // articleData 的 menu 屬性
         'articleData.menu' (newV, oldV) {
@@ -151,19 +145,32 @@ Vue.component('ArticleBox', {
     `,
 });
 
+Vue.component('calendar-temp', {
+
+});
+
 const data = {
 
     // !主資料
     articleDataArray: [],
+    calendarData: {
+        days: [],
+        oldDays: [],
+        chooseDate: {
+            year: 2022,
+            month: 3,
+        },
+    },
     // axiosUrl: 'https://tranquil-gorge-87619.herokuapp.com/',
     axiosUrl: 'http://localhost:3000/',
     viewScroll: '',
-    plusButton: {
+    plusButton: { // 新增文章按鈕
         width: 200,
         height: 60,
     },
-    // 增加文章按鈕動態更新大小
-    appliedArea: 'allItem',
+
+    articlePlusShow: true,
+    appliedArea: 'calendar', // ui選中項目 預設allItem
     UIShow: true, // 介面顯示
     UIStyle: {
         allItem: 'buttonMenuClick',
@@ -172,13 +179,13 @@ const data = {
         calendar: 'buttonMenuUnclick',
 
     },
+    loading: true, // 讀取
     itemButton: false,
     articleShow: false, // 完整文章淡入
     articleForm: false, // 新增、修改清單區域淡入淡出
     editArticleH2: '添加代辦事項', // 修改或新增文章區的標題
 
     // 用於新增、修改、顯示全文章的區域。
-    // !對form表單用v-model 來雙向綁定 才不用一直  parentNode 找dom原素
     form: {
         edit: false,
         id: '',
@@ -204,6 +211,36 @@ const app = new Vue({
                 return e.state === true;
             });
         },
+        chooseDateRes: {
+            //   行事曆年月份
+            get () {
+                const year = this.calendarData.chooseDate.year;
+                const month = this.calendarData.chooseDate.month;
+
+                if (month >= 10) {
+                    return `${String(year)}-${String(month)}`;
+                }
+                return `${String(year)}-0${String(month)}`;
+            },
+            set (e) {
+                // 依照畫面上的input回傳的value更新資料中的 年月資料
+                // 順便更新要顯示的天數。
+                const value = e.target.value;
+
+                const numberYear = parseInt(value.slice(0, 4));
+                const numberMonth = parseInt(value.slice(5, 7));
+
+                const getDate = this.calendarDays(numberYear, numberMonth);
+
+                this.calendarData.days = getDate.date;
+                this.calendarData.oldDays = getDate.oldDays;
+
+                // 轉成數字後賦值
+                this.calendarData.chooseDate.year = numberYear;
+                this.calendarData.chooseDate.month = numberMonth;
+            },
+        },
+
     },
     watch: {
         viewScroll: function (newValue, oldValue) {
@@ -217,6 +254,21 @@ const app = new Vue({
         },
     },
     created: async function () {
+        // 行事曆資料
+        const date = new Date();
+        const dateYear = date.getFullYear();
+        const dateMonth = date.getMonth() + 1;
+        // 取得解析後的日期
+        const getDate = this.calendarDays(dateYear, dateMonth);
+
+        this.calendarData.days = getDate.date;
+        this.calendarData.oldDays = getDate.oldDays;
+
+        this.calendarData.chooseDate.year = dateYear;
+        this.calendarData.chooseDate.month = dateMonth;
+
+
+        // 清單資料
         const ajaxData = await axios.get(this.axiosUrl);
         this.ajaxArticle(ajaxData.data);
     },
@@ -226,12 +278,14 @@ const app = new Vue({
         const viewSize = window.innerWidth;
 
         if (viewSize < 1024) {
-            vm.plusButton.width = 0;
-            vm.plusButton.height = 0;
+            vm.plusButton.width = 87;
+            vm.plusButton.height = 87;
             window.addEventListener('scroll', function () {
                 vm.viewScroll = window.scrollY;
             });
         }
+        // 讀取畫面隱藏
+        this.loading = false;
     },
     methods: {
         /*
@@ -247,24 +301,33 @@ const app = new Vue({
 
             switch (e.target.outerText) {
                 case '所有事項':
-                    // this.UIStyle.allItem = 'buttonMenuClick';
+                    this.plusButton.width = 87;
+                    this.plusButton.height = 87;
+                    this.articlePlusShow = true;
                     this.UIStyle.allItem = 'buttonMenuClick';
                     break;
                 case '待辦':
+                    this.plusButton.width = 87;
+                    this.plusButton.height = 87;
+                    this.articlePlusShow = true;
                     this.UIStyle.toDo = 'buttonMenuClick';
                     break;
                 case '結案':
+                    this.plusButton.width = 87;
+                    this.plusButton.height = 87;
+                    this.articlePlusShow = true;
                     this.UIStyle.getThingsDone = 'buttonMenuClick';
                     break;
                 case '行事曆':
+                    this.articlePlusShow = false;
                     this.UIStyle.calendar = 'buttonMenuClick';
                     break;
             }
         },
 
         /*
-        ********************************貼文設定按鈕********************************
-        */
+    ********************************貼文設定按鈕********************************
+    */
         // 設定貼文
         editArticle: function (id) {
             const vm = this;
@@ -305,20 +368,17 @@ const app = new Vue({
                 stateImg: stateImg,
             };
 
-            const formData = this.packageForm('chengeState', box);
-            this.axiosSubmit('POST', formData);
+            this.axiosSubmit('POST', 'chengeState', box);
         },
 
         removeArticle: function (id) { // 刪除功能
-            // 包裝form
-            const formData = this.packageForm('DELETE', {id: id});
             // 呼叫axios方法
-            this.axiosSubmit('DELETE', formData);
+            this.axiosSubmit('DELETE', 'DELETE', {id: id});
         },
 
         /*
-        *******************************閱讀功能*******************************
-        */
+    *******************************閱讀功能*******************************
+    */
         //  開啟全文章閱讀區
         articleState: function (title, content, setDate, date) {
             const uiBl = this.UIShow;
@@ -329,12 +389,14 @@ const app = new Vue({
                 itemBtnBl === false &&
                 articleBl === false) {
                 // 是否顯示UI
+                this.articlePlusShow = false;
                 this.UIShow = false;
                 // 是否顯示文章
                 this.articleShow = true;
             } else if (uiBl === false &&
                 itemBtnBl === false &&
                 articleBl === true) {
+                this.articlePlusShow = true;
                 this.UIShow = true;
                 this.articleShow = false;
                 // 清空顯示區
@@ -349,8 +411,8 @@ const app = new Vue({
 
 
         /*
-        *******************************修改貼文*******************************
-        */
+    *******************************修改貼文*******************************
+    */
         updataArticle: function () { // 將修改好的內容推入陣列
             // !取得傳入的參數 再去articleDataArray 用id找對應的資料修改
             const vm = this;
@@ -380,16 +442,14 @@ const app = new Vue({
                 date: date,
             };
 
-            // 包裝form
-            const formData = this.packageForm('reviseArticle', box);
             // 呼叫axios方法
-            this.axiosSubmit('POST', formData);
+            this.axiosSubmit('POST', 'reviseArticle', box);
 
             vm.closeEditArticle(); // 清空顯示區
         },
         /*
-        *******************************新增貼文*******************************
-        */
+    *******************************新增貼文*******************************
+    */
         formSubmit: function () {
             if (this.form.edit === true) { // 檢查如果是修改狀態就調用修改方法
                 this.updataArticle(); // 下方不執行
@@ -441,11 +501,6 @@ const app = new Vue({
                 }
             }
 
-            // 如果設定月份+1 = 13 代表是1月
-            if (todayDate.getMonth() + 1 === 13) {
-                formSetDate.setM = 1;
-            }
-
             // 如果月份 日期是一位數會出bug
             formSetDate.setY = String(formSetDate.setY);
             formSetDate.setM = String(formSetDate.setM);
@@ -476,9 +531,9 @@ const app = new Vue({
             };
 
             // 包裝form
-            const formData = this.packageForm('addArticle', box);
             // 呼叫axios方法
-            this.axiosSubmit('POST', formData);
+
+            this.axiosSubmit('POST', 'addArticle', box);
 
             vm.closeEditArticle(); // 清空顯示區
         },
@@ -499,8 +554,8 @@ const app = new Vue({
         },
 
         /*
-        *******************************其他功能*******************************
-        */
+    *******************************其他功能*******************************
+    */
 
         // 解析ajax取得的文章資料方法
         ajaxArticle: function (event) {
@@ -526,22 +581,21 @@ const app = new Vue({
                 vm.$set(vm.articleDataArray, vm.articleDataArray.length, e);
             });
         },
-        packageForm: function (funcName, dataContent) {
-            // 封裝 formData 表單
-            const formData = new FormData();
-            formData.append('func', funcName);
-            formData.append('data', JSON.stringify(dataContent));
-            return formData;
-        },
-        axiosSubmit: function (method, data) {
-            // axios方法提交至後端
+        // axios取得資料
+        axiosSubmit: function (method, func, data) {
+            // 顯示讀取畫面
+            this.loading = true;
             axios({
                 method: method,
                 url: this.axiosUrl,
-                headers: {'Content-Type': 'multipart/form-data'},
-                data: data,
+                data: {
+                    func: func,
+                    data: data,
+                },
             }).then((e) => {
-                if (!e) return;
+                // 隱藏讀取
+                this.loading = false;
+                // if (!e) return;
                 console.log(e.data);
                 this.ajaxArticle(e.data);
             });
@@ -565,6 +619,57 @@ const app = new Vue({
                     // 如果是 y 回傳16位元數 0x3 or 0x8 相當於 3 or 8
                     return (c === 'x' ? random : (random & 0x3 | 0x8)).toString(16);
                 });
+        },
+        // 行事曆日期解析
+        calendarDays: function (year, month) {
+            let days;
+            const arrayDays = [];
+            const arrayOldDays = [];
+
+            const firstDate = new Date(year, month - 1, 1); // 因為month 有+1過 所以-1
+            const firstDayWeek = firstDate.getDay();
+            const lastDay = new Date(year, month - 1, 0); // 前一個月的最後一天
+            let oldDays = lastDay.getDate();
+
+            // 月份
+            if (month % 2 === 0) {
+                if (month === 2) {
+                    days = 28;
+                } else {
+                    days = 30;
+                }
+            } else {
+                days = 31;
+            }
+            // 閏年判斷
+            if (year % 400 === 0 ||
+                year % 4 === 0 && year % 100 !== 0) {
+                if (month === 2) {
+                    days = 29;
+                }
+            }
+            // 星期判斷 //如果是禮拜五 上個月-4 之後推進array 逐漸+1
+            if (firstDayWeek === 0) {
+                for (let i = 0; i < 6; i++) {
+                    arrayOldDays.push(oldDays - 6);
+                    oldDays++;
+                }
+            } else {
+                for (let i = 0; i < firstDayWeek - 1; i++) {
+                    arrayOldDays.push(oldDays - (firstDayWeek - 2));
+                    oldDays++;
+                }
+            }
+
+
+            for (let i = 0; i < days; i++) {
+                arrayDays.push(i + 1);
+            }
+
+            return {
+                date: arrayDays,
+                oldDays: arrayOldDays,
+            };
         },
     },
 });

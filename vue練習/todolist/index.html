@@ -39,7 +39,7 @@
     <nav class="d-flex justify-content-center align-content-center">
 
         <div class="d-flex flex-lg-column justify-content-lg-around align-items-lg-center">
-            <img src="/images/notebook.png" class="me-1" alt="To-Do-List圖示">
+            <img v-show="!loading" src="/images/notebook.png" class="me-1" alt="To-Do-List圖示">
             <a class="To-Do-List" href="#">
                 To-Do-List
             </a>
@@ -51,7 +51,7 @@
 
         <div id="listContent" class="d-flex flex-wrap justify-content-center mx-auto ms-lg-auto me-lg-0">
 
-            <div v-show=" appliedArea==='allItem'">
+            <div v-show=" appliedArea==='allItem'" class="articleTemp">
                 <!-- 文章組件 -->
                 <article-box v-for=" data in articleDataArray" :key="data.id" :article-data="data"
                     :item-state="itemButton" @change-menu="data.menu = $event" @item-button-temp="itemButton = $event"
@@ -62,7 +62,7 @@
                 </article-box>
             </div>
 
-            <div v-show="appliedArea === 'toDo'">
+            <div v-show="appliedArea === 'toDo'" class="articleTemp">
                 <article-box v-for="data in toDoData" :key="data.id" :article-data="data" :item-state="itemButton"
                     @change-menu="data.menu = $event" @item-button-temp="itemButton = $event"
                     @item-class-temp="data.menuClass = $event" @article-state-temp="articleState"
@@ -72,7 +72,7 @@
                 </article-box>
             </div>
 
-            <div v-show="appliedArea === 'getThingsDone'">
+            <div v-show="appliedArea === 'getThingsDone'" class="articleTemp">
                 <article-box v-for="data in getThingsDoneData" :key="data.id" :article-data="data"
                     :item-state="itemButton" @change-menu="data.menu = $event" @item-button-temp="itemButton = $event"
                     @item-class-temp="data.menuClass = $event" @article-state-temp="articleState"
@@ -82,9 +82,65 @@
                 </article-box>
             </div>
 
+            <div v-show=" appliedArea === 'calendar'" class="calendarTemp">
+                <div class="calendar d-flex flex-column text-center">
+                    <div class="weekdays px-3 pt-3 text-light fs-5 fw-bold">
+                        <ul class="d-flex justify-content-around p-0">
+                            <li>一</li>
+                            <li>二</li>
+                            <li>三</li>
+                            <li>四</li>
+                            <li>五</li>
+                            <li>六</li>
+                            <li>日</li>
+                        </ul>
+                    </div>
 
+                    <div class="calendarContent  py-3 px-3">
+                        <!-- v-for -->
 
+                        <li v-for="day in calendarData.oldDays">
+                            <button class="dayBox oldDays">
+                                <div type="button" class="dayBoxNumber">
+                                    <div>{{day}}</div>
+                                </div>
+                            </button>
+                        </li>
 
+                        <li v-for="day in calendarData.days">
+                            <button class="dayBox">
+                                <div type="button" class="dayBoxNumber">
+                                    <div>{{day}}</div>
+                                </div>
+                            </button>
+                        </li>
+
+                    </div>
+
+                    <div class="calendarFunction d-flex justify-content-center align-items-center">
+                        <form action="" class="d-flex justify-content-around align-items-center">
+                            <!-- <label for="calendarInput">選擇月份：</label> -->
+                            <button>-</button>
+                            <!-- v-value  @input -->
+                            <input :value="chooseDateRes" @input="chooseDateRes = $event" id="calendarInput"
+                                type="month" class="mx-4">
+
+                            <button>+</button>
+
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <transition>
+                <div v-show="loading" id="loadingImg">
+                    <img src="/images/notebook.gif" class="loadingNote" alt="loadingNote">
+                    <p class="m-0 text-light">LOADING...</p>
+                </div>
+
+            </transition>
         </div>
 
         <transition>
@@ -99,7 +155,7 @@
                 <button :class="UIStyle.getThingsDone" @click="appliedArea = 'getThingsDone'" class="col-3 ps-lg-5">
                     結案
                 </button>
-                <button :class="UIStyle.calendar" class="col-3 ps-lg-5">
+                <button :class="UIStyle.calendar" @click="appliedArea = 'calendar'" class="col-3 ps-lg-5">
                     行事曆
                 </button>
             </div>
@@ -156,13 +212,12 @@
                 </form>
             </div>
         </transition>
-
-        <button v-if="UIShow" @click="articleForm = true" class="articlePlus"
-            :style="{ width: plusButton.width + 'px', height: plusButton.height + 'px'}">
-            <img src="/images/添加代辦事項/plus.svg" alt="添加代辦事項">
-            <!-- <div>{{buttonSize}}</div> -->
-        </button>
-
+        <transition>
+            <button v-show="articlePlusShow" @click="articleForm = true" class="articlePlus"
+                :style="{ width: plusButton.width + 'px', height: plusButton.height + 'px'}">
+                <img src="/images/添加代辦事項/plus.svg" alt="添加代辦事項">
+            </button>
+        </transition>
 
 
     </div>

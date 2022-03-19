@@ -112,7 +112,7 @@ nav a:hover {
 .buttonMenu button {
     position     : relative;
     border       : 0px;
-    font-size    : 1.3rem;
+    font-size    : 1.2rem;
     font-weight  : bold;
     /* background: #1BAACB;
     color        : #FFFFFF; */
@@ -188,14 +188,17 @@ nav a:hover {
 ****************************************************************/
 
 #listContent {
-    position      : relative;
-    padding-top   : 25px;
-    padding-bottom: 90px;
-
+    position : relative;
     max-width: 500px;
     height   : auto;
 
     z-index: 0;
+}
+
+#listContent .articleTemp {
+    /* 只有文章要往下、往上推 */
+    padding-top   : 25px;
+    padding-bottom: 90px;
 }
 
 #listContent .article {
@@ -264,6 +267,7 @@ nav a:hover {
     height: 30px;
 }
 
+/* 日期 */
 #listContent #add {
     color      : #00FFF0;
     font-size  : 18px;
@@ -275,6 +279,130 @@ nav a:hover {
     font-size  : 18px;
     font-weight: bold;
 }
+
+/****************************************************************
+                            行事曆
+****************************************************************/
+#listContent .calendarTemp {
+    position: relative;
+    width   : 100vw;
+    height  : calc(100vh - 64px - 61px);
+}
+
+#listContent .calendar {
+    width : 100%;
+    height: 100%;
+
+    background: rgb(19, 178, 241);
+    /* border : solid 1px rgb(255, 0, 0); */
+}
+
+#listContent .calendar li {
+    list-style: none;
+    width     : 14.28%;
+}
+
+#listContent .weekdays ul {
+    position: relative;
+}
+
+
+#listContent .weekdays ul::before {
+    content : "";
+    position: absolute;
+    left    : calc(50% - 47.5%);
+    top     : 3rem;
+    width   : 95%;
+
+    border-bottom: solid 3px rgb(255, 255, 255);
+    border-radius: 10%;
+}
+
+#listContent .calendarContent {
+    display      : flex;
+    flex-wrap    : wrap;
+    align-content: flex-start;
+
+
+    width    : 100%;
+    height   : 85%;
+    /* border: solid 1px rgb(255, 0, 0); */
+}
+
+#listContent .calendarContent li {
+    /* width   : 14.28%; */
+    height: 18%;
+}
+
+
+
+#listContent .calendarContent .dayBox {
+    position: relative;
+    width   : 2.5rem;
+    height  : 2.5rem;
+
+    color     : #fff;
+    background: rgba(51, 255, 0, 0);
+
+    font-size    : 1.5em;
+    /* border    : solid 3px rgba(167, 255, 255, 0.561); */
+    border       : solid 3px rgba(167, 255, 255, 0);
+    box-sizing   : border-box;
+    border-radius: 30px;
+
+    transition: 0.1s;
+}
+
+#listContent .calendarContent .oldDays {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#listContent .calendarContent .dayBox:focus {
+    background   : rgb(38, 215, 255);
+    border-radius: 30px;
+}
+
+#listContent .calendarContent .dayBoxNumber {
+    position: absolute;
+    top     : calc(50% - 1.25rem);
+    right   : calc(50% - 1.25rem);
+
+    width        : 2.5rem;
+    /* height    : 2.5rem; */
+
+    border-radius: 30px;
+
+    font-weight: bold;
+    text-align : center;
+}
+
+
+
+/* 行事曆功能 */
+#listContent .calendarFunction {
+    background: rgb(23, 117, 241);
+    width     : 100%;
+    height    : 15%;
+
+    border-radius: 30px 30px 0 0;
+}
+
+#listContent .calendarFunction label {
+    width: 8rem;
+
+    font-size  : 1.5rem;
+    font-weight: bold;
+
+    color: #fff;
+}
+
+#listContent .calendarFunction input {
+    width      : 8em;
+    font-size  : 24px;
+    font-weight: bold;
+}
+
+
 
 /* 設定按鈕 */
 .itemList {
@@ -517,6 +645,53 @@ nav a:hover {
     text-indent: 0em;
 }
 
+/****************************************************************
+                            雜項
+****************************************************************/
+#loadingImg {
+    position  : fixed;
+    top       : 0;
+    right     : 0;
+    width     : 100vw;
+    height    : 100vh;
+    background: rgba(0, 0, 0, 0.5);
+
+    z-index: 999;
+}
+
+#loadingImg .loadingNote {
+    position : absolute;
+    top      : calc(50% - 50px);
+    right    : calc(50% - 50px);
+    width    : 100px;
+    height   : 100px;
+    animation: loading 0.65s ease-in-out infinite;
+}
+
+#loadingImg p {
+    position: absolute;
+    top     : calc(50% + 55px);
+    right   : calc(50% - 80.24px);
+
+    font-size  : 28px;
+    font-weight: 900;
+}
+
+
+@keyframes loading {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
 @media screen and (min-width: 1024px) {
 
     /****************************************************************
@@ -703,6 +878,24 @@ nav a:hover {
         height    : 100vh;
     }
 
+    /****************************************************************
+                            雜項
+****************************************************************/
+    #loadingImg {
+        width : 70vw;
+        height: 100vh;
+    }
 
+    #loadingImg .loadingNote {
+        top   : calc(50% - 62.5px);
+        right : calc(50% - 62.5px);
+        width : 125px;
+        height: 125px;
+    }
 
+    #loadingImg p {
+        top      : calc(50% + 4rem);
+        right    : calc(50% - 7rem);
+        font-size: 38px;
+    }
 }
