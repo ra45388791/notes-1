@@ -39,7 +39,7 @@
     <nav class="d-flex justify-content-center align-content-center">
 
         <div class="d-flex flex-lg-column justify-content-lg-around align-items-lg-center">
-            <img v-show="!loading" src="/images/notebook.png" class="me-1" alt="To-Do-List圖示">
+            <img src="/images/notebook.png" class="me-1" alt="To-Do-List圖示">
             <a class="To-Do-List" href="#">
                 To-Do-List
             </a>
@@ -51,10 +51,20 @@
 
         <div id="listContent" class="d-flex flex-wrap justify-content-center mx-auto ms-lg-auto me-lg-0">
 
-            <div v-show=" appliedArea==='allItem'" class="articleTemp">
+            <div v-show=" UI.appliedArea==='allItem'" class="articleTemp">
                 <!-- 文章組件 -->
                 <article-box v-for=" data in articleDataArray" :key="data.id" :article-data="data"
-                    :item-state="itemButton" @change-menu="data.menu = $event" @item-button-temp="itemButton = $event"
+                    :item-state="UI.itemButton" @change-menu="data.menu = $event"
+                    @item-button-temp="UI.itemButton = $event" @item-class-temp="data.menuClass = $event"
+                    @article-state-temp="articleState" @set-article-state-temp="setArticleState"
+                    @edit-article-temp="editArticle" @remove-article-temp="removeArticle">
+
+                </article-box>
+            </div>
+
+            <div v-show="UI.appliedArea === 'toDo'" class="articleTemp">
+                <article-box v-for="data in toDoData" :key="data.id" :article-data="data" :item-state="UI.itemButton"
+                    @change-menu="data.menu = $event" @item-button-temp="UI.itemButton = $event"
                     @item-class-temp="data.menuClass = $event" @article-state-temp="articleState"
                     @set-article-state-temp="setArticleState" @edit-article-temp="editArticle"
                     @remove-article-temp="removeArticle">
@@ -62,37 +72,25 @@
                 </article-box>
             </div>
 
-            <div v-show="appliedArea === 'toDo'" class="articleTemp">
-                <article-box v-for="data in toDoData" :key="data.id" :article-data="data" :item-state="itemButton"
-                    @change-menu="data.menu = $event" @item-button-temp="itemButton = $event"
-                    @item-class-temp="data.menuClass = $event" @article-state-temp="articleState"
-                    @set-article-state-temp="setArticleState" @edit-article-temp="editArticle"
-                    @remove-article-temp="removeArticle">
-
-                </article-box>
-            </div>
-
-            <div v-show="appliedArea === 'getThingsDone'" class="articleTemp">
+            <div v-show="UI.appliedArea === 'getThingsDone'" class="articleTemp">
                 <article-box v-for="data in getThingsDoneData" :key="data.id" :article-data="data"
-                    :item-state="itemButton" @change-menu="data.menu = $event" @item-button-temp="itemButton = $event"
-                    @item-class-temp="data.menuClass = $event" @article-state-temp="articleState"
-                    @set-article-state-temp="setArticleState" @edit-article-temp="editArticle"
-                    @remove-article-temp="removeArticle">
+                    :item-state="UI.itemButton" @change-menu="data.menu = $event"
+                    @item-button-temp="UI.itemButton = $event" @item-class-temp="data.menuClass = $event"
+                    @article-state-temp="articleState" @set-article-state-temp="setArticleState"
+                    @edit-article-temp="editArticle" @remove-article-temp="removeArticle">
 
                 </article-box>
             </div>
 
-            <div v-show=" appliedArea === 'calendar'" class="calendarTemp">
+            <div v-show=" UI.appliedArea === 'calendar'" class="calendarTemp">
                 <div class="calendar d-flex flex-column text-center">
                     <div class="weekdays px-3 pt-3 text-light fs-5 fw-bold">
                         <ul class="d-flex justify-content-around p-0">
-                            <li>一</li>
-                            <li>二</li>
-                            <li>三</li>
-                            <li>四</li>
-                            <li>五</li>
-                            <li>六</li>
-                            <li>日</li>
+
+                            <li v-for="item of calendarData.weekdays" :key="item.text">
+                                {{item.text}}
+                            </li>
+
                         </ul>
                     </div>
 
@@ -135,7 +133,7 @@
             </div>
 
             <transition>
-                <div v-show="loading" id="loadingImg">
+                <div v-show="UI.loading" id="loadingImg">
                     <img src="/images/notebook.gif" class="loadingNote" alt="loadingNote">
                     <p class="m-0 text-light">LOADING...</p>
                 </div>
@@ -145,17 +143,19 @@
 
         <transition>
 
-            <div v-if="UIShow" @click="buttonMenuStyle" class="buttonMenu d-flex flex-lg-column justify-content-around">
-                <button :class="UIStyle.allItem" @click="appliedArea = 'allItem'" class="col-3 ps-lg-5">
+            <div v-if="UI.UIShow" @click="buttonMenuStyle"
+                class="buttonMenu d-flex flex-lg-column justify-content-around">
+                <button :class="UI.UIStyle.allItem" @click="UI.appliedArea = 'allItem'" class="col-3 ps-lg-5">
                     所有事項
                 </button>
-                <button :class="UIStyle.toDo" @click="appliedArea = 'toDo'" class="col-3 ps-lg-5">
+                <button :class="UI.UIStyle.toDo" @click="UI.appliedArea = 'toDo'" class="col-3 ps-lg-5">
                     待辦
                 </button>
-                <button :class="UIStyle.getThingsDone" @click="appliedArea = 'getThingsDone'" class="col-3 ps-lg-5">
+                <button :class="UI.UIStyle.getThingsDone" @click="UI.appliedArea = 'getThingsDone'"
+                    class="col-3 ps-lg-5">
                     結案
                 </button>
-                <button :class="UIStyle.calendar" @click="appliedArea = 'calendar'" class="col-3 ps-lg-5">
+                <button :class="UI.UIStyle.calendar" @click="UI.appliedArea = 'calendar'" class="col-3 ps-lg-5">
                     行事曆
                 </button>
             </div>
@@ -163,8 +163,8 @@
 
         <!-- 全文章顯示區 -->
         <transition>
-            <!-- ! v-if="articleShow" -->
-            <article v-if="articleShow" class="fullArticle px-3 py-3 text-light">
+            <!-- ! v-if="UI.articleShow" -->
+            <article v-if="UI.articleShow" class="fullArticle px-3 py-3 text-light">
                 <section class="mx-auto p-4">
                     <div class="d-flex justify-content-center text-center ">
                         <!-- !文章標題 -->
@@ -179,8 +179,8 @@
                         <p v-html="form.content"></p>
                     </div>
 
-                    <!-- ! v-if="articleShow"  @click="articleState"-->
-                    <button v-if="articleShow" @click="articleState" class="articlePlus returnButton">
+                    <!-- ! v-if="UI.articleShow"  @click="articleState"-->
+                    <button v-if="UI.articleShow" @click="articleState" class="articlePlus returnButton">
                         <img src="/images/添加代辦事項/back.svg" alt="返回按鈕">
                     </button>
 
@@ -191,16 +191,16 @@
         <!-- 新增、修改清單區域 -->
         <transition name="article-form">
 
-            <div v-show="articleForm" id="postArticle">
+            <div v-show="UI.articleForm" id="postArticle">
                 <nav class="d-flex justify-content-between px-2">
                     <button @click="closeEditArticle">
                         <img src="/images/添加代辦事項/X.svg" alt="返回">
                     </button>
-                    <h2 class="text-light">{{editArticleH2}}</h2>
+                    <h2 class="text-light">{{form.editArticleH2}}</h2>
 
-                    <button type="submit" form="articleForm"><img src="/images/添加代辦事項/O.svg" alt="提交按鈕"></button>
+                    <button type="submit" form="UI.articleForm"><img src="/images/添加代辦事項/O.svg" alt="提交按鈕"></button>
                 </nav>
-                <form id="articleForm" method="POST" action="/" @submit.prevent="formSubmit"
+                <form id="UI.articleForm" method="POST" action="/" @submit.prevent="formSubmit"
                     class="container d-flex flex-column justify-content-between align-items-center pb-2">
 
                     <input v-model="form.title" type="text" name="title" placeholder="標題" class="inputForm inputTitle">
@@ -213,8 +213,8 @@
             </div>
         </transition>
         <transition>
-            <button v-show="articlePlusShow" @click="articleForm = true" class="articlePlus"
-                :style="{ width: plusButton.width + 'px', height: plusButton.height + 'px'}">
+            <button v-show="UI.articlePlusShow" @click="UI.articleForm = true" class="articlePlus"
+                :style="{ width: UI.plusButton.width + 'px', height: UI.plusButton.height + 'px'}">
                 <img src="/images/添加代辦事項/plus.svg" alt="添加代辦事項">
             </button>
         </transition>
