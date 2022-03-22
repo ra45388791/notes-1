@@ -13,7 +13,7 @@
 ****************************************************************/
 /* 刪除文章 */
 .v-enter-to,
-.v-leave {
+.v-leave-from{
     opacity: 1;
 }
 
@@ -22,8 +22,8 @@
     transition: opacity 0.5s;
 }
 
-.v-enter,
-.v-leave-to {
+.v-enter-from,
+.v-leave-to{
     opacity: 0;
 }
 
