@@ -32,7 +32,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- <script defer src="script/vue.js"></script> -->
     <script src="https://unpkg.com/vue@next"></script>
-    <script defer src="script/index.js"></script>
+    <script defer type="module" src="script/index.js"></script>
 </head>
 
 <body>
@@ -55,17 +55,7 @@
             <div v-show=" UI.appliedArea==='allItem'" class="articleTemp">
                 <!-- 文章組件 -->
                 <article-box v-for=" data in articleDataArray" :key="data.id" :article-data="data"
-                    :item-state="UI.itemButton" @change-menu="data.menu = $event"
-                    @item-button-temp="UI.itemButton = $event" @item-class-temp="data.menuClass = $event"
-                    @article-state-temp="articleState" @set-article-state-temp="setArticleState"
-                    @edit-article-temp="editArticle" @remove-article-temp="removeArticle">
-
-                </article-box>
-            </div>
-
-            <div v-show="UI.appliedArea === 'toDo'" class="articleTemp">
-                <article-box v-for="data in toDoData" :key="data.id" :article-data="data" :item-state="UI.itemButton"
-                    @change-menu="data.menu = $event" @item-button-temp="UI.itemButton = $event"
+                    :item-state="UI.itemButton" @item-button-temp="UI.itemButton = $event"
                     @item-class-temp="data.menuClass = $event" @article-state-temp="articleState"
                     @set-article-state-temp="setArticleState" @edit-article-temp="editArticle"
                     @remove-article-temp="removeArticle">
@@ -73,12 +63,21 @@
                 </article-box>
             </div>
 
-            <div v-show="UI.appliedArea === 'getThingsDone'" class="articleTemp">
-                <article-box v-for="data in getThingsDoneData" :key="data.id" :article-data="data"
-                    :item-state="UI.itemButton" @change-menu="data.menu = $event"
+            <div v-show="UI.appliedArea === 'toDo'" class="articleTemp">
+                <article-box v-for="data in toDoData" :key="data.id" :article-data="data" :item-state="UI.itemButton"
                     @item-button-temp="UI.itemButton = $event" @item-class-temp="data.menuClass = $event"
                     @article-state-temp="articleState" @set-article-state-temp="setArticleState"
                     @edit-article-temp="editArticle" @remove-article-temp="removeArticle">
+
+                </article-box>
+            </div>
+
+            <div v-show="UI.appliedArea === 'getThingsDone'" class="articleTemp">
+                <article-box v-for="data in getThingsDoneData" :key="data.id" :article-data="data"
+                    :item-state="UI.itemButton" @item-button-temp="UI.itemButton = $event"
+                    @item-class-temp="data.menuClass = $event" @article-state-temp="articleState"
+                    @set-article-state-temp="setArticleState" @edit-article-temp="editArticle"
+                    @remove-article-temp="removeArticle">
 
                 </article-box>
             </div>
@@ -217,10 +216,10 @@
 
                     <h2 class="my-0" v-cloak>{{form.editArticleH2}}</h2>
 
-                    <button type="submit" form="UI.articleForm"><img src="/images/添加代辦事項/O.svg" alt="提交按鈕"></button>
+                    <button type="submit" form="articleForm"><img src="/images/添加代辦事項/O.svg" alt="提交按鈕"></button>
                 </nav>
 
-                <form id="UI.articleForm" method="POST" action="/" @submit.prevent="formSubmit"
+                <form id="articleForm" method="POST" action="/" @submit.prevent="formSubmit"
                     class="container d-flex flex-column justify-content-between align-items-center pb-2">
 
                     <input v-model="form.title" type="text" name="title" placeholder="標題" class="inputForm inputTitle">

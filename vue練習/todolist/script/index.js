@@ -1,148 +1,4 @@
-Vue.component('ArticleBox', {
-    props: {
-        articleData: {
-            type: Object,
-            required: true,
-        },
-        itemState: {
-            type: Boolean,
-            required: true,
-        },
-    },
-    data: function () {
-        return {
-            articleDatas: this.articleData, // 取得主資料
-            itemButtonState: this.itemState, // 選項清單是否打開
-            articleSet: [
-                {text: '待辦'},
-                {text: '結案'},
-                {text: '修改'},
-                {text: '刪除'},
-            ],
-        };
-    },
-    watch: {
-        // articleData 的 menu 屬性
-        'articleData.menu' (newV, oldV) {
-            this.articleDatas.menu = newV;
-        },
-        'articleData.menuClass' (newV, oldV) {
-            this.articleDatas.menuClass = newV;
-        },
-        'articleData.state' (newV, oldV) {
-            this.articleDatas.state = newV;
-        },
-        'articleData.stateImg' (newV, oldV) {
-            this.articleDatas.stateImg = newV;
-        },
-        // item是否打開
-        itemState (newV, oldV) {
-            this.itemButtonState = newV;
-        },
-    },
-    methods: {
-        changeArticleState: function (e) { // 開啟全文章
-            const title = this.articleData.title;
-            const content = this.articleData.content;
-            const setDate = this.articleData.setDate;
-            const date = this.articleData.date;
 
-            this.$emit('article-state-temp', title, content, setDate, date);
-        },
-        setItem: function (e) { // 展開選單
-            const vm = this;
-            // !父組件的UI.itemButton
-
-            if (vm.itemButtonState === false) {
-                // 把UI.itemButton 設為true
-                vm.$emit('item-button-temp', true);
-                // 切換展開狀態
-                vm.$emit('item-class-temp', 'openItem');
-                // 如果按鈕失去焦點就收起清單
-                window.addEventListener('mouseup', function packUpItem2 () {
-                    vm.$emit('item-class-temp', 'closeItem');
-                    // 移除監聽
-                    window.removeEventListener('mouseup', packUpItem2);
-                    vm.$emit('item-button-temp', false);
-                });
-            }
-        },
-
-        clickButton: function (e) { // 按下選單按鈕時
-            const vm = this;
-            const textx = e.srcElement.outerText; // 取得文字
-
-            switch (textx) {
-                case '待辦':
-                    vm.$emit('set-article-state-temp', vm.articleDatas.id, false, '/images/close.png');
-                    break;
-                case '結案':
-                    vm.$emit('set-article-state-temp', vm.articleDatas.id, true, '/images/check.png');
-                    break;
-                case '修改':
-                    vm.$emit('edit-article-temp', vm.articleDatas.id);
-                    break;
-                case '刪除':
-                    if (vm.articleDatas.state === false) {
-                        const check = confirm('此清單尚未結案，確定要刪除嗎?');
-                        if (check === false) return;
-                    }
-
-                    // this.articleDatas.itemShow = false;
-
-                    vm.$emit('remove-article-temp', vm.articleDatas.id);
-                    break;
-            }
-        },
-    },
-    template: `
-        <transition>
-
-            <div v-if="articleDatas.itemShow" @click.self="changeArticleState"
-                class="article d-flex flex-column justify-content-between text-start col-12 mb-3 px-3 pb-3">
-                <div>
-
-                    <h3 @click.self="changeArticleState" class="mb-4 px-1">{{articleDatas.title}}</h3>
-                    <p @click.self="changeArticleState" v-html="articleDatas.content" class="px-1"></p>
-                </div>
-                <div class="itemList">
-
-                <button @click.stop="setItem" class="setButton" type="button">
-                </button>
-
-                <ul :class="articleDatas.menuClass" @click.stop="clickButton"
-                    class="d-flex flex-column justify-content-center py-2 px-3">
-
-                    <li v-for="item of articleSet">
-                        <button>{{item.text}}</button>
-                    </li>
-
-                </ul>
-            </div>
-                <div @click="changeArticleState" class="d-flex justify-content-around">
-                    
-                    <div id="add" class="listState d-flex justify-content-center align-items-center">
-                        <span>{{articleData.setDate.setM}}/{{articleData.setDate.setD}}</span>
-                    </div>
-                        
-                    <div class="listState">
-                        <img :src="articleDatas.stateImg" alt="">
-                    </div>
-
-                    <div id="end" class="listState d-flex justify-content-center align-items-center">
-                        <span>{{articleData.date.m}}/{{articleData.date.d}}</span>
-                    </div>
-
-                </div>
-                    
-                
-
-
-            </div>
-        </transition>
-    
-    `,
-});
 
 // Vue.component('calendar-temp', {
 
@@ -201,9 +57,11 @@ const data = {
 };
 
 // eslint-disable-next-line no-unused-vars
-const app = new Vue({
-    el: '#app',
-    data: data,
+const app = Vue.createApp({
+    // el: '#app',
+    data () {
+        return data;
+    },
     computed: {
         toDoData: function () {
             return this.articleDataArray.filter(function (e) {
@@ -244,7 +102,7 @@ const app = new Vue({
 
     },
     watch: {
-        viewScroll: function (newValue, oldValue) {
+        'viewScroll': function (newValue, oldValue) {
             if (newValue > oldValue && this.UI.plusButton.width === 0) {
                 this.UI.plusButton.width = 70;
                 this.UI.plusButton.height = 70;
@@ -253,10 +111,9 @@ const app = new Vue({
                 this.UI.plusButton.height = 0;
             }
         },
+
     },
     created: function () {
-        console.log(Storage.length);
-
         this.$nextTick(async function () {
             // 行事曆資料
             const date = new Date();
@@ -292,6 +149,8 @@ const app = new Vue({
                 vm.UI.plusButton.width = 200;
                 vm.UI.plusButton.height = 60;
             }
+
+            console.log(this.$refs);
         });
     },
     methods: {
@@ -581,7 +440,9 @@ const app = new Vue({
             vm.articleDataArray = [];
 
             originalData.forEach(function (e) {
-                vm.$set(vm.articleDataArray, vm.articleDataArray.length, e);
+                // vm.$set(vm.articleDataArray, vm.articleDataArray.length, e);
+                vm.articleDataArray[vm.articleDataArray.length] = e;
+                // vm.$set(vm.articleDataArray, vm.articleDataArray.length, e);
             });
         },
         // axios取得資料
@@ -675,7 +536,7 @@ const app = new Vue({
                 oldDaysBefore -= (firstDayWeek - 1);
                 oldDaysAfter -= firstDayWeek - 2;
             }
-            console.log(firstDayWeek);
+            // console.log(firstDayWeek);
             // 選中月份天數
             for (let i = 0; i < days; i++) {
                 arrayDays.push(i + 1);
@@ -697,3 +558,156 @@ const app = new Vue({
         },
     },
 });
+
+// vue3要寫在下方
+app.component('article-box', {
+    props: {
+        articleData: {
+            type: Object,
+            required: true,
+        },
+        itemState: {
+            type: Boolean,
+            required: true,
+        },
+    },
+    emits: ['item-button-temp', 'item-class-temp', 'article-state-temp', 'set-article-state-temp', 'edit-article-temp', 'remove-article-temp'],
+    data: function () {
+        return {
+            articleDatas: this.articleData, // 取得主資料
+            itemButtonState: this.itemState, // 選項清單是否打開
+            articleSet: [
+                {text: '待辦'},
+                {text: '結案'},
+                {text: '修改'},
+                {text: '刪除'},
+            ],
+        };
+    },
+    watch: {
+        // articleData 的 menu 屬性
+        'articleData.menu' (newV, oldV) {
+            this.articleDatas.menu = newV;
+        },
+        'articleData.menuClass' (newV, oldV) {
+            this.articleDatas.menuClass = newV;
+        },
+        'articleData.state' (newV, oldV) {
+            this.articleDatas.state = newV;
+        },
+        'articleData.stateImg' (newV, oldV) {
+            this.articleDatas.stateImg = newV;
+        },
+        // item是否打開
+        itemState (newV, oldV) {
+            this.itemButtonState = newV;
+        },
+    },
+    created () {
+        // console.log(this.articleDatas);
+    },
+    methods: {
+        changeArticleState: function (e) { // 開啟全文章
+            const title = this.articleData.title;
+            const content = this.articleData.content;
+            const setDate = this.articleData.setDate;
+            const date = this.articleData.date;
+
+            this.$emit('article-state-temp', title, content, setDate, date);
+        },
+        setItem: function (e) { // 展開選單
+            const vm = this;
+            // !父組件的UI.itemButton
+
+            if (vm.itemButtonState === false) {
+                // 把UI.itemButton 設為true
+                vm.$emit('item-button-temp', true);
+                // 切換展開狀態
+                vm.$emit('item-class-temp', 'openItem');
+                // 如果按鈕失去焦點就收起清單
+                window.addEventListener('mouseup', function packUpItem2 () {
+                    vm.$emit('item-class-temp', 'closeItem');
+                    // 移除監聽
+                    window.removeEventListener('mouseup', packUpItem2);
+                    vm.$emit('item-button-temp', false);
+                });
+            }
+        },
+
+        clickButton: function (e) { // 按下選單按鈕時
+            const vm = this;
+            const textx = e.srcElement.outerText; // 取得文字
+
+            switch (textx) {
+                case '待辦':
+                    vm.$emit('set-article-state-temp', vm.articleDatas.id, false, '/images/close.png');
+                    break;
+                case '結案':
+                    vm.$emit('set-article-state-temp', vm.articleDatas.id, true, '/images/check.png');
+                    break;
+                case '修改':
+                    vm.$emit('edit-article-temp', vm.articleDatas.id);
+                    break;
+                case '刪除':
+                    if (vm.articleDatas.state === false) {
+                        const check = confirm('此清單尚未結案，確定要刪除嗎?');
+                        if (check === false) return;
+                    }
+
+                    // this.articleDatas.itemShow = false;
+
+                    vm.$emit('remove-article-temp', vm.articleDatas.id);
+                    break;
+            }
+        },
+    },
+    template: `
+    
+        
+        <transition>
+            <div v-if="articleDatas.itemShow" @click.self="changeArticleState"
+                class="article d-flex flex-column justify-content-between text-start col-12 mb-3 px-3 pb-3">
+                <div>
+
+                    <h3 @click.self="changeArticleState" class="mb-4 px-1">{{articleDatas.title}}</h3>
+                    <p @click.self="changeArticleState" v-html="articleDatas.content" class="px-1"></p>
+                </div>
+                <div class="itemList">
+
+                    <button @click.stop="setItem" class="setButton" type="button">
+                    </button>
+
+                    <ul :class="articleDatas.menuClass" @click.stop="clickButton"
+                        class="d-flex flex-column justify-content-center py-2 px-3">
+
+                        <li v-for="item of articleSet">
+                            <button>{{item.text}}</button>
+                        </li>
+
+                    </ul>
+                </div>
+                <div @click="changeArticleState" class="d-flex justify-content-around">
+
+                    <div id="add" class="listState d-flex justify-content-center align-items-center">
+                        <span>{{articleData.setDate.setM}}/{{articleData.setDate.setD}}</span>
+                    </div>
+
+                    <div class="listState">
+                        <img :src="articleDatas.stateImg" alt="">
+                    </div>
+
+                    <div id="end" class="listState d-flex justify-content-center align-items-center">
+                        <span>{{articleData.date.m}}/{{articleData.date.d}}</span>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </transition>
+
+    `,
+});
+
+// 把vue掛到app上
+app.mount('#app');

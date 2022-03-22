@@ -12,6 +12,8 @@
     "eslint": "^8.10.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-vue": "^8.5.0"
-    
+  },
+  "dependencies": {
+    "axios": "^0.26.1"
   }
 }
