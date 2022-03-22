@@ -154,7 +154,8 @@ const data = {
     articleDataArray: [],
     calendarData: { // 行事曆相關屬性
         days: [], // 選中月的日期
-        oldDays: [], // 上個月用來填充的日期
+        oldDaysBefore: [], // 上個月用來填充的日期
+        oldDaysAfter: [], // 上個月用來填充的日期
         weekdays: [ // 星期幾
             {text: '一'}, {text: '二'}, {text: '三'}, {text: '四'}, {text: '五'}, {text: '六'}, {text: '日'},
         ],
@@ -245,49 +246,53 @@ const app = new Vue({
     watch: {
         viewScroll: function (newValue, oldValue) {
             if (newValue > oldValue && this.UI.plusButton.width === 0) {
-                this.UI.plusButton.width = 87;
-                this.UI.plusButton.height = 87;
+                this.UI.plusButton.width = 70;
+                this.UI.plusButton.height = 70;
             } else if (newValue < oldValue && this.UI.plusButton.width !== 0) {
                 this.UI.plusButton.width = 0;
                 this.UI.plusButton.height = 0;
             }
         },
     },
-    created: async function () {
-        // 行事曆資料
-        const date = new Date();
-        const dateYear = date.getFullYear();
-        const dateMonth = date.getMonth() + 1;
-        // 設定行事曆顯示日期
-        this.calendarDays(dateYear, dateMonth);
+    created: function () {
+        console.log(Storage.length);
 
-        this.calendarData.chooseDate.year = dateYear;
-        this.calendarData.chooseDate.month = dateMonth;
+        this.$nextTick(async function () {
+            // 行事曆資料
+            const date = new Date();
+            const dateYear = date.getFullYear();
+            const dateMonth = date.getMonth() + 1;
+            // 設定行事曆顯示日期
+            this.calendarDays(dateYear, dateMonth);
+
+            this.calendarData.chooseDate.year = dateYear;
+            this.calendarData.chooseDate.month = dateMonth;
+
+            // 清單資料
+            const ajaxData = await axios.get(this.axiosUrl);
+            this.UI.loading = false;
 
 
-        // 清單資料
-        const ajaxData = await axios.get(this.axiosUrl);
-        this.UI.loading = false;
-
-
-        this.ajaxArticle(ajaxData.data);
+            this.ajaxArticle(ajaxData.data);
+        });
     },
     mounted () {
         const vm = this;
-        // console.log(document.cookie);
-        const viewSize = window.innerWidth;
+        this.$nextTick(function () {
+            // console.log(document.cookie);
+            const viewSize = window.innerWidth;
 
-        if (viewSize < 1024) {
-            vm.UI.plusButton.width = 87;
-            vm.UI.plusButton.height = 87;
-            window.addEventListener('scroll', function () {
-                vm.viewScroll = window.scrollY;
-            });
-        } else {
-            vm.UI.plusButton.width = 200;
-            vm.UI.plusButton.height = 60;
-        }
-        // 讀取畫面隱藏
+            if (viewSize < 1024) {
+                vm.UI.plusButton.width = 70;
+                vm.UI.plusButton.height = 70;
+                window.addEventListener('scroll', function () {
+                    vm.viewScroll = window.scrollY;
+                });
+            } else {
+                vm.UI.plusButton.width = 200;
+                vm.UI.plusButton.height = 60;
+            }
+        });
     },
     methods: {
         /*
@@ -390,6 +395,7 @@ const app = new Vue({
                 this.UI.UIShow = false;
                 // 是否顯示文章
                 this.UI.articleShow = true;
+                this.form.editArticleH2 = '待辦事項';
             } else if (uiBl === false &&
                 itemBtnBl === false &&
                 articleBl === true) {
@@ -585,6 +591,7 @@ const app = new Vue({
             axios({
                 method: method,
                 url: this.axiosUrl,
+                // headers: {},
                 data: {
                     func: func,
                     data: data,
@@ -619,60 +626,74 @@ const app = new Vue({
                 });
         },
         // 行事曆日期解析
-        calendarDays: function (year, monthPlusOne) {
-            const month = monthPlusOne - 1; // 因為monthPlusOne 有+1過 所以-1
+        calendarDays: function (year, month) {
             let days;
             const arrayDays = []; // 選定月份天數
-            const arrayOldDays = [];// 用來填充空格的上個月天數
+            const arrayOldDaysBefore = [];// 用來填充空格的上個月天數
+            const arrayOldDaysAfter = [];
 
-            const firstDate = new Date(year, month, 1); // 取得指定月份的第一天
-            const firstDayWeek = firstDate.getDay(); // 取得第一天星期幾
-            const lastDay = new Date(year, month, 0); // 前一個月的最後一天
-            let oldDays = lastDay.getDate();
+            const firstDate = new Date(year, month - 1, 1); // 取得指定月份的第一天
+            let firstDayWeek = firstDate.getDay(); // 取得第一天星期幾
+            const lastDay = new Date(year, month - 1, 0); // 前一個月的最後一天
+            let oldDaysBefore = lastDay.getDate();
+
+            let oldDaysAfter = NaN;
+
 
             // 月份
             if (month % 2 === 0) {
                 if (month === 2) {
                     days = 28;
+                    oldDaysAfter = 14;
                 } else {
                     days = 30;
+                    oldDaysAfter = 12;
                 }
             } else {
                 days = 31;
+                oldDaysAfter = 11;
             }
             // 閏年判斷
             if (year % 400 === 0 ||
                 year % 4 === 0 && year % 100 !== 0) {
                 if (month === 2) {
                     days = 29;
+                    oldDaysAfter = 13;
                 }
             }
             // 星期判斷 //如果是禮拜五 上個月-4 之後推進array 逐漸+1
             if (firstDayWeek === 0) {
-                oldDays -= 6;
+                firstDayWeek = 7; // 如果是禮拜天 星期參數會是0
+                oldDaysBefore -= 6;
+                oldDaysAfter -= 6;
             } else {
                 /** 假如第一天在禮拜五，上個月是三月 最後一天是31。
-                *   要顯示的第一個數字是 28 號
-                *   5 - 2 = 3;     禮拜(5) - 2
-                *   31 - 3 = 28;   取得要顯示的天數
-                */
-                oldDays -= firstDayWeek - 2;
+                 *   要顯示的第一個數字是 28 號
+                 *   5 - 2 = 3;     禮拜(5) - 2
+                 *   31 - 3 = 28;   取得要顯示的天數
+                 */
+                oldDaysBefore -= (firstDayWeek - 1);
+                oldDaysAfter -= firstDayWeek - 2;
             }
-
+            console.log(firstDayWeek);
             // 選中月份天數
             for (let i = 0; i < days; i++) {
                 arrayDays.push(i + 1);
             }
-
             // 填充空格的上個月天數
-            for (let i = 0; i < firstDayWeek - 1; i++) {
-                arrayOldDays.push(oldDays);
-                oldDays++;
+            for (let i = 0; i < firstDayWeek; i++) {
+                arrayOldDaysBefore.push(oldDaysBefore);
+                oldDaysBefore++;
+            }
+            // !!天數有問題
+            for (let i = 0; i < oldDaysAfter - 2; i++) {
+                arrayOldDaysAfter.push(i + 1);
             }
 
             // 設定顯示日期
             this.calendarData.days = arrayDays;
-            this.calendarData.oldDays = arrayOldDays;
+            this.calendarData.oldDaysBefore = arrayOldDaysBefore;
+            this.calendarData.oldDaysAfter = arrayOldDaysAfter;
         },
     },
 });

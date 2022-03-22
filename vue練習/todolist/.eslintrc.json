@@ -41,6 +41,9 @@
                 "ignoreComments": true, //忽略自己行中的所有尾隨註釋和註釋
                 "ignoreUrls": true //忽略包含 URL 的行
             }
+        ],
+        "no-invalid-this": [ //關閉檢查this
+            "off"
         ]
     }
 }

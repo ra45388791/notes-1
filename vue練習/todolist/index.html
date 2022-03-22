@@ -97,7 +97,7 @@
                     <div class="calendarContent  py-3 px-3">
                         <!-- v-for -->
 
-                        <li v-for="day in calendarData.oldDays">
+                        <li v-for="day in calendarData.oldDaysBefore">
                             <button class="dayBox oldDays">
                                 <div type="button" class="dayBoxNumber">
                                     <div>{{day}}</div>
@@ -113,6 +113,13 @@
                             </button>
                         </li>
 
+                        <li v-for="day in calendarData.oldDaysAfter">
+                            <button class="dayBox oldDays">
+                                <div type="button" class="dayBoxNumber">
+                                    <div>{{day}}</div>
+                                </div>
+                            </button>
+                        </li>
                     </div>
 
                     <div class="calendarFunction d-flex justify-content-center align-items-center">
@@ -164,7 +171,21 @@
         <!-- 全文章顯示區 -->
         <transition>
             <!-- ! v-if="UI.articleShow" -->
-            <article v-if="UI.articleShow" class="fullArticle px-3 py-3 text-light">
+            <article v-if="UI.articleShow" id="fullArticle" class="topNavFunctionBox px-3 text-light">
+
+                <nav class="d-flex justify-content-between px-2 text-light ">
+
+                    <button @click="articleState">
+                        <img src="/images/添加代辦事項/X.svg" alt="返回">
+                    </button>
+
+                    <h2 class="my-0" v-cloak>{{form.editArticleH2}}</h2>
+
+                    <button type="button" style="opacity: 0;" disabled>
+                        <img src="/images/添加代辦事項/O.svg" alt="填充方塊">
+                    </button>
+                </nav>
+
                 <section class="mx-auto p-4">
                     <div class="d-flex justify-content-center text-center ">
                         <!-- !文章標題 -->
@@ -178,12 +199,6 @@
                         <!-- !文章內容  內文用v-html 因為要用 </br>-->
                         <p v-html="form.content"></p>
                     </div>
-
-                    <!-- ! v-if="UI.articleShow"  @click="articleState"-->
-                    <button v-if="UI.articleShow" @click="articleState" class="articlePlus returnButton">
-                        <img src="/images/添加代辦事項/back.svg" alt="返回按鈕">
-                    </button>
-
                 </section>
             </article>
         </transition>
@@ -191,15 +206,19 @@
         <!-- 新增、修改清單區域 -->
         <transition name="article-form">
 
-            <div v-show="UI.articleForm" id="postArticle">
-                <nav class="d-flex justify-content-between px-2">
+            <div v-show="UI.articleForm" id="postArticle" class="topNavFunctionBox">
+
+                <nav class="d-flex justify-content-between px-2 text-light">
+
                     <button @click="closeEditArticle">
                         <img src="/images/添加代辦事項/X.svg" alt="返回">
                     </button>
-                    <h2 class="text-light">{{form.editArticleH2}}</h2>
+
+                    <h2 class="my-0" v-cloak>{{form.editArticleH2}}</h2>
 
                     <button type="submit" form="UI.articleForm"><img src="/images/添加代辦事項/O.svg" alt="提交按鈕"></button>
                 </nav>
+
                 <form id="UI.articleForm" method="POST" action="/" @submit.prevent="formSubmit"
                     class="container d-flex flex-column justify-content-between align-items-center pb-2">
 
