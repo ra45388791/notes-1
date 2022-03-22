@@ -1,7 +1,4 @@
-
-// Vue.component('calendar-temp', {
-
-// });
+import axios from '/node_modules/axios/index.js';
 
 const data = {
 
@@ -12,7 +9,7 @@ const data = {
         oldDaysBefore: [], // 上個月用來填充的日期
         oldDaysAfter: [], // 上個月用來填充的日期
         weekdays: [ // 星期幾
-            {text: '一'}, {text: '二'}, {text: '三'}, {text: '四'}, {text: '五'}, {text: '六'}, {text: '日'},
+            { text: '一' }, { text: '二' }, { text: '三' }, { text: '四' }, { text: '五' }, { text: '六' }, { text: '日' },
         ],
         chooseDate: {
             year: 2022,
@@ -58,7 +55,7 @@ const data = {
 // eslint-disable-next-line no-unused-vars
 const app = Vue.createApp({
     // el: '#app',
-    data () {
+    data() {
         return data;
     },
     computed: {
@@ -74,7 +71,7 @@ const app = Vue.createApp({
         },
         chooseDateRes: {
             //   行事曆年月份
-            get () {
+            get() {
                 const year = this.calendarData.chooseDate.year;
                 const month = this.calendarData.chooseDate.month;
 
@@ -83,7 +80,7 @@ const app = Vue.createApp({
                 }
                 return `${String(year)}-0${String(month)}`;
             },
-            set (e) {
+            set(e) {
                 // 依照畫面上的input回傳的value更新資料中的 年月資料
                 // 順便更新要顯示的天數。
                 const value = e.target.value;
@@ -132,7 +129,7 @@ const app = Vue.createApp({
             this.ajaxArticle(ajaxData.data);
         });
     },
-    mounted () {
+    mounted() {
         const vm = this;
         this.$nextTick(function () {
             // console.log(document.cookie);
@@ -233,7 +230,7 @@ const app = Vue.createApp({
 
         removeArticle: function (id) { // 刪除功能
             // 呼叫axios方法
-            this.axiosSubmit('DELETE', 'DELETE', {id: id});
+            this.axiosSubmit('DELETE', 'DELETE', { id: id });
         },
 
         /*
@@ -576,33 +573,33 @@ app.component('article-box', {
             articleDatas: this.articleData, // 取得主資料
             itemButtonState: this.itemState, // 選項清單是否打開
             articleSet: [
-                {text: '待辦'},
-                {text: '結案'},
-                {text: '修改'},
-                {text: '刪除'},
+                { text: '待辦' },
+                { text: '結案' },
+                { text: '修改' },
+                { text: '刪除' },
             ],
         };
     },
     watch: {
         // articleData 的 menu 屬性
-        'articleData.menu' (newV, oldV) {
+        'articleData.menu'(newV, oldV) {
             this.articleDatas.menu = newV;
         },
-        'articleData.menuClass' (newV, oldV) {
+        'articleData.menuClass'(newV, oldV) {
             this.articleDatas.menuClass = newV;
         },
-        'articleData.state' (newV, oldV) {
+        'articleData.state'(newV, oldV) {
             this.articleDatas.state = newV;
         },
-        'articleData.stateImg' (newV, oldV) {
+        'articleData.stateImg'(newV, oldV) {
             this.articleDatas.stateImg = newV;
         },
         // item是否打開
-        itemState (newV, oldV) {
+        itemState(newV, oldV) {
             this.itemButtonState = newV;
         },
     },
-    created () {
+    created() {
         // console.log(this.articleDatas);
     },
     methods: {
@@ -624,7 +621,7 @@ app.component('article-box', {
                 // 切換展開狀態
                 vm.$emit('item-class-temp', 'openItem');
                 // 如果按鈕失去焦點就收起清單
-                window.addEventListener('mouseup', function packUpItem2 () {
+                window.addEventListener('mouseup', function packUpItem2() {
                     vm.$emit('item-class-temp', 'closeItem');
                     // 移除監聽
                     window.removeEventListener('mouseup', packUpItem2);
