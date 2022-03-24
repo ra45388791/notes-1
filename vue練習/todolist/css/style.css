@@ -12,9 +12,9 @@
                         vue過度動畫
 ****************************************************************/
 /* 刪除文章 */
-.v-enter-to,
-.v-leave-from {
-    opacity: 1;
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
 }
 
 .v-enter-active,
@@ -22,9 +22,9 @@
     transition: opacity 0.5s;
 }
 
-.v-enter-from,
-.v-leave-to {
-    opacity: 0;
+.v-enter-to,
+.v-leave-from {
+    opacity: 1;
 }
 
 /* 添加代辦事項進入 */
@@ -143,6 +143,63 @@ nav a:hover {
 }
 
 
+/* 讀取 */
+#loadingImg {
+    position  : fixed;
+    top       : 0;
+    right     : 0;
+    width     : 100vw;
+    height    : 100vh;
+    background: rgba(0, 0, 0, 0.5);
+
+    z-index: 2;
+}
+
+#loadingImg .loadingNote {
+    position : absolute;
+    top      : calc(50% - 50px);
+    right    : calc(50% - 50px);
+    width    : 100px;
+    height   : 100px;
+    animation: loading 0.65s ease-in-out infinite;
+}
+
+#loadingImg p {
+    position: absolute;
+    top     : calc(50% + 55px);
+    right   : calc(50% - 80.24px);
+
+    font-size  : 28px;
+    font-weight: 900;
+}
+
+
+@keyframes loading {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* 遮罩 */
+.mask {
+    position: fixed;
+    right   : 0;
+    top     : 0;
+
+    width     : 100%;
+    height    : 100%;
+    background: rgba(0, 0, 0, 0.5);
+
+    z-index: 2;
+}
 
 
 /**************************************************************** 
@@ -166,10 +223,10 @@ nav a:hover {
 
 
 .buttonMenu .radioBox {
-    position     : absolute;
-    visibility   : hidden;
-    opacity      : 0;
-    /* z-index   : -99; */
+    position  : absolute;
+    visibility: hidden;
+    opacity   : 0;
+
 }
 
 .buttonMenu label {
@@ -182,6 +239,7 @@ nav a:hover {
 
 .buttonMenu button {
     position: relative;
+    padding : 0px;
 
     border       : 0px;
     font-size    : 1.2rem;
@@ -215,44 +273,6 @@ nav a:hover {
     height     : 75%;
     border-left: solid 2px #ffffff;
 }
-
-
-/* .buttonMenu button {
-    position     : relative;
-    height: 100%;
-
-    border       : 0px;
-    font-size    : 1.2rem;
-    font-weight  : bold;
-
-    transition   : 0.4s;
-}
-
-.buttonMenu button:active {
-    color     : #65e3ff;
-    background: #0C4553;
-}
-
-.menuUnclick {
-    background: #1BAACB;
-    color     : #FFFFFF;
-}
-
-.menuClick {
-    color     : #15778f;
-    background: #65e3ff;
-}
-
-.buttonMenu button:not(:first-child):before {
-    content    : "";
-    position   : absolute;
-    left       : 0;
-    top        : 15%;
-    width      : 1px;
-    height     : 75%;
-    border-left: solid 2px #ffffff;
-} */
-
 
 .articlePlus {
     position: fixed;
@@ -560,7 +580,6 @@ nav a:hover {
     top  : 45px;
     right: 65px;
 
-
     width: 120px;
 
     background: #0084A3;
@@ -570,15 +589,12 @@ nav a:hover {
     box-shadow   : inset 0px 0px 0px 2px #00FFF0;
 
     list-style: none;
+    z-index   : 3;
 
     transition: 0.5s;
 
 }
 
-.itemList li {
-    min-height: 28px;
-    margin    : 5px 0px;
-}
 
 .itemList ul button {
     padding: 2px 0px;
@@ -597,21 +613,27 @@ nav a:hover {
     background: #00CFFF;
 }
 
-.itemList ul li {
+/* .itemList ul li {
     box-shadow: none;
 
+} */
+
+.itemList li {
+    min-height: 28px;
+    margin    : 5px 0px;
 }
 
 .openItem {
     height : 170px;
     opacity: 1;
-    z-index: 99;
+    z-index: 3;
 }
 
 .closeItem {
-    height : 0px;
-    opacity: 0;
-    z-index: -1;
+    height    : 0px;
+    visibility: hidden;
+    opacity   : 0;
+    z-index   : 0;
 }
 
 
@@ -690,52 +712,7 @@ nav a:hover {
     text-indent: 0em;
 }
 
-/****************************************************************
-                            雜項
-****************************************************************/
-#loadingImg {
-    position  : fixed;
-    top       : 0;
-    right     : 0;
-    width     : 100vw;
-    height    : 100vh;
-    background: rgba(0, 0, 0, 0.5);
 
-    z-index: 999;
-}
-
-#loadingImg .loadingNote {
-    position : absolute;
-    top      : calc(50% - 50px);
-    right    : calc(50% - 50px);
-    width    : 100px;
-    height   : 100px;
-    animation: loading 0.65s ease-in-out infinite;
-}
-
-#loadingImg p {
-    position: absolute;
-    top     : calc(50% + 55px);
-    right   : calc(50% - 80.24px);
-
-    font-size  : 28px;
-    font-weight: 900;
-}
-
-
-@keyframes loading {
-    0% {
-        transform: translateY(0px);
-    }
-
-    50% {
-        transform: translateY(-20px);
-    }
-
-    100% {
-        transform: translateY(0px);
-    }
-}
 
 @media screen and (min-width: 1024px) {
 
@@ -772,12 +749,28 @@ nav a:hover {
         color: #FFFFFF;
     }
 
+    /****************************************************************
+                            通用區
+****************************************************************/
+    .mask {
+        position: fixed;
+        right   : 1px;
+        top     : 0;
+
+        width     : 70vw;
+        height    : 100%;
+        background: rgba(0, 0, 0, 0.5);
+
+        z-index: 2;
+    }
+
+
     /**************************************************************** 
                             按鈕區
 *****************************************************************/
     .buttonMenu {
         width : 30vw;
-        height: 244px;
+        height: 292px;
         left  : 0px;
         top   : 40%;
 
@@ -786,6 +779,25 @@ nav a:hover {
 
         z-index: 0;
     }
+
+    .buttonMenu label {
+        width            : 100%;
+        height           : 100%;
+        /* vertical-align: bottom; */
+        line-height      : 72px;
+    }
+
+    /* .buttonMenu label:not(:first-child)::before {
+        content : "";
+        
+        position: absolute;
+        left    : 0px;
+        top     : 0px;
+
+        width        : 100%;
+        height       : 1px;
+        border-bottom: solid 2px #ffffff38;
+    } */
 
     .buttonMenu button {
         width     : 100%;
@@ -807,22 +819,11 @@ nav a:hover {
         box-shadow: inset 0px 0px 0px 0px #4bccec00;
     }
 
-    /* .buttonMenu button:active {
-        color     : #15778f;
-        background: #65e3ff;
-    } */
+    .buttonMenu button:not(:first-child)::before {
+        display: none;
+    }
 
-
-
-
-    .buttonMenu button:not(:first-child):before {
-        content : "";
-        position: absolute;
-        left    : 0px;
-        top     : 0px;
-
-        width        : 100%;
-        height       : 1px;
+    .buttonMenu button:not(:last-child) {
         border-bottom: solid 2px #ffffff38;
     }
 

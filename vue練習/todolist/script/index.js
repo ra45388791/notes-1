@@ -30,10 +30,10 @@ const data = {
         },
         appliedArea: 'allItem', // ui選中項目 預設allItem [article /radio / articlePlus]
         UIShow: true, // 介面顯示
-        loading: true, // 讀取
-        itemButton: false, // set清單是否打開
         articleShow: false, // 完整文章淡入
         articleForm: false, // 新增、修改清單區域淡入淡出
+        loading: true, // 讀取
+        setArticleMask: false, // 遮罩
     },
 
     // 用於新增、修改、顯示全文章的區域。
@@ -43,14 +43,13 @@ const data = {
         id: '',
         title: '',
         content: '',
-        setDate: {},
-        date: {},
+        setDate: '',
+        date: '',
     },
 };
 
 // eslint-disable-next-line no-unused-vars
 const app = Vue.createApp({
-    // el: '#app',
     data () {
         return data;
     },
@@ -64,10 +63,6 @@ const app = Vue.createApp({
             return this.articleDataArray.filter(function (e) {
                 return e.state === true;
             });
-        },
-        uiClass: function () {
-            console.log(this.UIStyle);
-            return this.UIStyle === 1 ? buttonMenuClick : buttonMenuUnclick;
         },
         chooseDateRes: {
             //   行事曆年月份
@@ -107,11 +102,6 @@ const app = Vue.createApp({
                 this.UI.plusButton.height = 0;
             }
         },
-        'UI.UIStyle': function (newValue, oldValue) {
-            // console.log(newValue);
-            console.log(this.UI.UIStyle);
-        },
-
     },
     created: function () {
         this.$nextTick(async function () {
@@ -127,10 +117,10 @@ const app = Vue.createApp({
 
             // 清單資料
             const ajaxData = await axios.get(this.axiosUrl);
+
+            this.updateArticle(ajaxData.data);
+
             this.UI.loading = false;
-
-
-            this.ajaxArticle(ajaxData.data);
         });
     },
     mounted () {
@@ -166,6 +156,7 @@ const app = Vue.createApp({
                     vm.form.id = event.id; // 用來找是哪個id要被修改
                     vm.form.title = event.title; // 修改前的標題
                     vm.form.content = event.content; // 修改前的內容
+                    vm.form.date = event.date; //
                     break; // 如果id符合就跳出
                 }
             }
@@ -204,16 +195,14 @@ const app = Vue.createApp({
         },
 
         /*
-    *******************************閱讀功能*******************************
-    */
+        *******************************閱讀功能*******************************
+        */
         //  開啟全文章閱讀區
         articleState: function (title, content, setDate, date) {
             const uiBl = this.UI.UIShow;
-            const itemBtnBl = this.UI.itemButton;
             const articleBl = this.UI.articleShow;
 
             if (uiBl === true &&
-                itemBtnBl === false &&
                 articleBl === false) {
                 // 是否顯示UI
                 this.UI.UIShow = false;
@@ -221,7 +210,6 @@ const app = Vue.createApp({
                 this.UI.articleShow = true;
                 this.form.editArticleH2 = '待辦事項';
             } else if (uiBl === false &&
-                itemBtnBl === false &&
                 articleBl === true) {
                 this.UI.UIShow = true;
                 this.UI.articleShow = false;
@@ -237,8 +225,8 @@ const app = Vue.createApp({
 
 
         /*
-    *******************************修改貼文*******************************
-    */
+        *******************************修改貼文*******************************
+        */
         updataArticle: function () { // 將修改好的內容推入陣列
             // !取得傳入的參數 再去articleDataArray 用id找對應的資料修改
             const vm = this;
@@ -246,21 +234,16 @@ const app = Vue.createApp({
             const title = vm.form.title;
             const content = vm.form.content;
             const date = vm.form.date;
-            const dateData = {
-                y: parseInt(date.slice(0, 4)),
-                m: parseInt(date.slice(5, 7)),
-                d: parseInt(date.slice(8)),
-            };
+
 
             for (const event of vm.articleDataArray) { //
                 if (event.id === id) {
                     event.title = title; // 修改前的標題
                     event.content = content; // 修改前的內容
-                    event.date = dateData;
+                    event.date = date;
                     break; // 如果id符合就跳出
                 }
             }
-
             const box = {
                 id: id,
                 title: title,
@@ -274,8 +257,8 @@ const app = Vue.createApp({
             vm.closeEditArticle(); // 清空顯示區
         },
         /*
-    *******************************新增貼文*******************************
-    */
+        *******************************新增貼文*******************************
+        */
         formSubmit: function () {
             if (this.form.edit === true) { // 檢查如果是修改狀態就調用修改方法
                 this.updataArticle(); // 下方不執行
@@ -380,33 +363,19 @@ const app = Vue.createApp({
         },
 
         /*
-    *******************************其他功能*******************************
-    */
-
-        // 解析ajax取得的文章資料方法
-        ajaxArticle: function (event) {
+        *******************************其他功能*******************************
+        */
+        updateArticle: function (datas) {
+            if (!datas) return;
             const vm = this;
-            const originalData = event.map(function (e) {
-                // 解析資料型態
-                e.setDate = {
-                    setY: parseInt(e.setDate.slice(0, 4)),
-                    setM: parseInt(e.setDate.slice(5, 7)),
-                    setD: parseInt(e.setDate.slice(8)),
-                };
-                e.date = {
-                    y: parseInt(e.date.slice(0, 4)),
-                    m: parseInt(e.date.slice(5, 7)),
-                    d: parseInt(e.date.slice(8)),
-                };
-                return e;
-            });
 
             vm.articleDataArray = [];
 
-            originalData.forEach(function (e) {
-                // vm.$set(vm.articleDataArray, vm.articleDataArray.length, e);
-                vm.articleDataArray[vm.articleDataArray.length] = e;
-                // vm.$set(vm.articleDataArray, vm.articleDataArray.length, e);
+            vm.$nextTick(function () {
+                datas.forEach(function (data) {
+                    // vm.articleDataArray[vm.articleDataArray.length] = data;
+                    vm.articleDataArray.push(data);
+                });
             });
         },
         // axios取得資料
@@ -423,11 +392,12 @@ const app = Vue.createApp({
                 },
             }).then((e) => {
                 // 隱藏讀取
-                console.log(e);
                 this.UI.loading = false;
-                // if (!e) return;
-                console.log(e.data);
-                this.ajaxArticle(e.data);
+
+                // if (!e.data) return; // 如果data沒東西就跳出
+                this.updateArticle(e.data);
+            }).catch((err) => {
+                throw err;
             });
         },
         // 產生uuid方法
@@ -451,67 +421,74 @@ const app = Vue.createApp({
                 });
         },
         // 行事曆日期解析
-        calendarDays: function (year, month) {
-            let days;
+        calendarDays: function (year, monthData) { // data月份參數吃原始資料 也就是 0~11
+            const month = (monthData - 1);
+
+            console.log(year, month);
+
             const arrayDays = []; // 選定月份天數
             const arrayOldDaysBefore = [];// 用來填充空格的上個月天數
             const arrayOldDaysAfter = [];
 
-            const firstDate = new Date(year, month - 1, 1); // 取得指定月份的第一天
-            let firstDayWeek = firstDate.getDay(); // 取得第一天星期幾
-            const lastDay = new Date(year, month - 1, 0); // 前一個月的最後一天
+            const firstDate = new Date(year, month, 1); // 取得本月的第一天
+            let firstDayWeek = firstDate.getDay(); // 取得本月第一天星期幾
+
+            const totalLastDate = new Date(year, month + 1, 0);
+            const totalDate = totalLastDate.getDate();// 取得本月最後一天
+
+            const lastDay = new Date(year, month, 0); // 前一個月的最後一天
             let oldDaysBefore = lastDay.getDate();
 
             let oldDaysAfter = NaN;
 
 
-            // 月份
-            if (month % 2 === 0) {
-                if (month === 2) {
-                    days = 28;
-                    oldDaysAfter = 14;
-                } else {
-                    days = 30;
-                    oldDaysAfter = 12;
-                }
-            } else {
-                days = 31;
-                oldDaysAfter = 11;
-            }
-            // 閏年判斷
-            if (year % 400 === 0 ||
-                year % 4 === 0 && year % 100 !== 0) {
-                if (month === 2) {
-                    days = 29;
-                    oldDaysAfter = 13;
-                }
-            }
-            // 星期判斷 //如果是禮拜五 上個月-4 之後推進array 逐漸+1
+            // // 月份
+            // if (month % 2 === 0) {
+            //     if (month === 2) {
+            //         days = 28;
+            //         oldDaysAfter = 14;
+            //     } else {
+            //         days = 30;
+            //         oldDaysAfter = 12;
+            //     }
+            // } else {
+            //     days = 31;
+            //     oldDaysAfter = 11;
+            // }
+            // // 閏年判斷
+            // if (year % 400 === 0 ||
+            //     year % 4 === 0 && year % 100 !== 0) {
+            //     if (month === 2) {
+            //         days = 29;
+            //         oldDaysAfter = 13;
+            //     }
+            // }
+
+
             if (firstDayWeek === 0) {
                 firstDayWeek = 7; // 如果是禮拜天 星期參數會是0
-                oldDaysBefore -= 6;
-                oldDaysAfter -= 6;
+                oldDaysBefore -= 5;
+                // oldDaysAfter -= 6;
             } else {
-                /** 假如第一天在禮拜五，上個月是三月 最後一天是31。
-                 *   要顯示的第一個數字是 28 號
-                 *   5 - 2 = 3;     禮拜(5) - 2
-                 *   31 - 3 = 28;   取得要顯示的天數
-                 */
-                oldDaysBefore -= (firstDayWeek - 1);
-                oldDaysAfter -= firstDayWeek - 2;
+                oldDaysBefore -= (firstDayWeek - 2);
+                // oldDaysAfter -= firstDayWeek - 2;
             }
-            // console.log(firstDayWeek);
+
             // 選中月份天數
-            for (let i = 0; i < days; i++) {
+            for (let i = 0; i < totalDate; i++) {
                 arrayDays.push(i + 1);
             }
+            console.log(oldDaysBefore);
             // 填充空格的上個月天數
-            for (let i = 0; i < firstDayWeek; i++) {
+            for (let i = 0; i < firstDayWeek - 1; i++) {
                 arrayOldDaysBefore.push(oldDaysBefore);
                 oldDaysBefore++;
             }
-            // !!天數有問題
-            for (let i = 0; i < oldDaysAfter - 2; i++) {
+
+            // 7 * 6 = 42 最多顯示42天  42 - ( 總天數 + 上個月顯示天數 ) = 要填充的天數
+            oldDaysAfter = 42 - (arrayDays.length + arrayOldDaysBefore.length);
+            console.log(oldDaysAfter);
+            for (let i = 0; i < oldDaysAfter; i++) {
                 arrayOldDaysAfter.push(i + 1);
             }
 
@@ -530,23 +507,41 @@ app.component('article-box', {
             type: Object,
             required: true,
         },
-        itemState: {
-            type: Boolean,
-            required: true,
-        },
+
     },
     emits: ['item-button-temp', 'item-class-temp', 'article-state-temp', 'set-article-state-temp', 'edit-article-temp', 'remove-article-temp'],
     data: function () {
         return {
             articleDatas: this.articleData, // 取得主資料
-            itemButtonState: this.itemState, // 選項清單是否打開
             articleSet: [
                 {text: '待辦'},
                 {text: '結案'},
                 {text: '修改'},
                 {text: '刪除'},
             ],
+            menuSet: {
+                show: false,
+                opacity: false,
+            },
         };
+    },
+    computed: {
+        setDateParse: function () {
+            const d = {
+                setY: parseInt(this.articleDatas.setDate.slice(0, 4)),
+                setM: parseInt(this.articleDatas.setDate.slice(5, 7)),
+                setD: parseInt(this.articleDatas.setDate.slice(8)),
+            };
+            return d;
+        },
+        dateParse: function () {
+            const d = {
+                y: parseInt(this.articleDatas.date.slice(0, 4)),
+                m: parseInt(this.articleDatas.date.slice(5, 7)),
+                d: parseInt(this.articleDatas.date.slice(8)),
+            };
+            return d;
+        },
     },
     watch: {
         // articleData 的 menu 屬性
@@ -580,22 +575,9 @@ app.component('article-box', {
             this.$emit('article-state-temp', title, content, setDate, date);
         },
         setItem: function (e) { // 展開選單
-            const vm = this;
             // !父組件的UI.itemButton
-
-            if (vm.itemButtonState === false) {
-                // 把UI.itemButton 設為true
-                vm.$emit('item-button-temp', true);
-                // 切換展開狀態
-                vm.$emit('item-class-temp', 'openItem');
-                // 如果按鈕失去焦點就收起清單
-                window.addEventListener('mouseup', function packUpItem2 () {
-                    vm.$emit('item-class-temp', 'closeItem');
-                    // 移除監聽
-                    window.removeEventListener('mouseup', packUpItem2);
-                    vm.$emit('item-button-temp', false);
-                });
-            }
+            this.menuSet.show = !this.menuSet.show;
+            this.menuSet.opacity = !this.menuSet.opacity;
         },
 
         clickButton: function (e) { // 按下選單按鈕時
@@ -623,6 +605,8 @@ app.component('article-box', {
                     vm.$emit('remove-article-temp', vm.articleDatas.id);
                     break;
             }
+
+            this.setItem();
         },
     },
     template: `
@@ -641,19 +625,18 @@ app.component('article-box', {
                     <button @click.stop="setItem" class="setButton" type="button">
                     </button>
 
-                    <ul :class="articleDatas.menuClass" @click.stop="clickButton"
+                    <ul :class="menuSet.show ? 'openItem':'closeItem' " @click.stop="clickButton"
                         class="d-flex flex-column justify-content-center py-2 px-3">
 
                         <li v-for="item of articleSet">
                             <button>{{item.text}}</button>
                         </li>
-
                     </ul>
                 </div>
                 <div @click="changeArticleState" class="d-flex justify-content-around">
 
                     <div id="add" class="listState d-flex justify-content-center align-items-center">
-                        <span>{{articleData.setDate.setM}}/{{articleData.setDate.setD}}</span>
+                        <span>{{setDateParse.setM}}/{{setDateParse.setD}}</span>
                     </div>
 
                     <div class="listState">
@@ -661,12 +644,16 @@ app.component('article-box', {
                     </div>
 
                     <div id="end" class="listState d-flex justify-content-center align-items-center">
-                        <span>{{articleData.date.m}}/{{articleData.date.d}}</span>
+                        <span>{{dateParse.m}}/{{dateParse.d}}</span>
                     </div>
 
                 </div>
-
-
+                
+                <div v-show="menuSet.show"
+                    class="mask" 
+                    @click="setItem" >
+                </div>
+                
             </div>
         </transition>
 

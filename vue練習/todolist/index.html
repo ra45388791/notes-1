@@ -55,17 +55,18 @@
             <div v-show=" UI.appliedArea==='allItem'" class="articleTemp">
                 <!-- 文章組件 -->
                 <article-box v-for=" data in articleDataArray" :key="data.id" :article-data="data"
-                    :item-state="UI.itemButton" @item-button-temp="UI.itemButton = $event"
-                    @item-class-temp="data.menuClass = $event" @article-state-temp="articleState"
+                    :item-state="UI.itemButton" @article-state-temp="articleState"
                     @set-article-state-temp="setArticleState" @edit-article-temp="editArticle"
                     @remove-article-temp="removeArticle">
 
                 </article-box>
             </div>
 
+            <!-- @item-button-temp="UI.itemButton = $event" -->
+            <!-- @item-class-temp="data.menuClass = $event"  -->
+
             <div v-show="UI.appliedArea === 'toDo'" class="articleTemp">
                 <article-box v-for="data in toDoData" :key="data.id" :article-data="data" :item-state="UI.itemButton"
-                    @item-button-temp="UI.itemButton = $event" @item-class-temp="data.menuClass = $event"
                     @article-state-temp="articleState" @set-article-state-temp="setArticleState"
                     @edit-article-temp="editArticle" @remove-article-temp="removeArticle">
 
@@ -74,8 +75,7 @@
 
             <div v-show="UI.appliedArea === 'getThingsDone'" class="articleTemp">
                 <article-box v-for="data in getThingsDoneData" :key="data.id" :article-data="data"
-                    :item-state="UI.itemButton" @item-button-temp="UI.itemButton = $event"
-                    @item-class-temp="data.menuClass = $event" @article-state-temp="articleState"
+                    :item-state="UI.itemButton" @article-state-temp="articleState"
                     @set-article-state-temp="setArticleState" @edit-article-temp="editArticle"
                     @remove-article-temp="removeArticle">
 
@@ -145,6 +145,7 @@
                 </div>
 
             </transition>
+
         </div>
 
         <transition>
@@ -205,8 +206,8 @@
                         <h3 class="pb-2 border-bottom">{{form.title}}</h3>
                     </div>
                     <div class="articleDate py-2 text-center">
-                        <p>設定清單日期 : {{form.setDate.setY}}-{{form.setDate.setM}}-{{form.setDate.setD}}</p>
-                        <p>預計達成日期 : {{form.date.y}}-{{form.date.m}}-{{form.date.d}}</p>
+                        <p>設定清單日期 : {{form.setDate}}</p>
+                        <p>預計達成日期 : {{form.date}}</p>
                     </div>
                     <div class="d-flex justify-content-center">
                         <!-- !文章內容  內文用v-html 因為要用 </br>-->
