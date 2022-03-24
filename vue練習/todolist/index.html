@@ -95,7 +95,6 @@
                     </div>
 
                     <div class="calendarContent  py-3 px-3">
-                        <!-- v-for -->
 
                         <li v-for="day in calendarData.oldDaysBefore">
                             <button class="dayBox oldDays">
@@ -149,22 +148,36 @@
         </div>
 
         <transition>
+            <div v-if="UI.UIShow" class="buttonMenu d-flex flex-lg-column justify-content-around">
 
-            <div v-if="UI.UIShow" @click="buttonMenuStyle"
-                class="buttonMenu d-flex flex-lg-column justify-content-around">
-                <button :class="UI.UIStyle.allItem" @click="UI.appliedArea = 'allItem'" class="col-3 ps-lg-5">
-                    所有事項
+                <div class="radioBox">
+                    <input v-model="UI.appliedArea" type="radio" id="allItem" value="allItem">
+                    <input v-model="UI.appliedArea" type="radio" id="toDo" value="toDo">
+                    <input v-model="UI.appliedArea" type="radio" id="getThingsDone" value="getThingsDone">
+                    <input v-model="UI.appliedArea" type="radio" id="calendar" value="calendar">
+                </div>
+
+                <button :class="UI.appliedArea === 'allItem' ? 'menuClick' : 'menuUnclick'" class="col-3">
+                    <label class="ps-lg-5" for="allItem">
+                        所有事項
+                    </label>
                 </button>
-                <button :class="UI.UIStyle.toDo" @click="UI.appliedArea = 'toDo'" class="col-3 ps-lg-5">
-                    待辦
+                <button :class="UI.appliedArea === 'toDo' ? 'menuClick' : 'menuUnclick'" class="col-3">
+                    <label class="ps-lg-5" for="toDo">
+                        待辦
+                    </label>
                 </button>
-                <button :class="UI.UIStyle.getThingsDone" @click="UI.appliedArea = 'getThingsDone'"
-                    class="col-3 ps-lg-5">
-                    結案
+                <button :class="UI.appliedArea === 'getThingsDone' ? 'menuClick' : 'menuUnclick'" class="col-3">
+                    <label class="ps-lg-5" for="getThingsDone">
+                        結案
+                    </label>
                 </button>
-                <button :class="UI.UIStyle.calendar" @click="UI.appliedArea = 'calendar'" class="col-3 ps-lg-5">
-                    行事曆
+                <button :class="UI.appliedArea === 'calendar' ? 'menuClick' : 'menuUnclick'" class="col-3">
+                    <label class="ps-lg-5" for="calendar">
+                        行事曆
+                    </label>
                 </button>
+
             </div>
         </transition>
 
@@ -232,7 +245,7 @@
             </div>
         </transition>
         <transition>
-            <button v-show="UI.articlePlusShow" @click="UI.articleForm = true" class="articlePlus"
+            <button v-show="UI.appliedArea !== 'calendar'" @click="UI.articleForm = true" class="articlePlus"
                 :style="{ width: UI.plusButton.width + 'px', height: UI.plusButton.height + 'px'}">
                 <img src="/images/添加代辦事項/plus.svg" alt="添加代辦事項">
             </button>

@@ -28,15 +28,8 @@ const data = {
             width: 0,
             height: 0,
         },
-        articlePlusShow: true, // 顯示增加文章按鈕
-        appliedArea: 'allItem', // ui選中項目 預設allItem
+        appliedArea: 'allItem', // ui選中項目 預設allItem [article /radio / articlePlus]
         UIShow: true, // 介面顯示
-        UIStyle: { // 按下顯示功能按鈕更換class
-            allItem: 'buttonMenuClick',
-            toDo: 'buttonMenuUnclick',
-            getThingsDone: 'buttonMenuUnclick',
-            calendar: 'buttonMenuUnclick',
-        },
         loading: true, // 讀取
         itemButton: false, // set清單是否打開
         articleShow: false, // 完整文章淡入
@@ -71,6 +64,10 @@ const app = Vue.createApp({
             return this.articleDataArray.filter(function (e) {
                 return e.state === true;
             });
+        },
+        uiClass: function () {
+            console.log(this.UIStyle);
+            return this.UIStyle === 1 ? buttonMenuClick : buttonMenuUnclick;
         },
         chooseDateRes: {
             //   行事曆年月份
@@ -110,6 +107,10 @@ const app = Vue.createApp({
                 this.UI.plusButton.height = 0;
             }
         },
+        'UI.UIStyle': function (newValue, oldValue) {
+            // console.log(newValue);
+            console.log(this.UI.UIStyle);
+        },
 
     },
     created: function () {
@@ -148,43 +149,9 @@ const app = Vue.createApp({
                 vm.UI.plusButton.width = 200;
                 vm.UI.plusButton.height = 60;
             }
-
-            console.log(this.$refs);
         });
     },
     methods: {
-        /*
-        ********************************UI狀態style********************************
-        */
-        buttonMenuStyle: function (e) {
-            this.UI.UIStyle = {
-                allItem: 'buttonMenuUnclick',
-                toDo: 'buttonMenuUnclick',
-                getThingsDone: 'buttonMenuUnclick',
-                calendar: 'buttonMenuUnclick',
-            };
-
-            switch (e.target.outerText) {
-                case '所有事項':
-
-                    this.UI.articlePlusShow = true;
-                    this.UI.UIStyle.allItem = 'buttonMenuClick';
-                    break;
-                case '待辦':
-                    this.UI.articlePlusShow = true;
-                    this.UI.UIStyle.toDo = 'buttonMenuClick';
-                    break;
-                case '結案':
-                    this.UI.articlePlusShow = true;
-                    this.UI.UIStyle.getThingsDone = 'buttonMenuClick';
-                    break;
-                case '行事曆':
-                    this.UI.articlePlusShow = false;
-                    this.UI.UIStyle.calendar = 'buttonMenuClick';
-                    break;
-            }
-        },
-
         /*
     ********************************貼文設定按鈕********************************
     */
@@ -249,7 +216,6 @@ const app = Vue.createApp({
                 itemBtnBl === false &&
                 articleBl === false) {
                 // 是否顯示UI
-                this.UI.articlePlusShow = false;
                 this.UI.UIShow = false;
                 // 是否顯示文章
                 this.UI.articleShow = true;
@@ -257,7 +223,6 @@ const app = Vue.createApp({
             } else if (uiBl === false &&
                 itemBtnBl === false &&
                 articleBl === true) {
-                this.UI.articlePlusShow = true;
                 this.UI.UIShow = true;
                 this.UI.articleShow = false;
                 // 清空顯示區
@@ -603,7 +568,7 @@ app.component('article-box', {
         },
     },
     created () {
-        // console.log(this.articleDatas);
+        // console.log(this.articleData);
     },
     methods: {
         changeArticleState: function (e) { // 開啟全文章

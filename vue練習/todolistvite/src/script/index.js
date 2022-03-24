@@ -1,4 +1,4 @@
-import axios from '/node_modules/axios/index.js';
+import { css } from '/src/css/style.css';
 
 const data = {
 

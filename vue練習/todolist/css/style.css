@@ -13,7 +13,7 @@
 ****************************************************************/
 /* 刪除文章 */
 .v-enter-to,
-.v-leave-from{
+.v-leave-from {
     opacity: 1;
 }
 
@@ -23,13 +23,13 @@
 }
 
 .v-enter-from,
-.v-leave-to{
+.v-leave-to {
     opacity: 0;
 }
 
 /* 添加代辦事項進入 */
 
-.article-form-enter,
+.article-form-enter-from,
 .article-form-leave-to {
 
     transform: translateY(100vh);
@@ -42,7 +42,7 @@
 }
 
 .article-form-enter-to,
-.article-form-leave {
+.article-form-leave-from {
 
     transform: translateY(0px);
     opacity  : 1;
@@ -162,8 +162,27 @@ nav a:hover {
     z-index: 2;
 }
 
+
+
+
+.buttonMenu .radioBox {
+    position     : absolute;
+    visibility   : hidden;
+    opacity      : 0;
+    /* z-index   : -99; */
+}
+
+.buttonMenu label {
+    width            : 100%;
+    height           : 100%;
+    /* vertical-align: bottom; */
+    line-height      : 60px;
+}
+
+
 .buttonMenu button {
-    position     : relative;
+    position: relative;
+
     border       : 0px;
     font-size    : 1.2rem;
     font-weight  : bold;
@@ -177,12 +196,12 @@ nav a:hover {
     background: #0C4553;
 }
 
-.buttonMenuUnclick {
+.menuUnclick {
     background: #1BAACB;
     color     : #FFFFFF;
 }
 
-.buttonMenuClick {
+.menuClick {
     color     : #15778f;
     background: #65e3ff;
 }
@@ -196,6 +215,44 @@ nav a:hover {
     height     : 75%;
     border-left: solid 2px #ffffff;
 }
+
+
+/* .buttonMenu button {
+    position     : relative;
+    height: 100%;
+
+    border       : 0px;
+    font-size    : 1.2rem;
+    font-weight  : bold;
+
+    transition   : 0.4s;
+}
+
+.buttonMenu button:active {
+    color     : #65e3ff;
+    background: #0C4553;
+}
+
+.menuUnclick {
+    background: #1BAACB;
+    color     : #FFFFFF;
+}
+
+.menuClick {
+    color     : #15778f;
+    background: #65e3ff;
+}
+
+.buttonMenu button:not(:first-child):before {
+    content    : "";
+    position   : absolute;
+    left       : 0;
+    top        : 15%;
+    width      : 1px;
+    height     : 75%;
+    border-left: solid 2px #ffffff;
+} */
+
 
 .articlePlus {
     position: fixed;
@@ -737,14 +794,14 @@ nav a:hover {
         text-align: start;
     }
 
-    .buttonMenuClick {
+    .menuClick {
         color        : #15778f;
         background   : #65e3ff;
         /* box-shadow: inset -15px 0px 0px 0px #4bccec; */
         box-shadow   : inset -25px 0px 0px 0px #ffa948;
     }
 
-    .buttonMenuUnclick {
+    .menuUnclick {
         background: #1BAACB;
         color     : #FFFFFF;
         box-shadow: inset 0px 0px 0px 0px #4bccec00;
