@@ -54,19 +54,15 @@
 
             <div v-show=" UI.appliedArea==='allItem'" class="articleTemp">
                 <!-- 文章組件 -->
-                <article-box v-for=" data in articleDataArray" :key="data.id" :article-data="data"
-                    :item-state="UI.itemButton" @article-state-temp="articleState"
-                    @set-article-state-temp="setArticleState" @edit-article-temp="editArticle"
-                    @remove-article-temp="removeArticle">
+                <article-box v-for=" data in articleDataArray" :key="data.id" v-bind="data" :item-state="UI.itemButton"
+                    @article-state-temp="articleState" @set-article-state-temp="setArticleState"
+                    @edit-article-temp="editArticle" @remove-article-temp="removeArticle">
 
                 </article-box>
             </div>
 
-            <!-- @item-button-temp="UI.itemButton = $event" -->
-            <!-- @item-class-temp="data.menuClass = $event"  -->
-
             <div v-show="UI.appliedArea === 'toDo'" class="articleTemp">
-                <article-box v-for="data in toDoData" :key="data.id" :article-data="data" :item-state="UI.itemButton"
+                <article-box v-for="data in toDoData" :key="data.id" v-bind="data" :item-state="UI.itemButton"
                     @article-state-temp="articleState" @set-article-state-temp="setArticleState"
                     @edit-article-temp="editArticle" @remove-article-temp="removeArticle">
 
@@ -74,10 +70,9 @@
             </div>
 
             <div v-show="UI.appliedArea === 'getThingsDone'" class="articleTemp">
-                <article-box v-for="data in getThingsDoneData" :key="data.id" :article-data="data"
-                    :item-state="UI.itemButton" @article-state-temp="articleState"
-                    @set-article-state-temp="setArticleState" @edit-article-temp="editArticle"
-                    @remove-article-temp="removeArticle">
+                <article-box v-for="data in getThingsDoneData" :key="data.id" v-bind="data" :item-state="UI.itemButton"
+                    @article-state-temp="articleState" @set-article-state-temp="setArticleState"
+                    @edit-article-temp="editArticle" @remove-article-temp="removeArticle">
 
                 </article-box>
             </div>
@@ -124,12 +119,12 @@
                     <div class="calendarFunction d-flex justify-content-center align-items-center">
                         <form action="" class="d-flex justify-content-around align-items-center">
                             <!-- <label for="calendarInput">選擇月份：</label> -->
-                            <button>-</button>
+                            <button type="button" @click="calendarData.chooseDate.month--">-</button>
                             <!-- v-value  @input -->
                             <input :value="chooseDateRes" @input="chooseDateRes = $event" id="calendarInput"
                                 type="month" class="mx-4">
 
-                            <button>+</button>
+                            <button type="button" @click="calendarData.chooseDate.month++">+</button>
 
                         </form>
                     </div>
@@ -261,10 +256,7 @@
 
 
 
-
-
-
-
+    
 
 
 

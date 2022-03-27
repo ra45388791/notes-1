@@ -70,6 +70,33 @@ const app = Vue.createApp({
                 const year = this.calendarData.chooseDate.year;
                 const month = this.calendarData.chooseDate.month;
 
+                // 大於12換到下一年
+                if (month >= 13) {
+                    this.calendarData.chooseDate.year += 1;
+                    this.calendarData.chooseDate.month = 1;
+
+                    const year = this.calendarData.chooseDate.year;
+                    const month = this.calendarData.chooseDate.month;
+
+                    this.calendarDays(year, month);
+
+                    return `${String(year)}-01`;
+                }
+                // 小於1換到上一年
+                if (month <= 0) {
+                    this.calendarData.chooseDate.year -= 1;
+                    this.calendarData.chooseDate.month = 12;
+
+                    const year = this.calendarData.chooseDate.year;
+                    const month = this.calendarData.chooseDate.month;
+
+                    this.calendarDays(year, month);
+
+                    return `${String(year)}-12`;
+                }
+
+                this.calendarDays(year, month);
+
                 if (month >= 10) {
                     return `${String(year)}-${String(month)}`;
                 }
@@ -79,9 +106,11 @@ const app = Vue.createApp({
                 // 依照畫面上的input回傳的value更新資料中的 年月資料
                 // 順便更新要顯示的天數。
                 const value = e.target.value;
+                console.log(value);
 
                 const numberYear = parseInt(value.slice(0, 4));
                 const numberMonth = parseInt(value.slice(5, 7));
+
 
                 this.calendarDays(numberYear, numberMonth);
 
@@ -329,8 +358,6 @@ const app = Vue.createApp({
             const box = {
                 id: idData,
                 itemShow: true, // 刪除文章淡出
-                menu: false,
-                menuClass: 'closeItem',
                 state: false, // 預設false
                 stateImg: '/images/close.png', // 預設待辦
                 title: formTitle, // 取得標題
@@ -422,63 +449,39 @@ const app = Vue.createApp({
         },
         // 行事曆日期解析
         calendarDays: function (year, monthData) { // data月份參數吃原始資料 也就是 0~11
+            // ! Data 月份吃原始參數 也就是 0 ~ 11 表示 1~12 月
+            // ! 也就是說 要取得3月 傳入參數必須是 2
             const month = (monthData - 1);
-
-            console.log(year, month);
 
             const arrayDays = []; // 選定月份天數
             const arrayOldDaysBefore = [];// 用來填充空格的上個月天數
             const arrayOldDaysAfter = [];
 
-            const firstDate = new Date(year, month, 1); // 取得本月的第一天
-            let firstDayWeek = firstDate.getDay(); // 取得本月第一天星期幾
-
+            // 取得本月最後一天
             const totalLastDate = new Date(year, month + 1, 0);
-            const totalDate = totalLastDate.getDate();// 取得本月最後一天
+            const totalDate = totalLastDate.getDate();
 
-            const lastDay = new Date(year, month, 0); // 前一個月的最後一天
+            // 取得本月星期幾
+            const firstDate = new Date(year, month, 1);
+            let firstDayWeek = firstDate.getDay();
+
+            // 前一個月的最後一天
+            const lastDay = new Date(year, month, 0);
             let oldDaysBefore = lastDay.getDate();
 
             let oldDaysAfter = NaN;
 
-
-            // // 月份
-            // if (month % 2 === 0) {
-            //     if (month === 2) {
-            //         days = 28;
-            //         oldDaysAfter = 14;
-            //     } else {
-            //         days = 30;
-            //         oldDaysAfter = 12;
-            //     }
-            // } else {
-            //     days = 31;
-            //     oldDaysAfter = 11;
-            // }
-            // // 閏年判斷
-            // if (year % 400 === 0 ||
-            //     year % 4 === 0 && year % 100 !== 0) {
-            //     if (month === 2) {
-            //         days = 29;
-            //         oldDaysAfter = 13;
-            //     }
-            // }
-
-
             if (firstDayWeek === 0) {
                 firstDayWeek = 7; // 如果是禮拜天 星期參數會是0
                 oldDaysBefore -= 5;
-                // oldDaysAfter -= 6;
             } else {
                 oldDaysBefore -= (firstDayWeek - 2);
-                // oldDaysAfter -= firstDayWeek - 2;
             }
 
             // 選中月份天數
             for (let i = 0; i < totalDate; i++) {
                 arrayDays.push(i + 1);
             }
-            console.log(oldDaysBefore);
             // 填充空格的上個月天數
             for (let i = 0; i < firstDayWeek - 1; i++) {
                 arrayOldDaysBefore.push(oldDaysBefore);
@@ -487,7 +490,6 @@ const app = Vue.createApp({
 
             // 7 * 6 = 42 最多顯示42天  42 - ( 總天數 + 上個月顯示天數 ) = 要填充的天數
             oldDaysAfter = 42 - (arrayDays.length + arrayOldDaysBefore.length);
-            console.log(oldDaysAfter);
             for (let i = 0; i < oldDaysAfter; i++) {
                 arrayOldDaysAfter.push(i + 1);
             }
@@ -502,17 +504,28 @@ const app = Vue.createApp({
 
 // vue3要寫在下方
 app.component('article-box', {
-    props: {
-        articleData: {
-            type: Object,
-            required: true,
-        },
+    // props: {
+    //     articleData: {
+    //         type: Object,
+    //         required: true,
+    //     },
 
-    },
+    // },
+    props: ['id', 'itemShow', 'state', 'stateImg', 'title', 'content', 'setDate', 'date'],
     emits: ['item-button-temp', 'item-class-temp', 'article-state-temp', 'set-article-state-temp', 'edit-article-temp', 'remove-article-temp'],
     data: function () {
         return {
-            articleDatas: this.articleData, // 取得主資料
+            // articleDatas: this.articleData, // 取得主資料
+            articleDatas: {// 取得主資料
+                id: this.id,
+                itemShow: this.itemShow,
+                state: this.state,
+                stateImg: this.stateImg,
+                title: this.title,
+                content: this.content,
+                setDate: this.setDate,
+                date: this.date,
+            },
             articleSet: [
                 {text: '待辦'},
                 {text: '結案'},
@@ -544,26 +557,17 @@ app.component('article-box', {
         },
     },
     watch: {
-        // articleData 的 menu 屬性
-        'articleData.menu' (newV, oldV) {
-            this.articleDatas.menu = newV;
-        },
-        'articleData.menuClass' (newV, oldV) {
-            this.articleDatas.menuClass = newV;
-        },
         'articleData.state' (newV, oldV) {
             this.articleDatas.state = newV;
         },
         'articleData.stateImg' (newV, oldV) {
             this.articleDatas.stateImg = newV;
         },
-        // item是否打開
-        itemState (newV, oldV) {
-            this.itemButtonState = newV;
-        },
+
     },
     created () {
         // console.log(this.articleData);
+        // console.log(this.$parent); // 取得父組件
     },
     methods: {
         changeArticleState: function (e) { // 開啟全文章
@@ -662,3 +666,5 @@ app.component('article-box', {
 
 // 把vue掛到app上
 app.mount('#app');
+
+
