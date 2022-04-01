@@ -12,7 +12,7 @@ function updateTime() {
     const minute = time.getMinutes();
     const second = time.getSeconds();
 
-    console.log(hour + ':' + minute + ':' + second);
+    // console.log(hour + ':' + minute + ':' + second);
 
     hourHand.style.transform = `rotate(${(hour * 30) + (minute * 0.5)}deg)`;
     minuteHand.style.transform = `rotate(${minute * 6}deg)`;
@@ -23,3 +23,6 @@ function updateTime() {
 setInterval(() => {
     updateTime();
 }, 1000);
+
+
+
