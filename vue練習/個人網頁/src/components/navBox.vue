@@ -9,7 +9,11 @@
             </div>
             <div class="navOptions">
                 <ul>
-                    <navButton v-for="navbutton of navOptions" :named="navbutton.name"></navButton>
+                    <navButton
+                        v-for="navbutton of navOptions"
+                        :named="navbutton.name"
+                        :Anchord="navbutton.Anchor"
+                    ></navButton>
                 </ul>
             </div>
         </div>
@@ -25,6 +29,7 @@ import navButton from './navButton.vue'
 export default {
     data() {
         return {
+            innerWidth: 0,
             navState: false,
             photoStickers: "../public/photoStickers.png",
             navSelfIntroductionH2: "張榮展",
@@ -32,11 +37,11 @@ export default {
             navOptions: [
                 {
                     name: "HOME",
-                    Anchor: ''
+                    Anchor: '/#header'
                 },
                 {
                     name: "ABOUT",
-                    Anchor: ''
+                    Anchor: '/#about'
                 },
                 {
                     name: "SKILLS",
@@ -49,6 +54,14 @@ export default {
             ],
             footerText: 'Copyright ©2022 All rights reserved'
         };
+    },
+    mounted() {
+        if (window.innerWidth >= 1440) {
+            this.navState = true
+        }
+
+
+
     },
     methods: {
         showNav: function () {
@@ -65,7 +78,7 @@ export default {
 <style scoped>
 .indexNav {
     position: fixed;
-    left: 0;
+    left: 0px;
     top: 0;
 
     display: flex;
@@ -78,6 +91,7 @@ export default {
     transition: all 1s;
     /* transition-timing-function: cubic-bezier(0.3, 0.59, 0.2, 1); */
     transition-timing-function: cubic-bezier(0.3, 0.59, 0.2, 1);
+    z-index: 99;
 }
 
 .indexNav > div {
@@ -162,5 +176,14 @@ footer {
     margin: 0.5rem;
     color: rgb(146, 146, 146);
     font-size: 0.5rem;
+}
+
+@media (min-width: 1440px) {
+    .indexNav {
+        width: 19vw;
+    }
+    .showNav {
+        display: none;
+    }
 }
 </style>

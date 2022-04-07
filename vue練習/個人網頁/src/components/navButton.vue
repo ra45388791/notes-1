@@ -1,15 +1,16 @@
 <template>
     <li>
-        <router-link to="/">{{ buttonName }}</router-link>
+        <router-link :to="buttonAnchor">{{ buttonName }}</router-link>
     </li>
 </template>
 
 <script>
 export default {
-    props: ['named'],
+    props: ['named', 'Anchord'],
     data() {
         return {
             buttonName: this.named,
+            buttonAnchor: this.Anchord
         }
     }
 
