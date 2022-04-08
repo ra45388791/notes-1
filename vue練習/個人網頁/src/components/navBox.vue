@@ -188,7 +188,7 @@ footer {
 
 @media (min-width: 1440px) {
     .indexNav {
-        width: 19vw;
+        width: 18.5vw;
     }
     .closeNav {
         left: 0px;

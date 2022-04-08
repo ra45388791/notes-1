@@ -12,7 +12,7 @@
                     "height": 80
                 },
                 "title": "HTML",
-                "content": "這式 html"
+                "content": "熟悉常用的html5語意標籤、表單、checkbox、radio、響應式圖片等開發需要用到的知識"
             },
             {
                 "id": "a1",
@@ -22,7 +22,7 @@
                     "height": 80
                 },
                 "title": "CSS",
-                "content": "這式 css"
+                "content": "熟悉Flex彈性盒子，before、after等偽類使用方式，喜歡研究一些小技巧。"
             },
             {
                 "id": "a2",
@@ -32,7 +32,7 @@
                     "height": 80
                 },
                 "title": "JavaScript",
-                "content": "這式 javascript"
+                "content": "熟悉上下文、型別轉換、OOP物件導向、作用域、閉包等JS基礎觀念，"
             },
             {
                 "id": "a3",
@@ -42,7 +42,7 @@
                     "height": 69.05
                 },
                 "title": "Vue.JS",
-                "content": "這式 javascript"
+                "content": "熟悉Vue操作語法和一些特性、能使用SFC的模式寫出小型SPA專案。會使用vuex，略懂一點vue-router。"
             },
             {
                 "id": "a4",
@@ -52,7 +52,7 @@
                     "height": 69.05
                 },
                 "title": "Vite",
-                "content": "這式 javascript"
+                "content": "我目前正在使用這款vue官方近幾年推出的新世代打包工具，使用的挺順手的，還未接觸 vueCLI 未來有機會想嘗試使用看看。"
             },
             {
                 "id": "a5",
@@ -62,7 +62,7 @@
                     "height": 66
                 },
                 "title": "Bootstrap",
-                "content": "這式 javascript"
+                "content": "雖然我能熟練地使用bootsrtape提供的class和某些零件，但我不是很喜歡使用他們，在使用的體驗上感覺自由度不高，目前比較偏向手刻版面。"
             },
             {
                 "id": "a6",
@@ -72,7 +72,7 @@
                     "height": 80
                 },
                 "title": "RWD",
-                "content": "這式 javascript"
+                "content": "RWD自適應設計對現代有著不同規格的載體來說是設計版面不可或缺的一項技術。"
             },
             {
                 "id": "a7",
@@ -82,7 +82,7 @@
                     "height": 84.72
                 },
                 "title": "RESTful_API",
-                "content": "這式 javascript"
+                "content": "熟悉RESTful請求使用方式，目前習慣使用 Axios 第三方API來發送RESTful請求。"
             },
             {
                 "id": "a8",
@@ -92,7 +92,7 @@
                     "height": 80
                 },
                 "title": "git",
-                "content": "這式 javascript"
+                "content": "習慣使用 git 作為版控的工具，能夠使用cmd指令來操作，但目前最習慣使用 vscode 的 GitLens 外掛。"
             }
         ]
     },

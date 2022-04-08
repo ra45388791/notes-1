@@ -6,12 +6,14 @@
             <skillsNav></skillsNav>
             <SkillsArticle></SkillsArticle>
         </div>
+        <SkillFloatingBlock></SkillFloatingBlock>
     </section>
 </template>
 
 <script>
 import skillsNav from './skillsNav.vue'
 import SkillsArticle from './skillsArticle.vue';
+import SkillFloatingBlock from "./skillFloatingBlock.vue";
 
 
 export default {
@@ -20,7 +22,7 @@ export default {
 
         };
     },
-    components: { skillsNav, SkillsArticle }
+    components: { skillsNav, SkillsArticle, SkillFloatingBlock }
 
 }
 
@@ -36,10 +38,9 @@ h3 {
 }
 
 #skills {
+    position: relative;
     padding: 3rem 0;
     width: 100%;
-    /* height: 60vh; */
-    /* background: #000; */
     background: linear-gradient(45deg, #00bbff 0%, #514ef7 100%, transparent 0);
 }
 

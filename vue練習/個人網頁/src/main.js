@@ -16,7 +16,17 @@ const store = createStore({
     state() {
         return {
             skillDatas: skillJson,
-            skillPage: 2,
+            skillPage: 0,
+            skillFloatArticle: {
+                id: '',
+                image: {
+                    url: '',
+                    width: '',
+                    height: ''
+                },
+                title: '',
+                content: '',
+            }
         }
     },
     getters: {
@@ -25,6 +35,28 @@ const store = createStore({
     mutations: {
         CHENGE_SKILL_PAGE(state, payload) { //切換 技能頁面
             state.skillPage = payload
+        },
+        COMMIT_SKILL_ARTICLE(state, payload) {
+            state.skillFloatArticle = {
+                id: '',
+                image: {
+                    url: '',
+                    width: '',
+                    height: ''
+                },
+                title: '',
+                content: '',
+            };
+            state.skillFloatArticle = {
+                id: payload.id,
+                image: {
+                    url: payload.image.url,
+                    width: payload.image.width,
+                    height: payload.image.height
+                },
+                title: payload.title,
+                content: payload.content,
+            };
         }
     }
 });

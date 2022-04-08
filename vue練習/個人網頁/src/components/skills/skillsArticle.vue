@@ -14,6 +14,7 @@
                 class="articles"
             ></SkillsArticleBox>
         </div>
+
     </article>
 </template>
 
@@ -26,16 +27,16 @@ import SkillsArticleBox from "./skillsArticleBox.vue";
 export default {
     data() {
         return {
-            isMouseDown: false,
-            pos: {
+            isMouseDown: false,                                 //是否按下滑鼠
+            pos: {                                              //拖曳參數
                 left: 0,
                 x: 0
             },
         };
     },
     computed: {
-        ...mapState(["skillDatas", "skillPage"]),
-        skillsArticleGetter() {
+        ...mapState(["skillDatas", "skillPage"]),               //vuex資料
+        skillsArticleGetter() {                                 //把文章資料抽出
             const vm = this;
             const article = this.skillDatas.find(function (e) {
                 if (e.id === vm.skillPage) {
@@ -69,7 +70,7 @@ export default {
             this.CHENGE_SKILL_PAGE(e);        // 提交id 到 vuex
         }
     },
-    components: { SkillsArticleBox }
+    components: { SkillsArticleBox}
 }
 
 
