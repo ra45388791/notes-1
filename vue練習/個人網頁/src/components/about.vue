@@ -66,7 +66,9 @@ h2 {
     padding: 8vh 2rem;
 }
 .title {
+    margin-bottom: 2rem;
     width: 100%;
+
 }
 .content {
     margin-bottom: 2rem;
@@ -75,10 +77,11 @@ h2 {
     text-align: justify;
 }
 #about .enTitle {
+    font-size: 2rem;
     text-align: center;
 }
 #about .zhTitle {
-    font-size: 2rem;
+    font-size: 3rem;
 
     text-align: center;
 }
@@ -105,16 +108,18 @@ h2 {
 }
 @media (min-width: 1024px) {
     #about {
+        /* padding: 8vh 20%; */
         flex-wrap: wrap;
         justify-content: center;
     }
-
     .content {
         margin-bottom: 0;
 
         margin-right: 3rem;
         width: 384px;
     }
+
+
 
     #about .imgBox {
         width: 384px;

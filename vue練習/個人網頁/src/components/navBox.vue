@@ -1,5 +1,5 @@
 <template>
-    <nav class="indexNav" :style="navState ? 'left:0px;' : 'left:-260px;'">
+    <nav class="indexNav" :class="navState ? 'openNav' : 'closeNav'">
         <button type="button" @click="showNav" class="showNav"></button>
         <div>
             <div class="photoStickers">
@@ -13,6 +13,7 @@
                         v-for="navbutton of navOptions"
                         :named="navbutton.name"
                         :Anchord="navbutton.Anchor"
+                        :idd="navbutton.id"
                     ></navButton>
                 </ul>
             </div>
@@ -37,19 +38,19 @@ export default {
             navOptions: [
                 {
                     name: "HOME",
-                    Anchor: '/#header'
+                    Anchor: '/#header',
                 },
                 {
                     name: "ABOUT",
-                    Anchor: '/#about'
+                    Anchor: '/#about',
                 },
                 {
                     name: "SKILLS",
-                    Anchor: ''
+                    Anchor: '/#skills',
                 },
                 {
                     name: "WORK",
-                    Anchor: ''
+                    Anchor: '',
                 }
             ],
             footerText: 'Copyright ©2022 All rights reserved'
@@ -89,7 +90,6 @@ export default {
     height: 100vh;
     background: rgb(44, 45, 50);
     transition: all 1s;
-    /* transition-timing-function: cubic-bezier(0.3, 0.59, 0.2, 1); */
     transition-timing-function: cubic-bezier(0.3, 0.59, 0.2, 1);
     z-index: 99;
 }
@@ -104,6 +104,14 @@ export default {
 
     width: 100%;
     height: 100%;
+}
+
+.openNav {
+    left: 0px;
+}
+
+.closeNav {
+    left: -260px;
 }
 
 /* 秀出nav按鈕 */
@@ -182,8 +190,19 @@ footer {
     .indexNav {
         width: 19vw;
     }
+    .closeNav {
+        left: 0px;
+    }
     .showNav {
         display: none;
+    }
+}
+
+@media (min-width: 1920px) {
+    .indexNav {
+        
+        left:19.5vw;
+        width: 15vw;
     }
 }
 </style>

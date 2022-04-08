@@ -1,0 +1,243 @@
+[
+    {
+        "id": 0,
+        "name": "前端",
+        "enName": "frontEnd",
+        "article": [
+            {
+                "id": "a0",
+                "image": {
+                    "url": "../../../public/skillsImages/HTML.png",
+                    "width": 80,
+                    "height": 80
+                },
+                "title": "HTML",
+                "content": "這式 html"
+            },
+            {
+                "id": "a1",
+                "image": {
+                    "url": "../../../public/skillsImages/css.png",
+                    "width": 80,
+                    "height": 80
+                },
+                "title": "CSS",
+                "content": "這式 css"
+            },
+            {
+                "id": "a2",
+                "image": {
+                    "url": "../../../public/skillsImages/javascript.png",
+                    "width": 60,
+                    "height": 80
+                },
+                "title": "JavaScript",
+                "content": "這式 javascript"
+            },
+            {
+                "id": "a3",
+                "image": {
+                    "url": "../../../public/skillsImages/vue.svg",
+                    "width": 80,
+                    "height": 69.05
+                },
+                "title": "Vue.JS",
+                "content": "這式 javascript"
+            },
+            {
+                "id": "a4",
+                "image": {
+                    "url": "../../../public/skillsImages/vite.png",
+                    "width": 80,
+                    "height": 69.05
+                },
+                "title": "Vite",
+                "content": "這式 javascript"
+            },
+            {
+                "id": "a5",
+                "image": {
+                    "url": "../../../public/skillsImages/bootsrtape.png",
+                    "width": 80,
+                    "height": 66
+                },
+                "title": "Bootstrap",
+                "content": "這式 javascript"
+            },
+            {
+                "id": "a6",
+                "image": {
+                    "url": "../../../public/skillsImages/RWD.png",
+                    "width": 80,
+                    "height": 80
+                },
+                "title": "RWD",
+                "content": "這式 javascript"
+            },
+            {
+                "id": "a7",
+                "image": {
+                    "url": "../../../public/skillsImages/rest_api.png",
+                    "width": 80,
+                    "height": 84.72
+                },
+                "title": "RESTful_API",
+                "content": "這式 javascript"
+            },
+            {
+                "id": "a8",
+                "image": {
+                    "url": "../../../public/skillsImages/git.png",
+                    "width": 80,
+                    "height": 80
+                },
+                "title": "git",
+                "content": "這式 javascript"
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "name": "後端",
+        "enName": "backEnd",
+        "article": [
+            {
+                "id": "b0",
+                "image": {
+                    "url": "../../../public/skillsImages/node.png",
+                    "width": 90,
+                    "height": 55.04
+                },
+                "title": "node.js",
+                "content": ""
+            },
+            {
+                "id": "b1",
+                "image": {
+                    "url": "../../../public/skillsImages/MySQL.png",
+                    "width": 120,
+                    "height": 61.79
+                },
+                "title": "MySQL",
+                "content": ""
+            },
+            {
+                "id": "b2",
+                "image": {
+                    "url": "../../../public/skillsImages/heroku.png",
+                    "width": 80,
+                    "height": 80
+                },
+                "title": "heroku",
+                "content": ""
+            },
+            {
+                "id": "b3",
+                "image": {
+                    "url": "../../../public/skillsImages/npm.png",
+                    "width": 120,
+                    "height": 46.69
+                },
+                "title": "npm",
+                "content": ""
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "其他",
+        "enName": "other",
+        "article": [
+            {
+                "id": "c0",
+                "image": {
+                    "url": "../../../public/skillsImages/Word.png",
+                    "width": 80,
+                    "height": 78.52
+                },
+                "title": "Word",
+                "content": ""
+            },
+            {
+                "id": "c1",
+                "image": {
+                    "url": "../../../public/skillsImages/PowerPoint.png",
+                    "width": 80,
+                    "height": 74.4
+                },
+                "title": "PowerPoint",
+                "content": ""
+            },
+            {
+                "id": "c2",
+                "image": {
+                    "url": "../../../public/skillsImages/Excel.png",
+                    "width": 80,
+                    "height": 78.52
+                },
+                "title": "Excel",
+                "content": ""
+            },
+            {
+                "id": "c3",
+                "image": {
+                    "url": "../../../public/skillsImages/Photoshop.png",
+                    "width": 80,
+                    "height": 78
+                },
+                "title": "Photoshop",
+                "content": ""
+            },
+            {
+                "id": "c4",
+                "image": {
+                    "url": "../../../public/skillsImages/Virtualbox.png",
+                    "width": 80,
+                    "height": "a"
+                },
+                "title": "Virtualbox",
+                "content": ""
+            },
+            {
+                "id": "c5",
+                "image": {
+                    "url": "../../../public/skillsImages/Unity.png",
+                    "width": 80,
+                    "height": 80
+                },
+                "title": "Unity",
+                "content": ""
+            },
+            {
+                "id": "c6",
+                "image": {
+                    "url": "../../../public/skillsImages/Blender.png",
+                    "width": 180,
+                    "height": 48.37
+                },
+                "title": "blender",
+                "content": ""
+            },
+            {
+                "id": "c7",
+                "image": {
+                    "url": "../../../public/skillsImages/Krita.png",
+                    "width": 80,
+                    "height": 80
+                },
+                "title": "Krita",
+                "content": ""
+            },
+            {
+                "id": "c8",
+                "image": {
+                    "url": "../../../public/skillsImages/inkscape.png",
+                    "width": 80,
+                    "height": 80
+                },
+                "title": "inkscape",
+                "content": ""
+            }
+        ]
+    }
+]

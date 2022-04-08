@@ -25,9 +25,9 @@ export default {
         };
     },
     mounted() {
-        console.log(this.$refs);
+        // console.log(this.$refs);
         const a = this.$refs.titleOne.getBoundingClientRect();
-        console.log(a);
+        // console.log(a);
     },
     methods: {
 

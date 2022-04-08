@@ -3,6 +3,7 @@
     <div class="rightContent">
         <Header></Header>
         <About></About>
+        <Skills></Skills>
     </div>
     <!-- <router-view></router-view> -->
 </template>
@@ -11,8 +12,8 @@
 
 import NavBox from './components/navBox.vue'
 import Header from './components/header.vue';
-
 import About from './components/about.vue';
+import Skills from './components/skills/skills.vue';
 
 export default {
     data() {
@@ -20,7 +21,7 @@ export default {
 
         };
     },
-    components: { NavBox, Header, About }
+    components: { NavBox, Header, About, Skills }
 }
 
 
@@ -34,7 +35,7 @@ html {
 }
 body {
     position: relative;
-    margin: 0;
+
     padding: 0;
 }
 h2 {
@@ -50,6 +51,14 @@ h2 {
         right: 0;
         top: 0;
         width: 80vw;
+    }
+}
+@media (min-width: 1920px) {
+    body {
+        margin: 0 20vw;
+    }
+    .rightContent {
+        width: 45vw;
     }
 }
 </style>

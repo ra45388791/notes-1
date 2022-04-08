@@ -1,17 +1,21 @@
 <template>
     <li>
-        <router-link :to="buttonAnchor">{{ buttonName }}</router-link>
+        <router-link class="navButton" :to="buttonAnchor">{{ buttonName }}</router-link>
     </li>
 </template>
 
 <script>
 export default {
-    props: ['named', 'Anchord'],
+    props: ['named', 'Anchord', 'idd'],
     data() {
         return {
             buttonName: this.named,
-            buttonAnchor: this.Anchord
+            buttonAnchor: this.Anchord,
+            id: this.idd,
         }
+    },
+    mounted() {
+
     }
 
 
