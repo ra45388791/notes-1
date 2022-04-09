@@ -49,6 +49,7 @@ export default {
         mouseDown: function (e) {
 
             this.isMouseDown = true;                            // 是否按下
+            console.log(this.$refs.articleScroll.style);
             this.$refs.articleScroll.style.cursor = "grabbing"  // 滑鼠樣式
             this.pos.left = this.$refs.articleScroll.scrollLeft;//卷軸滾動位置
             this.pos.x = e.clientX;                             //滑鼠所在位置
@@ -107,7 +108,6 @@ article::-webkit-scrollbar {
     flex-wrap: wrap;
 
     height: 20rem;
-    cursor: grab;
 }
 
 .articles:nth-last-child(1)::after {

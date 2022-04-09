@@ -52,7 +52,7 @@ export default {
                     Anchor: '/#skills',
                 },
                 {
-                    name: "WORK",
+                    name: "WORKS",
                     Anchor: '/#work',
                 },
                 {

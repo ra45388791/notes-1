@@ -17,6 +17,7 @@ import App from './App.vue'
 const store = createStore({
     state() {
         return {
+            //技能頁面
             skillDatas: skillJson,
             skillPage: 0,
             skillFloatArticle: {

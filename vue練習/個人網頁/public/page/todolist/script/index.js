@@ -1,8 +1,4 @@
 
-// Vue.component('calendar-temp', {
-
-// });
-
 const data = {
 
     // !主資料
@@ -359,7 +355,7 @@ const app = Vue.createApp({
                 id: idData,
                 itemShow: true, // 刪除文章淡出
                 state: false, // 預設false
-                stateImg: '/images/close.png', // 預設待辦
+                stateImg: './images/close.png', // 預設待辦
                 title: formTitle, // 取得標題
                 content: contentData, // 取得處裡過後的內容
                 setDate: `${formSetDate.setY}-${formSetDate.setM}-${formSetDate.setD}`,
@@ -590,10 +586,10 @@ app.component('article-box', {
 
             switch (textx) {
                 case '待辦':
-                    vm.$emit('set-article-state-temp', vm.articleDatas.id, false, '/images/close.png');
+                    vm.$emit('set-article-state-temp', vm.articleDatas.id, false, './images/close.png');
                     break;
                 case '結案':
-                    vm.$emit('set-article-state-temp', vm.articleDatas.id, true, '/images/check.png');
+                    vm.$emit('set-article-state-temp', vm.articleDatas.id, true, './images/check.png');
                     break;
                 case '修改':
                     vm.$emit('edit-article-temp', vm.articleDatas.id);
