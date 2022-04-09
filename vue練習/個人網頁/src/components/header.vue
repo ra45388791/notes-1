@@ -26,7 +26,7 @@ export default {
     },
     mounted() {
         // console.log(this.$refs);
-        const a = this.$refs.titleOne.getBoundingClientRect();
+        // const a = this.$refs.titleOne.getBoundingClientRect();
         // console.log(a);
     },
     methods: {
@@ -51,14 +51,12 @@ export default {
     background: linear-gradient(
         45deg,
         #514ef7 30%,
-        /* #00b3ff 70%, */ #00bbff 100%,
+        #00bbff 100%,
         transparent
     );
-    /* background: #514ef7; */
 }
 .banner {
     margin: 0 auto;
-    /* padding: 0 50px; */
     display: flex;
     flex-direction: column;
     justify-content: start;

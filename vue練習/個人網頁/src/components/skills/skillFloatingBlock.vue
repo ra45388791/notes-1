@@ -135,7 +135,7 @@ export default {
 .closeArticle button {
     position: absolute;
     left: calc(50% - 1.25rem);
-    bottom: -2.8rem;
+    bottom: -2.9rem;
     width: 2.5rem;
     height: 2.5rem;
     border: none;

@@ -8,6 +8,8 @@ import index from './index.vue'
 import header from './components/header.vue'
 import about from './components/about.vue'
 import skills from './components/skills/skills.vue'
+import work from './components/work/work.vue'
+
 import App from './App.vue'
 
 
@@ -77,6 +79,10 @@ const routes = [
     {
         path: '/#skills',
         component: skills,
+    },
+    {
+        path: '/#work',
+        component: work,
     }
 ]
 
@@ -93,10 +99,6 @@ const router = createRouter({
         }
     }
 })
-
-// router.beforeEach((to) => {
-//     console.log(to);
-// })
 
 const vm = createApp(index);
 

@@ -14,7 +14,6 @@
                 class="articles"
             ></SkillsArticleBox>
         </div>
-
     </article>
 </template>
 
@@ -70,7 +69,7 @@ export default {
             this.CHENGE_SKILL_PAGE(e);        // 提交id 到 vuex
         }
     },
-    components: { SkillsArticleBox}
+    components: { SkillsArticleBox }
 }
 
 

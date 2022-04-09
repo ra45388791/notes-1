@@ -4,16 +4,19 @@
         <Header></Header>
         <About></About>
         <Skills></Skills>
+        <Work></Work>
     </div>
     <!-- <router-view></router-view> -->
 </template>
 
 <script>
 
-import NavBox from './components/navBox.vue'
+import NavBox from './components/nav/navBox.vue'
 import Header from './components/header.vue';
 import About from './components/about.vue';
 import Skills from './components/skills/skills.vue';
+import Work from './components/work/work.vue';
+
 
 export default {
     data() {
@@ -21,7 +24,7 @@ export default {
 
         };
     },
-    components: { NavBox, Header, About, Skills }
+    components: { NavBox, Header, About, Skills, Work }
 }
 
 
@@ -35,7 +38,7 @@ html {
 }
 body {
     position: relative;
-
+    margin: 0;
     padding: 0;
 }
 h2 {
