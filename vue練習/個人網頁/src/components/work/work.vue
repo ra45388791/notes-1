@@ -8,7 +8,6 @@
         </div>
 
         <WorkDynamicWall
-            .class="DynamicWallcomp"
             :articleDatas="pushArticleData"
             :showArticles="showArticle"
             @closeArticle="showArticle = false"
@@ -17,6 +16,7 @@
 </template>
 
 <script>
+import { computed } from "@vue/reactivity";
 import WorkBox from "./workBox.vue";
 import worksJson from "../../assets/works.json";
 import WorkDynamicWall from "./workDynamicWall.vue";
@@ -27,23 +27,24 @@ export default {
             worksData: worksJson,
             showArticle: false,
             pushArticleData: {
-                id: NaN,
+                id: 0,
                 title: "",
                 content: "",
                 image: "",
+                photos: [],
                 href: "",
                 router: "",
-                technology: []
             }
         };
     },
     mounted() {
-        // console.log(this.worksData);
+
     },
-    computed: {},
+    computed: {
+
+    },
     methods: {
         setArticle: function (e) {
-            console.log(e);
             this.pushArticleData = {}   //清空文章
             this.pushArticleData = e;   //設定文章
             this.showArticle = true

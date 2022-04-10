@@ -99,7 +99,8 @@ export default {
     background: rgb(44, 45, 50);
     transition: all 1s;
     transition-timing-function: cubic-bezier(0.3, 0.59, 0.2, 1);
-    z-index: 99;
+    z-index: 3;
+    
 }
 
 .indexNav > div {
@@ -134,6 +135,7 @@ export default {
     border: none;
     border-radius: 0 0 5px 0;
     cursor: pointer; /*滑鼠樣式*/
+    z-index: 9999;
 }
 .showNav::before {
     content: "";

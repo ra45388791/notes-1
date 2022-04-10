@@ -1,5 +1,5 @@
 <template>
-    <article class="workBox">
+    <div class="workBox">
         <button class="content" @mouseup="openArticle">
             <img :src="image" :style="showMask ? 'transform: scale(1.1);' : ''" />
             <div
@@ -11,26 +11,35 @@
                 <h3>{{ title }}</h3>
             </div>
         </button>
-    </article>
+    </div>
 </template>
 
 <script>
-
 export default {
-    props: ['id', 'title', 'content', 'image', 'href', 'technology'],
+    props: ["id", "title", "content", "image", "photos", "href", "router", "technology"],
     data() {
         return {
-            showMask: false
+            showMask: false,
         };
     },
     mounted() {
         // console.log(this.image);
     },
-    computed: {
-    },
+    computed: {},
     methods: {
-        openArticle() {
-            // location.href = this.href
+        openArticle() { //開啟文章
+            const box = {
+                id: this.id,
+                title: this.title,
+                content: this.content,
+                image: this.image,
+                photos: this.photos,
+                href: this.href,
+                router: this.router,
+                technology: this.technology
+            }
+
+            this.$emit('openArticle', box);
         },
         mouseIn() {
             this.showMask = true;
@@ -46,29 +55,22 @@ export default {
 <style scoped>
 .workBox {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     margin: 0;
     width: 18rem;
     height: 18rem;
-    /* background: #1f1; */
-    /* border: 0.5px solid rgb(86, 86, 86); */
 }
 .workBox .content {
     position: relative;
     padding: 0;
-
     width: 100%;
     height: 100%;
-
     border: none;
     overflow: hidden;
 }
 .workBox img {
     position: absolute;
-    top: 0%;
-    left: 0%;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     transition: 0.5s;

@@ -2,34 +2,71 @@
     {
         "id": 0,
         "title": "Todolist",
-        "content": "12348",
+        "content": "todolist介紹",
         "image": "../../../public/works/todolist.jpg",
+        "photos": [
+            {
+                "id": 0,
+                "photo": "../../../public/works/todolist/0.jpg"
+            },
+            {
+                "id": 1,
+                "photo": "../../../public/works/todolist/1.jpg"
+            },
+            {
+                "id": 2,
+                "photo": "../../../public/works/todolist/2.jpg"
+            },
+            {
+                "id": 3,
+                "photo": "../../../public/works/todolist/3.jpg"
+            }
+        ],
         "href": "/public/page/todolist/index.html",
-        "technology": [
-            "html",
-            "css"
-        ]
+        "router": ""
     },
     {
         "id": 2,
         "title": "氣象API應用",
-        "content": "12348",
+        "content": "gsdgsdfg",
         "image": "https://fakeimg.pl/300x300/",
-        "href": "",
-        "technology": [
-            "html",
-            "css"
-        ]
+        "photos": [
+            {
+                "id": 0,
+                "photo": "https://fakeimg.pl/300x900/"
+            },
+            {
+                "id": 1,
+                "photo": "https://fakeimg.pl/900x300/"
+            },
+            {
+                "id": 2,
+                "photo": "https://fakeimg.pl/500x500/"
+            }
+        ],
+        "href": "/public/page/台灣天氣地圖/index.html",
+        "router": "/asss"
     },
     {
         "id": 3,
         "title": "大學專題-音樂遊戲",
-        "content": "12348",
+        "content": "sdhsdfnjsdtdfgdfshg",
+        "photos": [
+            {
+                "id": 0,
+                "photo": "https://fakeimg.pl/900x300/"
+            },
+            {
+                "id": 1,
+                "photo": "https://fakeimg.pl/500x500/"
+            },
+            {
+                "id": 2,
+                "photo": "https://fakeimg.pl/300x900/"
+            }
+        ],
         "image": "../../../public/works/大學專題.jpg",
         "href": "",
-        "technology": [
-            "html",
-            "css"
-        ]
+        "router": "/abc"
     }
 ]

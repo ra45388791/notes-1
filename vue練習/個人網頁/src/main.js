@@ -91,7 +91,6 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes: routes,					//也可以只寫 routes
     scrollBehavior(to, from, savedPosition) {
-        // console.log(to);
         if (to.hash) {
             return {
                 el: to.hash,
