@@ -4,28 +4,53 @@
             <h2>我的作品</h2>
         </div>
         <div class="content">
-            <WorkBox v-for=" work of worksData" v-bind="work"></WorkBox>
+            <WorkBox v-for=" work of worksData" v-bind="work" @openArticle="setArticle"></WorkBox>
         </div>
+
+        <WorkDynamicWall
+            .class="DynamicWallcomp"
+            :articleDatas="pushArticleData"
+            :showArticles="showArticle"
+            @closeArticle="showArticle = false"
+        ></WorkDynamicWall>
     </section>
 </template>
 
 <script>
 import WorkBox from "./workBox.vue";
 import worksJson from "../../assets/works.json";
-
+import WorkDynamicWall from "./workDynamicWall.vue";
 
 export default {
     data() {
         return {
-            worksData: worksJson
+            worksData: worksJson,
+            showArticle: false,
+            pushArticleData: {
+                id: NaN,
+                title: "",
+                content: "",
+                image: "",
+                href: "",
+                router: "",
+                technology: []
+            }
         };
     },
     mounted() {
         // console.log(this.worksData);
     },
     computed: {},
-    methods: {},
-    components: { WorkBox }
+    methods: {
+        setArticle: function (e) {
+            console.log(e);
+            this.pushArticleData = {}   //清空文章
+            this.pushArticleData = e;   //設定文章
+            this.showArticle = true
+
+        }
+    },
+    components: { WorkBox, WorkDynamicWall }
 }
 </script>
 
@@ -33,10 +58,13 @@ export default {
 #work {
     position: relative;
     padding: 3rem 0;
+    /* min-height: 100vh; */
     background: rgb(29, 29, 29);
+    overflow: hidden;
 }
 
 #work::before {
+    /* #work 高度太小會被字頂出去*/
     content: "works";
     position: absolute;
     top: 15rem;
@@ -80,8 +108,13 @@ export default {
 }
 #work .content {
     display: flex;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+@media (min-width: 1024px) {
+    #work .content {
+        flex-direction: row;
+    }
 }
 </style>
