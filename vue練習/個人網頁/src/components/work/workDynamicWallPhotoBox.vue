@@ -1,15 +1,13 @@
 <template>
     <div class="mediaBox" ref="mediaBox">
-        <TransitionGroup>
-            <div
-                v-for="(photos, index) of photoId"
-                :key="photos.id"
-                v-show="showPhotoId === index"
-                class="Box"
-            >
-                <img :src="photos.photo" alt />
-            </div>
-        </TransitionGroup>
+        <div
+            v-for="(photos, index) of photoId"
+            :key="photos.id"
+            v-show="showPhotoId === index"
+            class="Box"
+        >
+            <img :src="photos.photo" alt />
+        </div>
         <transition>
             <!-- ! 讀取 可能要在修改一下 -->
             <div v-show="photoId.length === 0" class="loading"></div>

@@ -4,7 +4,12 @@
             <h2>我的作品</h2>
         </div>
         <div class="content">
-            <WorkBox v-for=" work of worksData" v-bind="work" @openArticle="setArticle"></WorkBox>
+            <WorkBox
+                v-for=" work of worksData"
+                v-bind="work"
+                @openArticle="setArticle"
+                class="workLastBox"
+            ></WorkBox>
         </div>
 
         <WorkDynamicWall
@@ -58,8 +63,12 @@ export default {
 <style scoped>
 #work {
     position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     padding: 3rem 0;
-    /* min-height: 100vh; */
     background: rgb(29, 29, 29);
     overflow: hidden;
 }
@@ -78,6 +87,7 @@ export default {
 }
 
 #work .title {
+    align-self: start;
     margin: 0 4rem;
     margin-bottom: 5rem;
     text-align: start;
@@ -109,13 +119,43 @@ export default {
 }
 #work .content {
     display: flex;
+    flex-direction: column;
+
     justify-content: center;
     align-items: center;
-    flex-direction: column;
 }
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
+    /* 控制顯示作品一行欄位數 */
     #work .content {
         flex-direction: row;
+        flex-wrap: wrap;
+        width: calc(18rem * 2);
+    }
+    #work .content > div:nth-last-child(1) {
+        margin-right: auto;
+    }
+}
+@media (min-width: 1024px) {
+    /* 控制顯示作品一行欄位數 */
+    #work .content {
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: calc(18rem * 3);
+    }
+    #work .content > div:nth-last-child(1) {
+        margin-right: auto;
+    }
+}
+
+@media (min-width: 1440px) {
+    /* 控制顯示作品一行欄位數 */
+    #work .content {
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: calc(18rem * 4);
+    }
+    #work .content > div:nth-last-child(1) {
+        margin-right: auto;
     }
 }
 </style>
