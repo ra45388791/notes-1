@@ -25,12 +25,12 @@ export default {
             buttonData: [
                 {
                     id: 0,
-                    image: '/nav/git_hub.png',
+                    image: 'nav/git_hub.png',
                     href: "https://github.com/ra45388791"
                 },
                 {
                     id: 1,
-                    image: '/nav/104.png',
+                    image: 'nav/104.png',
                     href: "https://pda.104.com.tw/profile/share/6OFojacTKtUXHsRI7QsUq24EJikVOmze"
                 }
             ]

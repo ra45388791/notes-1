@@ -7,7 +7,7 @@
             {
                 "id": "a0",
                 "image": {
-                    "url": "/skillsImages/HTML.png",
+                    "url": "skillsImages/HTML.png",
                     "width": 80,
                     "height": 80
                 },
@@ -17,7 +17,7 @@
             {
                 "id": "a1",
                 "image": {
-                    "url": "/skillsImages/css.png",
+                    "url": "skillsImages/css.png",
                     "width": 80,
                     "height": 80
                 },
@@ -27,7 +27,7 @@
             {
                 "id": "a2",
                 "image": {
-                    "url": "/skillsImages/javascript.png",
+                    "url": "skillsImages/javascript.png",
                     "width": 60,
                     "height": 80
                 },
@@ -37,7 +37,7 @@
             {
                 "id": "a3",
                 "image": {
-                    "url": "/skillsImages/vue.svg",
+                    "url": "skillsImages/vue.svg",
                     "width": 80,
                     "height": 69.05
                 },
@@ -47,7 +47,7 @@
             {
                 "id": "a4",
                 "image": {
-                    "url": "/skillsImages/vite.png",
+                    "url": "skillsImages/vite.png",
                     "width": 80,
                     "height": 69.05
                 },
@@ -57,7 +57,7 @@
             {
                 "id": "a5",
                 "image": {
-                    "url": "/skillsImages/bootsrtape.png",
+                    "url": "skillsImages/bootsrtape.png",
                     "width": 80,
                     "height": 66
                 },
@@ -67,7 +67,7 @@
             {
                 "id": "a6",
                 "image": {
-                    "url": "/skillsImages/RWD.png",
+                    "url": "skillsImages/RWD.png",
                     "width": 80,
                     "height": 80
                 },
@@ -77,7 +77,7 @@
             {
                 "id": "a7",
                 "image": {
-                    "url": "/skillsImages/rest_api.png",
+                    "url": "skillsImages/rest_api.png",
                     "width": 80,
                     "height": 84.72
                 },
@@ -87,7 +87,7 @@
             {
                 "id": "a8",
                 "image": {
-                    "url": "/skillsImages/git.png",
+                    "url": "skillsImages/git.png",
                     "width": 80,
                     "height": 80
                 },
@@ -104,7 +104,7 @@
             {
                 "id": "b0",
                 "image": {
-                    "url": "/skillsImages/node.png",
+                    "url": "skillsImages/node.png",
                     "width": 90,
                     "height": 55.04
                 },
@@ -114,7 +114,7 @@
             {
                 "id": "b1",
                 "image": {
-                    "url": "/skillsImages/MySQL.png",
+                    "url": "skillsImages/MySQL.png",
                     "width": 120,
                     "height": 61.79
                 },
@@ -124,7 +124,7 @@
             {
                 "id": "b2",
                 "image": {
-                    "url": "/skillsImages/heroku.png",
+                    "url": "skillsImages/heroku.png",
                     "width": 80,
                     "height": 80
                 },
@@ -134,7 +134,7 @@
             {
                 "id": "b3",
                 "image": {
-                    "url": "/skillsImages/npm.png",
+                    "url": "skillsImages/npm.png",
                     "width": 120,
                     "height": 46.69
                 },
@@ -151,7 +151,7 @@
             {
                 "id": "c0",
                 "image": {
-                    "url": "/skillsImages/Word.png",
+                    "url": "skillsImages/Word.png",
                     "width": 80,
                     "height": 78.52
                 },
@@ -161,7 +161,7 @@
             {
                 "id": "c1",
                 "image": {
-                    "url": "/skillsImages/PowerPoint.png",
+                    "url": "skillsImages/PowerPoint.png",
                     "width": 80,
                     "height": 74.4
                 },
@@ -171,7 +171,7 @@
             {
                 "id": "c2",
                 "image": {
-                    "url": "/skillsImages/Excel.png",
+                    "url": "skillsImages/Excel.png",
                     "width": 80,
                     "height": 78.52
                 },
@@ -181,7 +181,7 @@
             {
                 "id": "c3",
                 "image": {
-                    "url": "/skillsImages/Photoshop.png",
+                    "url": "skillsImages/Photoshop.png",
                     "width": 80,
                     "height": 78
                 },
@@ -191,7 +191,7 @@
             {
                 "id": "c4",
                 "image": {
-                    "url": "/skillsImages/Virtualbox.png",
+                    "url": "skillsImages/Virtualbox.png",
                     "width": 80,
                     "height": "a"
                 },
@@ -201,7 +201,7 @@
             {
                 "id": "c5",
                 "image": {
-                    "url": "/skillsImages/Unity.png",
+                    "url": "skillsImages/Unity.png",
                     "width": 80,
                     "height": 80
                 },
@@ -211,7 +211,7 @@
             {
                 "id": "c6",
                 "image": {
-                    "url": "/skillsImages/Blender.png",
+                    "url": "skillsImages/Blender.png",
                     "width": 180,
                     "height": 48.37
                 },
@@ -221,7 +221,7 @@
             {
                 "id": "c7",
                 "image": {
-                    "url": "/skillsImages/Krita.png",
+                    "url": "skillsImages/Krita.png",
                     "width": 80,
                     "height": 80
                 },
@@ -231,7 +231,7 @@
             {
                 "id": "c8",
                 "image": {
-                    "url": "/skillsImages/inkscape.png",
+                    "url": "skillsImages/inkscape.png",
                     "width": 80,
                     "height": 80
                 },

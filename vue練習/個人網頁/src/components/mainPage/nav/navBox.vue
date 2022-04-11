@@ -35,7 +35,7 @@ export default {
         return {
             innerWidth: 0,
             navState: false,
-            photoStickers: "/nav/photoStickers.png",
+            photoStickers: "nav/photoStickers.png",
             navSelfIntroductionH2: "張榮展",
             navSelfIntroductionP: "努力自學前端，立志成為前端工程師",
             navOptions: [

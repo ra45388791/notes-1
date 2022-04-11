@@ -57,7 +57,6 @@ h6 {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    /* color: #2c3e50; */
 
     margin-top: 0px;
 }
@@ -69,7 +68,7 @@ h6 {
     }
 
 }
-@media (min-width: 1920px) {
+@media (min-width: 2000px) {
     body {
         margin: 0 20vw;
     }
