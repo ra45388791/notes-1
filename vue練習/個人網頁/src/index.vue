@@ -1,23 +1,21 @@
 <template>
-    <NavBox></NavBox>
-    <div class="rightContent">
-        <div>
-            <Header></Header>
-            <About></About>
-            <Skills></Skills>
-            <Work></Work>
-        </div>
-    </div>
-    <!-- <router-view></router-view> -->
+    <!-- <NavBox></NavBox> -->
+    <!-- <div class="rightContent">
+        <Header></Header>
+        <About></About>
+        <Skills></Skills>
+        <Work></Work>
+    </div>-->
+    <router-view></router-view>
 </template>
 
 <script>
 
-import NavBox from './components/mainPage/nav/navBox.vue'
-import Header from './components/mainPage/header.vue';
-import About from './components/mainPage/about.vue';
-import Skills from './components/mainPage/skills/skills.vue';
-import Work from './components/mainPage/work/work.vue';
+// import NavBox from './components/mainPage/nav/navBox.vue'
+// import Header from './components/mainPage/header.vue';
+// import About from './components/mainPage/about.vue';
+// import Skills from './components/mainPage/skills/skills.vue';
+// import Work from './components/mainPage/work/work.vue';
 
 
 export default {
@@ -26,7 +24,7 @@ export default {
 
         };
     },
-    components: { NavBox, Header, About, Skills, Work }
+    // components: { NavBox, Header, About, Skills, Work }
 }
 
 
@@ -61,21 +59,21 @@ h6 {
 
     margin-top: 0px;
 }
-
-.rightContent {
-    scroll-behavior: smooth; /*平滑滾動 - 電腦*/
-}
+/*平滑滾動 - 電腦*/
+/* .rightContent {
+    scroll-behavior: smooth;
+} */
 
 @media (min-width: 1440px) {
     #app {
         display: flex;
     }
-    .rightContent {
+    /* .rightContent {
         overflow-y: scroll;
         width: 100%;
         height: 100vh;
         scroll-behavior: smooth;
-    }
+    } */
 }
 @media (min-width: 1920px) {
     body {

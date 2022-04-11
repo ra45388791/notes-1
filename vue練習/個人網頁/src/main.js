@@ -10,6 +10,7 @@ import index from './index.vue'
 // import about from './components/about.vue'
 // import skills from './components/skills/skills.vue'
 // import work from './components/work/work.vue'
+import mainPage from './components/mainPage/mainPage.vue'
 
 // import App from './App.vue'
 
@@ -67,8 +68,8 @@ const store = createStore({
 
 const routes = [
     {
-        path: '/:other',
-        component: 
+        path: '/:mainPages',
+        component: mainPage
     },
     // {
     //     path: '/#header',
@@ -91,14 +92,18 @@ const routes = [
 const router = createRouter({
     history: createWebHashHistory(),
     routes: routes,					//也可以只寫 routes
-    scrollBehavior(to, from, savedPosition) {
-        if (to.hash) {
-            return {
-                el: to.hash,
-                behavior: 'smooth'
-            }
-        }
-    }
+    // scrollBehavior(to, from, savedPosition) {
+    //     if (to) {
+    //         return {
+    //             el: to.hash,
+    //             behavior: 'smooth'
+    //         }
+    //     }
+    // }
+})
+
+router.beforeEach((to, from) => {
+    console.log(to);
 })
 
 const vm = createApp(index);
