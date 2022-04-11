@@ -2,15 +2,16 @@ import { createApp } from 'vue'
 import { createStore } from 'vuex'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
+import "./style/normalize.css"
 import skillJson from './assets/skills.json';       // 匯入 json
 
 import index from './index.vue'
-import header from './components/header.vue'
-import about from './components/about.vue'
-import skills from './components/skills/skills.vue'
-import work from './components/work/work.vue'
+// import header from './components/header.vue'
+// import about from './components/about.vue'
+// import skills from './components/skills/skills.vue'
+// import work from './components/work/work.vue'
 
-import App from './App.vue'
+// import App from './App.vue'
 
 
 
@@ -66,8 +67,8 @@ const store = createStore({
 
 const routes = [
     {
-        path: '/',
-        component: header
+        path: '/:other',
+        component: 
     },
     // {
     //     path: '/#header',
