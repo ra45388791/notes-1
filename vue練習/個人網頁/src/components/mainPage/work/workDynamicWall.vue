@@ -164,6 +164,10 @@ export default {
     box-sizing: border-box;
     border-radius: 30px;
 }
+.workButton img{
+    max-width: 16px;
+    max-height: 16px;
+}
 
 .workArticle {
     position: fixed;

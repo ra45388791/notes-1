@@ -42,9 +42,4 @@ export default {
         scroll-behavior: smooth;
     }
 }
-@media (min-width: 1920px) {
-    /* .rightContent {
-        width: 45vw;
-    } */
-}
 </style>

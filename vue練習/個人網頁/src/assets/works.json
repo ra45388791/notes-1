@@ -52,7 +52,7 @@
         "id": 1,
         "title": "氣象API應用",
         "content": "gsdgsdfg",
-        "image": "https://fakeimg.pl/300x300/",
+        "image": "works/ROC_Central_Weather_Bureau/ROC_Central_Weather_Bureau.png",
         "photos": [
             {
                 "id": 0,
@@ -80,28 +80,74 @@
     {
         "id": 2,
         "title": "大學專題-音樂遊戲",
-        "content": "sdhsdfnjsdtdfgdfshg",
+        "content": [
+            {
+                "id": 0,
+                "text": "大學時製作的專題作品，這個作品是一個音樂遊戲，構想是做出現代的音樂遊戲機台類型的音樂遊戲。"
+            },
+            {
+                "id": 1,
+                "text": "我負責的是  unity程式、架構設計、50頁報告撰寫、譜面設計、動畫設計、特效設計、物件建模、素材蒐集  等核心部分，我的組員們則是負責硬體部分。"
+            },
+            {
+                "id": 2,
+                "text": "美術、物件設計上參考了 \" beat Saber \" 的背景幾何圖形以及打擊點的設計，遊玩模式參考了市面上的 Chunithm 街機來設計。"
+            },
+            {
+                "id": 3,
+                "text": "譜面的製造過程是:先依照音樂節奏生成物件，再使用紀錄時間的scene透過碰到物件觸發事件的機制把時間點記錄下來並生成csv擋案，再編輯擋案指定某個時間點再某個位置要生成物件。"
+            }
+        ],
         "image": "works/大學專題.jpg",
         "photos": [
             {
                 "id": 0,
-                "photo": "https://fakeimg.pl/900x300/"
+                "photo": "works/musicGame/0.jpg"
             },
             {
                 "id": 1,
-                "photo": "https://fakeimg.pl/500x500/"
+                "photo": "works/musicGame/1.jpg"
             },
             {
                 "id": 2,
-                "photo": "https://fakeimg.pl/300x900/"
+                "photo": "works/musicGame/2.jpg"
+            },
+            {
+                "id": 3,
+                "photo": "works/musicGame/3.jpg"
+            },
+            {
+                "id": 4,
+                "photo": "works/musicGame/4.jpg"
             }
         ],
         "button": [
             {
                 "id": 0,
-                "name": "前往連結",
-                "type": "router",
-                "link": "/#/abc",
+                "name": "開啟影片",
+                "type": "href",
+                "link": "https://www.youtube.com/watch?v=2Yhu2y0_TqI",
+                "icon": "works/icon/video.svg"
+            },
+            {
+                "id": 1,
+                "name": "開啟報告",
+                "type": "href",
+                "link": "works/musicGame/期末60頁報告.pdf",
+                "icon": "works/icon/foreign.png"
+            },
+            {
+                "id": 2,
+                "name": "開啟流程圖",
+                "type": "href",
+                "link": "works/musicGame/流程圖.pdf",
+                "icon": "works/icon/foreign.png"
+            },
+            {
+                "id": 3,
+                "name": "音樂遊戲譜面",
+                "type": "href",
+                "link": "works/musicGame/音樂遊戲譜面.pdf",
                 "icon": "works/icon/foreign.png"
             }
         ]

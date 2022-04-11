@@ -126,7 +126,8 @@ export default {
     border: none;
     border-radius: 100%;
     opacity: 0.1;
-    transition: 0.3s;
+    transition: 0.2s;
+    cursor: pointer;
 }
 
 .chengeButton button:hover {

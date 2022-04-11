@@ -67,18 +67,23 @@ export default {
 }
 .workBox .content {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 0;
     width: 100%;
     height: 100%;
+
     border: none;
     overflow: hidden;
 }
 .workBox img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    /* width: 100%;
+    height: 100%; */
+
+    max-width: 18rem;
+    max-height: 18rem;
+
     transition: 0.5s;
 }
 .workBox .content .mask {
