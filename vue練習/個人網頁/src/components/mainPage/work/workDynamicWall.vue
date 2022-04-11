@@ -294,7 +294,7 @@ nav h3 {
     text-indent: 2em;
 
     text-align: start;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 }
 
 /* 按鈕 */

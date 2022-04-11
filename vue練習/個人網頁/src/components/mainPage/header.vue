@@ -46,7 +46,7 @@ export default {
 
     padding: 8vh 0;
     width: 100%;
-    height: 92vh;
+    /* height: 92vh; */
 
     background: linear-gradient(45deg, #514ef7 30%, #00bbff 100%, transparent);
 }

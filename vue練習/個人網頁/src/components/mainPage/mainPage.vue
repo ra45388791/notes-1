@@ -1,6 +1,4 @@
 <template>
-    
-
     <div class="rightContent">
         <Header></Header>
         <About></About>
@@ -33,22 +31,18 @@ export default {
 </script>
 
 <style scoped>
-
 .rightContent {
     scroll-behavior: smooth; /*平滑滾動 - 電腦*/
 }
 
 @media (min-width: 1440px) {
-
     .rightContent {
-        overflow-y: scroll;
         width: 100%;
-        height: 100vh;
+        height: 100%;
         scroll-behavior: smooth;
     }
 }
 @media (min-width: 1920px) {
-
     /* .rightContent {
         width: 45vw;
     } */

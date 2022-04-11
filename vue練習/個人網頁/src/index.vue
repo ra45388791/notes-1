@@ -6,7 +6,9 @@
         <Skills></Skills>
         <Work></Work>
     </div>-->
-    <router-view></router-view>
+    <div class="contentBox">
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
@@ -25,8 +27,8 @@ export default {
         };
     },
     // components: { NavBox, Header, About, Skills, Work }
-    components: { NavBox}
-    
+    components: { NavBox }
+
 }
 
 
@@ -60,18 +62,23 @@ h6 {
 
     margin-top: 0px;
 }
-
-
+.contentBox {
+    width: 100vw;
+    height: 100%;
+}
 @media (min-width: 1440px) {
     #app {
         display: flex;
     }
-
+    .contentBox {
+        margin-left: 15vw;
+        width: 85vw;
+        height: 100%;
+    }
 }
 @media (min-width: 2000px) {
     body {
-        margin: 0 20vw;
+        margin: 0 15vw;
     }
-
 }
 </style>

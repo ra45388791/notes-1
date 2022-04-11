@@ -41,7 +41,7 @@ export default {
             navOptions: [
                 {
                     name: "HOME",
-                    Anchor: '/#header',
+                    Anchor: '/',
                 },
                 {
                     name: "ABOUT",
@@ -57,7 +57,7 @@ export default {
                 },
                 {
                     name: "WORKEXPERIENCE",
-                    Anchor: '/',
+                    Anchor: '/abc',
                 },
 
             ],
@@ -97,7 +97,7 @@ export default {
     width: 240px;
     height: 100vh;
     background: rgb(44, 45, 50);
-    transition: all 1s;
+    transition: left 1s;
     transition-timing-function: cubic-bezier(0.3, 0.59, 0.2, 1);
     z-index: 3;
 
@@ -200,8 +200,9 @@ footer {
 
 @media (min-width: 1440px) {
     .indexNav {
-        position: relative;
-        /* width: 19vw; */
+        /* position: relative; */
+        padding: 0;
+        width: 15vw;
     }
     .closeNav {
         left: 0px;
@@ -211,10 +212,12 @@ footer {
     }
 }
 
-@media (min-width: 1920px) {
-    /* .indexNav {
-        left: 19.5vw; 
+@media (min-width: 2000px) {
+    .indexNav {
+        /* position: relative; */
+        padding: 0;
+        left: 15vw;
         width: 15vw;
-    } */
+    }
 }
 </style>

@@ -8,7 +8,7 @@ import skillJson from './assets/skills.json';       // 匯入 json
 import index from './index.vue'
 // import header from './components/header.vue'
 // import about from './components/about.vue'
-// import skills from './components/skills/skills.vue'
+import skills from './components/mainPage/skills/skills.vue'
 // import work from './components/work/work.vue'
 import mainPage from './components/mainPage/mainPage.vue'
 import NotFound from './components/NotFound.vue'
@@ -69,13 +69,13 @@ const store = createStore({
 
 const routes = [
     {
-        path: '/:mainPages?',
+        path: '/',
         component: mainPage
     },
-    // {
-    //     path: '/#header',
-    //     component: header,
-    // },
+    {
+        path: '/abc',
+        component: skills,
+    },
     // {
     //     path: '/#about',
     //     component: about,
@@ -88,24 +88,28 @@ const routes = [
     //     path: '/#work',
     //     component: work,
     // }
+    {
+        path: '/:pathMatch(.*)*',		// 要使用正則表達式	
+        component: NotFound
+    }
 ]
 
 const router = createRouter({
     history: createWebHashHistory(),
     routes: routes,					//也可以只寫 routes
     scrollBehavior(to, from, savedPosition) {
-        if (to.path === '/') {  //首頁導航
-            if (to.fullPath !== '/') {
-                const hash = to.fullPath.slice(to.fullPath.indexOf('/') + 1);
-                document.querySelector(hash).scrollIntoView();  //找到 id 錨點，滾動到該位置。
-                return null;
-            } else {
-                //回到頂部
-                document.querySelector('#header').scrollIntoView();
-                return null;
+        if (to.fullPath === '/') {
+            return {
+                top: 0,
+            }
+        } else if (to.hash) {
+            // console.log(to.hash);
+            return {
+                el: to.hash
             }
         }
-        return null;
+
+
     }
 })
 

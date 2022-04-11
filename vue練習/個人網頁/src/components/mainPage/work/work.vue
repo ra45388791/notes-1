@@ -164,4 +164,9 @@ export default {
         margin-right: auto;
     }
 }
+@media (min-width: 2000px) {
+    #work .content {
+        width: calc(18rem * 3);
+    }
+}
 </style>
