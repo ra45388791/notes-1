@@ -37,6 +37,7 @@ export default {
 html {
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth; /*平滑滾動 - 手機*/
 }
 body {
     position: relative;
@@ -55,6 +56,10 @@ h6 {
     margin-top: 0px !important;
 }
 
+.rightContent {
+    scroll-behavior: smooth; /*平滑滾動 - 電腦*/
+}
+
 @media (min-width: 1440px) {
     #app {
         display: flex;
@@ -63,14 +68,15 @@ h6 {
         overflow-y: scroll;
         width: 100%;
         height: 100vh;
+        scroll-behavior: smooth;
     }
 }
 @media (min-width: 1920px) {
     body {
         margin: 0 20vw;
     }
-    .rightContent {
-        /* width: 45vw; */
-    }
+    /* .rightContent {
+        width: 45vw;
+    } */
 }
 </style>

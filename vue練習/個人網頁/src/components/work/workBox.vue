@@ -15,8 +15,16 @@
 </template>
 
 <script>
+/**
+ * 要動到 worksJson 需要跟著修改以下組件
+ *  work.vue
+ *  workBox.vue
+ *  WorkDynamicWall.vue
+ *  WorkDynamicWallPhotoBox.vue
+ * 
+*/
 export default {
-    props: ["id", "title", "content", "image", "photos", "href", "router", "technology"],
+    props: ["id", "title", "content", "image", "photos", "button"],
     data() {
         return {
             showMask: false,
@@ -34,9 +42,7 @@ export default {
                 content: this.content,
                 image: this.image,
                 photos: this.photos,
-                href: this.href,
-                router: this.router,
-                technology: this.technology
+                button: this.button,
             }
 
             this.$emit('openArticle', box);

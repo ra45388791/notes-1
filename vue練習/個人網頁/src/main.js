@@ -69,22 +69,22 @@ const routes = [
         path: '/',
         component: header
     },
-    {
-        path: '/#header',
-        component: header,
-    },
-    {
-        path: '/#about',
-        component: about,
-    },
-    {
-        path: '/#skills',
-        component: skills,
-    },
-    {
-        path: '/#work',
-        component: work,
-    }
+    // {
+    //     path: '/#header',
+    //     component: header,
+    // },
+    // {
+    //     path: '/#about',
+    //     component: about,
+    // },
+    // {
+    //     path: '/#skills',
+    //     component: skills,
+    // },
+    // {
+    //     path: '/#work',
+    //     component: work,
+    // }
 ]
 
 const router = createRouter({

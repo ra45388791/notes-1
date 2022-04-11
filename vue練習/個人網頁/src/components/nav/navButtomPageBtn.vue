@@ -114,7 +114,7 @@ nav::-webkit-scrollbar {
 
     cursor: pointer;
     user-select: none; /*禁止區塊反白*/
-    transition: all 0.3s;
+    transition: all 0.2s;
 }
 
 .bottomBtn img {
@@ -123,10 +123,10 @@ nav::-webkit-scrollbar {
     border-radius: 30px;
 }
 
-.bottomBtn:active {
+.bottomBtn:hover {
     color: white;
     border: 4px solid rgb(175, 175, 175);
-    box-shadow: 0 0 10px 0 rgb(254, 254, 254);
+    box-shadow: 0 0 5px 0 rgb(254, 254, 254);
 }
 .bottomBtn:focus {
     color: white;

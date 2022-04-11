@@ -209,9 +209,9 @@ footer {
 }
 
 @media (min-width: 1920px) {
-    .indexNav {
-        /* left: 19.5vw; */
-        /* width: 15vw; */
-    }
+    /* .indexNav {
+        left: 19.5vw; 
+        width: 15vw;
+    } */
 }
 </style>

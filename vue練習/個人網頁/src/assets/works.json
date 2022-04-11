@@ -2,7 +2,16 @@
     {
         "id": 0,
         "title": "Todolist",
-        "content": "todolist介紹",
+        "content": [
+            {
+                "id": 0,
+                "text": "這個todolist作品版型、後端、功能都是由我一人手工建置，使用了 'figma' 設計版型，參考了我最喜歡的網頁巴哈姆特的配色以及風格，css框架採用bootstrap，JavaScript框架使用vue2來建置功能。"
+            },
+            {
+                "id": 1,
+                "text": "後端則是使用 'heroku' 來做為運算平台，使用node.js來撰寫後端接口，資料儲存使用了json來儲存。"
+            }
+        ],
         "image": "../../../public/works/todolist.jpg",
         "photos": [
             {
@@ -22,8 +31,22 @@
                 "photo": "../../../public/works/todolist/3.jpg"
             }
         ],
-        "href": "/public/page/todolist/index.html",
-        "router": ""
+        "button": [
+            {
+                "id": 0,
+                "name": "前往作品",
+                "type": "href",
+                "link": "/public/page/todolist/index.html",
+                "icon": "../../../public/works/icon/foreign.png"
+            },
+            {
+                "id": 1,
+                "name": "前往連結",
+                "type": "router",
+                "link": "/#",
+                "icon": "../../../public/works/icon/foreign.png"
+            }
+        ]
     },
     {
         "id": 1,
@@ -44,8 +67,15 @@
                 "photo": "https://fakeimg.pl/500x500/"
             }
         ],
-        "href": "/public/page/台灣天氣地圖/index.html",
-        "router": "/asss"
+        "button": [
+            {
+                "id": 0,
+                "name": "前往作品",
+                "type": "href",
+                "link": "/public/page/台灣天氣地圖/index.html",
+                "icon": "../../../public/works/icon/foreign.png"
+            }
+        ]
     },
     {
         "id": 2,
@@ -66,95 +96,14 @@
                 "photo": "https://fakeimg.pl/300x900/"
             }
         ],
-        "href": "",
-        "router": "/abc"
-    },
-    {
-        "id": 3,
-        "title": "個人頁面-第一版",
-        "content": "sdhsdfnjsdtdfgdfshg",
-        "image": "https://fakeimg.pl/300x300/",
-        "photos": [
+        "button": [
             {
                 "id": 0,
-                "photo": "https://fakeimg.pl/900x300/"
-            },
-            {
-                "id": 1,
-                "photo": "https://fakeimg.pl/500x500/"
-            },
-            {
-                "id": 2,
-                "photo": "https://fakeimg.pl/300x900/"
+                "name": "前往連結",
+                "type": "router",
+                "link": "/#/abc",
+                "icon": "../../../public/works/icon/foreign.png"
             }
-        ],
-        "href": "",
-        "router": "/abc"
-    },
-    {
-        "id": 4,
-        "title": "測試用格子1",
-        "content": "sdhsdfnjsdtdfgdfshg",
-        "image": "https://fakeimg.pl/300x300/",
-        "photos": [
-            {
-                "id": 0,
-                "photo": "https://fakeimg.pl/900x300/"
-            },
-            {
-                "id": 1,
-                "photo": "https://fakeimg.pl/500x500/"
-            },
-            {
-                "id": 2,
-                "photo": "https://fakeimg.pl/300x900/"
-            }
-        ],
-        "href": "",
-        "router": "/abc"
-    },
-    {
-        "id": 5,
-        "title": "測試用格子2",
-        "content": "sdhsdfnjsdtdfgdfshg",
-        "image": "https://fakeimg.pl/300x300/",
-        "photos": [
-            {
-                "id": 0,
-                "photo": "https://fakeimg.pl/900x300/"
-            },
-            {
-                "id": 1,
-                "photo": "https://fakeimg.pl/500x500/"
-            },
-            {
-                "id": 2,
-                "photo": "https://fakeimg.pl/300x900/"
-            }
-        ],
-        "href": "",
-        "router": "/abc"
-    },
-    {
-        "id": 6,
-        "title": "測試用格子3",
-        "content": "sdhsdfnjsdtdfgdfshg",
-        "image": "https://fakeimg.pl/300x300/",
-        "photos": [
-            {
-                "id": 0,
-                "photo": "https://fakeimg.pl/900x300/"
-            },
-            {
-                "id": 1,
-                "photo": "https://fakeimg.pl/500x500/"
-            },
-            {
-                "id": 2,
-                "photo": "https://fakeimg.pl/300x900/"
-            }
-        ],
-        "href": "",
-        "router": "/abc"
+        ]
     }
 ]

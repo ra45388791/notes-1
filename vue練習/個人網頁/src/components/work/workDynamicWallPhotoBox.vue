@@ -28,6 +28,14 @@
     會有貼文內容 照片可以左右切換那種
 */
 export default {
+    /**
+     * 要動到 worksJson 需要跟著修改以下組件
+     *  work.vue
+     *  workBox.vue
+     *  WorkDynamicWall.vue
+     *  WorkDynamicWallPhotoBox.vue
+     * 
+    */
     props: ['dynamicPhotos'],
     data() {
         return {

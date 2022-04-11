@@ -3,7 +3,10 @@
         <div class="workArticle" v-show="showArticles" @click.self="closeArticle">
             <article class="article">
                 <div class="media">
-                    <WorkDynamicWallPhotoBox :dynamicPhotos="articleData.photos"></WorkDynamicWallPhotoBox>
+                    <WorkDynamicWallPhotoBox
+                        :dynamicPhotos="articleData.photos"
+                        :dynamicButton="articleData.button"
+                    ></WorkDynamicWallPhotoBox>
                 </div>
                 <div class="message">
                     <nav>
@@ -16,12 +19,15 @@
                             <div class="message-content">
                                 <h4>{{ articleData.title }}</h4>
                                 <div class="message-content-div">
-                                    <p>{{ articleData.content }}</p>
+                                    <p
+                                        v-for="content of articleData.content"
+                                        :key="content.id"
+                                    >{{ content.text }}</p>
                                 </div>
                             </div>
 
                             <div class="superLink">
-                                <a
+                                <!-- <a
                                     v-show="ishref"
                                     :href="articleData.href"
                                     target="_blank"
@@ -32,15 +38,27 @@
                                         src="../../../public/works/icon/foreign.png"
                                         alt="linkIcon"
                                     />
+                                </a>-->
+                                <a
+                                    v-for="hrefs of hrefButton"
+                                    :href="hrefs.link"
+                                    :key="hrefs.id"
+                                    target="_blank"
+                                    class="workButton"
+                                >
+                                    {{ hrefs.name }}
+                                    <img :src="hrefs.icon" alt="linkIcon" />
                                 </a>
-                                <!-- 如果是路由 用a -->
-                                <a v-show="!ishref" class="workButton">
-                                    前往作品
-                                    <img
-                                        src="../../../public/works/icon/foreign.png"
-                                        alt="linkIcon"
-                                    />
-                                </a>
+                                <router-link
+                                    v-for="router of routerButton"
+                                    :to="router.link"
+                                    :key="router.id"
+                                    target="_blank"
+                                    class="workButton"
+                                >
+                                    {{ router.name }}
+                                    <img :src="router.icon" alt="linkIcon" />
+                                </router-link>
                             </div>
                         </div>
                     </div>
@@ -51,6 +69,14 @@
 </template>
 
 <script>
+/**
+ * 要動到 worksJson 需要跟著修改以下組件
+ *  work.vue
+ *  workBox.vue
+ *  WorkDynamicWall.vue
+ *  WorkDynamicWallPhotoBox.vue
+ * 
+*/
 import WorkDynamicWallPhotoBox from "./workDynamicWallPhotoBox.vue";
 
 
@@ -61,13 +87,6 @@ export default {
 
     watch: {
         articleDatas: function (newVal, oldVal) {
-            //判斷外部連結是 router 還是 href
-            if (newVal.href) {
-                this.ishref = true;
-            }
-            else {
-                this.ishref = false;
-            }
             this.articleData = newVal;
         },
         showArticles: function (newVal, oldVal) {
@@ -80,18 +99,25 @@ export default {
             articleData: {
                 id: 0,
                 title: "",
-                content: "",
+                content: [],
                 image: "",
                 photos: [],
-                href: "",
-                router: "",
+                button: []
             },
             showArticle: false,
-            ishref: true, //判斷外部連結是 router 還是 href
+            // ishref: true, //判斷外部連結是 router 還是 href
         };
     },
     computed: {
+        hrefButton: function () {
+            const href = this.articleData.button.filter((e) => e.type === "href");
+            return href;
+        },
+        routerButton: function () {
+            const router = this.articleData.button.filter((e) => e.type === "router");
+            return router;
 
+        }
     },
     methods: {
         closeArticle() {
@@ -262,6 +288,7 @@ nav h3 {
 }
 .message-content p {
     margin: 0;
+    margin-bottom: 1rem;
     padding: 0 1.5rem;
     line-height: 1.5rem;
     text-indent: 2em;
@@ -273,6 +300,7 @@ nav h3 {
 /* 按鈕 */
 .message .superLink {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     margin: 1rem 0 1rem;
@@ -280,6 +308,9 @@ nav h3 {
     height: 25%;
 }
 .message .superLink a {
+    width: 11rem;
+    margin: 0.5rem 0.5rem;
+
     line-height: 2.4rem;
     text-decoration: none;
 }

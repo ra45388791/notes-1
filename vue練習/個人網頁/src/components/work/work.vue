@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import { computed } from "@vue/reactivity";
 import WorkBox from "./workBox.vue";
 import worksJson from "../../assets/works.json";
 import WorkDynamicWall from "./workDynamicWall.vue";
@@ -31,14 +30,21 @@ export default {
         return {
             worksData: worksJson,
             showArticle: false,
+            /**
+             * 要動到 worksJson 需要跟著修改以下組件
+             *  work.vue
+             *  workBox.vue
+             *  WorkDynamicWall.vue
+             *  WorkDynamicWallPhotoBox.vue
+             * 
+            */
             pushArticleData: {
                 id: 0,
                 title: "",
-                content: "",
+                content: [],
                 image: "",
                 photos: [],
-                href: "",
-                router: "",
+                button: []
             }
         };
     },
@@ -68,7 +74,7 @@ export default {
     flex-direction: column;
     align-items: center;
 
-    padding: 3rem 0;
+    padding: 3rem 0 11rem;
     background: rgb(29, 29, 29);
     overflow: hidden;
 }

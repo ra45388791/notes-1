@@ -1,6 +1,7 @@
 <template>
     <li>
-        <router-link class="navButton" :to="buttonAnchor">{{ buttonName }}</router-link>
+        <!-- <router-link class="navButton" :to="buttonAnchor">{{ buttonName }}</router-link> -->
+        <a class="navButton" :href="buttonAnchor">{{ buttonName }}</a>
     </li>
 </template>
 
