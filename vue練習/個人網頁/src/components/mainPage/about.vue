@@ -12,7 +12,7 @@
             </article>
         </div>
         <div class="imgBox">
-            <img src="../../public/生活照.jpg" alt srcset />
+            <img src="/public/生活照.jpg" alt srcset />
         </div>
     </section>
 </template>

@@ -13,11 +13,11 @@
 
 <script>
 
-import NavBox from './components/nav/navBox.vue'
-import Header from './components/header.vue';
-import About from './components/about.vue';
-import Skills from './components/skills/skills.vue';
-import Work from './components/work/work.vue';
+import NavBox from './components/mainPage/nav/navBox.vue'
+import Header from './components/mainPage/header.vue';
+import About from './components/mainPage/about.vue';
+import Skills from './components/mainPage/skills/skills.vue';
+import Work from './components/mainPage/work/work.vue';
 
 
 export default {
@@ -35,7 +35,6 @@ export default {
 
 <style>
 html {
-    margin: 0;
     padding: 0;
     scroll-behavior: smooth; /*平滑滾動 - 手機*/
 }
@@ -53,7 +52,14 @@ h6 {
     padding: 0;
 }
 #app {
-    margin-top: 0px !important;
+    /* 字體 */
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    /* color: #2c3e50; */
+
+    margin-top: 0px;
 }
 
 .rightContent {

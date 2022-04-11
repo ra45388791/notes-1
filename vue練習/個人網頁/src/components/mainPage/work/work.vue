@@ -22,7 +22,7 @@
 
 <script>
 import WorkBox from "./workBox.vue";
-import worksJson from "../../assets/works.json";
+import worksJson from "../../../assets/works.json";
 import WorkDynamicWall from "./workDynamicWall.vue";
 
 export default {

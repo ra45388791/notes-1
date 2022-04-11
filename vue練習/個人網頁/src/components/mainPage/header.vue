@@ -2,8 +2,8 @@
     <header id="header">
         <div class="banner">
             <picture>
-                <source srcset="../../public/全身照xl.jpg" media="(min-width: 768px)" />
-                <img src="../../public/全身照sm.jpg" alt />
+                <source srcset="/public/全身照xl.jpg" media="(min-width: 768px)" />
+                <img src="/public/全身照sm.jpg" alt />
             </picture>
             <div class="content">
                 <h2 ref="titleOne">{{ title }}</h2>

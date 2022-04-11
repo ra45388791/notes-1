@@ -35,7 +35,7 @@ export default {
         return {
             innerWidth: 0,
             navState: false,
-            photoStickers: "../public/photoStickers.png",
+            photoStickers: "/public/photoStickers.png",
             navSelfIntroductionH2: "張榮展",
             navSelfIntroductionP: "努力自學前端，立志成為前端工程師",
             navOptions: [
@@ -100,6 +100,8 @@ export default {
     transition: all 1s;
     transition-timing-function: cubic-bezier(0.3, 0.59, 0.2, 1);
     z-index: 3;
+
+    text-align:center;
 }
 
 .indexNav > div {
@@ -155,6 +157,7 @@ export default {
 .photoStickers {
     position: relative;
     padding-bottom: 15px;
+    
 }
 .photoStickers:before {
     content: "";
