@@ -1,10 +1,12 @@
 <template>
     <NavBox></NavBox>
     <div class="rightContent">
-        <Header></Header>
-        <About></About>
-        <Skills></Skills>
-        <Work></Work>
+        <div>
+            <Header></Header>
+            <About></About>
+            <Skills></Skills>
+            <Work></Work>
+        </div>
     </div>
     <!-- <router-view></router-view> -->
 </template>
@@ -32,7 +34,6 @@ export default {
 </script>
 
 <style>
-
 html {
     margin: 0;
     padding: 0;
@@ -55,11 +56,13 @@ h6 {
 }
 
 @media (min-width: 1440px) {
+    #app {
+        display: flex;
+    }
     .rightContent {
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 80vw;
+        overflow-y: scroll;
+        width: 100%;
+        height: 100vh;
     }
 }
 @media (min-width: 1920px) {
@@ -67,7 +70,7 @@ h6 {
         margin: 0 20vw;
     }
     .rightContent {
-        width: 45vw;
+        /* width: 45vw; */
     }
 }
 </style>

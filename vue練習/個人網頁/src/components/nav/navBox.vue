@@ -100,7 +100,6 @@ export default {
     transition: all 1s;
     transition-timing-function: cubic-bezier(0.3, 0.59, 0.2, 1);
     z-index: 3;
-    
 }
 
 .indexNav > div {
@@ -198,7 +197,8 @@ footer {
 
 @media (min-width: 1440px) {
     .indexNav {
-        width: 19vw;
+        position: relative;
+        /* width: 19vw; */
     }
     .closeNav {
         left: 0px;
@@ -210,8 +210,8 @@ footer {
 
 @media (min-width: 1920px) {
     .indexNav {
-        left: 19.5vw;
-        width: 15vw;
+        /* left: 19.5vw; */
+        /* width: 15vw; */
     }
 }
 </style>
