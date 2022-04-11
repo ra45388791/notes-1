@@ -12,23 +12,23 @@
                 "text": "後端則是使用 'heroku' 來做為運算平台，使用node.js來撰寫後端接口，資料儲存使用了json來儲存。"
             }
         ],
-        "image": "../../../public/works/todolist.jpg",
+        "image": "/works/todolist.jpg",
         "photos": [
             {
                 "id": 0,
-                "photo": "../../../public/works/todolist/0.jpg"
+                "photo": "/works/todolist/0.jpg"
             },
             {
                 "id": 1,
-                "photo": "../../../public/works/todolist/1.jpg"
+                "photo": "/works/todolist/1.jpg"
             },
             {
                 "id": 2,
-                "photo": "../../../public/works/todolist/2.jpg"
+                "photo": "/works/todolist/2.jpg"
             },
             {
                 "id": 3,
-                "photo": "../../../public/works/todolist/3.jpg"
+                "photo": "/works/todolist/3.jpg"
             }
         ],
         "button": [
@@ -36,15 +36,15 @@
                 "id": 0,
                 "name": "前往作品",
                 "type": "href",
-                "link": "/public/page/todolist/index.html",
-                "icon": "../../../public/works/icon/foreign.png"
+                "link": "/page/todolist/index.html",
+                "icon": "/works/icon/foreign.png"
             },
             {
                 "id": 1,
                 "name": "前往連結",
                 "type": "router",
                 "link": "/#",
-                "icon": "../../../public/works/icon/foreign.png"
+                "icon": "/works/icon/foreign.png"
             }
         ]
     },
@@ -72,8 +72,8 @@
                 "id": 0,
                 "name": "前往作品",
                 "type": "href",
-                "link": "/public/page/台灣天氣地圖/index.html",
-                "icon": "../../../public/works/icon/foreign.png"
+                "link": "/page/台灣天氣地圖/index.html",
+                "icon": "/works/icon/foreign.png"
             }
         ]
     },
@@ -81,7 +81,7 @@
         "id": 2,
         "title": "大學專題-音樂遊戲",
         "content": "sdhsdfnjsdtdfgdfshg",
-        "image": "../../../public/works/大學專題.jpg",
+        "image": "/works/大學專題.jpg",
         "photos": [
             {
                 "id": 0,
@@ -102,7 +102,7 @@
                 "name": "前往連結",
                 "type": "router",
                 "link": "/#/abc",
-                "icon": "../../../public/works/icon/foreign.png"
+                "icon": "/works/icon/foreign.png"
             }
         ]
     }

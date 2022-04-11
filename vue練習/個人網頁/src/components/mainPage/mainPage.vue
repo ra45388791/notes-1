@@ -1,5 +1,5 @@
 <template>
-    <NavBox></NavBox>
+    
 
     <div class="rightContent">
         <Header></Header>

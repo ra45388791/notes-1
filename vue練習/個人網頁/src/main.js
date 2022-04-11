@@ -11,6 +11,7 @@ import index from './index.vue'
 // import skills from './components/skills/skills.vue'
 // import work from './components/work/work.vue'
 import mainPage from './components/mainPage/mainPage.vue'
+import NotFound from './components/NotFound.vue'
 
 // import App from './App.vue'
 
@@ -68,7 +69,7 @@ const store = createStore({
 
 const routes = [
     {
-        path: '/:mainPages',
+        path: '/:mainPages?',
         component: mainPage
     },
     // {
@@ -92,14 +93,20 @@ const routes = [
 const router = createRouter({
     history: createWebHashHistory(),
     routes: routes,					//也可以只寫 routes
-    // scrollBehavior(to, from, savedPosition) {
-    //     if (to) {
-    //         return {
-    //             el: to.hash,
-    //             behavior: 'smooth'
-    //         }
-    //     }
-    // }
+    scrollBehavior(to, from, savedPosition) {
+        if (to.path === '/') {  //首頁導航
+            if (to.fullPath !== '/') {
+                const hash = to.fullPath.slice(to.fullPath.indexOf('/') + 1);
+                document.querySelector(hash).scrollIntoView();  //找到 id 錨點，滾動到該位置。
+                return null;
+            } else {
+                //回到頂部
+                document.querySelector('#header').scrollIntoView();
+                return null;
+            }
+        }
+        return null;
+    }
 })
 
 router.beforeEach((to, from) => {

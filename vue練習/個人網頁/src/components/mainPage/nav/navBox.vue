@@ -35,7 +35,7 @@ export default {
         return {
             innerWidth: 0,
             navState: false,
-            photoStickers: "/public/photoStickers.png",
+            photoStickers: "/nav/photoStickers.png",
             navSelfIntroductionH2: "張榮展",
             navSelfIntroductionP: "努力自學前端，立志成為前端工程師",
             navOptions: [
@@ -57,7 +57,7 @@ export default {
                 },
                 {
                     name: "WORKEXPERIENCE",
-                    Anchor: '',
+                    Anchor: '/',
                 },
 
             ],
@@ -101,7 +101,7 @@ export default {
     transition-timing-function: cubic-bezier(0.3, 0.59, 0.2, 1);
     z-index: 3;
 
-    text-align:center;
+    text-align: center;
 }
 
 .indexNav > div {
@@ -157,7 +157,6 @@ export default {
 .photoStickers {
     position: relative;
     padding-bottom: 15px;
-    
 }
 .photoStickers:before {
     content: "";
@@ -171,6 +170,7 @@ export default {
 }
 
 .photoStickers h2 {
+    margin: 0.7rem 0 0.3rem;
     color: rgb(255, 255, 255);
     font-weight: bold;
 }
@@ -185,7 +185,7 @@ export default {
     width: 12rem;
     height: 12rem;
     border-radius: 100%;
-    box-shadow: 0px 0px 20px 0px rgb(255, 255, 255);
+    box-shadow: 0px 0px 10px 0px rgb(189, 189, 189);
 }
 
 .navOptions ul {

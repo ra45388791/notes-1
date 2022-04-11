@@ -1,5 +1,5 @@
 <template>
-    <!-- <NavBox></NavBox> -->
+    <NavBox></NavBox>
     <!-- <div class="rightContent">
         <Header></Header>
         <About></About>
@@ -11,7 +11,7 @@
 
 <script>
 
-// import NavBox from './components/mainPage/nav/navBox.vue'
+import NavBox from './components/mainPage/nav/navBox.vue'
 // import Header from './components/mainPage/header.vue';
 // import About from './components/mainPage/about.vue';
 // import Skills from './components/mainPage/skills/skills.vue';
@@ -25,6 +25,8 @@ export default {
         };
     },
     // components: { NavBox, Header, About, Skills, Work }
+    components: { NavBox}
+    
 }
 
 
@@ -59,28 +61,18 @@ h6 {
 
     margin-top: 0px;
 }
-/*平滑滾動 - 電腦*/
-/* .rightContent {
-    scroll-behavior: smooth;
-} */
+
 
 @media (min-width: 1440px) {
     #app {
         display: flex;
     }
-    /* .rightContent {
-        overflow-y: scroll;
-        width: 100%;
-        height: 100vh;
-        scroll-behavior: smooth;
-    } */
+
 }
 @media (min-width: 1920px) {
     body {
         margin: 0 20vw;
     }
-    /* .rightContent {
-        width: 45vw;
-    } */
+
 }
 </style>

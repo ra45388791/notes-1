@@ -117,6 +117,7 @@ export default {
 }
 .content {
     margin: 0 1rem;
+    line-height: 1.5rem;
     text-align: center;
 }
 .closeArticle {

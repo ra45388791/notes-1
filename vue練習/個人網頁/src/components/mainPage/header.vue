@@ -2,8 +2,8 @@
     <header id="header">
         <div class="banner">
             <picture>
-                <source srcset="/public/全身照xl.jpg" media="(min-width: 768px)" />
-                <img src="/public/全身照sm.jpg" alt />
+                <source srcset="/public/header/全身照xl.jpg" media="(min-width: 768px)" />
+                <img src="/public/header/全身照sm.jpg" alt />
             </picture>
             <div class="content">
                 <h2 ref="titleOne">{{ title }}</h2>
@@ -48,12 +48,7 @@ export default {
     width: 100%;
     height: 92vh;
 
-    background: linear-gradient(
-        45deg,
-        #514ef7 30%,
-        #00bbff 100%,
-        transparent
-    );
+    background: linear-gradient(45deg, #514ef7 30%, #00bbff 100%, transparent);
 }
 .banner {
     margin: 0 auto;
