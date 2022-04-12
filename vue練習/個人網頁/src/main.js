@@ -36,7 +36,6 @@ const store = createStore({
         }
     },
     getters: {
-
     },
     mutations: {
         CHENGE_SKILL_PAGE(state, payload) { //切換 技能頁面
@@ -71,10 +70,6 @@ const routes = [
     {
         path: '/',
         component: mainPage
-    },
-    {
-        path: '/abc',
-        component: skills,
     },
     // {
     //     path: '/#about',

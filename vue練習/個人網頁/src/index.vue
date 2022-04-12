@@ -8,16 +8,16 @@
     </div>-->
     <div class="contentBox">
         <router-view></router-view>
+        <FooterTemp></FooterTemp>
     </div>
+
 </template>
 
 <script>
 
 import NavBox from './components/mainPage/nav/navBox.vue'
-// import Header from './components/mainPage/header.vue';
-// import About from './components/mainPage/about.vue';
-// import Skills from './components/mainPage/skills/skills.vue';
-// import Work from './components/mainPage/work/work.vue';
+import FooterTemp from './components/footer/footerTemp.vue'
+
 
 
 export default {
@@ -27,7 +27,7 @@ export default {
         };
     },
     // components: { NavBox, Header, About, Skills, Work }
-    components: { NavBox }
+    components: { NavBox, FooterTemp }
 
 }
 
@@ -38,13 +38,16 @@ export default {
 <style>
 html {
     padding: 0;
-    scroll-behavior: smooth; /*平滑滾動 - 手機*/
+    scroll-behavior: smooth;
+    /*平滑滾動 - 手機*/
 }
+
 body {
     position: relative;
     margin: 0;
     padding: 0;
 }
+
 h2,
 h3,
 h4,
@@ -53,6 +56,7 @@ h6 {
     margin: 0;
     padding: 0;
 }
+
 #app {
     /* 字體 */
     font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -62,20 +66,24 @@ h6 {
 
     margin-top: 0px;
 }
+
 .contentBox {
     width: 100vw;
     height: 100%;
 }
+
 @media (min-width: 1440px) {
     #app {
         display: flex;
     }
+
     .contentBox {
         margin-left: 15vw;
         width: 85vw;
         height: 100%;
     }
 }
+
 @media (min-width: 2000px) {
     body {
         margin: 0 15vw;

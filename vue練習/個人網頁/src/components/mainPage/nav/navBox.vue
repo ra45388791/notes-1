@@ -9,12 +9,8 @@
             </div>
             <div class="navOptions">
                 <ul>
-                    <navButton
-                        v-for="navbutton of navOptions"
-                        :named="navbutton.name"
-                        :Anchord="navbutton.Anchor"
-                        :idd="navbutton.id"
-                    ></navButton>
+                    <navButton v-for="navbutton of navOptions" :named="navbutton.name" :Anchord="navbutton.Anchor"
+                        :idd="navbutton.id"></navButton>
                 </ul>
             </div>
         </div>
@@ -54,12 +50,7 @@ export default {
                 {
                     name: "WORKS",
                     Anchor: '/#work',
-                },
-                {
-                    name: "WORKEXPERIENCE",
-                    Anchor: '/abc',
-                },
-
+                }
             ],
             footerText: 'Copyright ©2022 All rights reserved'
         };
@@ -104,7 +95,7 @@ export default {
     text-align: center;
 }
 
-.indexNav > div {
+.indexNav>div {
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -135,9 +126,11 @@ export default {
     background: #000;
     border: none;
     border-radius: 0 0 5px 0;
-    cursor: pointer; /*滑鼠樣式*/
+    cursor: pointer;
+    /*滑鼠樣式*/
     z-index: 9999;
 }
+
 .showNav::before {
     content: "";
     position: absolute;
@@ -158,6 +151,7 @@ export default {
     position: relative;
     padding-bottom: 15px;
 }
+
 .photoStickers:before {
     content: "";
     position: absolute;
@@ -174,6 +168,7 @@ export default {
     color: rgb(255, 255, 255);
     font-weight: bold;
 }
+
 .photoStickers p {
     margin: auto;
     width: 80%;
@@ -204,9 +199,11 @@ footer {
         padding: 0;
         width: 15vw;
     }
+
     .closeNav {
         left: 0px;
     }
+
     .showNav {
         display: none;
     }

@@ -11,7 +11,7 @@
 <script>
 
 import NavBox from './nav/navBox.vue'
-import Header from './header.vue';
+import Header from './header/header.vue';
 import About from './about.vue';
 import Skills from './skills/skills.vue';
 import Work from './work/work.vue';

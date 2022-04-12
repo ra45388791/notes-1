@@ -151,35 +151,25 @@
             {
                 "id": "c0",
                 "image": {
-                    "url": "skillsImages/Word.png",
-                    "width": 80,
-                    "height": 78.52
+                    "url": "skillsImages/Figma.png",
+                    "width": 100,
+                    "height": 75
                 },
-                "title": "Word",
-                "content": "相當熟練 word 操作，大學時製作50頁專題報告時使用的工具。"
+                "title": "Figma",
+                "content": "製作 svg 格式圖片的工具，我在開發網頁經常需要使用到的向量類型的圖片，都是用這個 inkscape 製作出來的。"
             },
             {
                 "id": "c1",
                 "image": {
-                    "url": "skillsImages/PowerPoint.png",
+                    "url": "skillsImages/inkscape.png",
                     "width": 80,
-                    "height": 74.4
+                    "height": 80
                 },
-                "title": "PowerPoint",
-                "content": "這是我製作報告時常使用的工具。"
+                "title": "inkscape",
+                "content": "製作 svg 格式圖片的工具，我在開發網頁經常需要使用到的向量類型的圖片，都是用這個 inkscape 製作出來的。"
             },
             {
                 "id": "c2",
-                "image": {
-                    "url": "skillsImages/Excel.png",
-                    "width": 80,
-                    "height": 78.52
-                },
-                "title": "Excel",
-                "content": "知道基本操作，可以使用一些簡單函式來操作。"
-            },
-            {
-                "id": "c3",
                 "image": {
                     "url": "skillsImages/Photoshop.png",
                     "width": 80,
@@ -189,7 +179,37 @@
                 "content": "製作網頁素材時常需要用到的工具。"
             },
             {
+                "id": "c3",
+                "image": {
+                    "url": "skillsImages/Word.png",
+                    "width": 80,
+                    "height": 78.52
+                },
+                "title": "Word",
+                "content": "相當熟練 word 操作，大學時製作50頁專題報告時使用的工具。"
+            },
+            {
                 "id": "c4",
+                "image": {
+                    "url": "skillsImages/PowerPoint.png",
+                    "width": 80,
+                    "height": 74.4
+                },
+                "title": "PowerPoint",
+                "content": "這是我製作報告時常使用的工具。"
+            },
+            {
+                "id": "c5",
+                "image": {
+                    "url": "skillsImages/Excel.png",
+                    "width": 80,
+                    "height": 78.52
+                },
+                "title": "Excel",
+                "content": "知道基本操作，可以使用一些簡單函式來操作。"
+            },
+            {
+                "id": "c6",
                 "image": {
                     "url": "skillsImages/Virtualbox.png",
                     "width": 80,
@@ -199,7 +219,7 @@
                 "content": "大學時學習過如何使用的工具，能夠從無到有建置一個系統。"
             },
             {
-                "id": "c5",
+                "id": "c7",
                 "image": {
                     "url": "skillsImages/Unity.png",
                     "width": 80,
@@ -209,7 +229,7 @@
                 "content": "大學專題製作使用的遊戲引擎，熟悉如何操作。"
             },
             {
-                "id": "c6",
+                "id": "c8",
                 "image": {
                     "url": "skillsImages/Blender.png",
                     "width": 180,
@@ -219,7 +239,7 @@
                 "content": "大學專題製作課程製作 Unity 需要使用的素材所使用的工具。"
             },
             {
-                "id": "c7",
+                "id": "c9",
                 "image": {
                     "url": "skillsImages/Krita.png",
                     "width": 80,
@@ -227,16 +247,6 @@
                 },
                 "title": "Krita",
                 "content": "在開發網頁時製作所需使用的素材，以及在休閒時間創作使用的工具。"
-            },
-            {
-                "id": "c8",
-                "image": {
-                    "url": "skillsImages/inkscape.png",
-                    "width": 80,
-                    "height": 80
-                },
-                "title": "inkscape",
-                "content": "製作 svg 格式圖片的工具，我在開發網頁經常需要使用到的向量類型的圖片，都是用這個 inkscape 製作出來的。"
             }
         ]
     }
