@@ -1,182 +1,56 @@
 /**
+ * @處裡元素fadein 的 observer API 觀察模組
  * 模組化 observer 方法
- * 主要是透過觀測更改物件的style
- * 
+ * 透過傳入四個參數來達到設定動畫並觀察的效果
+ * 共需要傳入4個參數:
+ * 1:元素的原始狀態,
+ * 2:要執行的 css 動畫名稱,
+ * 3:執行的長度,
+ * 4:延遲多久後才執行
  */
-
 
 
 /**
- * 淡入
+ *  使用範例                                         傳入參數
+ *                實例化 class 使用 setAnimation方法('原始狀態','css動畫名稱','執行長度','延遲執行秒數')
+ *  
+ *      const fadein = new Fadein().setAnimation('opacity:0', 'leftFadeIn', 1, 300);
+ *      fadein.observe(this.$refs.titleOne);              
  */
-const observerOpacity = new IntersectionObserver((element) => {
-    element.forEach(e => {
-        e.target.style = 'opacity:0';   //先把有註冊的元素設為透明
-        if (e.isIntersecting) {
-            setTimeout(() => {
-                e.target.style = 'opacity:1';
-                observerOpacity.unobserve(e.target);
-            }, 300)
-        }
-    })
-})
-
-
-/**
- * 從上淡入
- * @keyframes topFadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(-2rem);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0rem);
-    }
-}
- */
-const observerTopFadeIn = new IntersectionObserver((element) => {
-    element.forEach(e => {
-        e.target.style = 'opacity:0';   //先把有註冊的元素設為透明
-        if (e.isIntersecting) {
-            setTimeout(() => {
-                e.target.style = 'animation: topFadeIn 1s 0s ease-out;';
-                setTimeout(() => {
-                    e.target.style = ''
-                    observerTopFadeIn.unobserve(e.target);
-                }, 1000)
-            }, 300)
-        }
-    })
-})
-
-
-/**
- * @從底部fadein動畫要設置
- *  @keyframes bottomFadeIn {
-        0% {
-            opacity: 0;
-            transform: translateY(2rem);
-        }
-        100% {
-            opacity: 1;
-            transform: translateY(0rem);
-        }
-    }
- */
-const observerBottomFadeIn = new IntersectionObserver((element) => {
-    element.forEach(e => {
-        e.target.style = 'opacity:0';   //先把有註冊的元素設為透明
-        if (e.isIntersecting) {
-            setTimeout(() => {
-                e.target.style = 'animation: bottomFadeIn 1s 0s ease-out;';
-                setTimeout(() => {
-
-                    e.target.style = ''
-                    observerBottomFadeIn.unobserve(e.target);
-                }, 1000)
-            }, 300)
-        }
-    })
-})
-
-/**
- * 從左淡入
- * @keyframes leftFadeIn {
-        0% {
-            opacity: 0;
-            transform: translateX(-2rem);
-        }
-        100% {
-            opacity: 1;
-            transform: translateX(0rem);
-        }
-    }
- * 
- */
-
-const observerLeftFadeIn = new IntersectionObserver((element) => {
-    element.forEach(e => {
-        e.target.style = 'opacity:0';   //先把有註冊的元素設為透明
-        if (e.isIntersecting) {
-            setTimeout(() => {
-                e.target.style = 'animation: leftFadeIn 1s 0s ease-out;';
-                setTimeout(() => {
-
-                    e.target.style = ''
-                    observerLeftFadeIn.unobserve(e.target);
-                }, 1000)
-            }, 300)
-        }
-    })
-})
-
-/**
- * 從右淡入
- * 
- *  @keyframes rightFadeIn {
-        0% {
-            opacity: 0;
-            transform: translateX(2rem);
-        }
-        100% {
-            opacity: 1;
-            transform: translateX(0rem);
-        }
-    }   
- */
-
-const observerRightFadeIn = new IntersectionObserver((element) => {
-    element.forEach(e => {
-        e.target.style = 'opacity:0';   //先把有註冊的元素設為透明
-        if (e.isIntersecting) {
-            setTimeout(() => {
-                e.target.style = 'animation: rightFadeIn 1s 0s ease-out;';
-                setTimeout(() => {
-
-                    e.target.style = ''
-                    observerRightFadeIn.unobserve(e.target);
-                }, 1000)
-            }, 300)
-        }
-    })
-})
-
-
-class testClass {
+class setFadeInAnimation {
     constructor() {
     }
     /**
-     * 步驟1: 宣告變數 傳入 元素原始狀態 動畫名稱 執行時間 延遲幾秒執行
+     * 設定動畫參數
      */
     setAnimation(originalStyle, AnimationName, second, delay) {
-        const secondString = `${second}s`
+        const secondString = `${second}s`               //秒數轉成字串
 
-        return function (element) {
-
+        const set = function (element) {
             element.forEach(e => {
-                e.target.style = originalStyle;   //元素原始狀態
-                if (e.isIntersecting) {
-                    setTimeout(() => {
+                e.target.style = originalStyle;         //元素原始狀態
+                if (e.isIntersecting) {                 //如果觀察到
+                    setTimeout(() => {                  //延遲執行
                         e.target.style = `animation: ${AnimationName} ${secondString} 0s ease-out;`;
                         setTimeout(() => {
-
-                            e.target.style = ''
-                            observerRightFadeIn.unobserve(e.target);
+                            // console.log(e.target);
+                            e.target.style = ''         //清空style
+                            newObserver.unobserve(e.target);  //取消觀察
                         }, second * 1000)
                     }, delay)//延遲幾秒觸發
                 }
             })
-
         }
 
+        /**
+         * 實例化物件
+         */
+        const newObserver = new IntersectionObserver(set);
+        return newObserver;
     }
-    /**
-     * 步驟2:建構觀察API 傳入步驟1建構好的方法
-     * 步驟3:(在操作的程式執行) 用 步驟2 建構的observer 物件註冊觀察事件
-     */
-    newObserver(setAnimetion) {
-        return new IntersectionObserver(setAnimetion)
+
+    unobserveFunc() {
+
     }
 }
 
@@ -191,4 +65,4 @@ class testClass {
  * observerRightFadeIn : 從右淡入
  * 
  */
-export { testClass, observerOpacity, observerTopFadeIn, observerBottomFadeIn, observerLeftFadeIn, observerRightFadeIn };
+export { setFadeInAnimation };

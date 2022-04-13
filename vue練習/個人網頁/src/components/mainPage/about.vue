@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { observerBottomFadeIn } from '../../../script/observerFunc.js'
+import { setFadeInAnimation as Fadein } from '../../../script/observerFunc.js'
 export default {
 
     data() {
@@ -35,9 +35,11 @@ export default {
         };
     },
     mounted() {
-        observerBottomFadeIn.observe(this.$refs.title);
-        observerBottomFadeIn.observe(this.$refs.content);
-        observerBottomFadeIn.observe(this.$refs.photo);
+        // fadein動畫
+        const fadein = new Fadein().setAnimation('opacity:0', 'bottomFadeIn', 1, 300);
+        fadein.observe(this.$refs.title)
+        fadein.observe(this.$refs.content);
+        fadein.observe(this.$refs.photo);
 
         const year = new Date().getFullYear();
         this.date = year - 1999;        //計算我的年齡

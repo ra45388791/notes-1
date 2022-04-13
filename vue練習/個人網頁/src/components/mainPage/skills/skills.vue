@@ -12,7 +12,7 @@
 
 <script>
 // 自製 observer 方法
-import { observerBottomFadeIn } from '../../../../script/observerFunc.js'
+import { setFadeInAnimation as Fadein } from '../../../../script/observerFunc.js'
 
 import skillsNav from './skillsNav.vue'
 import SkillsArticle from './skillsArticle.vue';
@@ -26,10 +26,15 @@ export default {
         };
     },
     mounted() {
+        //動畫
         let ref = this.$refs
-        observerBottomFadeIn.observe(ref.title1);
-        observerBottomFadeIn.observe(ref.title2);
-        observerBottomFadeIn.observe(ref.navRef);
+        const fadein = new Fadein().setAnimation('opacity:0', 'bottomFadeIn', 1, 300);
+
+        fadein.observe(ref.title1)
+        fadein.observe(ref.title2)
+        fadein.observe(ref.navRef)
+
+
     },
     components: { skillsNav, SkillsArticle, SkillFloatingBlock }
 

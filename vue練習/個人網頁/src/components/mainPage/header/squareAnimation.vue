@@ -15,15 +15,18 @@
 </template>
 
 <script>
-import { observerRightFadeIn } from '../../../../script/observerFunc.js'
+import { setFadeInAnimation as Fadein } from '../../../../script/observerFunc.js'
 export default {
     mounted() {
-        observerRightFadeIn.observe(this.$refs.square)
+        const fadein = new Fadein().setAnimation('opacity:0', 'squareRightFadeIn', 1, 300);
+        fadein.observe(this.$refs.square)
     }
 }
 </script>
 
 <style scoped>
+
+
 #squareBox {
     /* 方形底層 */
     position: absolute;

@@ -6,10 +6,6 @@ import "./style/normalize.css"
 import skillJson from './assets/skills.json';       // 匯入 json
 
 import index from './index.vue'
-// import header from './components/header.vue'
-// import about from './components/about.vue'
-import skills from './components/mainPage/skills/skills.vue'
-// import work from './components/work/work.vue'
 import mainPage from './components/mainPage/mainPage.vue'
 import NotFound from './components/NotFound.vue'
 

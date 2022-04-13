@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { observerLeftFadeIn } from '../../../../script/observerFunc.js'
+import { setFadeInAnimation as Fadein } from '../../../../script/observerFunc.js'
 
 import WorkBox from "./workBox.vue";
 import worksJson from "../../../assets/works.json";
@@ -43,7 +43,9 @@ export default {
         };
     },
     mounted() {
-        observerLeftFadeIn.observe(this.$refs.title1)
+        //動畫
+        const fadein = new Fadein().setAnimation('opacity:0', 'leftFadeIn', 1, 300);
+        fadein.observe(this.$refs.title1)
     },
     computed: {
 

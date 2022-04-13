@@ -35,7 +35,6 @@ export default {
 </script>
 
 <style>
-
 /* 模組化動畫css */
 @keyframes topFadeIn {
     0% {
@@ -91,6 +90,18 @@ export default {
     }
 }
 
+/* header方塊動畫 */
+@keyframes squareRightFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateX(5rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0rem);
+    }
+}
 
 
 html {
@@ -127,6 +138,24 @@ h6 {
 .contentBox {
     width: 100vw;
     height: 100%;
+}
+
+@media (min-width: 425px) {
+    /* header方塊動畫 */
+    @keyframes squareRightFadeIn {
+        0% {
+            opacity: 0;
+            transform: translateX(10rem);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateX(0rem);
+        }
+    }
+
+
+
 }
 
 @media (min-width: 1440px) {
