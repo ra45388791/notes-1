@@ -43,7 +43,6 @@ export default {
             const deta1 = deta[0].article;
             const deta2 = deta[1].article;
             const deta3 = deta[2].article;
-            console.log(deta2);
             const parseDeta1 = deta1.filter(function (e) {
                 for (let s of vm.skills) {
                     if (e.title === s) return e;

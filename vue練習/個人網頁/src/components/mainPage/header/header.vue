@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { observerLeftFadeIn } from '../../../../script/observerFunc.js'
+import { observerLeftFadeIn, testClass } from '../../../../script/observerFunc.js'
 import squareAnimation from "./squareAnimation.vue";
 export default {
 	data() {
@@ -34,11 +34,22 @@ export default {
 		};
 	},
 	mounted() {
-		// console.log(this.$refs);
-		// const a = this.$refs.titleOne.getBoundingClientRect();
-		// console.log(a);
-		observerLeftFadeIn.observe(this.$refs.titleOne);
+		// observerLeftFadeIn.observe(this.$refs.titleOne);
 
+
+		this.$nextTick(function () {
+
+			const textClass1 = new testClass();
+			//設定
+			const setStyle = textClass1.setAnimation('opacity:0', 'leftFadeIn', 1, 300);
+
+			//實例化observer
+			const newObservertest = textClass1.newObserver(setStyle);
+
+			//註冊事件
+			newObservertest.observe(this.$refs.titleOne);
+			// console.log(newObservertest);
+		})
 
 	},
 	methods: {},
