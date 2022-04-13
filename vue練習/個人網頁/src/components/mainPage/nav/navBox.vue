@@ -3,7 +3,10 @@
         <button type="button" @click="showNav" class="showNav"></button>
         <div>
             <div class="photoStickers">
-                <img :src="photoStickers" class alt srcset />
+                <router-link :to="'/'">
+                    <img :src="photoStickers" class alt srcset />
+                </router-link>
+
                 <h2>{{ navSelfIntroductionH2 }}</h2>
                 <p>{{ navSelfIntroductionP }}</p>
             </div>
@@ -56,9 +59,9 @@ export default {
         };
     },
     mounted() {
-        if (window.innerWidth >= 1440) {
-            this.navState = true
-        }
+        // if (window.innerWidth >= 1440) {
+        //     this.navState = true
+        // }
 
 
 

@@ -76,7 +76,7 @@ export default {
     }
 }
 
-@keyframes rightFadeIn {
+@keyframes rigthFadeIn {
 
     /* 從底部fadein */
     0% {
@@ -141,6 +141,7 @@ h6 {
 }
 
 @media (min-width: 425px) {
+
     /* header方塊動畫 */
     @keyframes squareRightFadeIn {
         0% {

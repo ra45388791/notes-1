@@ -3,7 +3,7 @@
         <div class="title">
             <h2><samp ref="title1">我的作品</samp></h2>
         </div>
-        <div class="content">
+        <div ref="content1" class="content">
             <WorkBox v-for=" work of worksData" v-bind="work" @openArticle="setArticle" class="workLastBox"></WorkBox>
         </div>
 
@@ -46,6 +46,7 @@ export default {
         //動畫
         const fadein = new Fadein().setAnimation('opacity:0', 'leftFadeIn', 1, 300);
         fadein.observe(this.$refs.title1)
+        fadein.observe(this.$refs.content1)
     },
     computed: {
 

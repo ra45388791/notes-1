@@ -28,11 +28,11 @@ export default {
     mounted() {
         //動畫
         let ref = this.$refs
-        const fadein = new Fadein().setAnimation('opacity:0', 'bottomFadeIn', 1, 300);
+        const bottomFadein = new Fadein().setAnimation('opacity:0', 'bottomFadeIn', 1, 300);
 
-        fadein.observe(ref.title1)
-        fadein.observe(ref.title2)
-        fadein.observe(ref.navRef)
+        bottomFadein.observe(ref.title1)
+        bottomFadein.observe(ref.title2)
+
 
 
     },

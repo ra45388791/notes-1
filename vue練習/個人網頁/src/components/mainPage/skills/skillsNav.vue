@@ -1,22 +1,13 @@
 <template>
-    <nav
-        @mousedown="mouseDown"
-        @mousemove="mouseMove"
-        @mouseup="mouseLeave"
-        @mouseleave="mouseLeave"
-        ref="scrollBar"
-    >
-        <SkillNavButton
-            v-for=" skill of skillData"
-            v-bind="skill"
-            @focusButton="changeSkillsArticle"
-            :class="buttonFocus === skill.id ? 'buttonFocus' : ''"
-            key=" skill.id"
-        ></SkillNavButton>
+    <nav @mousedown="mouseDown" @mousemove="mouseMove" @mouseup="mouseLeave" @mouseleave="mouseLeave" ref="scrollBar">
+        <SkillNavButton v-for=" skill of skillData" v-bind="skill" @focusButton="changeSkillsArticle"
+            :class="buttonFocus === skill.id ? 'buttonFocus' : ''" key=" skill.id"></SkillNavButton>
     </nav>
 </template>
 
 <script>
+import { setFadeInAnimation as Fadein } from '../../../../script/observerFunc.js'
+
 import { mapMutations } from "vuex";
 import SkillNavButton from "./skillNavButton.vue";
 
@@ -31,6 +22,11 @@ export default {
             buttonFocus: 0
 
         };
+    },
+    mounted() {
+        const bottomFadein = new Fadein().setAnimation('opacity:0', 'bottomFadeIn', 1, 300);
+        bottomFadein.observe(this.$refs.scrollBar)
+
     },
     computed: {
         skillData() {
@@ -89,6 +85,7 @@ nav {
     cursor: grab;
     border-radius: 50px;
 }
+
 nav::-webkit-scrollbar {
     display: none;
 }

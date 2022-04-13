@@ -1,23 +1,16 @@
 <template>
-    <article
-        @mousedown="mouseDown"
-        @mousemove="mouseMove"
-        @mouseup="mouseLeave"
-        @mouseleave="mouseLeave"
-        ref="articleScroll"
-    >
+    <article @mousedown="mouseDown" @mousemove="mouseMove" @mouseup="mouseLeave" @mouseleave="mouseLeave"
+        ref="articleScroll">
         <div class="articleBox">
-            <SkillsArticleBox
-                v-for="skill of skillsArticleGetter"
-                v-bind="skill"
-                :key="skill.id"
-                class="articles"
-            ></SkillsArticleBox>
+            <SkillsArticleBox v-for="skill of skillsArticleGetter" v-bind="skill" :key="skill.id" class="articles">
+            </SkillsArticleBox>
         </div>
     </article>
 </template>
 
 <script>
+import { setFadeInAnimation as Fadein } from '../../../../script/observerFunc.js'
+
 import { mapState } from "vuex";
 import SkillsArticleBox from "./skillsArticleBox.vue";
 
@@ -32,6 +25,10 @@ export default {
                 x: 0
             },
         };
+    },
+    mounted() {
+        const rigthFadein = new Fadein().setAnimation('opacity:0', 'rigthFadeIn', 1, 300);
+        rigthFadein.observe(this.$refs.articleScroll)
     },
     computed: {
         ...mapState(["skillDatas", "skillPage"]),               //vuex資料
@@ -82,12 +79,10 @@ article {
     margin: 1rem 0;
     width: 100%;
     height: 20rem;
-    background: linear-gradient(
-        175deg,
-        #3d7bff 0%,
-        #11dfdf 100%,
-        transparent 0
-    );
+    background: linear-gradient(175deg,
+            #3d7bff 0%,
+            #11dfdf 100%,
+            transparent 0);
 
     border-top: 4px solid rgb(0, 225, 255);
     border-bottom: 4px solid rgb(0, 225, 255);

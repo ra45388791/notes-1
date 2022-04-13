@@ -4,15 +4,16 @@
             <h2 class="zhTitle">{{ zhTitle }}</h2>
             <h2 class="enTitle">{{ enTitle }}</h2>
         </div>
-        <div ref="content" class="content">
-            <article>
+        <div class="content">
+            <article ref="content">
                 <p style="font-weight: bold;">{{ content }}</p>
                 <p>{{ content2 }}</p>
                 <p>{{ content3 }}</p>
             </article>
         </div>
-        <div ref="photo" class="imgBox">
-            <img src="/public/about/生活照.jpg" alt srcset />
+        <div class="imgBox">
+            <img ref="photo" src="/public/about/生活照.jpg" alt srcset>
+            <div class="photoBg"></div>
         </div>
     </section>
 </template>
@@ -36,10 +37,13 @@ export default {
     },
     mounted() {
         // fadein動畫
-        const fadein = new Fadein().setAnimation('opacity:0', 'bottomFadeIn', 1, 300);
-        fadein.observe(this.$refs.title)
-        fadein.observe(this.$refs.content);
-        fadein.observe(this.$refs.photo);
+        const bottomFadein = new Fadein().setAnimation('opacity:0', 'bottomFadeIn', 1, 300);
+        bottomFadein.observe(this.$refs.title)
+
+        const leftFadein = new Fadein().setAnimation('opacity:0', 'leftFadeIn', 1, 300);
+        leftFadein.observe(this.$refs.content);
+        const rigthFadeIn = new Fadein().setAnimation('opacity:0', 'rigthFadeIn', 1, 300);
+        rigthFadeIn.observe(this.$refs.photo);
 
         const year = new Date().getFullYear();
         this.date = year - 1999;        //計算我的年齡
@@ -65,18 +69,23 @@ h2 {
 }
 
 #about {
-    position: relative;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 
-    padding: 8vh 2rem;
+    padding: 5rem 2rem 10rem;
+    overflow: hidden;
+}
+
+.title,
+.content,
+.imgBox {
+    position: relative;
 }
 
 .title {
     margin-bottom: 2rem;
     width: 100%;
-
 }
 
 .content {
@@ -84,6 +93,7 @@ h2 {
     width: 100%;
     line-height: 1.5rem;
     text-align: justify;
+    z-index: 2;
 }
 
 #about .enTitle {
@@ -106,10 +116,43 @@ h2 {
 }
 
 #about .imgBox img {
-    width: 100%;
+    position: relative;
+    width: 300px;
     height: 100%;
     border-radius: 30px;
     box-shadow: 0 15px 15px -10px #000;
+    z-index: 2;
+}
+
+
+.photoBg {
+    content: "";
+    position: absolute;
+    left: calc(50% - 9rem);
+    top: -20%;
+
+    width: 2.5rem;
+    height: 25rem;
+
+    background: rgb(0, 195, 255);
+
+    border-radius: 50px;
+    transform: rotate(45deg);
+
+    z-index: 1;
+    box-shadow: 4rem -5rem 0 0 rgb(251, 255, 0), 8rem 7rem 0 0 rgb(0, 195, 255), 12rem -7rem 0 0 rgb(255, 166, 0), 16rem 1rem 0 0 rgb(195, 0, 255), 20rem -3rem 0 0 rgb(255, 0, 0)
+}
+
+.photoBg:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -4rem;
+    width: 3rem;
+    height: 3rem;
+    background: rgb(195, 0, 255);
+    border-radius: 50px;
+    box-shadow: 12rem -7rem 0 0 rgb(255, 0, 0), 4rem 25rem 0 0 rgb(255, 170, 0), 20rem 27rem 0 0 rgb(0, 191, 255)
 }
 
 @media (min-width: 768px) {
@@ -140,6 +183,35 @@ h2 {
 
     #about .imgBox {
         width: 384px;
+    }
+
+    #about .imgBox img {
+        width: 100%;
+    }
+
+    .photoBg {
+        left: 20%;
+        top: -30%;
+
+        width: 3rem;
+        height: 40rem;
+
+        background: rgb(0, 195, 255);
+
+
+        z-index: 1;
+        box-shadow: 4.5rem -2rem 0 0 rgb(251, 255, 0), 9rem 7rem 0 0 rgb(0, 195, 255), 13rem -7rem 0 0 rgb(255, 166, 0), 17rem 1rem 0 0 rgb(195, 0, 255), 21rem -3rem 0 0 rgb(255, 0, 0)
+    }
+
+    .photoBg:before {
+        left: 0;
+        top: -4rem;
+        width: 3rem;
+        height: 3rem;
+
+        background: rgb(195, 0, 255);
+        border-radius: 50px;
+        box-shadow: 13rem -7rem 0 0 rgb(255, 0, 0), 4.5rem 43rem 0 0 rgb(255, 170, 0), 21rem 42rem 0 0 rgb(0, 191, 255)
     }
 }
 </style>
