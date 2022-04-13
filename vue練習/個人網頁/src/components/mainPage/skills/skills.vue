@@ -2,7 +2,7 @@
     <section id="skills">
         <h2 class="zhTitle" ref="title1">我的技能</h2>
         <h3 class="enTitle" ref="title2">My Skills</h3>
-        <div class="skillBox">
+        <div ref="navRef" class="skillBox">
             <skillsNav></skillsNav>
             <SkillsArticle></SkillsArticle>
         </div>
@@ -12,7 +12,7 @@
 
 <script>
 // 自製 observer 方法
-import observerOpacity from '../../../../script/observerFunc.js'
+import { observerBottomFadeIn } from '../../../../script/observerFunc.js'
 
 import skillsNav from './skillsNav.vue'
 import SkillsArticle from './skillsArticle.vue';
@@ -27,10 +27,9 @@ export default {
     },
     mounted() {
         let ref = this.$refs
-        observerOpacity.observe(ref.title1);
-        observerOpacity.observe(ref.title2);
-
-
+        observerBottomFadeIn.observe(ref.title1);
+        observerBottomFadeIn.observe(ref.title2);
+        observerBottomFadeIn.observe(ref.navRef);
     },
     components: { skillsNav, SkillsArticle, SkillFloatingBlock }
 
@@ -45,7 +44,7 @@ h2,
 h3 {
     margin: 10px 0;
     color: rgb(251, 255, 255);
-    opacity: 0;
+
     transition: 1s;
 }
 

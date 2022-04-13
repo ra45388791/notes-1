@@ -3,10 +3,8 @@
         <div class="workArticle" v-show="showArticles" @click.self="closeArticle">
             <article class="article">
                 <div class="media">
-                    <WorkDynamicWallPhotoBox
-                        :dynamicPhotos="articleData.photos"
-                        :dynamicButton="articleData.button"
-                    ></WorkDynamicWallPhotoBox>
+                    <WorkDynamicWallPhotoBox :dynamicPhotos="articleData.photos" :dynamicButton="articleData.button">
+                    </WorkDynamicWallPhotoBox>
                 </div>
                 <div class="message">
                     <nav>
@@ -19,10 +17,7 @@
                             <div class="message-content">
                                 <h4>{{ articleData.title }}</h4>
                                 <div class="message-content-div">
-                                    <p
-                                        v-for="content of articleData.content"
-                                        :key="content.id"
-                                    >{{ content.text }}</p>
+                                    <p v-for="content of articleData.content" :key="content.id">{{ content.text }}</p>
                                 </div>
                             </div>
 
@@ -39,23 +34,13 @@
                                         alt="linkIcon"
                                     />
                                 </a>-->
-                                <a
-                                    v-for="hrefs of hrefButton"
-                                    :href="hrefs.link"
-                                    :key="hrefs.id"
-                                    target="_blank"
-                                    class="workButton"
-                                >
+                                <a v-for="hrefs of hrefButton" :href="hrefs.link" :key="hrefs.id" target="_blank"
+                                    class="workButton">
                                     {{ hrefs.name }}
                                     <img :src="hrefs.icon" alt="linkIcon" />
                                 </a>
-                                <router-link
-                                    v-for="router of routerButton"
-                                    :to="router.link"
-                                    :key="router.id"
-                                    target="_blank"
-                                    class="workButton"
-                                >
+                                <router-link v-for="router of routerButton" :to="router.link" :key="router.id"
+                                    target="_blank" class="workButton">
                                     {{ router.name }}
                                     <img :src="router.icon" alt="linkIcon" />
                                 </router-link>
@@ -147,6 +132,7 @@ export default {
 .v-leave-to {
     opacity: 0;
 }
+
 .v-enter-to,
 .v-leave-from {
     opacity: 1;
@@ -164,7 +150,8 @@ export default {
     box-sizing: border-box;
     border-radius: 30px;
 }
-.workButton img{
+
+.workButton img {
     max-width: 16px;
     max-height: 16px;
 }
@@ -182,6 +169,7 @@ export default {
     background: rgba(0, 0, 0, 0.461);
     z-index: 9;
 }
+
 .article {
     display: flex;
     flex-direction: column-reverse;
@@ -197,6 +185,7 @@ export default {
     height: 60%;
     /* height: 24rem; */
 }
+
 .message {
     display: flex;
     flex-direction: column;
@@ -219,12 +208,14 @@ nav {
     background: rgb(29, 29, 29);
     border-bottom: 1px solid rgb(88, 88, 88);
 }
+
 nav button {
     position: relative;
     margin: 0 1.5rem;
     transition: transform 0.3s, background-color 0.1s;
     cursor: pointer;
 }
+
 nav button::before {
     content: "";
     position: absolute;
@@ -235,6 +226,7 @@ nav button::before {
     background: #fff;
     transform: rotate(45deg);
 }
+
 nav button::after {
     content: "";
     position: absolute;
@@ -273,6 +265,7 @@ nav h3 {
     height: 100%;
     overflow-y: scroll;
 }
+
 .message-content {
     display: flex;
     flex-direction: column;
@@ -283,6 +276,7 @@ nav h3 {
     font-size: 1.5rem;
     color: #fff;
 }
+
 .message-content-div {
     margin: 0.2rem 0;
     width: 100%;
@@ -290,6 +284,7 @@ nav h3 {
     align-self: flex-start;
     word-wrap: break-word;
 }
+
 .message-content p {
     margin: 0;
     margin-bottom: 1rem;
@@ -311,6 +306,7 @@ nav h3 {
     width: 100%;
     height: 25%;
 }
+
 .message .superLink a {
     width: 11rem;
     margin: 0.5rem 0.5rem;
@@ -324,6 +320,7 @@ nav h3 {
         width: 26rem;
         height: 40rem;
     }
+
     .media {
         min-height: 0;
     }
@@ -335,14 +332,17 @@ nav h3 {
         width: 50rem;
         height: 30rem;
     }
+
     .media {
         width: 60%;
         height: 100%;
     }
+
     .message {
         width: 40%;
         height: 100%;
     }
+
     nav {
         height: 3.5rem;
     }

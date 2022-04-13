@@ -1,25 +1,26 @@
 <template>
     <section id="about">
-        <div class="title">
+        <div ref="title" class="title">
             <h2 class="zhTitle">{{ zhTitle }}</h2>
             <h2 class="enTitle">{{ enTitle }}</h2>
         </div>
-        <div class="content">
+        <div ref="content" class="content">
             <article>
                 <p style="font-weight: bold;">{{ content }}</p>
                 <p>{{ content2 }}</p>
                 <p>{{ content3 }}</p>
             </article>
         </div>
-        <div class="imgBox">
+        <div ref="photo" class="imgBox">
             <img src="/public/about/生活照.jpg" alt srcset />
         </div>
     </section>
 </template>
 
 <script>
-
+import { observerBottomFadeIn } from '../../../script/observerFunc.js'
 export default {
+
     data() {
         return {
             zhTitle: "關於我",
@@ -34,6 +35,10 @@ export default {
         };
     },
     mounted() {
+        observerBottomFadeIn.observe(this.$refs.title);
+        observerBottomFadeIn.observe(this.$refs.content);
+        observerBottomFadeIn.observe(this.$refs.photo);
+
         const year = new Date().getFullYear();
         this.date = year - 1999;        //計算我的年齡
     },
@@ -65,32 +70,39 @@ h2 {
 
     padding: 8vh 2rem;
 }
+
 .title {
     margin-bottom: 2rem;
     width: 100%;
 
 }
+
 .content {
     margin-bottom: 2rem;
     width: 100%;
     line-height: 1.5rem;
     text-align: justify;
 }
+
 #about .enTitle {
     font-size: 2rem;
     text-align: center;
 }
+
 #about .zhTitle {
     font-size: 3rem;
 
     text-align: center;
 }
+
 #about p {
     text-indent: 2em;
 }
+
 #about .imgBox {
     width: 90vw;
 }
+
 #about .imgBox img {
     width: 100%;
     height: 100%;
@@ -102,16 +114,19 @@ h2 {
     .content {
         width: 60%;
     }
+
     #about .imgBox {
         width: 460px;
     }
 }
+
 @media (min-width: 1024px) {
     #about {
         /* padding: 8vh 20%; */
         flex-wrap: wrap;
         justify-content: center;
     }
+
     .content {
         margin-bottom: 0;
 

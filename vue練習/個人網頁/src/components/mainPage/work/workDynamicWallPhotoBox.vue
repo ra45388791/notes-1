@@ -1,11 +1,6 @@
 <template>
     <div class="mediaBox" ref="mediaBox">
-        <div
-            v-for="(photos, index) of photoId"
-            :key="photos.id"
-            v-show="showPhotoId === index"
-            class="Box"
-        >
+        <div v-for="(photos, index) of photoId" :key="photos.id" v-show="showPhotoId === index" class="Box">
             <img :src="photos.photo" alt />
         </div>
         <transition>
@@ -46,14 +41,14 @@ export default {
     mounted() {
     },
     watch: {
+        //取得資料
         dynamicPhotos(newVal, oldVal) {
             const vm = this;
             this.photoId = [];
             this.showPhotoId = 0;
-            setTimeout(() => {
-                vm.photoId = newVal;
 
-            }, 300)
+            vm.photoId = newVal;
+
         }
     },
     computed: {
@@ -93,6 +88,7 @@ export default {
 .v-leave-to {
     opacity: 0;
 }
+
 .mediaBox {
     position: relative;
     display: flex;
@@ -133,6 +129,7 @@ export default {
 .chengeButton button:hover {
     opacity: 0.5;
 }
+
 .chengeButton button::before {
     position: absolute;
     left: 28%;
@@ -144,6 +141,7 @@ export default {
     border-radius: 30px;
     transform: rotate(-45deg);
 }
+
 .chengeButton button::after {
     position: absolute;
     left: 28%;
@@ -155,10 +153,12 @@ export default {
     border-radius: 30px;
     transform: rotate(45deg);
 }
+
 .chengeButton button:nth-child(1) {
     left: 1rem;
     top: calc(50% - 1.5rem);
 }
+
 .chengeButton button:nth-child(2) {
     right: 1rem;
     top: calc(50% - 1.5rem);

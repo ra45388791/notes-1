@@ -1,5 +1,5 @@
 <template>
-    <div id="squareBox">
+    <div ref="square" style="opacity: 0;" id="squareBox">
         <div class="box">
             <div class="square square1">
 
@@ -15,6 +15,12 @@
 </template>
 
 <script>
+import { observerRightFadeIn } from '../../../../script/observerFunc.js'
+export default {
+    mounted() {
+        observerRightFadeIn.observe(this.$refs.square)
+    }
+}
 </script>
 
 <style scoped>

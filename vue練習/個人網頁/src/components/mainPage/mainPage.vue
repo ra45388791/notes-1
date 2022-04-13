@@ -32,7 +32,8 @@ export default {
 
 <style scoped>
 .rightContent {
-    scroll-behavior: smooth; /*平滑滾動 - 電腦*/
+    scroll-behavior: smooth;
+    /*平滑滾動 - 電腦*/
 }
 
 @media (min-width: 1440px) {

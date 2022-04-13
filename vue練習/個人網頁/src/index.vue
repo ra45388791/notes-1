@@ -10,7 +10,6 @@
         <router-view></router-view>
         <FooterTemp></FooterTemp>
     </div>
-
 </template>
 
 <script>
@@ -36,6 +35,64 @@ export default {
 </script>
 
 <style>
+
+/* 模組化動畫css */
+@keyframes topFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-2rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0rem);
+    }
+}
+
+@keyframes bottomFadeIn {
+
+    /* 從底部fadein */
+    0% {
+        opacity: 0;
+        transform: translateY(2rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0rem);
+    }
+}
+
+@keyframes leftFadeIn {
+
+    /* 從底部fadein */
+    0% {
+        opacity: 0;
+        transform: translateX(-2rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0rem);
+    }
+}
+
+@keyframes rightFadeIn {
+
+    /* 從底部fadein */
+    0% {
+        opacity: 0;
+        transform: translateX(2rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0rem);
+    }
+}
+
+
+
 html {
     padding: 0;
     scroll-behavior: smooth;

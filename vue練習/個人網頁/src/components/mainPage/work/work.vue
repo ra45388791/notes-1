@@ -1,26 +1,20 @@
 <template>
     <section id="work">
         <div class="title">
-            <h2>我的作品</h2>
+            <h2><samp ref="title1">我的作品</samp></h2>
         </div>
         <div class="content">
-            <WorkBox
-                v-for=" work of worksData"
-                v-bind="work"
-                @openArticle="setArticle"
-                class="workLastBox"
-            ></WorkBox>
+            <WorkBox v-for=" work of worksData" v-bind="work" @openArticle="setArticle" class="workLastBox"></WorkBox>
         </div>
 
-        <WorkDynamicWall
-            :articleDatas="pushArticleData"
-            :showArticles="showArticle"
-            @closeArticle="showArticle = false"
-        ></WorkDynamicWall>
+        <WorkDynamicWall :articleDatas="pushArticleData" :showArticles="showArticle"
+            @closeArticle="showArticle = false"></WorkDynamicWall>
     </section>
 </template>
 
 <script>
+import { observerLeftFadeIn } from '../../../../script/observerFunc.js'
+
 import WorkBox from "./workBox.vue";
 import worksJson from "../../../assets/works.json";
 import WorkDynamicWall from "./workDynamicWall.vue";
@@ -49,7 +43,7 @@ export default {
         };
     },
     mounted() {
-
+        observerLeftFadeIn.observe(this.$refs.title1)
     },
     computed: {
 
@@ -98,6 +92,7 @@ export default {
     margin-bottom: 5rem;
     text-align: start;
 }
+
 #work .title h2 {
     position: relative;
     font-size: 3rem;
@@ -114,15 +109,22 @@ export default {
     height: 1px;
     background: #fff;
 }
+
 #work .title h2::after {
     content: "";
     position: absolute;
+    left: 12rem;
     bottom: -5px;
     width: 4.5rem;
     height: 1px;
     background: #fff;
     transform: rotate(90deg);
 }
+
+#work .title samp {
+    display: block;
+}
+
 #work .content {
     display: flex;
     flex-direction: column;
@@ -130,40 +132,49 @@ export default {
     justify-content: center;
     align-items: center;
 }
+
 @media (min-width: 768px) {
+
     /* 控制顯示作品一行欄位數 */
     #work .content {
         flex-direction: row;
         flex-wrap: wrap;
         width: calc(18rem * 2);
     }
-    #work .content > div:nth-last-child(1) {
+
+    #work .content>div:nth-last-child(1) {
         margin-right: auto;
     }
 }
+
 @media (min-width: 1024px) {
+
     /* 控制顯示作品一行欄位數 */
     #work .content {
         flex-direction: row;
         flex-wrap: wrap;
         width: calc(18rem * 3);
     }
-    #work .content > div:nth-last-child(1) {
+
+    #work .content>div:nth-last-child(1) {
         margin-right: auto;
     }
 }
 
 @media (min-width: 1440px) {
+
     /* 控制顯示作品一行欄位數 */
     #work .content {
         flex-direction: row;
         flex-wrap: wrap;
         width: calc(18rem * 4);
     }
-    #work .content > div:nth-last-child(1) {
+
+    #work .content>div:nth-last-child(1) {
         margin-right: auto;
     }
 }
+
 @media (min-width: 2000px) {
     #work .content {
         width: calc(18rem * 3);

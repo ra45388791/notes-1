@@ -5,11 +5,11 @@
                 <source srcset="/public/header/全身照xl.jpg" media="(min-width: 768px)" />
                 <img src="/public/header/全身照sm.jpg" alt />
             </picture> -->
-			<div class="content">
-				<h2 ref="titleOne">
+			<div ref="titleOne" class="content">
+				<h2>
 					<samp class="title1">{{ title }}</samp>
 				</h2>
-				<h2 ref="titletwo">
+				<h2>
 					<samp class="title1">{{ title2 }}</samp>
 				</h2>
 				<h3>{{ content1 }}</h3>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { observerLeftFadeIn } from '../../../../script/observerFunc.js'
 import squareAnimation from "./squareAnimation.vue";
 export default {
 	data() {
@@ -36,6 +37,9 @@ export default {
 		// console.log(this.$refs);
 		// const a = this.$refs.titleOne.getBoundingClientRect();
 		// console.log(a);
+		observerLeftFadeIn.observe(this.$refs.titleOne);
+
+
 	},
 	methods: {},
 	components: { squareAnimation },
