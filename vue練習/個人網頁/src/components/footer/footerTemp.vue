@@ -176,6 +176,5 @@ export default {
         margin: 0;
     }
 
-    .content .technologyImg {}
 }
 </style>

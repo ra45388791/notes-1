@@ -61,6 +61,11 @@
                 </article-box>
             </div>
 
+
+
+
+
+            
             <div v-show="UI.appliedArea === 'toDo'" class="articleTemp">
                 <article-box v-for="data in toDoData" :key="data.id" v-bind="data" :item-state="UI.itemButton"
                     @article-state-temp="articleState" @set-article-state-temp="setArticleState"

@@ -264,7 +264,7 @@ nav a:hover {
     background: #65e3ff;
 }
 
-.buttonMenu button:not(:first-child):before {
+.buttonMenu button:not(:first-child)::before {
     content    : "";
     position   : absolute;
     left       : 0;

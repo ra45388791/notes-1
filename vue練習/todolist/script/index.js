@@ -29,8 +29,10 @@ const data = {
             height: 0,
         },
         appliedArea: 'allItem', // ui選中項目 預設allItem [article /radio / articlePlus]
+
         UIShow: true, // 介面顯示
         articleShow: false, // 完整文章淡入
+
         articleForm: false, // 新增、修改清單區域淡入淡出
         loading: true, // 讀取
         setArticleMask: false, // 遮罩
