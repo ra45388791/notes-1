@@ -1,7 +1,10 @@
 <template>
     <div v-bind="$attrs" class="content">
         <!-- v-show="UI.UIShow" -->
-        <Article v-for="article of mainArticles" :key="article.id" v-bind="article" />
+        <Article v-show="articleShow === 'allItem'" v-for="article of main" :key="article.id" v-bind="article" />
+        <Article v-show="articleShow === 'toDo'" v-for="article of toDoState" :key="article.id" v-bind="article" />
+        <Article v-show="articleShow === 'getThingsDone'" v-for="article of getThingsDoneState" :key="article.id"
+            v-bind="article" />
     </div>
     <Loading />
     <HintBox />
@@ -20,7 +23,16 @@ export default {
 
     },
     computed: {
-        ...mapState(['mainArticles'])
+        ...mapState({
+            main: 'mainArticles',
+            articleShow: 'showStateArticle'
+        }),
+        toDoState() {
+            return this.main.filter(e => e.state === false);
+        },
+        getThingsDoneState() {
+            return this.main.filter(e => e.state === true);
+        }
     },
 
     components: { Article, Loading, HintBox }

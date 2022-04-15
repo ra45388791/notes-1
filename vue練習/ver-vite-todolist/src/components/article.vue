@@ -67,7 +67,7 @@ export default {
     },
     methods: {
         //切換秀出全文章狀態、將文章推入暫存區、切換編輯文章狀態
-        ...mapMutations(["CHANGE_SHOW_ARTICLE_STATE", "TEMPORARY_STORAGE_ARTICLES", "CHANGE_EDIT_ARTICLE_STATE"]),
+        ...mapMutations(["CHANGE_SHOW_FULL_ARTICLE_STATE", "TEMPORARY_STORAGE_ARTICLES", "CHANGE_EDIT_ARTICLE_STATE"]),
         //提交文章並更新整個文章串
         ...mapActions(['SUBMIT_ARTICLES']),
 
@@ -82,7 +82,7 @@ export default {
                 state: this.state,
                 stateImg: this.stateImg,
             };
-            this.CHANGE_SHOW_ARTICLE_STATE();
+            this.CHANGE_SHOW_FULL_ARTICLE_STATE();
             this.TEMPORARY_STORAGE_ARTICLES(box);
         },
         //設定文章狀態

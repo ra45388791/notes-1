@@ -3,7 +3,7 @@
         <article id="fullArticle">
             <!-- 檢視文章選單 -->
             <nav class="topNav">
-                <button @mouseup="CHANGE_SHOW_ARTICLE_STATE" class="buttons">
+                <button @mouseup="CHANGE_SHOW_FULL_ARTICLE_STATE" class="buttons">
                     <img src="../../public/images/添加代辦事項/X.svg" alt="">
                 </button>
 
@@ -53,7 +53,7 @@ export default {
         }),
     },
     methods: {
-        ...mapMutations(['CHANGE_SHOW_ARTICLE_STATE'])
+        ...mapMutations(['CHANGE_SHOW_FULL_ARTICLE_STATE'])
     },
     components: { Article }
 }

@@ -12,10 +12,11 @@ import mainPage from './components/mainPage.vue'
  * !貼文
  * !檢視貼文功能
  * !新增貼文功能         (標題 / 內文 / 日期)
- * 代辦 / 結案 / 修改 / 刪除
- * 修改貼文
- * 行事曆
+ * !代辦 / 結案 / 修改 
+ * !修改貼文
  * !讀取畫面
+ * 刪除文章 ( 刪除時檢查清單是否完成 )
+ * 行事曆
  */
 // const url = 'https://tranquil-gorge-87619.herokuapp.com/';
 const url = 'http://localhost:5000/#/';
@@ -25,6 +26,7 @@ const store = createStore({
     state() {
         return {
             mainArticles: [],
+            showStateArticle: 'allItem',
             UI: {
                 UIShow: true,       // 介面顯示
                 loading: false,     // loading 畫面
@@ -57,8 +59,12 @@ const store = createStore({
                 state.mainArticles = payload;
             }
         },
+        //切換顯示狀態文章
+        CHANGE_SHOW_ARTICLE(state, payload) {
+            state.showStateArticle = payload;
+        },
         //開啟全文章
-        CHANGE_SHOW_ARTICLE_STATE(state) {
+        CHANGE_SHOW_FULL_ARTICLE_STATE(state) {
             state.UI.UIShow = !state.UI.UIShow;
             state.UI.articleShow = !state.UI.articleShow;
         },

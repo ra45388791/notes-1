@@ -14,7 +14,7 @@
     </transition>
 </template>
 <script>
-
+import { mapMutations } from "vuex";
 export default {
     data() {
         return {
@@ -39,6 +39,16 @@ export default {
             ]
         }
     },
+    watch: {
+        appliedArea(newVal) {
+            this.CHANGE_SHOW_ARTICLE(newVal);
+            // console.log(newVal);
+        }
+    },
+    methods: {
+        ...mapMutations(['CHANGE_SHOW_ARTICLE']),
+    }
+
 
 }
 </script>
