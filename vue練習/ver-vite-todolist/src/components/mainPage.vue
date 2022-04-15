@@ -1,7 +1,7 @@
 <template>
     <div v-bind="$attrs" class="content">
         <!-- v-show="UI.UIShow" -->
-        <Article v-for="article of mainArticles" v-bind="article" />
+        <Article v-for="article of mainArticles" :key="article.id" v-bind="article" />
     </div>
     <Loading />
 </template>

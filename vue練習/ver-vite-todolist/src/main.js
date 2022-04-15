@@ -27,7 +27,7 @@ const store = createStore({
             mainArticles: [],
             UI: {
                 UIShow: true,       // 介面顯示
-                loading: false,      //
+                loading: false,     // loading 畫面
                 articleShow: false, // 閱讀完整文章淡入
                 addArticle: false,  // 新增文章淡入
             },

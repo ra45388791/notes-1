@@ -342,17 +342,6 @@ export default {
 @media (min-width:1024px) {
 
     #addButton {
-        /* position: fixed;
-        left: 8.2rem;
-        bottom: 1.5rem;
-
-        width: 12rem;
-        height: 3rem;
-        background: #00CFFF;
-        border: none;
-        border-radius: 30px;
-        z-index: 10; */
-
         left: 5.5rem;
         bottom: 1.5rem;
 
@@ -360,31 +349,12 @@ export default {
         height: 3rem;
 
         border-radius: 30px;
-
     }
 
     .article {
         width: auto;
         width: 500px;
     }
-
-
-    /* .article .title {
-
-        font-size: 1.75rem;
-    }
-
-    .article .title h3 {
-        margin: 1rem 0;
-    }
-
-    .article .date {
-        font-size: 1.5rem;
-    }
-
-    .article .itemContent {
-        font-size: 1.3rem;
-    } */
 }
 
 @media (min-width:1440px) {
@@ -395,6 +365,5 @@ export default {
         width: 12rem;
         height: 3rem;
     }
-
 }
 </style>

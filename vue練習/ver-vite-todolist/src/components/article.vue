@@ -27,23 +27,22 @@
 
         <div class="setButton">
             <button @mouseup.stop="openSet"></button>
+            <ArticleSetItem :state="setArticleItemState" @close="closeSet" />
         </div>
     </div>
 </template>
 <script>
 import { mapMutations } from "vuex";
+import ArticleSetItem from "./articleSetItem.vue";
 export default {
-
-    // props: ['id', 'itemShow', 'state', 'stateImg', 'title', 'content', 'setDate', 'date'],
-    props: ['id', 'state', 'stateImg', 'title', 'content', 'setDate', 'date'],
+    props: ["id", "state", "stateImg", "title", "content", "setDate", "date"],
     data() {
         return {
-            itemShow: true
-        }
+            itemShow: true,
+            setArticleItemState: false  //設定清單是否展開
+        };
     },
     created() {
-
-
     },
     computed: {
         parseSetDate() {
@@ -52,7 +51,7 @@ export default {
             return {
                 month: month,
                 day: day,
-            }
+            };
         },
         parseEndDate() {
             const month = this.date.slice(5, 7);
@@ -60,11 +59,11 @@ export default {
             return {
                 month: month,
                 day: day,
-            }
+            };
         }
     },
     methods: {
-        ...mapMutations(['CHANGE_SHOW_ARTICLE_STATE', 'TEMPORARY_STORAGE_ARTICLES']),
+        ...mapMutations(["CHANGE_SHOW_ARTICLE_STATE", "TEMPORARY_STORAGE_ARTICLES"]),
         // 打開文章
         openArticle: function () {
             const box = {
@@ -75,20 +74,19 @@ export default {
                 date: this.date,
                 state: this.state,
                 stateImg: this.stateImg,
-            }
-
-
+            };
             this.CHANGE_SHOW_ARTICLE_STATE();
-            this.TEMPORARY_STORAGE_ARTICLES(box)
-
+            this.TEMPORARY_STORAGE_ARTICLES(box);
         },
         // 打開設定清單
         openSet: function () {
-            console.log('456');
+            this.setArticleItemState = true;
+        },
+        closeSet: function () {
+            this.setArticleItemState = false;
         }
-
-
-    }
+    },
+    components: { ArticleSetItem }
 }
 </script>
 <style scoped>
