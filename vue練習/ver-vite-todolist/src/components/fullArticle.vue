@@ -1,18 +1,18 @@
 <template>
-    <transition>
-
+    <transition name="editOrRead">
         <article id="fullArticle">
+            <!-- 檢視文章選單 -->
             <nav class="topNav">
-                <button @mouseup="OPEN_FULL_ARTICLES" class="buttons">
+                <button @mouseup="CHANGE_SHOW_ARTICLE_STATE" class="buttons">
                     <img src="images/添加代辦事項/X.svg" alt="">
                 </button>
 
                 <div>{{ title }}</div>
 
                 <button class="buttons noShowButton">
-                    <!-- <img src="images/添加代辦事項/O.svg" alt=""> -->
                 </button>
             </nav>
+            <!-- 內文 -->
             <div class="content">
                 <div class="article">
                     <div class="title">
@@ -53,30 +53,12 @@ export default {
         }),
     },
     methods: {
-        ...mapMutations(['OPEN_FULL_ARTICLES'])
+        ...mapMutations(['CHANGE_SHOW_ARTICLE_STATE'])
     },
     components: { Article }
 }
 </script>
 <style scoped>
-.v-enter-active,
-.v-leave-active {
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-    opacity: 0;
-    transform: translateY(5rem);
-}
-
-.v-enter-to,
-.v-leave-from {
-    opacity: 1;
-    transform: translateY(0rem);
-
-}
-
 #fullArticle {
     position: fixed;
     left: 0;
@@ -145,10 +127,10 @@ export default {
     width: 350px;
 
     border: 5px solid #fff;
-    border-radius: 20px;
+    border-radius: 20px 0 0 20px;
     box-sizing: border-box;
     color: #fff;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .article .title {

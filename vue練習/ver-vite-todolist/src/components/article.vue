@@ -1,5 +1,5 @@
 <template>
-    <div class="article" @mouseup="openArticle">
+    <div v-show="itemShow" @mouseup="openArticle" class="article">
 
         <div class="articleHeader">
             <div class="top">
@@ -34,11 +34,11 @@
 import { mapMutations } from "vuex";
 export default {
 
-    props: ['id', 'itemShow', 'state', 'stateImg', 'title', 'content', 'setDate', 'date'],
+    // props: ['id', 'itemShow', 'state', 'stateImg', 'title', 'content', 'setDate', 'date'],
+    props: ['id', 'state', 'stateImg', 'title', 'content', 'setDate', 'date'],
     data() {
         return {
-
-
+            itemShow: true
         }
     },
     created() {
@@ -64,7 +64,7 @@ export default {
         }
     },
     methods: {
-        ...mapMutations(['OPEN_FULL_ARTICLES', 'TEMPORARY_STORAGE_ARTICLES']),
+        ...mapMutations(['CHANGE_SHOW_ARTICLE_STATE', 'TEMPORARY_STORAGE_ARTICLES']),
         // 打開文章
         openArticle: function () {
             const box = {
@@ -78,7 +78,7 @@ export default {
             }
 
 
-            this.OPEN_FULL_ARTICLES();
+            this.CHANGE_SHOW_ARTICLE_STATE();
             this.TEMPORARY_STORAGE_ARTICLES(box)
 
         },

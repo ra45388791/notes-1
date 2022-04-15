@@ -1,12 +1,15 @@
 <template>
-    <header>
-        <h1>
-            <div class="noteImage">
-                <img src="/images/notebook.png" alt="">
-            </div>
-            <samp>{{ title }}</samp>
-        </h1>
-    </header>
+    <transition>
+
+        <header>
+            <h1>
+                <div class="noteImage">
+                    <img src="/images/notebook.png" alt="">
+                </div>
+                <samp>{{ title }}</samp>
+            </h1>
+        </header>
+    </transition>
 </template>
 <script>
 export default {
@@ -19,6 +22,16 @@ export default {
 }
 </script>
 <style scoped>
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
+
 header {
     position: fixed;
     top: 0;
@@ -61,9 +74,9 @@ header .noteImage img {
 @media (min-width: 1024px) {
     header {
         position: relative;
-        padding: 3rem 0;
+        padding: 0rem 0;
         width: 100%;
-        height: 15rem;
+        height: 12rem;
         background: #126376;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
@@ -77,6 +90,26 @@ header .noteImage img {
         align-items: center;
         margin: 0;
         padding: 0;
+        font-size: 2.5rem;
+        color: #fff;
+    }
+
+    header .noteImage {
+        margin-right: 0rem;
+        margin-bottom: 1rem;
+        width: 6rem;
+        height: 6rem;
+    }
+}
+
+@media (min-width: 1440px) {
+    header {
+        padding: 4rem 0;
+        height: 15rem;
+
+    }
+
+    header h1 {
         font-size: 3rem;
         color: #fff;
     }
@@ -86,12 +119,6 @@ header .noteImage img {
         margin-bottom: 1rem;
         width: 8rem;
         height: 8rem;
-    }
-}
-
-@media (min-width: 1440px) {
-    header {
-        padding: 4rem 0;
     }
 }
 </style>

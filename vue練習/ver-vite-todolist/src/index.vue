@@ -4,7 +4,7 @@
         <NavTemp v-show="UI.UIShow" />
     </div>
     <FullArticle v-show="UI.articleShow" />
-
+    <AddArticle />
     <div id="indexContent">
         <router-view></router-view>
     </div>
@@ -15,6 +15,7 @@ import { mapState } from "vuex";
 import Header from './header.vue'
 import NavTemp from './navTemp.vue';
 import FullArticle from "./components/fullArticle.vue";
+import AddArticle from "./components/addArticle.vue";
 
 
 export default {
@@ -28,10 +29,28 @@ export default {
     computed: {
         ...mapState(['UI'])
     },
-    components: { Header, NavTemp, FullArticle }
+    components: { Header, NavTemp, FullArticle, AddArticle }
 }
 </script>
 <style>
+.editOrRead-enter-active,
+.editOrRead-leave-active {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.editOrRead-enter-from,
+.editOrRead-leave-to {
+    opacity: 0;
+    transform: translateY(5rem);
+}
+
+.editOrRead-enter-to,
+.editOrRead-leave-from {
+    opacity: 1;
+    transform: translateY(0rem);
+
+}
+
 body {
     position: relative;
     padding-top: 64px;

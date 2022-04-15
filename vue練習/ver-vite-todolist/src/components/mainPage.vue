@@ -1,13 +1,14 @@
 <template>
-    <div class="content">
+    <div v-bind="$attrs" class="content">
         <!-- v-show="UI.UIShow" -->
         <Article v-for="article of mainArticles" v-bind="article" />
-
     </div>
+    <Loading />
 </template>
 <script>
 import { mapState, mapMutations } from "vuex";
 import Article from "./article.vue"
+import Loading from "./loading.vue"
 
 export default {
     data() {
@@ -20,7 +21,7 @@ export default {
         ...mapState(['mainArticles'])
     },
 
-    components: { Article }
+    components: { Article, Loading }
 }
 </script>
 <style scoped>

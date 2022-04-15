@@ -1,15 +1,17 @@
 <template>
-    <nav class="navBox">
-        <div class="buttonMenu">
-            <button v-for="btn of buttonData" :key="btn.id"
-                :class="appliedArea === btn.id ? 'menuClick' : 'menuUnclick'">
-                <input type="radio" v-model="appliedArea" :id="btn.id" :value="btn.id">
-                <label :for="btn.id">
-                    {{ btn.name }}
-                </label>
-            </button>
-        </div>
-    </nav>
+    <transition>
+        <nav class="navBox">
+            <div class="buttonMenu">
+                <button v-for="btn of buttonData" :key="btn.id"
+                    :class="appliedArea === btn.id ? 'menuClick' : 'menuUnclick'">
+                    <input type="radio" v-model="appliedArea" :id="btn.id" :value="btn.id">
+                    <label :for="btn.id">
+                        {{ btn.name }}
+                    </label>
+                </button>
+            </div>
+        </nav>
+    </transition>
 </template>
 <script>
 
@@ -41,6 +43,16 @@ export default {
 }
 </script>
 <style scoped>
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
+
 .navBox {
     position: fixed;
     left: 0;
@@ -103,7 +115,6 @@ export default {
 @media (min-width:1024px) {
 
     .navBox {
-
         position: relative;
         width: 100%;
         height: auto;
@@ -114,12 +125,11 @@ export default {
     .buttonMenu button {
         position: relative;
         width: 100%;
-        height: 4.5rem;
-        font-size: 2rem;
+        height: 3rem;
+        font-size: 1.5rem;
         text-align: start;
-        line-height: 4.5rem;
+        line-height: 3.5rem;
         box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.251);
-
     }
 
     .buttonMenu button label {
@@ -135,5 +145,19 @@ export default {
         height: 0px;
     }
 
+}
+
+@media (min-width:1440px) {
+
+    .buttonMenu button {
+        position: relative;
+        width: 100%;
+        height: 4.5rem;
+        font-size: 2rem;
+        text-align: start;
+        line-height: 4.5rem;
+        box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.251);
+
+    }
 }
 </style>
