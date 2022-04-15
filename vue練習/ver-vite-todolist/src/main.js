@@ -30,6 +30,7 @@ const store = createStore({
                 loading: false,     // loading 畫面
                 articleShow: false, // 閱讀完整文章淡入
                 addArticle: false,  // 新增文章淡入
+                editArticle: false, // 編輯文章淡入
                 hint: {
                     success: false,
                     fail: false
@@ -61,10 +62,15 @@ const store = createStore({
             state.UI.UIShow = !state.UI.UIShow;
             state.UI.articleShow = !state.UI.articleShow;
         },
-        //開啟新增文章編輯器
+        //開啟  "  新增  "  文章編輯器
         CHANGE_ADD_ARTICLE_STATE(state) {
             state.UI.UIShow = !state.UI.UIShow;
             state.UI.addArticle = !state.UI.addArticle;
+        },
+        //開啟  "  編輯  "  文章編輯器
+        CHANGE_EDIT_ARTICLE_STATE(state) {
+            state.UI.UIShow = !state.UI.UIShow;
+            state.UI.editArticle = !state.UI.editArticle;
         },
         //把文章推入暫存state以操作閱讀/編輯/新增
         TEMPORARY_STORAGE_ARTICLES(state, payload) {
@@ -77,6 +83,7 @@ const store = createStore({
             state.UI.UIShow = true;             //UI介面
             state.UI.articleShow = false;       //閱讀文章
             state.UI.addArticle = false;        //添加文章      
+            state.UI.editArticle = false;        //添加文章      
             state.temporaryStorageArticle = {
                 id: '',
                 title: '',
@@ -122,7 +129,6 @@ const store = createStore({
         async SUBMIT_ARTICLES(context, payload) {
             //關閉所有功能視窗
             context.commit('CLOSE_ALL_FUNCTIONS');
-
             //!讀取畫面開
             context.commit('CHANGE_LOADING');
 
@@ -146,7 +152,8 @@ const store = createStore({
             //!讀取畫面關
             context.commit('CHANGE_LOADING');
             return isSuccess    //回傳是否成功
-        }
+        },
+
     }
 });
 

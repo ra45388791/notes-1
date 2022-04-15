@@ -5,6 +5,7 @@
     </div>
     <FullArticle v-show="UI.articleShow" />
     <AddArticle />
+    <EditArticle />
     <div id="indexContent">
         <router-view></router-view>
     </div>
@@ -16,6 +17,7 @@ import Header from './header.vue'
 import NavTemp from './navTemp.vue';
 import FullArticle from "./components/fullArticle.vue";
 import AddArticle from "./components/addArticle.vue";
+import EditArticle from "./components/editArticle.vue";
 
 
 export default {
@@ -29,7 +31,7 @@ export default {
     computed: {
         ...mapState(['UI'])
     },
-    components: { Header, NavTemp, FullArticle, AddArticle }
+    components: { Header, NavTemp, FullArticle, AddArticle, EditArticle }
 }
 </script>
 <style>

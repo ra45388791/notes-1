@@ -30,7 +30,7 @@
         <div class="setButton">
             <button @mouseup.stop="openSet"></button>
             <ArticleSetItem :state="setArticleItemState" @close="closeSet" @upcomingState="setArticleState"
-                @caseClosedState="setArticleState" />
+                @caseClosedState="setArticleState" @editArticleFunc="editArticle" />
         </div>
     </div>
 </template>
@@ -66,8 +66,8 @@ export default {
         }
     },
     methods: {
-        //切換秀出全文章狀態、將文章推入暫存區
-        ...mapMutations(["CHANGE_SHOW_ARTICLE_STATE", "TEMPORARY_STORAGE_ARTICLES"]),
+        //切換秀出全文章狀態、將文章推入暫存區、切換編輯文章狀態
+        ...mapMutations(["CHANGE_SHOW_ARTICLE_STATE", "TEMPORARY_STORAGE_ARTICLES", "CHANGE_EDIT_ARTICLE_STATE"]),
         //提交文章並更新整個文章串
         ...mapActions(['SUBMIT_ARTICLES']),
 
@@ -104,7 +104,22 @@ export default {
             })
 
         },
-        //!編輯
+        //開啟編輯文章介面
+        editArticle: function () {
+            this.CHANGE_EDIT_ARTICLE_STATE();
+            const box = {
+                id: this.id,
+                title: this.title,
+                content: this.content,
+                setDate: this.setDate,
+                date: this.date,
+                state: this.state,
+                stateImg: this.stateImg,
+            };
+            this.TEMPORARY_STORAGE_ARTICLES(box);
+
+        },
+
         //!刪除
 
         // 打開設定清單

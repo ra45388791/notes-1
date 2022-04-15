@@ -54,8 +54,6 @@ export default {
             this.$emit('close');
         },
         upcoming() {        //代辦狀態
-            // vm.$emit('set-article-state-temp', vm.articleDatas.id, false, '/images/close.png');
-
             this.$emit('upcomingState', {
                 state: false,
                 stateImg: 'images/close.png'
@@ -68,11 +66,11 @@ export default {
                 stateImg: 'images/check.png'
             });
             this.closeSetItem();
-
         },
         editArticle() {     //開啟編輯畫面
             console.log('編輯');
-
+            this.$emit('editArticleFunc');
+            this.closeSetItem();
         },
         deleteArticle() {   //刪除文章
             console.log('刪除');

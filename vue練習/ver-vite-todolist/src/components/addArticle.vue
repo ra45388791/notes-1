@@ -3,7 +3,7 @@
         <article v-bind="$attrs" v-show="UI.addArticle" id="addArticle">
             <!-- 檢視文章選單 -->
             <nav class="topNav">
-                <button @mouseup="CHANGE_ADD_ARTICLE_STATE" class="buttons back">
+                <button @mouseup="CLOSE_ALL_FUNCTIONS" class="buttons back">
                     <img src="../../public/images/添加代辦事項/X.svg" alt="返回">
                 </button>
 
@@ -44,11 +44,7 @@ export default {
     data() {
         return {
             title: '新增清單',
-            form: {
-                title: '',
-                data: '',
-                content: '',
-            }
+
         };
     },
     created() {
@@ -60,7 +56,7 @@ export default {
         })
     },
     methods: {
-        ...mapMutations(['CHANGE_ADD_ARTICLE_STATE']),
+        ...mapMutations(['CHANGE_ADD_ARTICLE_STATE', 'CLOSE_ALL_FUNCTIONS']),
         ...mapActions(['SUBMIT_ARTICLES']),
         formSubmit: function (e) {
             const id = uuid();                  //生成id
@@ -73,7 +69,8 @@ export default {
                 alert('標題、內文或日期不能為空!')
                 return;
             }
-            if (this.checkDate(date)) { }       //檢查日期是否為過去
+            const checkDate = this.checkDate(date)
+            if (!checkDate) return;        //檢查日期是否為過去
 
             const box = {
                 id: id,                         //id
@@ -82,8 +79,6 @@ export default {
 
                 date: date,                     //結束日期
                 setDate: setDate,               //設定日期
-
-                // itemShow: true,                 // 刪除文章淡出
 
                 state: false,                   // 預設false
                 stateImg: 'images/close.png',  // 預設待辦
@@ -113,17 +108,17 @@ export default {
             // 檢查年份是否為過去
             if (dateData.y < todayDate.getFullYear()) {
                 alert('日期不能是過去');
-                return;
+                return false;
             }
 
             // 檢查輸入日期是否是過去
             if (dateData.m < todayDate.getMonth() + 1) {
                 alert('日期不能是過去');
-                return;
+                return false;
             } else if (dateData.m === todayDate.getMonth() + 1) {
                 if (dateData.d < todayDate.getDate()) {
                     alert('日期不能是過去');
-                    return;
+                    return false;
                 }
             }
 
