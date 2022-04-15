@@ -4,7 +4,7 @@
             <!-- 檢視文章選單 -->
             <nav class="topNav">
                 <button @mouseup="CHANGE_SHOW_ARTICLE_STATE" class="buttons">
-                    <img src="images/添加代辦事項/X.svg" alt="">
+                    <img src="../../public/images/添加代辦事項/X.svg" alt="">
                 </button>
 
                 <div>{{ title }}</div>

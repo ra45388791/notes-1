@@ -30,6 +30,10 @@ const store = createStore({
                 loading: false,     // loading 畫面
                 articleShow: false, // 閱讀完整文章淡入
                 addArticle: false,  // 新增文章淡入
+                hint: {
+                    success: false,
+                    fail: false
+                }
             },
             temporaryStorageArticle: {
                 id: '',
@@ -86,6 +90,19 @@ const store = createStore({
         //讀取畫面
         CHANGE_LOADING(state) {
             state.UI.loading = !state.UI.loading;
+        },
+        //操作成功提示
+        SUCCESS_TIPS(state) {
+            state.UI.hint.success = true;
+            setTimeout(function () {
+                state.UI.hint.success = false;
+            }, 1300)
+        },
+        FAIL_TIPS(state) {
+            state.UI.hint.fail = true;
+            setTimeout(function () {
+                state.UI.hint.fail = false;
+            }, 1300)
         }
     },
     actions: {
@@ -119,8 +136,10 @@ const store = createStore({
             }).then((response) => {
                 //推上主資料
                 context.commit('SET_MAIN_ARTICLES', response.data);
+                context.commit('SUCCESS_TIPS'); //操作成功提示
                 return true;
             }).catch((err) => {
+                context.commit('FAIL_TIPS');    //操作失敗提示
                 return false;   //失敗時回傳 false 並跳出失敗提示
             });
 

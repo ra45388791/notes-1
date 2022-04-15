@@ -4,11 +4,13 @@
         <Article v-for="article of mainArticles" :key="article.id" v-bind="article" />
     </div>
     <Loading />
+    <HintBox />
 </template>
 <script>
 import { mapState, mapMutations } from "vuex";
 import Article from "./article.vue"
 import Loading from "./loading.vue"
+import HintBox from "./hintBox.vue";
 
 export default {
     data() {
@@ -21,16 +23,14 @@ export default {
         ...mapState(['mainArticles'])
     },
 
-    components: { Article, Loading }
+    components: { Article, Loading, HintBox }
 }
 </script>
 <style scoped>
 .content {
-    /* margin: auto; */
     position: relative;
     width: 100%;
     height: auto;
-    /* background: #000; */
 }
 
 @media (min-width: 1024px) {

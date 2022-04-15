@@ -2,9 +2,10 @@
     <transition name="setItem">
         <div v-show="setItemState" @mouseup.stop id="setItem">
             <div class="setBox">
-                <button v-for="button of buttonData" :key="button.id" @mouseup.stop="closeSetItem" class="setButton">{{
-                    button.name
-                }}</button>
+                <button @mouseup.stop="upcoming" class="setButton">{{ buttonData[0].name }}</button>
+                <button @mouseup.stop="caseClosed" class="setButton">{{ buttonData[1].name }}</button>
+                <button @mouseup.stop="editArticle" class="setButton">{{ buttonData[2].name }}</button>
+                <button @mouseup.stop="deleteArticle" class="setButton">{{ buttonData[3].name }}</button>
             </div>
         </div>
     </transition>
@@ -16,25 +17,25 @@
 import { mapMutations } from "vuex";
 export default {
     props: ['state'],
-    emits: ['close'],
+    emits: ['close', 'upcomingState', 'caseClosedState', 'editArticleFunc', 'deleteArticleFunc'],
     data() {
         return {
             buttonData: [
                 {
                     id: 0,
-                    name: '代辦'
+                    name: '代辦',
                 },
                 {
                     id: 1,
-                    name: '結案'
+                    name: '結案',
                 },
                 {
                     id: 2,
-                    name: '修改'
+                    name: '修改',
                 },
                 {
                     id: 3,
-                    name: '刪除'
+                    name: '刪除',
                 }
             ]
         }
@@ -49,11 +50,34 @@ export default {
         }
     },
     methods: {
-        closeSetItem() {
-            console.log('攔截');
+        closeSetItem() {    //關閉設定選單
             this.$emit('close');
-        }
+        },
+        upcoming() {        //代辦狀態
+            // vm.$emit('set-article-state-temp', vm.articleDatas.id, false, '/images/close.png');
 
+            this.$emit('upcomingState', {
+                state: false,
+                stateImg: 'images/close.png'
+            });
+            this.closeSetItem();
+        },
+        caseClosed() {      //結案狀態
+            this.$emit('caseClosedState', {
+                state: true,
+                stateImg: 'images/check.png'
+            });
+            this.closeSetItem();
+
+        },
+        editArticle() {     //開啟編輯畫面
+            console.log('編輯');
+
+        },
+        deleteArticle() {   //刪除文章
+            console.log('刪除');
+
+        }
     }
 }
 </script>
@@ -72,7 +96,7 @@ export default {
 /* 設定清單 */
 .setItem-enter-active,
 .setItem-leave-active {
-    transition: opacity 0.5s ease, height 0.5s ease;
+    transition: opacity 0.3s ease, height 0.3s ease;
 }
 
 .setItem-enter-from,
@@ -105,7 +129,6 @@ export default {
     padding: 0.25rem 1rem;
 
     width: 8rem;
-    /* height: auto; */
     background: #0084A3;
     border: 2px solid #00fff0;
     box-sizing: border-box;
@@ -126,15 +149,13 @@ export default {
 
     width: 100%;
     height: 100%;
-
-    /* background: red; */
 }
 
 .setButton {
     margin: 0.25rem 0;
     width: 100%;
     height: 2rem;
-
+    line-height: 1.9rem;
     color: #fff;
     background: #0084A3;
     border: 1px solid #00ffff;

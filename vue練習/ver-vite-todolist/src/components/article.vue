@@ -2,19 +2,21 @@
     <div v-show="itemShow" @mouseup="openArticle" class="article">
 
         <div class="articleHeader">
+            <!-- 標題 -->
             <div class="top">
                 <div class="title">
                     <h3>{{ title }}</h3>
                 </div>
             </div>
 
+            <!-- 內文預覽 -->
             <div class="min">
                 <div class="content">
                     <p> {{ content }} </p>
                 </div>
             </div>
 
-
+            <!-- 文章日期/狀態 -->
             <div class="articleState">
                 <div class="date oldDate">{{ parseSetDate.month }}/{{ parseSetDate.day }}</div>
                 <div class="state">
@@ -27,12 +29,13 @@
 
         <div class="setButton">
             <button @mouseup.stop="openSet"></button>
-            <ArticleSetItem :state="setArticleItemState" @close="closeSet" />
+            <ArticleSetItem :state="setArticleItemState" @close="closeSet" @upcomingState="setArticleState"
+                @caseClosedState="setArticleState" />
         </div>
     </div>
 </template>
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 import ArticleSetItem from "./articleSetItem.vue";
 export default {
     props: ["id", "state", "stateImg", "title", "content", "setDate", "date"],
@@ -63,7 +66,11 @@ export default {
         }
     },
     methods: {
+        //切換秀出全文章狀態、將文章推入暫存區
         ...mapMutations(["CHANGE_SHOW_ARTICLE_STATE", "TEMPORARY_STORAGE_ARTICLES"]),
+        //提交文章並更新整個文章串
+        ...mapActions(['SUBMIT_ARTICLES']),
+
         // 打開文章
         openArticle: function () {
             const box = {
@@ -78,6 +85,28 @@ export default {
             this.CHANGE_SHOW_ARTICLE_STATE();
             this.TEMPORARY_STORAGE_ARTICLES(box);
         },
+        //設定文章狀態
+        setArticleState: function (e) {
+            if (this.state === e.state) return;
+
+            const box = {
+                id: this.id,
+                state: e.state,
+                stateImg: e.stateImg,
+            }
+            this.SUBMIT_ARTICLES({
+                method: 'POST',
+                func: 'chengeState',
+                data: box
+            }).then((e) => {
+                //檢查 如果回傳 true 成功; 回傳 false 失敗
+                // console.log(e);
+            })
+
+        },
+        //!編輯
+        //!刪除
+
         // 打開設定清單
         openSet: function () {
             this.setArticleItemState = true;
