@@ -36,14 +36,7 @@
                 "id": 0,
                 "name": "前往作品",
                 "type": "href",
-                "link": "/page/todolist/index.html",
-                "icon": "works/icon/foreign.png"
-            },
-            {
-                "id": 1,
-                "name": "前往連結",
-                "type": "router",
-                "link": "/#",
+                "link": "https://uceike58443729.000webhostapp.com/#/",
                 "icon": "works/icon/foreign.png"
             }
         ]

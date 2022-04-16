@@ -1,6 +1,6 @@
 <template>
     <transition>
-        <nav class="navBox">
+        <nav v-bind="$attrs" class="navBox">
             <div class="buttonMenu">
                 <button v-for="btn of buttonData" :key="btn.id"
                     :class="appliedArea === btn.id ? 'menuClick' : 'menuUnclick'">
@@ -12,9 +12,15 @@
             </div>
         </nav>
     </transition>
+
+    <!-- 添加文章按鈕 -->
+    <transition name="addButtonAni">
+        <button @mouseup="CHANGE_ADD_ARTICLE_STATE" v-show="UI.UIShow && page === 'root'" id="addButton"
+            type="button"></button>
+    </transition>
 </template>
 <script>
-import { mapMutations } from "vuex";
+import { mapState, mapMutations } from "vuex";
 export default {
     data() {
         return {
@@ -38,6 +44,12 @@ export default {
                 },
             ]
         }
+    },
+    computed: {
+        ...mapState({
+            page: 'page',
+            UI: 'UI'
+        }),
     },
     watch: {
         appliedArea(newVal, oldVal) {
@@ -65,10 +77,8 @@ export default {
         }
     },
     methods: {
-        ...mapMutations(['CHANGE_SHOW_ARTICLE']),
+        ...mapMutations(['CHANGE_ADD_ARTICLE_STATE', 'CHANGE_SHOW_ARTICLE']),
     }
-
-
 }
 </script>
 <style scoped>
@@ -80,6 +90,30 @@ export default {
 .v-enter-from,
 .v-leave-to {
     opacity: 0;
+}
+
+/* 添加文章按鈕動畫 */
+.addButtonAni-enter-active {
+    animation: addButtonAni 0.5s reverse;
+}
+
+.addButtonAni-leave-active {
+    animation: addButtonAni 0.5s;
+}
+
+@keyframes addButtonAni {
+    0% {
+        transform: translateY(0px);
+    }
+
+    20% {
+        transform: translateY(-1rem);
+    }
+
+    100% {
+        transform: translateY(20rem);
+        opacity: 0;
+    }
 }
 
 .navBox {
@@ -140,6 +174,48 @@ export default {
     background: #65e3ff;
 }
 
+/* 添加文章按鈕 */
+#addButton {
+    position: fixed;
+    right: 2rem;
+    bottom: 5rem;
+
+    width: 3rem;
+    height: 3rem;
+    background: #00CFFF;
+    border: none;
+    border-radius: 100%;
+    box-shadow: 0 5px 10px -5px #000;
+    transition: 0.2s;
+    z-index: 10;
+}
+
+#addButton:hover {
+
+    box-shadow: 0 5px 10px -5px #000, inset 0 0 20px 0 #fff;
+}
+
+
+#addButton::before {
+    content: "";
+    position: absolute;
+    left: calc(50% - 1rem);
+    top: calc(50% - 0.15rem);
+    width: 2rem;
+    height: 0.3rem;
+    background: #fff;
+}
+
+#addButton::after {
+    content: "";
+    position: absolute;
+    left: calc(50% - 0.15rem);
+    top: calc(50% - 1rem);
+    width: 0.3rem;
+    height: 2rem;
+    background: #fff;
+}
+
 
 @media (min-width:1024px) {
 
@@ -174,7 +250,21 @@ export default {
         height: 0px;
     }
 
+    /* 添加文章按鈕 */
+    #addButton {
+
+        left: 5.5rem;
+        bottom: 1.5rem;
+
+        width: 12rem;
+        height: 3rem;
+
+        border-radius: 30px;
+    }
+
 }
+
+
 
 @media (min-width:1440px) {
 
@@ -187,6 +277,15 @@ export default {
         line-height: 4.5rem;
         box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.251);
 
+    }
+
+    /* 添加文章按鈕 */
+    #addButton {
+        left: 9rem;
+        bottom: 1.5rem;
+
+        width: 12rem;
+        height: 3rem;
     }
 }
 </style>

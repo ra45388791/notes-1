@@ -26,6 +26,7 @@ const url = 'https://tranquil-gorge-87619.herokuapp.com/';
 const store = createStore({
     state() {
         return {
+            page: '',
             mainArticles: [],
             showStateArticle: 'allItem',
             UI: {
@@ -53,6 +54,9 @@ const store = createStore({
     getters: {
     },
     mutations: {
+        IS_ROOT_PAGE(state, payload) {
+            state.page = payload
+        },
         //將初始主資料推入state
         SET_MAIN_ARTICLES(state, payload) {
             if (Array.isArray(payload)) {
@@ -188,7 +192,13 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from) => {
-    // console.log(to);
+    //取得前往的網址
+    const getPath = to.path.slice(1);   //去掉 斜線 /
+    if (getPath) {                      //如果有內容修改page狀態為 前往網頁的名稱
+        store.commit('IS_ROOT_PAGE', getPath)
+    } else {                            //如果沒內容代表是根目錄
+        store.commit('IS_ROOT_PAGE', 'root')
+    }
 })
 
 const vm = createApp(index);
