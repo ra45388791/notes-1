@@ -6,7 +6,8 @@ import axios from 'axios'
 import "./style/normalize.css"
 
 import index from './index.vue'
-import mainPage from './components/mainPage.vue'
+import mainPage from './components/mainPage/mainPage.vue'
+import calenderMainPage from './components/calendar/calenderMainPage.vue'
 
 /**
  * !貼文
@@ -171,6 +172,10 @@ const routes = [
         path: '/',
         component: mainPage,
     },
+    {
+        path: '/calender',
+        component: calenderMainPage,
+    },
     // {
     //     path: '/:pathMatch(.*)*',		// 要使用正則表達式	
     //     component: NotFound
@@ -183,7 +188,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from) => {
-    console.log(to);
+    // console.log(to);
 })
 
 const vm = createApp(index);

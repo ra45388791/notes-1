@@ -32,7 +32,6 @@ export default {
             articleShow: 'showStateArticle'
         }),
         toDoState() {
-            console.log(this.main.length);
             return this.main.filter(e => e.state === false);
         },
         getThingsDoneState() {

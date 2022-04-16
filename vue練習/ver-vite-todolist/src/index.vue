@@ -15,9 +15,9 @@ import { mapState } from "vuex";
 
 import Header from './header.vue'
 import NavTemp from './navTemp.vue';
-import FullArticle from "./components/fullArticle.vue";
-import AddArticle from "./components/addArticle.vue";
-import EditArticle from "./components/editArticle.vue";
+import FullArticle from "./components/mainPage/fullArticle.vue";
+import AddArticle from "./components/mainPage/addArticle.vue";
+import EditArticle from "./components/mainPage/editArticle.vue";
 
 
 export default {

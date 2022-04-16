@@ -40,9 +40,28 @@ export default {
         }
     },
     watch: {
-        appliedArea(newVal) {
+        appliedArea(newVal, oldVal) {
+            //路由 : 取得目前所在頁面
+            const currentPage = this.$router.currentRoute._value.path;
+
+            //搜尋參數中是否有文章頁關鍵字 有:回傳0 沒有:回傳-1
+            const rootPathSearch = /allItem|toDo|getThingsDone/g
+            const rootPath = newVal.search(rootPathSearch)
+
+            //搜尋參數中是否有行事曆頁關鍵字 有:回傳0 沒有:回傳-1
+            const calendarPathSearch = /calendar/g
+            const calendarPath = newVal.search(calendarPathSearch)
+
+
+            if (currentPage !== '/' && rootPath === 0) {
+                //如果目前頁面不在根目錄  而點選的是根目錄按鈕 前往文章頁
+                this.$router.push('/')
+            } else if (calendarPath === 0) {
+                //如果目前在文章頁  而點選的是行事曆頁 前往行事曆頁
+                this.$router.push('/calender')
+            }
+
             this.CHANGE_SHOW_ARTICLE(newVal);
-            // console.log(newVal);
         }
     },
     methods: {

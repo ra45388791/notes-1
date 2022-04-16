@@ -1,23 +1,23 @@
 <template>
     <transition name="editOrRead">
-        <article v-bind="$attrs" v-show="UI.editArticle" id="editArticle">
+        <article v-bind="$attrs" v-show="UI.addArticle" id="addArticle">
             <!-- 檢視文章選單 -->
             <nav class="topNav">
                 <button @mouseup="CLOSE_ALL_FUNCTIONS" class="buttons back">
-                    <img src="../../public/images/添加代辦事項/X.svg" alt="返回">
+                    <img src="../../../public/images/添加代辦事項/X.svg" alt="返回">
                 </button>
 
                 <div>{{ title }}</div>
 
-                <button type="submit" form="editArticleForm" class="buttons check">
-                    <img src="../../public/images/添加代辦事項/O.svg" alt="提交按鈕">
+                <button type="submit" form="articleForm" class="buttons check">
+                    <img src="../../../public/images/添加代辦事項/O.svg" alt="提交按鈕">
                 </button>
             </nav>
             <!-- 編輯區 -->
             <div class="content">
                 <div class="article">
 
-                    <form id="editArticleForm" method="POST" action="/" @submit.prevent="formSubmit" class="">
+                    <form id="articleForm" method="POST" action="/" @submit.prevent="formSubmit" class="">
 
                         <input type="text" name="title" placeholder="標題" :value="form.title" class="formTitle">
 
@@ -32,14 +32,18 @@
 
         </article>
     </transition>
+    <transition name="addButtonAni">
+        <button @mouseup="CHANGE_ADD_ARTICLE_STATE" v-show="UI.UIShow" id="addButton" type="button"></button>
+    </transition>
 </template>
 <script>
 import { mapState, mapMutations, mapActions } from "vuex";
+import uuid from "../../../script/uuid.js"
 
 export default {
     data() {
         return {
-            title: '編輯清單',
+            title: '新增清單',
 
         };
     },
@@ -52,12 +56,14 @@ export default {
         })
     },
     methods: {
-        ...mapMutations(['CLOSE_ALL_FUNCTIONS']),
+        ...mapMutations(['CHANGE_ADD_ARTICLE_STATE', 'CLOSE_ALL_FUNCTIONS']),
         ...mapActions(['SUBMIT_ARTICLES']),
         formSubmit: function (e) {
+            const id = uuid();                  //生成id
             const title = e.target.title.value;
             const content = e.target.content.value;
             const date = e.target.date.value;
+            const setDate = this.setDate();
 
             if (!title || !date || !content) {
                 alert('標題、內文或日期不能為空!')
@@ -67,17 +73,22 @@ export default {
             if (!checkDate) return;        //檢查日期是否為過去
 
             const box = {
-                id: this.form.id,                         //  !id
+                id: id,                         //id
                 title: title,                   //標題
                 content: content,               //內容
+
                 date: date,                     //結束日期
+                setDate: setDate,               //設定日期
+
+                state: false,                   // 預設false
+                stateImg: 'images/close.png',  // 預設待辦
             }
 
-            // 將文章推入主資料
-            // this.axiosSubmit('POST', 'editArticle', box);
+            // !將文章推入主資料
+            // this.axiosSubmit('POST', 'addArticle', box);
             this.SUBMIT_ARTICLES({
                 method: 'POST',
-                func: 'reviseArticle',
+                func: 'addArticle',
                 data: box
             }).then((e) => {
                 //檢查 如果回傳 true 成功; 回傳 false 失敗
@@ -113,19 +124,35 @@ export default {
 
             return true
         },
+        setDate: function (e) {                 //處裡設定當下的時間
+            const setDate = new Date()
+            const year = String(setDate.getFullYear())
+            let month = String(setDate.getMonth() + 1)
+            let day = String(setDate.getDate())
+
+
+            if (month.length === 1) {
+                month = `0${month}`;
+            }
+            if (day.length === 1) {
+                day = `0${day}`;
+            }
+
+            return `${year}-${month}-${day}`;
+        }
     }
 }
 </script>
 <style scoped>
-.editButtonAni-enter-active {
-    animation: editButtonAni 0.5s reverse;
+.addButtonAni-enter-active {
+    animation: addButtonAni 0.5s reverse;
 }
 
-.editButtonAni-leave-active {
-    animation: editButtonAni 0.5s;
+.addButtonAni-leave-active {
+    animation: addButtonAni 0.5s;
 }
 
-@keyframes editButtonAni {
+@keyframes addButtonAni {
     0% {
         transform: translateY(0px);
     }
@@ -140,7 +167,50 @@ export default {
     }
 }
 
-#editArticle {
+
+#addButton {
+    position: fixed;
+    right: 2rem;
+    bottom: 5rem;
+
+    width: 3rem;
+    height: 3rem;
+    background: #00CFFF;
+    border: none;
+    border-radius: 100%;
+    box-shadow: 0 5px 10px -5px #000;
+    transition: 0.2s;
+    z-index: 10;
+}
+
+#addButton:hover {
+
+    box-shadow: 0 5px 10px -5px #000, inset 0 0 20px 0 #fff;
+}
+
+
+#addButton::before {
+    content: "";
+    position: absolute;
+    left: calc(50% - 1rem);
+    top: calc(50% - 0.15rem);
+    width: 2rem;
+    height: 0.3rem;
+    background: #fff;
+}
+
+#addButton::after {
+    content: "";
+    position: absolute;
+    left: calc(50% - 0.15rem);
+    top: calc(50% - 1rem);
+    width: 0.3rem;
+    height: 2rem;
+    background: #fff;
+}
+
+
+#addArticle {
     position: fixed;
     left: 0;
     top: 0;
@@ -217,15 +287,15 @@ export default {
 
 }
 
-#editArticleForm {
+#articleForm {
     display: flex;
     flex-direction: column;
     height: 100%;
 }
 
-#editArticleForm .formTitle,
-#editArticleForm .formDate,
-#editArticleForm .formContent {
+#articleForm .formTitle,
+#articleForm .formDate,
+#articleForm .formContent {
     width: 100%;
     color: #fff;
     background: #126376;
@@ -235,27 +305,27 @@ export default {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-#editArticleForm .formTitle::placeholder,
-#editArticleForm .formDate,
-#editArticleForm .formContent::placeholder {
+#articleForm .formTitle::placeholder,
+#articleForm .formDate,
+#articleForm .formContent::placeholder {
     color: rgb(206, 206, 206);
 }
 
-#editArticleForm .formTitle {
+#articleForm .formTitle {
     margin-bottom: 0.8rem;
     padding: 0.5rem;
     width: 100%;
     height: 35px;
 }
 
-#editArticleForm .formDate {
+#articleForm .formDate {
     margin: 0 auto;
     margin-bottom: 0.8rem;
     padding: 0 1rem;
     width: 10.5rem;
 }
 
-#editArticleForm .formContent {
+#articleForm .formContent {
     padding: 0.5rem;
     width: 100%;
     height: 100%;
@@ -266,7 +336,7 @@ export default {
 
 @media (min-width:1024px) {
 
-    #editButton {
+    #addButton {
         left: 5.5rem;
         bottom: 1.5rem;
 
@@ -283,7 +353,7 @@ export default {
 }
 
 @media (min-width:1440px) {
-    #editButton {
+    #addButton {
         left: 9rem;
         bottom: 1.5rem;
 
