@@ -6,7 +6,7 @@
     <FullArticle v-show="UI.articleShow" />
     <AddArticle v-show="UI.addArticle" />
     <EditArticle v-show="UI.editArticle" />
-    
+
     <div id="indexContent">
         <router-view></router-view>
     </div>
@@ -54,6 +54,8 @@ export default {
 
 }
 
+
+
 body {
     position: relative;
     padding-top: 64px;
@@ -84,6 +86,7 @@ body {
 @media (min-width: 1024px) {
     body {
         padding-top: 0px;
+        padding-bottom: 0px;
     }
 
     .navBox {
@@ -112,7 +115,7 @@ body {
 }
 
 /* 把免費空間自動加入的div隱藏起來 */
-.disclaimer{
+.disclaimer {
     display: none;
 }
 </style>
