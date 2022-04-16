@@ -30,7 +30,7 @@
         <div class="setButton">
             <button @mouseup.stop="openSet"></button>
             <ArticleSetItem :state="setArticleItemState" @close="closeSet" @upcomingState="setArticleState"
-                @caseClosedState="setArticleState" @editArticleFunc="editArticle" />
+                @caseClosedState="setArticleState" @editArticleFunc="editArticle" @deleteArticleFunc="deleteArticle" />
         </div>
     </div>
 </template>
@@ -98,11 +98,7 @@ export default {
                 method: 'POST',
                 func: 'chengeState',
                 data: box
-            }).then((e) => {
-                //檢查 如果回傳 true 成功; 回傳 false 失敗
-                // console.log(e);
             })
-
         },
         //開啟編輯文章介面
         editArticle: function () {
@@ -121,6 +117,18 @@ export default {
         },
 
         //!刪除
+        deleteArticle: function () {
+            if (!this.state) {          //如果事項尚未結案，確認是否刪除
+                const check = confirm("事項尚未結案，確定刪除嗎?");
+                if (!check) return;
+            }
+
+            this.SUBMIT_ARTICLES({
+                method: 'DELETE',
+                func: 'DELETE',
+                data: { id: this.id }
+            })
+        },
 
         // 打開設定清單
         openSet: function () {

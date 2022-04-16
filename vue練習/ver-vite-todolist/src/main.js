@@ -15,11 +15,11 @@ import mainPage from './components/mainPage.vue'
  * !代辦 / 結案 / 修改 
  * !修改貼文
  * !讀取畫面
- * 刪除文章 ( 刪除時檢查清單是否完成 )
+ * !刪除文章 ( 刪除時檢查清單是否完成 )
  * 行事曆
  */
-// const url = 'https://tranquil-gorge-87619.herokuapp.com/';
-const url = 'http://localhost:5000/#/';
+const url = 'https://tranquil-gorge-87619.herokuapp.com/';
+// const url = 'http://localhost:5000/#/';
 
 
 const store = createStore({
@@ -86,19 +86,22 @@ const store = createStore({
         },
         //關閉所有功能&清空暫存文章區
         CLOSE_ALL_FUNCTIONS(state) {
+
             state.UI.UIShow = true;             //UI介面
             state.UI.articleShow = false;       //閱讀文章
             state.UI.addArticle = false;        //添加文章      
             state.UI.editArticle = false;        //添加文章      
-            state.temporaryStorageArticle = {
-                id: '',
-                title: '',
-                content: '',
-                setDate: '',
-                date: '',
-                state: '',
-                stateImg: ''
-            }
+            setTimeout(() => {
+                state.temporaryStorageArticle = {
+                    id: '',
+                    title: '',
+                    content: '',
+                    setDate: '',
+                    date: '',
+                    state: '',
+                    stateImg: ''
+                }
+            }, 400)
         },
         //讀取畫面
         CHANGE_LOADING(state) {

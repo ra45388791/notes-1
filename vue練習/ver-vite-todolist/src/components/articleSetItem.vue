@@ -17,7 +17,7 @@
 import { mapMutations } from "vuex";
 export default {
     props: ['state'],
-    emits: ['close', 'upcomingState', 'caseClosedState', 'editArticleFunc', 'deleteArticleFunc'],
+    emits: ['close', 'upcomingState', 'caseClosedState', 'editArticleFunc', 'deleteArticleFunc', 'deleteArticleFunc'],
     data() {
         return {
             buttonData: [
@@ -68,13 +68,11 @@ export default {
             this.closeSetItem();
         },
         editArticle() {     //開啟編輯畫面
-            console.log('編輯');
             this.$emit('editArticleFunc');
             this.closeSetItem();
         },
         deleteArticle() {   //刪除文章
-            console.log('刪除');
-
+            this.$emit('deleteArticleFunc')
         }
     }
 }
