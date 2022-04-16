@@ -4,8 +4,9 @@
         <NavTemp v-show="UI.UIShow" />
     </div>
     <FullArticle v-show="UI.articleShow" />
-    <AddArticle />
-    <EditArticle />
+    <AddArticle v-show="UI.addArticle" />
+    <EditArticle v-show="UI.editArticle" />
+    
     <div id="indexContent">
         <router-view></router-view>
     </div>
@@ -108,5 +109,10 @@ body {
     #indexContent {
         margin-left: 30rem;
     }
+}
+
+/* 把免費空間自動加入的div隱藏起來 */
+.disclaimer{
+    display: none;
 }
 </style>
