@@ -229,6 +229,7 @@ export default {
         afterMonthDays: function (year, month, beforeLength, thisMonthLength) {
             let arrayDays = [];
 
+
             //基礎套用class
             const styles = ['oldDays']
 
@@ -280,6 +281,7 @@ export default {
                 return `${this.chooseDate.year}-${this.chooseDate.month}`
             }
         }
+<<<<<<< HEAD
     },
     methods: {
         monthReduce: function () {
@@ -300,6 +302,8 @@ export default {
 
 >>>>>>> parent of b47052c8 (發現效能問題 修改前)
         }
+=======
+>>>>>>> 8f9e269b8b98c9c64acd3524949148a71ac3521c
     }
 
 
@@ -476,6 +480,7 @@ li {
     .dateBox li {
         height: 5rem;
     }
+<<<<<<< HEAD
 
 }
 
@@ -485,4 +490,15 @@ li {
     }
 
 }
+=======
+
+}
+
+@media (min-width: 1920px) {
+    .dateBox li {
+        height: 7rem;
+    }
+
+}
+>>>>>>> 8f9e269b8b98c9c64acd3524949148a71ac3521c
 </style>
