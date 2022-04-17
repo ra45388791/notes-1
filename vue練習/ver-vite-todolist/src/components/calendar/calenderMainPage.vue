@@ -180,6 +180,7 @@ export default {
                 });
 
             }
+            
             return arrayDays;
         },
 
