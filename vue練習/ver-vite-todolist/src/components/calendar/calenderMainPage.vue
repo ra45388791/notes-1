@@ -11,7 +11,6 @@
 
             <div class="dateBox">
                 <ul class="day">
-<<<<<<< HEAD
  
 
                         <li is="vue:DayBox" v-for="days of month.dateData.before" v-bind="days" :key="days.id">
@@ -24,25 +23,6 @@
                         </li>
 
                     </ul>
-                </div>
-=======
-                    <li v-for="i of 5" class="oldDays" :key="i">
-                        <button>
-                            10
-                        </button>
-                    </li>
-                    <li v-for="i of 30" :key="i">
-                        <button>
-                            12
-                        </button>
-                    </li>
-                    <li v-for="i of 5" class="oldDays" :key="i">
-                        <button>
-                            11
-                        </button>
-                    </li>
-                </ul>
->>>>>>> parent of b47052c8 (發現效能問題 修改前)
             </div>
 
             <div class="control">
@@ -84,7 +64,6 @@ export default {
         })
     },
     computed: {
-<<<<<<< HEAD
         ...mapState(["mainArticles"]),
         //今日年月日
         today() {
@@ -229,7 +208,6 @@ export default {
         afterMonthDays: function (year, month, beforeLength, thisMonthLength) {
             let arrayDays = [];
 
-
             //基礎套用class
             const styles = ['oldDays']
 
@@ -273,37 +251,7 @@ export default {
             else
                 idDay = `${day}`;
             return { month: idMonth, day: idDay };
-=======
-        chooseDateRes() {
-            if (String(this.chooseDate.month).length === 1) {
-                return `${this.chooseDate.year}-0${this.chooseDate.month}`
-            } else {
-                return `${this.chooseDate.year}-${this.chooseDate.month}`
-            }
         }
-<<<<<<< HEAD
-    },
-    methods: {
-        monthReduce: function () {
-            if (this.chooseDate.month === 1) {
-                this.chooseDate.year -= 1;
-                this.chooseDate.month = 12;
-                return
-            }
-            this.chooseDate.month -= 1;
-        },
-        monthPlus: function () {
-            if (this.chooseDate.month === 12) {
-                this.chooseDate.year += 1;
-                this.chooseDate.month = 1;
-                return
-            }
-            this.chooseDate.month += 1;
-
->>>>>>> parent of b47052c8 (發現效能問題 修改前)
-        }
-=======
->>>>>>> 8f9e269b8b98c9c64acd3524949148a71ac3521c
     }
 
 
@@ -480,7 +428,6 @@ li {
     .dateBox li {
         height: 5rem;
     }
-<<<<<<< HEAD
 
 }
 
@@ -490,15 +437,4 @@ li {
     }
 
 }
-=======
-
-}
-
-@media (min-width: 1920px) {
-    .dateBox li {
-        height: 7rem;
-    }
-
-}
->>>>>>> 8f9e269b8b98c9c64acd3524949148a71ac3521c
 </style>
