@@ -13,16 +13,17 @@
                 <ul class="day">
  
 
-                    <li is="vue:DayBox" v-for="days of beforeMonthDays" v-bind="days" :key="days.id">
-                    </li>
+                        <li is="vue:DayBox" v-for="days of month.dateData.before" v-bind="days" :key="days.id">
+                        </li>
 
-                    <li is="vue:DayBox" v-for="days of thisMonthDays" v-bind="days" :key="days.id">
-                    </li>
+                        <li is="vue:DayBox" v-for="days of month.dateData.thisMonth" v-bind="days" :key="days.id">
+                        </li>
 
-                    <li is="vue:DayBox" v-for="days of afterMonthDays" v-bind="days" :key="days.id">
-                    </li>
+                        <li is="vue:DayBox" v-for="days of month.dateData.after" v-bind="days" :key="days.id">
+                        </li>
 
-                </ul>
+                    </ul>
+                </div>
             </div>
 
             <div class="control">
@@ -61,6 +62,16 @@ export default {
             }
         };
     },
+    created() {
+        this.$nextTick(function () {
+            const today = new Date;
+            const year = today.getFullYear();
+            const month = today.getMonth() + 1;
+
+            this.chooseDate.year = year;
+            this.chooseDate.month = month;
+        })
+    },
     computed: {
         ...mapState(["mainArticles"]),
         //今日年月日
@@ -70,10 +81,6 @@ export default {
             const month = today.getMonth() + 1;
             const day = today.getDate();
             const date = this.workWithNumbers(month, day);
-
-
-            this.chooseDate.year = year;
-            this.chooseDate.month = month;
 
             return `${year}-${date.month}-${date.day}`;
         },
@@ -86,16 +93,62 @@ export default {
                 return `${this.chooseDate.year}-${this.chooseDate.month}`;
             }
         },
+
+
+
+
+        //總月份
+        totalMonth: function () {
+            let totalDate = []
+
+            for (let i = 0; i < 12; i++) {
+                const beforeData = this.beforeMonthDays(this.chooseDate.year, i + 1);
+                const thisMonthData = this.thisMonthDays(this.chooseDate.year, i + 1);
+                const afterData = this.afterMonthDays(this.chooseDate.year, i + 1, beforeData.length, thisMonthData.length);
+
+
+                totalDate.push({
+                    id: `${this.chooseDate.year}-${i + 1}`,
+                    year: this.chooseDate.year,
+                    month: i + 1,
+                    dateData: {
+                        before: beforeData,
+                        thisMonth: thisMonthData,
+                        after: afterData
+                    }
+                })
+            }
+            return totalDate
+        }
+    },
+    methods: {
+        monthReduce: function () {
+            if (this.chooseDate.month === 1) {
+                this.chooseDate.year -= 1;
+                this.chooseDate.month = 12;
+                return;
+            }
+            this.chooseDate.month -= 1;
+        },
+        monthPlus: function () {
+            if (this.chooseDate.month === 12) {
+                this.chooseDate.year += 1;
+                this.chooseDate.month = 1;
+                return;
+            }
+            this.chooseDate.month += 1;
+        },
+
         //選中月分
-        thisMonthDays: function () {
+        thisMonthDays: function (year, month) {
             let arrayDays = [];
 
             //基礎套用class
             const styles = [];
 
             //原始年、月參數
-            const originYear = this.chooseDate.year;
-            const originMonth = this.chooseDate.month - 1;
+            const originYear = year;
+            const originMonth = month - 1;
             // 取得本月最後一天
             const totalLastDate = new Date(originYear, originMonth + 1, 0);
             const totalDate = totalLastDate.getDate();
@@ -115,16 +168,17 @@ export default {
             }
             return arrayDays;
         },
+
         //前一個月顯示
-        beforeMonthDays: function () {
+        beforeMonthDays: function (year, month) {
             let arrayDays = [];
 
             //基礎套用class
             const styles = ['oldDays']
 
             //原始年、月參數
-            const originYear = this.chooseDate.year;
-            const originMonth = this.chooseDate.month - 1;
+            const originYear = year;
+            const originMonth = month - 1;
             // 取得本月星期幾
             const firstDate = new Date(originYear, originMonth, 1);
             let firstDayWeek = firstDate.getDay();
@@ -156,17 +210,22 @@ export default {
             }
             return arrayDays;
         },
+
+
+
         //下一個月顯示
-        afterMonthDays: function () {
+        afterMonthDays: function (year, month, beforeLength, thisMonthLength) {
             let arrayDays = [];
 
             //基礎套用class
             const styles = ['oldDays']
 
             //原始年、月參數
-            const originYear = this.chooseDate.year;
-            const originMonth = this.chooseDate.month - 1;
-            const oldDaysAfter = 42 - (this.thisMonthDays.length + this.beforeMonthDays.length);
+            const originYear = year;
+            const originMonth = month - 1;
+
+            //42 - (前一個月+這個月的天數)
+            const oldDaysAfter = 42 - (beforeLength + thisMonthLength);
             for (let i = 0; i < oldDaysAfter; i++) {
                 const after = this.workWithNumbers(originMonth + 2, i + 1);
                 const id = `${originYear}-${after.month}-${after.day}`;
@@ -183,28 +242,6 @@ export default {
             return arrayDays;
         },
 
-        totalMonth: function () {
-            const totalMonth = this.beforeMonthDays.concat(this.thisMonthDays, this.afterMonthDays);
-            return totalMonth
-        }
-    },
-    methods: {
-        monthReduce: function () {
-            if (this.chooseDate.month === 1) {
-                this.chooseDate.year -= 1;
-                this.chooseDate.month = 12;
-                return;
-            }
-            this.chooseDate.month -= 1;
-        },
-        monthPlus: function () {
-            if (this.chooseDate.month === 12) {
-                this.chooseDate.year += 1;
-                this.chooseDate.month = 1;
-                return;
-            }
-            this.chooseDate.month += 1;
-        },
         isToday: function (date) {
             if (this.today === date) return true;
             else return false;
