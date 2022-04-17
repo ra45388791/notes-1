@@ -18,8 +18,6 @@ import calenderMainPage from './components/calendar/calenderMainPage.vue'
  * !讀取畫面
  * !刪除文章 ( 刪除時檢查清單是否完成 )
  * 行事曆
- * 
- * ( 全文章/編輯模組 的content 手機板高度超過螢幕需調整 )
  */
 const url = 'https://tranquil-gorge-87619.herokuapp.com/';
 // const url = 'http://localhost:5000/#/';

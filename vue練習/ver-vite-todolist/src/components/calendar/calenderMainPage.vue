@@ -40,27 +40,19 @@
     </div>
 </template>
 <script>
-import { mapState, mapMutations } from "vuex";
-import DayBox from "./dayBox.vue";
-
-
+import { mapMutations } from "vuex";
 export default {
     data() {
         return {
-            weekdays: [
-                { text: "一" },
-                { text: "二" },
-                { text: "三" },
-                { text: "四" },
-                { text: "五" },
-                { text: "六" },
-                { text: "日" },
+            weekdays: [ // 星期幾
+                { text: '一' }, { text: '二' }, { text: '三' }, { text: '四' }, { text: '五' }, { text: '六' }, { text: '日' },
             ],
             chooseDate: {
-                year: NaN,
-                month: NaN
+                year: 2022,
+                month: 4
             }
-        };
+
+        }
     },
     created() {
         this.$nextTick(function () {
@@ -261,8 +253,9 @@ export default {
                 idDay = `${day}`;
             return { month: idMonth, day: idDay };
         }
-    },
-    components: { DayBox }
+    }
+
+
 }
 </script>
 <style scoped>
@@ -272,6 +265,9 @@ export default {
     box-sizing: border-box;
 }
 
+li {
+    list-style: none;
+}
 
 
 /* 星期區 */
@@ -346,6 +342,47 @@ export default {
     width: 100%;
 }
 
+.dateBox li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% / 7);
+
+    height: 3.5rem;
+}
+
+.dateBox button {
+    position: relative;
+    padding: 0;
+
+    width: 2.5rem;
+    height: 2.5rem;
+
+    color: #fff;
+    background: rgba(51, 255, 0, 0);
+
+    font-size: 1.5em;
+    text-align: center;
+    border: solid 3px rgba(167, 255, 255, 0);
+    box-sizing: border-box;
+    border-radius: 30px;
+
+    transition: 0.1s;
+}
+
+.dateBox button:focus {
+    background: rgb(38, 215, 255);
+    border-radius: 30px;
+
+}
+
+/* !過去日期 */
+.dateBox .oldDays div {
+    color: rgba(255, 255, 255, 0.5);
+
+}
+
+/* !未來日期 */
 .control {
     display: flex;
     justify-content: center;
@@ -356,9 +393,12 @@ export default {
     background: rgb(19, 178, 241);
 }
 
+@media (min-width: 768px) {
 
-
-@media (min-width: 768px) {}
+    .dateBox li {
+        height: 3.5rem;
+    }
+}
 
 @media (min-width: 1024px) {
     #calenderPager {
@@ -375,6 +415,9 @@ export default {
 
     }
 
+    .dateBox li {
+        height: 3.5rem;
+    }
 
     .control {
         margin-bottom: 0;
@@ -382,7 +425,17 @@ export default {
     }
 }
 
-@media (min-width: 1440px) {}
+@media (min-width: 1440px) {
+    .dateBox li {
+        height: 5rem;
+    }
 
-@media (min-width: 1920px) {}
+}
+
+@media (min-width: 1920px) {
+    .dateBox li {
+        height: 7rem;
+    }
+
+}
 </style>
