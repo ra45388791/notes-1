@@ -11,7 +11,7 @@
 
             <div class="dateBox">
                 <ul class="day">
-
+ 
 
                     <li is="vue:DayBox" v-for="days of beforeMonthDays" v-bind="days" :key="days.id">
                     </li>
