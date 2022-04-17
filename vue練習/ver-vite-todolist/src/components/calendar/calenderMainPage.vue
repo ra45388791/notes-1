@@ -1,5 +1,5 @@
 <template>
-    <div id="calenderPager">
+    <div v-bind="$attrs" id="calenderPager">
         <div class="calenderBox">
 
             <div class="dayBox">
@@ -12,7 +12,6 @@
             <div class="dateBox">
                 <ul class="day">
 
-
                     <li is="vue:DayBox" v-for="days of beforeMonthDays" v-bind="days" :key="days.id">
                     </li>
 
@@ -21,19 +20,24 @@
 
                     <li is="vue:DayBox" v-for="days of afterMonthDays" v-bind="days" :key="days.id">
                     </li>
-
                 </ul>
             </div>
+            <transition>
 
-            <div class="control">
-                <button @mouseup="monthReduce">
-                    -
-                </button>
-                <input v-model="chooseDateRes" type="month">
-                <button @mouseup="monthPlus">
-                    +
-                </button>
-            </div>
+                <div class="control" :class="showControl ? 'showControl' : 'closeControl'">
+                    <button @mouseup="monthReduce" class="reduce">
+
+                    </button>
+                    <input :value="chooseDateRes" @input="setDate" type="month">
+                    <button @mouseup="monthPlus" class="plus">
+
+                    </button>
+                    <div class="showControlButton">
+                        <button @mouseup.stop="showControl = !showControl"
+                            :class="showControl ? 'triggerControl' : 'notTriggerControl'"></button>
+                    </div>
+                </div>
+            </transition>
 
         </div>
     </div>
@@ -58,8 +62,20 @@ export default {
             chooseDate: {
                 year: NaN,
                 month: NaN
-            }
+            },
+            showControl: false
         };
+    },
+    created() {
+        this.$nextTick(function () {
+            const today = new Date;
+            const year = today.getFullYear();
+            const month = today.getMonth() + 1;
+            this.chooseDate.year = year;
+            this.chooseDate.month = month;
+        })
+
+
     },
     computed: {
         ...mapState(["mainArticles"]),
@@ -70,10 +86,6 @@ export default {
             const month = today.getMonth() + 1;
             const day = today.getDate();
             const date = this.workWithNumbers(month, day);
-
-
-            this.chooseDate.year = year;
-            this.chooseDate.month = month;
 
             return `${year}-${date.month}-${date.day}`;
         },
@@ -87,22 +99,28 @@ export default {
             }
         },
         //選中月分
-        thisMonthDays: function () {
+        thisMonthDays() {
             let arrayDays = [];
 
-            //基礎套用class
-            const styles = [];
 
             //原始年、月參數
             const originYear = this.chooseDate.year;
             const originMonth = this.chooseDate.month - 1;
+
             // 取得本月最後一天
             const totalLastDate = new Date(originYear, originMonth + 1, 0);
             const totalDate = totalLastDate.getDate();
+
             //包裝
             for (let i = 0; i < totalDate; i++) {
+                //基礎套用class
+                const styles = [];
+
                 const thisMonth = this.workWithNumbers(originMonth + 1, i + 1);
                 const id = `${originYear}-${thisMonth.month}-${thisMonth.day}`;
+
+                const article = this.searchArticle(id);
+                if (article) styles.push('haveArticle');
 
 
                 //包裝
@@ -110,24 +128,26 @@ export default {
                     id: id,
                     day: i + 1,
                     styles: styles,
-                    today: this.isToday(id)     //如果日期是今天 設為true 否則 false
+                    today: this.isToday(id),     //如果日期是今天 設為true 否則 false
+                    article: article
                 });
             }
             return arrayDays;
         },
         //前一個月顯示
-        beforeMonthDays: function () {
+        beforeMonthDays() {
             let arrayDays = [];
 
-            //基礎套用class
-            const styles = ['oldDays']
+
 
             //原始年、月參數
             const originYear = this.chooseDate.year;
             const originMonth = this.chooseDate.month - 1;
+
             // 取得本月星期幾
             const firstDate = new Date(originYear, originMonth, 1);
             let firstDayWeek = firstDate.getDay();
+
             // 前一個月的最後一天
             const lastDay = new Date(originYear, originMonth, 0);
             let oldDaysBefore = lastDay.getDate();
@@ -141,54 +161,74 @@ export default {
             }
             // 填充空格的上個月天數
             for (let i = 0; i < firstDayWeek - 1; i++) {
+                //基礎套用class
+                const styles = ['oldDays']
+
                 //如果原始月份-1 === 0 代表是 12月
                 const before = this.workWithNumbers(originMonth === 0 ? 12 : originMonth, oldDaysBefore);
                 const id = `${originYear}-${before.month}-${before.day}`;
+
+                const article = this.searchArticle(id);
+                if (article) styles.push('haveArticle');
 
                 //包裝
                 arrayDays.push({
                     id: `before-${id}`,
                     day: oldDaysBefore,
                     styles: styles,
-                    today: this.isToday(id)     //如果日期是今天 設為true 否則 false
+                    today: this.isToday(id),        //如果日期是今天 設為true 否則 false
+                    article: article
                 });
                 oldDaysBefore++;
             }
             return arrayDays;
         },
         //下一個月顯示
-        afterMonthDays: function () {
+        afterMonthDays() {
             let arrayDays = [];
 
-            //基礎套用class
-            const styles = ['oldDays']
 
             //原始年、月參數
             const originYear = this.chooseDate.year;
             const originMonth = this.chooseDate.month - 1;
             const oldDaysAfter = 42 - (this.thisMonthDays.length + this.beforeMonthDays.length);
             for (let i = 0; i < oldDaysAfter; i++) {
+                //基礎套用class
+                const styles = ['oldDays']
+
                 const after = this.workWithNumbers(originMonth + 2, i + 1);
                 const id = `${originYear}-${after.month}-${after.day}`;
+
+
+
+                const article = this.searchArticle(id);
+                if (article) styles.push('haveArticle');
+
 
                 //包裝
                 arrayDays.push({
                     id: `after-${id}`,
                     day: i + 1,
                     styles: styles,
-                    today: this.isToday(id)     //如果日期是今天 設為true 否則 false
+                    today: this.isToday(id),     //如果日期是今天 設為true 否則 false
+                    article: article
                 });
 
             }
             return arrayDays;
         },
 
-        totalMonth: function () {
+        totalMonth() {
             const totalMonth = this.beforeMonthDays.concat(this.thisMonthDays, this.afterMonthDays);
             return totalMonth
         }
     },
     methods: {
+        //使用者手動設定月份
+        setDate: function (e) {
+            this.chooseDate.year = Number(e.target.value.slice(0, 4));
+            this.chooseDate.month = Number(e.target.value.slice(5));
+        },
         monthReduce: function () {
             if (this.chooseDate.month === 1) {
                 this.chooseDate.year -= 1;
@@ -205,10 +245,7 @@ export default {
             }
             this.chooseDate.month += 1;
         },
-        isToday: function (date) {
-            if (this.today === date) return true;
-            else return false;
-        },
+
         workWithNumbers: function (month, day) {
             //處裡如果數字為個位數在前方+1個0 以配對資料
             let idMonth = "";
@@ -223,12 +260,36 @@ export default {
             else
                 idDay = `${day}`;
             return { month: idMonth, day: idDay };
+        },
+        isToday: function (date) {
+            if (this.today === date) return true;
+            else return false;
+        },
+        searchArticle: function (date) {
+            const search = this.mainArticles.find(function (e) {
+                if (e.date === date) return e;
+            })
+
+            if (search) return search;
+            else return false;
         }
+
     },
     components: { DayBox }
 }
 </script>
 <style scoped>
+/* .v-enter-active,
+.v-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+} */
+
+
 *,
 ::after,
 ::before {
@@ -237,11 +298,12 @@ export default {
 
 
 
+
 /* 星期區 */
 #calenderPager {
     width: 100%;
     /* -(body上下距離) */
-    height: calc(100vh - 64px - 65px);
+    height: calc(100vh - 64px - 100px);
 
 }
 
@@ -251,7 +313,7 @@ export default {
 
     width: 100%;
     /*補足異點下面的缺少高度*/
-    height: 110%;
+    height: calc(100vh - 64px);
     text-align: center;
     background: rgb(19, 178, 241);
 }
@@ -310,15 +372,143 @@ export default {
 }
 
 .control {
+    position: fixed;
+    right: 0;
+    bottom: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 60px;
-    width: 100%;
+    width: 100vw;
     height: 5rem;
-    background: rgb(19, 178, 241);
+    background: rgb(0, 132, 255);
+
+    box-sizing: border-box;
+    transition: 0.5s ease-in-out;
 }
 
+.control::before {
+    content: "";
+    position: absolute;
+    left: -2.4rem;
+    bottom: -1px;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50px;
+    background: rgb(0, 132, 255);
+
+}
+
+.showControl {
+    right: 0;
+}
+
+.closeControl {
+    right: -100vw;
+}
+
+
+.reduce {
+    position: relative;
+    margin-right: 0.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgba(255, 255, 255, 0.264);
+    border: 0;
+    border-radius: 100%;
+}
+
+.reduce::before {
+    content: "";
+    position: absolute;
+    left: calc(50% - 1rem);
+    top: calc(50% - 0.2rem);
+    width: 2rem;
+    height: 0.4rem;
+    background: rgb(0, 132, 255);
+
+}
+
+.plus {
+    position: relative;
+    margin-left: 0.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgba(255, 255, 255, 0.264);
+    border: 0;
+    border-radius: 100%;
+}
+
+.plus::before {
+    content: "";
+    position: absolute;
+    left: calc(50% - 1rem);
+    top: calc(50% - 0.2rem);
+    width: 2rem;
+    height: 0.4rem;
+    background: rgb(0, 132, 255);
+
+}
+
+.plus::after {
+    content: "";
+    position: absolute;
+    left: calc(50% - 0.2rem);
+    top: calc(50% - 1rem);
+    width: 0.4rem;
+    height: 2rem;
+    background: rgb(0, 132, 255);
+
+}
+
+.showControlButton button {
+    position: fixed;
+    right: -2.5rem;
+    bottom: 3.7rem;
+    width: 5rem;
+    height: 5rem;
+    border: 1px solid rgb();
+    background: rgb(0, 166, 255);
+    border: 0;
+    border-radius: 100%;
+    box-shadow: 0 0 10px -5px #000;
+    transition: 0.2s;
+
+}
+
+.showControlButton button::before {
+    content: "";
+    position: absolute;
+    left: 0.8rem;
+    top: calc(50% - 0.125rem);
+    width: 1.3rem;
+    height: 0.25rem;
+    border-radius: 50px;
+    background: rgb(0, 247, 255);
+    box-shadow: 0 7px 0 0 rgb(0, 247, 255), 0 -7px 0 0 rgb(0, 247, 255);
+}
+
+.showControlButton button::after {
+    content: "";
+    position: absolute;
+    right: 0.8rem;
+    top: calc(50% - 0.8rem);
+    width: 0;
+    height: 0;
+
+    border-top: 0.8rem solid rgb(0, 132, 255, 0);
+    border-bottom: 0.8rem solid rgb(0, 132, 255, 0);
+    border-left: 0rem solid rgb(0, 247, 255, 0);
+    border-right: 0.8rem solid rgb(0, 247, 255);
+}
+
+.triggerControl {
+    transform: rotate(180deg);
+}
+
+.notTriggerControl {
+    transform: rotate(0deg);
+}
 
 
 @media (min-width: 768px) {}
@@ -341,7 +531,7 @@ export default {
 
     .control {
         margin-bottom: 0;
-        height: 100%;
+        /* height: 100%; */
     }
 }
 
