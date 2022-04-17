@@ -11,6 +11,21 @@
 
             <div class="dateBox">
                 <ul class="day">
+<<<<<<< HEAD
+ 
+
+                        <li is="vue:DayBox" v-for="days of month.dateData.before" v-bind="days" :key="days.id">
+                        </li>
+
+                        <li is="vue:DayBox" v-for="days of month.dateData.thisMonth" v-bind="days" :key="days.id">
+                        </li>
+
+                        <li is="vue:DayBox" v-for="days of month.dateData.after" v-bind="days" :key="days.id">
+                        </li>
+
+                    </ul>
+                </div>
+=======
                     <li v-for="i of 5" class="oldDays" :key="i">
                         <button>
                             10
@@ -27,6 +42,7 @@
                         </button>
                     </li>
                 </ul>
+>>>>>>> parent of b47052c8 (發現效能問題 修改前)
             </div>
 
             <div class="control">
@@ -57,7 +73,207 @@ export default {
 
         }
     },
+    created() {
+        this.$nextTick(function () {
+            const today = new Date;
+            const year = today.getFullYear();
+            const month = today.getMonth() + 1;
+
+            this.chooseDate.year = year;
+            this.chooseDate.month = month;
+        })
+    },
     computed: {
+<<<<<<< HEAD
+        ...mapState(["mainArticles"]),
+        //今日年月日
+        today() {
+            const today = new Date;
+            const year = today.getFullYear();
+            const month = today.getMonth() + 1;
+            const day = today.getDate();
+            const date = this.workWithNumbers(month, day);
+
+            return `${year}-${date.month}-${date.day}`;
+        },
+        //月份控制器參數
+        chooseDateRes() {
+            if (String(this.chooseDate.month).length === 1) {
+                return `${this.chooseDate.year}-0${this.chooseDate.month}`;
+            }
+            else {
+                return `${this.chooseDate.year}-${this.chooseDate.month}`;
+            }
+        },
+
+
+
+
+        //總月份
+        totalMonth: function () {
+            let totalDate = []
+
+            for (let i = 0; i < 12; i++) {
+                const beforeData = this.beforeMonthDays(this.chooseDate.year, i + 1);
+                const thisMonthData = this.thisMonthDays(this.chooseDate.year, i + 1);
+                const afterData = this.afterMonthDays(this.chooseDate.year, i + 1, beforeData.length, thisMonthData.length);
+
+
+                totalDate.push({
+                    id: `${this.chooseDate.year}-${i + 1}`,
+                    year: this.chooseDate.year,
+                    month: i + 1,
+                    dateData: {
+                        before: beforeData,
+                        thisMonth: thisMonthData,
+                        after: afterData
+                    }
+                })
+            }
+            return totalDate
+        }
+    },
+    methods: {
+        monthReduce: function () {
+            if (this.chooseDate.month === 1) {
+                this.chooseDate.year -= 1;
+                this.chooseDate.month = 12;
+                return;
+            }
+            this.chooseDate.month -= 1;
+        },
+        monthPlus: function () {
+            if (this.chooseDate.month === 12) {
+                this.chooseDate.year += 1;
+                this.chooseDate.month = 1;
+                return;
+            }
+            this.chooseDate.month += 1;
+        },
+
+        //選中月分
+        thisMonthDays: function (year, month) {
+            let arrayDays = [];
+
+            //基礎套用class
+            const styles = [];
+
+            //原始年、月參數
+            const originYear = year;
+            const originMonth = month - 1;
+            // 取得本月最後一天
+            const totalLastDate = new Date(originYear, originMonth + 1, 0);
+            const totalDate = totalLastDate.getDate();
+            //包裝
+            for (let i = 0; i < totalDate; i++) {
+                const thisMonth = this.workWithNumbers(originMonth + 1, i + 1);
+                const id = `${originYear}-${thisMonth.month}-${thisMonth.day}`;
+
+
+                //包裝
+                arrayDays.push({
+                    id: id,
+                    day: i + 1,
+                    styles: styles,
+                    today: this.isToday(id)     //如果日期是今天 設為true 否則 false
+                });
+            }
+            return arrayDays;
+        },
+
+        //前一個月顯示
+        beforeMonthDays: function (year, month) {
+            let arrayDays = [];
+
+            //基礎套用class
+            const styles = ['oldDays']
+
+            //原始年、月參數
+            const originYear = year;
+            const originMonth = month - 1;
+            // 取得本月星期幾
+            const firstDate = new Date(originYear, originMonth, 1);
+            let firstDayWeek = firstDate.getDay();
+            // 前一個月的最後一天
+            const lastDay = new Date(originYear, originMonth, 0);
+            let oldDaysBefore = lastDay.getDate();
+            if (firstDayWeek === 0) {
+                firstDayWeek = 7; // 如果是禮拜天 星期參數會是0
+                oldDaysBefore -= 5;
+            }
+            else {
+                //前一個月最後一天 - (本月星期x - 2) 
+                oldDaysBefore -= (firstDayWeek - 2);
+            }
+            // 填充空格的上個月天數
+            for (let i = 0; i < firstDayWeek - 1; i++) {
+                //如果原始月份-1 === 0 代表是 12月
+                const before = this.workWithNumbers(originMonth === 0 ? 12 : originMonth, oldDaysBefore);
+                const id = `${originYear}-${before.month}-${before.day}`;
+
+                //包裝
+                arrayDays.push({
+                    id: `before-${id}`,
+                    day: oldDaysBefore,
+                    styles: styles,
+                    today: this.isToday(id)     //如果日期是今天 設為true 否則 false
+                });
+                oldDaysBefore++;
+            }
+            return arrayDays;
+        },
+
+
+
+        //下一個月顯示
+        afterMonthDays: function (year, month, beforeLength, thisMonthLength) {
+            let arrayDays = [];
+
+
+            //基礎套用class
+            const styles = ['oldDays']
+
+            //原始年、月參數
+            const originYear = year;
+            const originMonth = month - 1;
+
+            //42 - (前一個月+這個月的天數)
+            const oldDaysAfter = 42 - (beforeLength + thisMonthLength);
+            for (let i = 0; i < oldDaysAfter; i++) {
+                const after = this.workWithNumbers(originMonth + 2, i + 1);
+                const id = `${originYear}-${after.month}-${after.day}`;
+
+                //包裝
+                arrayDays.push({
+                    id: `after-${id}`,
+                    day: i + 1,
+                    styles: styles,
+                    today: this.isToday(id)     //如果日期是今天 設為true 否則 false
+                });
+
+            }
+            return arrayDays;
+        },
+
+        isToday: function (date) {
+            if (this.today === date) return true;
+            else return false;
+        },
+        workWithNumbers: function (month, day) {
+            //處裡如果數字為個位數在前方+1個0 以配對資料
+            let idMonth = "";
+            let idDay = "";
+            //如果小於10 在數字前 + 一個0
+            if (month + 1 < 10)
+                idMonth = `0${month}`;
+            else
+                idMonth = `${month}`;
+            if (day + 1 < 10)
+                idDay = `0${day}`;
+            else
+                idDay = `${day}`;
+            return { month: idMonth, day: idDay };
+=======
         chooseDateRes() {
             if (String(this.chooseDate.month).length === 1) {
                 return `${this.chooseDate.year}-0${this.chooseDate.month}`
@@ -65,6 +281,7 @@ export default {
                 return `${this.chooseDate.year}-${this.chooseDate.month}`
             }
         }
+<<<<<<< HEAD
     },
     methods: {
         monthReduce: function () {
@@ -83,7 +300,10 @@ export default {
             }
             this.chooseDate.month += 1;
 
+>>>>>>> parent of b47052c8 (發現效能問題 修改前)
         }
+=======
+>>>>>>> 8f9e269b8b98c9c64acd3524949148a71ac3521c
     }
 
 
@@ -260,6 +480,7 @@ li {
     .dateBox li {
         height: 5rem;
     }
+<<<<<<< HEAD
 
 }
 
@@ -269,4 +490,15 @@ li {
     }
 
 }
+=======
+
+}
+
+@media (min-width: 1920px) {
+    .dateBox li {
+        height: 7rem;
+    }
+
+}
+>>>>>>> 8f9e269b8b98c9c64acd3524949148a71ac3521c
 </style>
