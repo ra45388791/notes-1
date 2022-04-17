@@ -11,6 +11,7 @@
 
             <div class="dateBox">
                 <ul class="day">
+<<<<<<< HEAD
  
 
                         <li is="vue:DayBox" v-for="days of month.dateData.before" v-bind="days" :key="days.id">
@@ -24,6 +25,24 @@
 
                     </ul>
                 </div>
+=======
+                    <li v-for="i of 5" class="oldDays" :key="i">
+                        <button>
+                            10
+                        </button>
+                    </li>
+                    <li v-for="i of 30" :key="i">
+                        <button>
+                            12
+                        </button>
+                    </li>
+                    <li v-for="i of 5" class="oldDays" :key="i">
+                        <button>
+                            11
+                        </button>
+                    </li>
+                </ul>
+>>>>>>> parent of b47052c8 (發現效能問題 修改前)
             </div>
 
             <div class="control">
@@ -40,27 +59,19 @@
     </div>
 </template>
 <script>
-import { mapState, mapMutations } from "vuex";
-import DayBox from "./dayBox.vue";
-
-
+import { mapMutations } from "vuex";
 export default {
     data() {
         return {
-            weekdays: [
-                { text: "一" },
-                { text: "二" },
-                { text: "三" },
-                { text: "四" },
-                { text: "五" },
-                { text: "六" },
-                { text: "日" },
+            weekdays: [ // 星期幾
+                { text: '一' }, { text: '二' }, { text: '三' }, { text: '四' }, { text: '五' }, { text: '六' }, { text: '日' },
             ],
             chooseDate: {
-                year: NaN,
-                month: NaN
+                year: 2022,
+                month: 4
             }
-        };
+
+        }
     },
     created() {
         this.$nextTick(function () {
@@ -73,6 +84,7 @@ export default {
         })
     },
     computed: {
+<<<<<<< HEAD
         ...mapState(["mainArticles"]),
         //今日年月日
         today() {
@@ -260,9 +272,37 @@ export default {
             else
                 idDay = `${day}`;
             return { month: idMonth, day: idDay };
+=======
+        chooseDateRes() {
+            if (String(this.chooseDate.month).length === 1) {
+                return `${this.chooseDate.year}-0${this.chooseDate.month}`
+            } else {
+                return `${this.chooseDate.year}-${this.chooseDate.month}`
+            }
         }
     },
-    components: { DayBox }
+    methods: {
+        monthReduce: function () {
+            if (this.chooseDate.month === 1) {
+                this.chooseDate.year -= 1;
+                this.chooseDate.month = 12;
+                return
+            }
+            this.chooseDate.month -= 1;
+        },
+        monthPlus: function () {
+            if (this.chooseDate.month === 12) {
+                this.chooseDate.year += 1;
+                this.chooseDate.month = 1;
+                return
+            }
+            this.chooseDate.month += 1;
+
+>>>>>>> parent of b47052c8 (發現效能問題 修改前)
+        }
+    }
+
+
 }
 </script>
 <style scoped>
@@ -272,6 +312,9 @@ export default {
     box-sizing: border-box;
 }
 
+li {
+    list-style: none;
+}
 
 
 /* 星期區 */
@@ -346,6 +389,47 @@ export default {
     width: 100%;
 }
 
+.dateBox li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% / 7);
+
+    height: 3.5rem;
+}
+
+.dateBox button {
+    position: relative;
+    padding: 0;
+
+    width: 2.5rem;
+    height: 2.5rem;
+
+    color: #fff;
+    background: rgba(51, 255, 0, 0);
+
+    font-size: 1.5em;
+    text-align: center;
+    border: solid 3px rgba(167, 255, 255, 0);
+    box-sizing: border-box;
+    border-radius: 30px;
+
+    transition: 0.1s;
+}
+
+.dateBox button:focus {
+    background: rgb(38, 215, 255);
+    border-radius: 30px;
+
+}
+
+/* !過去日期 */
+.dateBox .oldDays div {
+    color: rgba(255, 255, 255, 0.5);
+
+}
+
+/* !未來日期 */
 .control {
     display: flex;
     justify-content: center;
@@ -356,9 +440,12 @@ export default {
     background: rgb(19, 178, 241);
 }
 
+@media (min-width: 768px) {
 
-
-@media (min-width: 768px) {}
+    .dateBox li {
+        height: 3.5rem;
+    }
+}
 
 @media (min-width: 1024px) {
     #calenderPager {
@@ -375,6 +462,9 @@ export default {
 
     }
 
+    .dateBox li {
+        height: 3.5rem;
+    }
 
     .control {
         margin-bottom: 0;
@@ -382,7 +472,17 @@ export default {
     }
 }
 
-@media (min-width: 1440px) {}
+@media (min-width: 1440px) {
+    .dateBox li {
+        height: 5rem;
+    }
 
-@media (min-width: 1920px) {}
+}
+
+@media (min-width: 1920px) {
+    .dateBox li {
+        height: 7rem;
+    }
+
+}
 </style>
