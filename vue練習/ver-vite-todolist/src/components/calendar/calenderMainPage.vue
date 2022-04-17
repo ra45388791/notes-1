@@ -230,6 +230,7 @@ export default {
                 });
 
             }
+            
             return arrayDays;
         },
 
