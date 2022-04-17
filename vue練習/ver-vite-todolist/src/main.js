@@ -12,7 +12,7 @@ import calenderMainPage from './components/calendar/calenderMainPage.vue'
 /**
  * !貼文
  * !檢視貼文功能
- * !新增貼文功能         (標題 / 內文 / 日期)
+ * !新增貼文功能          (標題 / 內文 / 日期)
  * !代辦 / 結案 / 修改 
  * !修改貼文
  * !讀取畫面
