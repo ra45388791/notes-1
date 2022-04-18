@@ -49,6 +49,14 @@ const store = createStore({
                 state: '',
                 stateImg: ''
             },
+
+
+
+            //行事曆區資料
+            calendarDate: {
+                mainArticles: [],
+            }
+
         }
     },
     getters: {
@@ -125,6 +133,13 @@ const store = createStore({
                 state.UI.hint.fail = false;
             }, 1300)
         }
+
+        /**
+         * 行事曆區
+         */
+
+
+
     },
     actions: {
         //取得初始主資料

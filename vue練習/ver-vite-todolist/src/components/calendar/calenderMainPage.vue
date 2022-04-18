@@ -121,8 +121,6 @@ export default {
                 const id = `${originYear}-${thisMonth.month}-${thisMonth.day}`;
 
                 const article = this.searchArticle(id);
-                // if (article) styles.push('haveArticle');
-
 
                 //包裝
                 arrayDays.push({
@@ -170,7 +168,6 @@ export default {
                 const id = `${originYear}-${before.month}-${before.day}`;
 
                 const article = this.searchArticle(id);
-                // if (article) styles.push('haveArticle');
 
                 //包裝
                 arrayDays.push({
@@ -200,11 +197,7 @@ export default {
                 const after = this.workWithNumbers(originMonth + 2, i + 1);
                 const id = `${originYear}-${after.month}-${after.day}`;
 
-
-
                 const article = this.searchArticle(id);
-                // if (article) styles.push('haveArticle');
-
 
                 //包裝
                 arrayDays.push({
@@ -266,12 +259,13 @@ export default {
             if (this.today === date) return true;
             else return false;
         },
+        //搜尋這個日期是否有文章
         searchArticle: function (date) {
-            const search = this.mainArticles.find(function (e) {
+            const search = this.mainArticles.filter(function (e) {
                 if (e.date === date) return e;
             })
-
-            if (search) return search;
+            //如果有找到文章才回傳 否則回傳false
+            if (search.length > 0) return search;
             else return false;
         }
 

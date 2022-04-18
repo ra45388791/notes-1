@@ -4,9 +4,12 @@
         <Header />
         <NavTemp />
     </div>
+    <!-- 文章功能 -->
     <FullArticle v-show="UI.articleShow" />
     <AddArticle v-show="UI.addArticle" />
     <EditArticle v-show="UI.editArticle" />
+
+    <!-- 行事曆功能 -->
 
     <div id="indexContent">
         <router-view></router-view>
