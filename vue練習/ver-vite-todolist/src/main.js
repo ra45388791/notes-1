@@ -54,7 +54,7 @@ const store = createStore({
 
             //行事曆區資料
             calendarDate: {
-                // mainArticles: [],
+                showArticlesData: [],
                 UI: {
                     calendarShow: false,
                 }
@@ -150,6 +150,11 @@ const store = createStore({
             state.UI.UIShow = false;
             state.calendarDate.UI.calendarShow = true; //
         },
+        PUSH_SHOW_ARTICLE_DATA(state, payload) {
+            state.calendarDate.showArticlesData = [];
+            state.calendarDate.showArticlesData = payload;
+
+        }
     },
     actions: {
         //取得初始主資料

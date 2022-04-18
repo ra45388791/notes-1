@@ -5,7 +5,7 @@
                 <nav class="nav">
                     <!-- 檢視文章選單 -->
                     <nav class="topNav">
-                        <button @mouseup="CLOSE_ALL_FUNCTIONS" class="buttons">
+                        <button @mouseup="closeAllObject" class="buttons">
                             <img src="../../../public/images/添加代辦事項/X.svg" alt="">
                         </button>
 
@@ -15,10 +15,11 @@
                         </button>
                     </nav>
                 </nav>
-                <CalenderArticleOptions />
+                <CalenderArticleOptions ref="CalenderArticleOptions" :totalArticle="article"
+                    @pushArticle="pushArticle" />
 
 
-                <div></div>
+                <CalendarArticleContent v-bind="hoverArticle" />
 
 
 
@@ -29,27 +30,38 @@
 <script>
 import { mapState, mapMutations } from "vuex";
 import CalenderArticleOptions from "./calenderArticleOptions.vue";
+import CalendarArticleContent from "./calendarArticleContent.vue";
 export default {
     props: [],
     data() {
         return {
             style: [],
-            title: "檢視清單"
-        };
+            title: "檢視清單",
+            hoverArticle: {}
+        }
     },
     created() {
     },
     computed: {
-        // ...mapState({
-        //     UI: state => state.calendarDate.UI  //取 calendarDate 下的 UI
-        // })
+        ...mapState({
+            article: state => state.calendarDate.showArticlesData //取 calendarDate 下的 UI
+        })
     },
     methods: {
-        ...mapMutations(["CLOSE_ALL_FUNCTIONS"])
+        ...mapMutations(["CLOSE_ALL_FUNCTIONS"]),
         // showArticle() {
         // }
+        closeAllObject() {
+            this.CLOSE_ALL_FUNCTIONS();                         //關閉vuex狀態
+            this.$refs.CalenderArticleOptions.closeItem()       //關閉CalenderArticleOptions子組件的狀態
+            this.hoverArticle = {}                              //清空文章暫存區
+        },
+        pushArticle(e) {
+            this.hoverArticle = {}
+            this.hoverArticle = e
+        }
     },
-    components: { CalenderArticleOptions }
+    components: { CalenderArticleOptions, CalendarArticleContent }
 }
 </script>
 <style scoped>

@@ -387,7 +387,7 @@ export default {
     border: 5px solid rgb(0, 213, 255);
     box-sizing: border-box;
     transition: 0.5s ease-in-out;
-    z-index: 10;
+    z-index: 8;
 }
 
 .showControl {

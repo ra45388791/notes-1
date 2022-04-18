@@ -5,9 +5,9 @@
                 {{ day }}
             </p>
         </button>
-        <div class="text">
+        <!-- <div class="text"> //好像可以拿掉
             <p v-show="article" :class="articleIsClose.class">{{ articleIsClose.text }}</p>
-        </div>
+        </div> -->
     </li>
 </template>
 <script>
@@ -55,12 +55,13 @@ export default {
     methods: {
         ...mapMutations({
             SHOW_ARTICLE: 'CHANGE_CALENDAR_SHOW_STATE',
-            // CLOSE_ARTICLE: 'CLOSE_ALL_FUNCTIONS'
+            PUSH_ARTICLE: 'PUSH_SHOW_ARTICLE_DATA'
+
         }),
         showArticle() {
             if (!this.article) return;                  //確認是否有文章
-            this.SHOW_ARTICLE('')
-            // this.$store.commit('CHANGE_CALENDAR_SHOW_STATE');
+            this.SHOW_ARTICLE();                        //開啟文章區
+            this.PUSH_ARTICLE(this.article)             //將文章推入vuex
         }
     }
 
