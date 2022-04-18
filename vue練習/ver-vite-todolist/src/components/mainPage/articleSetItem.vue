@@ -1,6 +1,6 @@
 <template>
     <transition name="setItem">
-        <div v-show="setItemState" @mouseup.stop id="setItem">
+        <div v-bind="$attrs" v-show="setItemState" @mouseup.stop id="setItem">
             <div class="setBox">
                 <button @mouseup.stop="upcoming" class="setButton">{{ buttonData[0].name }}</button>
                 <button @mouseup.stop="caseClosed" class="setButton">{{ buttonData[1].name }}</button>
@@ -23,7 +23,7 @@ export default {
             buttonData: [
                 {
                     id: 0,
-                    name: '代辦',
+                    name: '待辦',
                 },
                 {
                     id: 1,
@@ -163,5 +163,46 @@ export default {
 
 .setButton:active {
     background: #00CFFF;
+}
+
+@media (min-width: 1920px) {
+
+    .setItem-enter-to,
+    .setItem-leave-from {
+        opacity: 1;
+        height: 259.91px;
+    }
+
+
+
+    #setItem {
+
+        top: 50%;
+        left: -12rem;
+
+        padding: 0.4rem 1rem;
+
+        width: 12rem;
+        background: #0084A3;
+        border: 2px solid #00fff0;
+
+        border-radius: 15px;
+    }
+
+    .setButton {
+        margin: 0.4rem 0;
+
+        height: 3rem;
+
+        font-size: 1.8rem;
+        line-height: 3rem;
+
+        border: 1px solid #00ffff;
+        border-radius: 20px;
+        box-sizing: border-box;
+        box-shadow: 0px 0px 4px #ffffff;
+        transition: 0.1s
+    }
+
 }
 </style>

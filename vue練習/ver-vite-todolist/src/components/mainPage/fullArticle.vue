@@ -1,36 +1,41 @@
 <template>
-    <transition name="editOrRead">
-        <article id="fullArticle">
-            <!-- 檢視文章選單 -->
-            <nav class="topNav">
-                <button @mouseup="CLOSE_ALL_FUNCTIONS" class="buttons">
-                    <img src="../../../public/images/添加代辦事項/X.svg" alt="">
-                </button>
+    <transition name="editOrRead" @mouseup="CLOSE_ALL_FUNCTIONS">
+        <div class="fullArticleBox">
 
-                <div>{{ title }}</div>
+            <article id="fullArticle">
+                <!-- 檢視文章選單 -->
+                <nav class="topNav">
+                    <button @mouseup="CLOSE_ALL_FUNCTIONS" class="buttons">
+                        <img src="../../../public/images/添加代辦事項/X.svg" alt="">
+                    </button>
 
-                <button class="buttons noShowButton">
-                </button>
-            </nav>
-            <!-- 內文 -->
-            <div class="content">
-                <div class="article">
-                    <div class="title">
-                        <h3>
-                            {{ showArticle.title }}
-                        </h3>
-                    </div>
-                    <div class="date">
-                        <p>設定清單日期 : {{ showArticle.setDate }}</p>
-                        <p>預計達成日期 : {{ showArticle.date }}</p>
-                    </div>
-                    <div class="itemContent">
-                        <p>{{ showArticle.content }}</p>
+                    <div>{{ title }}</div>
+
+                    <button class="buttons noShowButton">
+                    </button>
+                </nav>
+                <!-- 內文 -->
+                <div class="content">
+                    <div class="article">
+                        <div class="title">
+                            <h3>
+                                {{ showArticle.title }}
+                            </h3>
+                        </div>
+                        <div class="date">
+                            <p>設定清單日期 : {{ showArticle.setDate }}</p>
+                            <p>預計達成日期 : {{ showArticle.date }}</p>
+                        </div>
+                        <div class="itemContent">
+                            <p>{{ showArticle.content }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </article>
+
+            </article>
+        </div>
     </transition>
+
 </template>
 <script>
 import { mapState, mapMutations } from "vuex";
@@ -47,8 +52,6 @@ export default {
     },
     computed: {
         ...mapState({
-            mainArticles: 'mainArticles',
-            UI: 'UI',
             showArticle: 'temporaryStorageArticle'
         }),
     },
@@ -59,18 +62,35 @@ export default {
 }
 </script>
 <style scoped>
+*,
+::after,
+::before {
+    box-sizing: border-box;
+}
+
+.fullArticleBox {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    /* background: rgba(0, 0, 0, 0.5); */
+    z-index: 9;
+}
+
 #fullArticle {
     position: fixed;
     left: 0;
     top: 0;
     width: 100vw;
     height: 100vh;
-    background: #0C4553;
+    /* background: #0C4553; */
+    background: #1b697d;
     z-index: 9;
 }
 
 .topNav {
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     display: flex;
@@ -88,7 +108,7 @@ export default {
 }
 
 .buttons {
-    margin: 0 01rem;
+    margin: 0 1rem;
     width: 45px;
     height: 45px;
     background: rgba(0, 0, 0, 0);
@@ -113,7 +133,7 @@ export default {
 .content {
     display: flex;
     justify-content: center;
-    margin-top: 4rem;
+    /* margin-top: 4rem; */
     width: 100vw;
     height: calc(100vh - 4rem);
     word-break: break-all;
@@ -161,15 +181,50 @@ export default {
 }
 
 @media (min-width:768px) {
+    .fullArticleBox {
+        position: fixed;
+
+        left: 0;
+        top: 0;
+
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+
+
+        z-index: 9;
+    }
+
+    #fullArticle {
+        position: relative;
+        width: 390px;
+        height: 70vh;
+        border-radius: 20px
+    }
+
+    .topNav {
+        position: absolute;
+        border-radius: 20px 20px 0 0
+    }
+
+    .content {
+        margin-top: 4rem;
+        width: 100%;
+        height: calc(100% - 4rem);
+    }
+
+
     .article {
-        width: auto;
-        min-width: 350px;
-        max-width: 500px;
+        width: 100%;
+        border: 0px solid #fff;
     }
 
 
     .article .title {
-
         font-size: 1.75rem;
     }
 
@@ -184,5 +239,67 @@ export default {
     .article .itemContent {
         font-size: 1.3rem;
     }
+}
+
+@media (min-width:1024px) {
+
+    .fullArticleBox {
+        left: 23rem;
+        top: 0;
+
+        width: calc(100% - 23rem);
+        height: 100%;
+    }
+
+    #fullArticle {
+        width: 390px;
+        height: 90vh;
+    }
+}
+
+@media (min-width: 1440px) {
+
+    .fullArticleBox {
+        left: 30rem;
+        width: calc(100% - 30rem);
+    }
+
+    #fullArticle {
+        width: 390px;
+        height: 90vh;
+    }
+}
+
+@media (min-width: 1920px) {
+    .fullArticleBox {
+        left: 30rem;
+        top: 0;
+
+        width: calc(100% - 30rem);
+        height: 100%;
+    }
+
+    #fullArticle {
+        width: 800px;
+        height: 90vh;
+    }
+
+    .article .title {
+
+        font-size: 3rem;
+    }
+
+    .article .title h3 {
+        margin: 1.5rem 0;
+    }
+
+    .article .date {
+        font-size: 2rem;
+    }
+
+    .article .itemContent {
+        font-size: 1.8rem;
+    }
+
 }
 </style>

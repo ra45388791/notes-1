@@ -1,24 +1,34 @@
 <template>
     <div class="navBox">
-        <Header v-show="UI.UIShow" />
-        <NavTemp v-show="UI.UIShow" />
+        <!-- <Header v-show="UI.UIShow" /> -->
+        <Header />
+        <NavTemp />
     </div>
+    <!-- 文章功能 -->
     <FullArticle v-show="UI.articleShow" />
     <AddArticle v-show="UI.addArticle" />
     <EditArticle v-show="UI.editArticle" />
 
+    <!-- 行事曆功能 -->
+    <CalendarArticle v-show="calendarUI.calendarShow" />
+
+
     <div id="indexContent">
         <router-view></router-view>
+        <transition name="mask">
+            <div v-show="!UI.UIShow" @mouseup="CLOSE_ALL_FUNCTIONS" class="mask"></div>
+        </transition>
     </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 import Header from './header.vue'
 import NavTemp from './navTemp.vue';
 import FullArticle from "./components/mainPage/fullArticle.vue";
 import AddArticle from "./components/mainPage/addArticle.vue";
 import EditArticle from "./components/mainPage/editArticle.vue";
+import CalendarArticle from "./components/calendar/calendarArticle.vue";
 
 
 export default {
@@ -30,12 +40,35 @@ export default {
         this.$store.dispatch('GET_BACKEND_ARTICLES');
     },
     computed: {
-        ...mapState(['UI'])
+        ...mapState({
+            UI: 'UI',
+            calendarUI: state => state.calendarDate.UI  //取 calendarDate 下的 UI
+        })
     },
-    components: { Header, NavTemp, FullArticle, AddArticle, EditArticle }
+    methods: {
+        ...mapMutations(['CLOSE_ALL_FUNCTIONS']),
+    },
+    components: { Header, NavTemp, FullArticle, AddArticle, EditArticle, CalendarArticle }
 }
 </script>
 <style>
+.mask-enter-active,
+.mask-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.mask-enter-from,
+.mask-leave-to {
+    opacity: 0;
+}
+
+.mask-enter-to,
+.mask-leave-from {
+    opacity: 1;
+}
+
+
+
 .editOrRead-enter-active,
 .editOrRead-leave-active {
     transition: opacity 0.5s ease, transform 0.5s ease;
@@ -44,7 +77,7 @@ export default {
 .editOrRead-enter-from,
 .editOrRead-leave-to {
     opacity: 0;
-    transform: translateY(5rem);
+    transform: translateY(2rem);
 }
 
 .editOrRead-enter-to,
@@ -74,14 +107,37 @@ body {
 
 .navBox {
     position: relative;
-    z-index: 1;
+    /* z-index: 1; */
 }
 
 #indexContent {
     position: relative;
     /* background: rgb(15, 5, 92); */
-    z-index: 0;
+    /* z-index: 100; */
 }
+
+.mask {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    display: none;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+
+}
+
+@media (min-width: 768px) {
+
+    .mask {
+        display: block;
+
+
+    }
+}
+
 
 @media (min-width: 1024px) {
     body {
@@ -96,10 +152,17 @@ body {
         width: 23rem;
         height: 100vh;
         background: #126376;
+        box-shadow: 0 0px 10px -3px rgb(202, 255, 208);
     }
 
     #indexContent {
         margin-left: 23rem;
+    }
+
+    .mask {
+        left: 23rem;
+
+        width: calc(100% - 23rem);
     }
 }
 
@@ -112,7 +175,30 @@ body {
     #indexContent {
         margin-left: 30rem;
     }
+
+    .mask {
+        left: 30rem;
+        width: calc(100% - 30rem);
+    }
 }
+
+@media (min-width:1920px) {
+
+    .navBox {
+        width: 40rem;
+    }
+
+    #indexContent {
+        margin-left: 40rem;
+    }
+
+    .mask {
+        left: 40rem;
+        width: calc(100% - 40rem);
+    }
+}
+
+
 
 /* 把免費空間自動加入的div隱藏起來 */
 .disclaimer {

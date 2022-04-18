@@ -108,4 +108,32 @@ export default {
         width: calc(100% - 23rem);
     }
 }
+
+@media (min-width: 1440px) {
+    #loading {
+        margin-left: 30rem;
+        width: calc(100% - 30rem);
+    }
+
+    .loadingBox {
+        width: 15rem;
+        /* background: #000; */
+    }
+
+    .loadingImage {
+        width: 150px;
+    }
+
+    .loadingText p {
+        font-size: 42px;
+    }
+}
+
+
+@media (min-width: 1920px) {
+    #loading {
+        margin-left: 40rem;
+        width: calc(100% - 40rem);
+    }
+}
 </style>

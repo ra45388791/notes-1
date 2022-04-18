@@ -288,4 +288,46 @@ export default {
         height: 3rem;
     }
 }
+
+@media (min-width:1920px) {
+    .buttonMenu button {
+        position: relative;
+        width: 100%;
+        height: 6rem;
+        font-size: 3rem;
+        text-align: start;
+        line-height: 6.5rem;
+        box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.251);
+
+    }
+
+    /* 添加文章按鈕 */
+    #addButton {
+        left: 11rem;
+        bottom: 1.5rem;
+
+        width: 18rem;
+        height: 5rem;
+        border-radius: 80px;
+    }
+
+    #addButton::before {
+        left: calc(50% - 1.75rem);
+        top: calc(50% - 0.3rem);
+        width: 3.5rem;
+        height: 0.6rem;
+    }
+
+    #addButton::after {
+        content: "";
+        position: absolute;
+        left: calc(50% - 0.3rem);
+        top: calc(50% - 1.75rem);
+        width: 0.6rem;
+        height: 3.5rem;
+        background: #fff;
+    }
+
+
+}
 </style>
