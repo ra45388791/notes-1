@@ -472,14 +472,14 @@ export default {
     border: 0;
     border-radius: 100%;
     box-shadow: 0 0 10px -5px #000;
-    transition: 0.2s;
+    transition: 0.5s ease-in-out;
 
 }
 
 .showControlButton button::before {
     content: "";
     position: absolute;
-    left: 0.8rem;
+    left: 0.5rem;
     top: calc(50% - 0.125rem);
     width: 1.3rem;
     height: 0.25rem;
