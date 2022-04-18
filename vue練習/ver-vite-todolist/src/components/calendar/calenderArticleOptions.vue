@@ -9,7 +9,7 @@
                             標題
                         </h3>
                     </div>
-                    <div class="isClose">
+                    <div class="stateText" :class="article.state ? 'isClose' : 'isUpcoming'">
                         <p>
                             已結案
                         </p>
