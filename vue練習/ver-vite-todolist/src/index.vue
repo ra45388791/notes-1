@@ -133,6 +133,8 @@ body {
 
     .mask {
         display: block;
+
+
     }
 }
 
@@ -156,6 +158,12 @@ body {
     #indexContent {
         margin-left: 23rem;
     }
+
+    .mask {
+        left: 23rem;
+
+        width: calc(100% - 23rem);
+    }
 }
 
 @media (min-width: 1440px) {
@@ -167,6 +175,11 @@ body {
     #indexContent {
         margin-left: 30rem;
     }
+
+    .mask {
+        left: 30rem;
+        width: calc(100% - 30rem);
+    }
 }
 
 @media (min-width:1920px) {
@@ -177,6 +190,11 @@ body {
 
     #indexContent {
         margin-left: 40rem;
+    }
+
+    .mask {
+        left: 40rem;
+        width: calc(100% - 40rem);
     }
 }
 
