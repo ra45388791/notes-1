@@ -54,7 +54,10 @@ const store = createStore({
 
             //行事曆區資料
             calendarDate: {
-                mainArticles: [],
+                // mainArticles: [],
+                UI: {
+                    calendarShow: false,
+                }
             }
 
         }
@@ -104,6 +107,10 @@ const store = createStore({
             state.UI.articleShow = false;       //閱讀文章
             state.UI.addArticle = false;        //添加文章      
             state.UI.editArticle = false;        //添加文章      
+
+            //行事曆
+            state.calendarDate.UI.calendarShow = false; //
+
             setTimeout(() => {
                 state.temporaryStorageArticle = {
                     id: '',
@@ -132,12 +139,16 @@ const store = createStore({
             setTimeout(function () {
                 state.UI.hint.fail = false;
             }, 1300)
-        }
+        },
 
         /**
          * 行事曆區
          */
 
+        CHANGE_CALENDAR_SHOW_STATE(state) {
+            state.UI.UIShow = false;
+            state.calendarDate.UI.calendarShow = true; //
+        },
 
 
     },

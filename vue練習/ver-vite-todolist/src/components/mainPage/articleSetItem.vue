@@ -1,6 +1,6 @@
 <template>
     <transition name="setItem">
-        <div v-show="setItemState" @mouseup.stop id="setItem">
+        <div v-bind="$attrs" v-show="setItemState" @mouseup.stop id="setItem">
             <div class="setBox">
                 <button @mouseup.stop="upcoming" class="setButton">{{ buttonData[0].name }}</button>
                 <button @mouseup.stop="caseClosed" class="setButton">{{ buttonData[1].name }}</button>

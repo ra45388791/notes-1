@@ -1,6 +1,6 @@
 <template>
     <li :class="getStyle">
-        <button @mouseup="">
+        <button @click="showArticle">
             <p>
                 {{ day }}
             </p>
@@ -19,9 +19,6 @@ export default {
             style: []
         }
     },
-    created() {
-
-    },
     computed: {
 
         //把style 轉成字串套用到 li上
@@ -30,9 +27,11 @@ export default {
 
         getStyle() {
             this.style = [];
-            this.styles.forEach(e => {
-                this.style.push(e);
-            })
+            if (this.styles.length > 0) {
+                this.styles.forEach(e => {
+                    this.style.push(e);
+                })
+            }
 
             //今日
             if (this.today) {
@@ -54,11 +53,15 @@ export default {
 
     },
     methods: {
-
-
-        // showArticle() {
-
-        // }
+        ...mapMutations({
+            SHOW_ARTICLE: 'CHANGE_CALENDAR_SHOW_STATE',
+            // CLOSE_ARTICLE: 'CLOSE_ALL_FUNCTIONS'
+        }),
+        showArticle() {
+            if (!this.article) return;                  //確認是否有文章
+            this.SHOW_ARTICLE('')
+            // this.$store.commit('CHANGE_CALENDAR_SHOW_STATE');
+        }
     }
 
 

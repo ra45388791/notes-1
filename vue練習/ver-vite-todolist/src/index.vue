@@ -10,6 +10,8 @@
     <EditArticle v-show="UI.editArticle" />
 
     <!-- 行事曆功能 -->
+    <CalendarArticle v-show="calendarUI.calendarShow" />
+
 
     <div id="indexContent">
         <router-view></router-view>
@@ -26,6 +28,7 @@ import NavTemp from './navTemp.vue';
 import FullArticle from "./components/mainPage/fullArticle.vue";
 import AddArticle from "./components/mainPage/addArticle.vue";
 import EditArticle from "./components/mainPage/editArticle.vue";
+import CalendarArticle from "./components/calendar/calendarArticle.vue";
 
 
 export default {
@@ -37,12 +40,15 @@ export default {
         this.$store.dispatch('GET_BACKEND_ARTICLES');
     },
     computed: {
-        ...mapState(['UI'])
+        ...mapState({
+            UI: 'UI',
+            calendarUI: state => state.calendarDate.UI  //取 calendarDate 下的 UI
+        })
     },
     methods: {
         ...mapMutations(['CLOSE_ALL_FUNCTIONS']),
     },
-    components: { Header, NavTemp, FullArticle, AddArticle, EditArticle }
+    components: { Header, NavTemp, FullArticle, AddArticle, EditArticle, CalendarArticle }
 }
 </script>
 <style>
@@ -101,13 +107,13 @@ body {
 
 .navBox {
     position: relative;
-    z-index: 1;
+    /* z-index: 1; */
 }
 
 #indexContent {
     position: relative;
     /* background: rgb(15, 5, 92); */
-    z-index: 0;
+    /* z-index: 100; */
 }
 
 .mask {

@@ -81,7 +81,7 @@ export default {
 }
 
 .topNav {
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     display: flex;
@@ -99,7 +99,7 @@ export default {
 }
 
 .buttons {
-    margin: 0 01rem;
+    margin: 0 1rem;
     width: 45px;
     height: 45px;
     background: rgba(0, 0, 0, 0);
@@ -124,7 +124,7 @@ export default {
 .content {
     display: flex;
     justify-content: center;
-    margin-top: 4rem;
+    /* margin-top: 4rem; */
     width: 100vw;
     height: calc(100vh - 4rem);
     word-break: break-all;
