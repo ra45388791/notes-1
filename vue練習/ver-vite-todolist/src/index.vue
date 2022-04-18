@@ -1,7 +1,8 @@
 <template>
     <div class="navBox">
-        <Header v-show="UI.UIShow" />
-        <NavTemp v-show="UI.UIShow" />
+        <!-- <Header v-show="UI.UIShow" /> -->
+        <Header />
+        <NavTemp />
     </div>
     <FullArticle v-show="UI.articleShow" />
     <AddArticle v-show="UI.addArticle" />
@@ -9,10 +10,13 @@
 
     <div id="indexContent">
         <router-view></router-view>
+        <transition name="mask">
+            <div v-show="!UI.UIShow" @mouseup="CLOSE_ALL_FUNCTIONS" class="mask"></div>
+        </transition>
     </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 import Header from './header.vue'
 import NavTemp from './navTemp.vue';
@@ -32,10 +36,30 @@ export default {
     computed: {
         ...mapState(['UI'])
     },
+    methods: {
+        ...mapMutations(['CLOSE_ALL_FUNCTIONS']),
+    },
     components: { Header, NavTemp, FullArticle, AddArticle, EditArticle }
 }
 </script>
 <style>
+.mask-enter-active,
+.mask-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.mask-enter-from,
+.mask-leave-to {
+    opacity: 0;
+}
+
+.mask-enter-to,
+.mask-leave-from {
+    opacity: 1;
+}
+
+
+
 .editOrRead-enter-active,
 .editOrRead-leave-active {
     transition: opacity 0.5s ease, transform 0.5s ease;
@@ -44,7 +68,7 @@ export default {
 .editOrRead-enter-from,
 .editOrRead-leave-to {
     opacity: 0;
-    transform: translateY(5rem);
+    transform: translateY(2rem);
 }
 
 .editOrRead-enter-to,
@@ -83,6 +107,27 @@ body {
     z-index: 0;
 }
 
+.mask {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    display: none;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+
+}
+
+@media (min-width: 768px) {
+
+    .mask {
+        display: block;
+    }
+}
+
+
 @media (min-width: 1024px) {
     body {
         padding-top: 0px;
@@ -96,6 +141,7 @@ body {
         width: 23rem;
         height: 100vh;
         background: #126376;
+        box-shadow: 0 0px 10px -3px rgb(202, 255, 208);
     }
 
     #indexContent {
@@ -113,6 +159,19 @@ body {
         margin-left: 30rem;
     }
 }
+
+@media (min-width:1920px) {
+
+    .navBox {
+        width: 40rem;
+    }
+
+    #indexContent {
+        margin-left: 40rem;
+    }
+}
+
+
 
 /* 把免費空間自動加入的div隱藏起來 */
 .disclaimer {

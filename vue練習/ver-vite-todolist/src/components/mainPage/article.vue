@@ -143,11 +143,6 @@ export default {
 </script>
 <style scoped>
 .article {
-    /* display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    align-content: center; */
     position: relative;
     margin: 1rem auto;
     padding: 2rem 2rem 1rem;
@@ -229,7 +224,6 @@ export default {
     align-items: center;
     width: 100%;
     height: 20%;
-
 }
 
 
@@ -296,9 +290,6 @@ export default {
         0px -12px 0px 0px rgb(255 255 255 / 70%);
 }
 
-/*
-*/
-
 @media (min-width:1024px) {
     .article {
         width: 80%;
@@ -338,5 +329,74 @@ export default {
         background: rgba(255, 255, 255, 0);
         box-shadow: none;
     }
+}
+
+@media (min-width:1920px) {
+    .article {
+        /* width: 270px; */
+        height: 350px;
+        color: #fff;
+
+    }
+
+    .top .title {
+        font-size: 3rem;
+    }
+
+    .min {
+        height: 50%;
+    }
+
+    .min .content {
+        height: 10rem;
+    }
+
+    .min .content p {
+        margin-top: 1rem;
+        font-size: 1.8rem;
+        line-height: 1.3em;
+
+    }
+
+    .article .articleState {
+        height: 30%;
+    }
+
+    .article .articleState .date {
+        padding: 20px 50px;
+        font-size: 2rem;
+    }
+
+
+    .articleState .state {
+        width: 3rem;
+        height: 3rem;
+    }
+
+
+    .setButton {
+        top: 2.4rem;
+        right: 3rem;
+        width: 125px;
+        height: 60px;
+        border-radius: 80px;
+    }
+
+    .setButton button {
+        border-radius: 80px;
+    }
+
+    .setButton button::before {
+        left: calc(50% - 3.5px);
+        top: calc(50% - 3.5px);
+        width: 7px;
+        height: 7px;
+        font-size: 2rem;
+
+
+        border-radius: 30px;
+    }
+
+
 }
 </style>

@@ -291,4 +291,58 @@ export default {
         height: 3rem;
     }
 }
+
+@media (min-width:1920px) {
+
+    .topNav {
+        height: 6rem;
+        font-size: 3rem;
+    }
+
+    .buttons {
+        margin: 0 1rem;
+        width: 60px;
+        height: 60px;
+        background: rgba(0, 0, 0, 0);
+        border: none;
+        border-radius: 100%;
+        transition: 0.1s;
+    }
+
+    .check {
+        width: 75px;
+        height: 75px;
+    }
+
+    .content {
+        display: flex;
+        justify-content: center;
+        margin-top: 6rem;
+        width: 100vw;
+        height: calc(100vh - 6rem);
+    }
+
+    .article {
+        width: 60rem;
+    }
+
+    #editArticleForm .formTitle,
+    #editArticleForm .formDate,
+    #editArticleForm .formContent {
+        font-size: 2rem;
+    }
+
+    #editArticleForm .formTitle {
+
+        height: 3rem;
+    }
+
+    #editArticleForm .formDate {
+        margin: 0 auto;
+        margin-bottom: 0.8rem;
+        padding: 0 1rem;
+        width: 15.5rem;
+    }
+
+}
 </style>

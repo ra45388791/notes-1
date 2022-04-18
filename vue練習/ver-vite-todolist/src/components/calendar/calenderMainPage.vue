@@ -25,13 +25,14 @@
             <transition>
 
                 <div class="control" :class="showControl ? 'showControl' : 'closeControl'">
-                    <button @mouseup="monthReduce" class="reduce">
 
-                    </button>
+                    <button @mouseup="monthReduce" class="reduce"></button>
+
                     <input :value="chooseDateRes" @input="setDate" type="month">
-                    <button @mouseup="monthPlus" class="plus">
 
-                    </button>
+                    <button @mouseup="monthPlus" class="plus"></button>
+
+
                     <div class="showControlButton">
                         <button @mouseup.stop="showControl = !showControl"
                             :class="showControl ? 'triggerControl' : 'notTriggerControl'"></button>
@@ -120,7 +121,7 @@ export default {
                 const id = `${originYear}-${thisMonth.month}-${thisMonth.day}`;
 
                 const article = this.searchArticle(id);
-                if (article) styles.push('haveArticle');
+                // if (article) styles.push('haveArticle');
 
 
                 //包裝
@@ -169,7 +170,7 @@ export default {
                 const id = `${originYear}-${before.month}-${before.day}`;
 
                 const article = this.searchArticle(id);
-                if (article) styles.push('haveArticle');
+                // if (article) styles.push('haveArticle');
 
                 //包裝
                 arrayDays.push({
@@ -202,7 +203,7 @@ export default {
 
 
                 const article = this.searchArticle(id);
-                if (article) styles.push('haveArticle');
+                // if (article) styles.push('haveArticle');
 
 
                 //包裝
@@ -315,7 +316,7 @@ export default {
     /*補足異點下面的缺少高度*/
     height: calc(100vh - 64px);
     text-align: center;
-    background: rgb(19, 178, 241);
+    background: #126376;
 }
 
 .dayBox {
@@ -371,32 +372,28 @@ export default {
     width: 100%;
 }
 
+
+/* 控制器 */
 .control {
     position: fixed;
     right: 0;
-    bottom: 0;
+    bottom: -2px;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 60px;
-    width: 100vw;
-    height: 5rem;
-    background: rgb(0, 132, 255);
 
+    margin-bottom: 60px;
+    padding-left: 10vw;
+    width: 110vw;
+    height: 5rem;
+
+    background: rgb(0, 132, 255);
+    border-radius: 50px 0 0 50px;
+    border: 5px solid rgb(0, 213, 255);
     box-sizing: border-box;
     transition: 0.5s ease-in-out;
-}
-
-.control::before {
-    content: "";
-    position: absolute;
-    left: -2.4rem;
-    bottom: -1px;
-    width: 5rem;
-    height: 5rem;
-    border-radius: 50px;
-    background: rgb(0, 132, 255);
-
+    z-index: 10;
 }
 
 .showControl {
@@ -404,7 +401,7 @@ export default {
 }
 
 .closeControl {
-    right: -100vw;
+    right: -110vw;
 }
 
 
@@ -510,9 +507,6 @@ export default {
     transform: rotate(0deg);
 }
 
-
-@media (min-width: 768px) {}
-
 @media (min-width: 1024px) {
     #calenderPager {
 
@@ -522,20 +516,171 @@ export default {
     }
 
     .calenderBox {
-
-        /*補足異點下面的缺少高度*/
+        /*補足一點下面的缺少高度*/
         height: 100%;
-
     }
+
 
 
     .control {
-        margin-bottom: 0;
-        /* height: 100%; */
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        margin-bottom: 0px;
+        padding: 0;
+        width: calc(100% - 23rem);
+        height: 5rem;
+
+        border-radius: 20px 0 0 0;
+        border: 5px solid rgb(0, 213, 255);
+        border-bottom: 0;
+
+    }
+
+
+
+    .showControl {
+        right: 0;
+        bottom: 0;
+    }
+
+    .closeControl {
+        right: 0;
+        bottom: -5rem;
+    }
+
+    .showControlButton button {
+        position: fixed;
+        right: -2.5rem;
+        bottom: 0rem;
+        width: 5rem;
+        height: 5rem;
+        transition: 0.5s ease-in-out;
+    }
+
+
+
+    .showControlButton button::after {
+        right: 0.6rem;
+        top: calc(50% - 0.6rem);
+
+        border-top: 0rem solid rgb(0, 247, 255, 0);
+        border-bottom: 0.8rem solid rgb(0, 247, 255);
+        border-left: 0.8rem solid rgb(0, 247, 255, 0);
+        border-right: 0.8rem solid rgb(0, 247, 255, 0);
     }
 }
 
-@media (min-width: 1440px) {}
+@media (min-width: 1440px) {
 
-@media (min-width: 1920px) {}
+    .control {
+
+        width: calc(100% - 30rem);
+
+    }
+
+}
+
+@media (min-width: 1920px) {
+
+    /* 星期區 */
+    .dayBox {
+        font-size: 2rem;
+    }
+
+    .dayBox .day::before {
+        top: 4rem;
+    }
+
+    /* 控制器 */
+    .control {
+
+        width: calc(100% - 40rem);
+        height: 8rem;
+        border: 8px solid rgb(0, 213, 255);
+        border-bottom: 0;
+
+    }
+
+
+    .closeControl {
+        right: 0;
+        bottom: -8rem;
+    }
+
+    .reduce {
+        margin-right: 2rem;
+        width: 5rem;
+        height: 5rem;
+    }
+
+    .reduce::before {
+        content: "";
+        position: absolute;
+        left: calc(50% - 1.75rem);
+        top: calc(50% - 0.35rem);
+        width: 3.5rem;
+        height: 0.7rem;
+    }
+
+    .plus {
+        margin-left: 2rem;
+        width: 5rem;
+        height: 5rem;
+    }
+
+    .plus::before {
+
+        left: calc(50% - 1.75rem);
+        top: calc(50% - 0.35rem);
+        width: 3.5rem;
+        height: 0.7rem;
+    }
+
+    .plus::after {
+
+        left: calc(50% - 0.35rem);
+        top: calc(50% - 1.75rem);
+        width: 0.7rem;
+        height: 3.5rem;
+    }
+
+    .control input {
+        font-size: 2rem;
+
+    }
+
+
+    .showControlButton button {
+        position: fixed;
+        right: -4rem;
+        bottom: 0rem;
+        width: 8rem;
+        height: 8rem;
+        transition: 0.5s ease-in-out;
+    }
+
+    .showControlButton button::before {
+
+        left: 1rem;
+        top: calc(50% - 0.125rem);
+        width: 2.3rem;
+        height: 0.5rem;
+        border-radius: 1px;
+        background: rgb(0, 247, 255);
+        box-shadow: 0 15px 0 0 rgb(0, 247, 255), 0 -15px 0 0 rgb(0, 247, 255);
+    }
+
+    .showControlButton button::after {
+        right: 0.8rem;
+        top: calc(50% - 1rem);
+
+        border-top: 0rem solid rgb(0, 247, 255, 0);
+        border-bottom: 1.3rem solid rgb(0, 247, 255);
+        border-left: 1.3rem solid rgb(0, 247, 255, 0);
+        border-right: 1.3rem solid rgb(0, 247, 255, 0);
+    }
+
+
+}
 </style>
