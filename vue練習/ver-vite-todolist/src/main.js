@@ -139,6 +139,7 @@ const store = createStore({
             setTimeout(function () {
                 state.UI.hint.fail = false;
             }, 1300)
+
         },
 
         /**
@@ -149,8 +150,6 @@ const store = createStore({
             state.UI.UIShow = false;
             state.calendarDate.UI.calendarShow = true; //
         },
-
-
     },
     actions: {
         //取得初始主資料
