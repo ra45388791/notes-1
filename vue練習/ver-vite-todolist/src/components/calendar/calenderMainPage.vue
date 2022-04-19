@@ -312,6 +312,7 @@ export default {
     height: calc(100vh - 64px);
     text-align: center;
     background: #126376;
+    overflow-y: scroll;
 }
 
 .dayBox {

@@ -189,8 +189,8 @@ button p {
     button p {
         margin: 0;
         padding: 0;
-        font-size: 2.3rem;
-        line-height: 2.3rem
+        font-size: 2.5rem;
+        line-height: 2.5rem;
     }
 
 }

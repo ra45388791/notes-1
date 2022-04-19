@@ -17,8 +17,8 @@ import calenderMainPage from './components/calendar/calenderMainPage.vue'
  * !修改貼文
  * !讀取畫面
  * !刪除文章 ( 刪除時檢查清單是否完成 )
- * 行事曆
- * 實際尺寸 1920 尺寸太大 需要修改
+ * !行事曆
+ * !實際尺寸 1920 尺寸太大 需要修改
  */
 const url = 'https://tranquil-gorge-87619.herokuapp.com/';
 // const url = 'http://localhost:5000/#/';
@@ -123,6 +123,11 @@ const store = createStore({
                     stateImg: ''
                 }
             }, 400)
+
+            setTimeout(() => {
+                state.calendarDate.showArticlesData = [];
+            }, 400)
+
         },
         //讀取畫面
         CHANGE_LOADING(state) {
@@ -224,12 +229,13 @@ const router = createRouter({
 
 router.beforeEach((to, from) => {
     //取得前往的網址
-    const getPath = to.path.slice(1);   //去掉 斜線 /
-    if (getPath) {                      //如果有內容修改page狀態為 前往網頁的名稱
+    const getPath = to.path.slice(1);           //去掉 斜線 /
+    if (getPath) {                              //如果有內容修改page狀態為 前往網頁的名稱
         store.commit('IS_ROOT_PAGE', getPath)
-    } else {                            //如果沒內容代表是根目錄
+    } else {                                    //如果沒內容代表是根目錄
         store.commit('IS_ROOT_PAGE', 'root')
     }
+    store.commit('CLOSE_ALL_FUNCTIONS');        //切換功能時要關閉所有方法狀態
 })
 
 const vm = createApp(index);

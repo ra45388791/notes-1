@@ -171,8 +171,8 @@ export default {
 
     .setItem-enter-to,
     .setItem-leave-from {
-        /* opacity: 1;
-        height: 259.91px; */
+        opacity: 1;
+        height: 183.16px;
     }
 
 
@@ -192,7 +192,7 @@ export default {
     }
 
     .setButton {
-        margin: 0.rem 0;
+        margin: 0.3rem 0;
 
         height: 2rem;
 

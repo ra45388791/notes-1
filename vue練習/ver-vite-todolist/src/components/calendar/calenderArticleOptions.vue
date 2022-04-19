@@ -20,7 +20,7 @@
 
             </div>
 
-            <button @mouseup="showItem" class="showBtn" :class="show ? 'buttonShowState' : 'buttonCloseState'">
+            <button @mouseup="changItemState" class="showBtn" :class="show ? 'buttonShowState' : 'buttonCloseState'">
                 <div class="showBtnBox">
                 </div>
             </button>
@@ -29,10 +29,9 @@
     </transition>
 </template>
 <script>
-import { mapState, mapMutations } from "vuex";
 export default {
-    props: ['totalArticle'],
-    emit: ['pushArticle'],
+    props: ['totalArticle'],    //接收到的所有文章
+    emit: ['pushArticle'],      //將選中的文章推上去
     data() {
         return {
             style: [],
@@ -40,22 +39,29 @@ export default {
         }
     },
     computed: {
-        // ...mapState({
-        //     UI: state => state.calendarDate.UI  //取 calendarDate 下的 UI
-        // })
-
         setTotalArticle() {
+            if (this.totalArticle.length === 1) {
+                this.pushArticleData(this.totalArticle[0])
+            } else if (this.totalArticle.length > 1) {
+                this.openItem();
+            }
             return this.totalArticle;
         }
 
 
     },
     methods: {
-        showItem() {                        //切換選擇區狀態
+        changItemState() {                  //切換選擇區狀態
             this.show = !this.show;
         },
         closeItem() {                       //關閉選擇區
             this.show = false;
+        },
+        openItem() {                        //開啟選擇區
+            const vm = this;
+            setTimeout(() => {
+                vm.show = true;
+            }, 300)
         },
         pushArticleData(e) {                //將選中的文章推上去
             const box = {
@@ -84,8 +90,8 @@ export default {
 }
 
 .itemShowState {
-    padding: 1rem 1.5rem;
-    height: calc(5rem * 5);
+    padding: 5px 1.5rem;
+    height: 24rem;
 }
 
 .buttonCloseState {
@@ -115,6 +121,7 @@ export default {
     width: 100%;
 
     background: rgb(0, 77, 82);
+    box-shadow: inset 0 -5px 0px 0px rgb(34, 209, 212);
     transition: 0.5s 0.5s ease-in-out;
 }
 
@@ -135,9 +142,14 @@ export default {
     color: #fff;
     background: rgb(0, 110, 161);
 
-    border: 5px solid #00ffff;
+    border: 5px solid #02b2da;
     border-radius: 10px;
     box-sizing: border-box;
+    cursor: pointer;
+}
+
+.articleOption:active {
+    background: rgb(0, 93, 136);
 }
 
 .title {
@@ -146,7 +158,7 @@ export default {
     max-width: 70%;
     font-size: 1.25rem;
     text-align: start;
-    border-right: 5px solid #00ffff;
+    border-right: 5px solid #02b2da;
 
 }
 
@@ -187,7 +199,7 @@ export default {
 .showBtn {
     position: absolute;
     /* rigth 動畫 */
-    bottom: -3.05rem;
+    bottom: -3rem;
     padding: 0.25rem;
 
     width: 3rem;
@@ -204,7 +216,6 @@ export default {
     width: 100%;
     height: 100%;
 
-    /* background: #000; */
     border: 2px solid #00ffff;
     border-radius: 100%;
 }
@@ -237,5 +248,101 @@ export default {
     border-bottom: 0rem solid #00ffff00;
     border-left: 0.65rem solid #00ffff00;
     border-right: 0.65rem solid #00ffff00;
+}
+
+@media (min-width: 768px) {
+    .itemCloseState {
+        padding: 0rem 1.5rem;
+        height: 0rem;
+    }
+
+    .itemShowState {
+        padding: 5px 1.5rem;
+        height: 11.5rem;
+    }
+
+    .optionsBox {
+        display: flex;
+        justify-content: space-around;
+        align-content: start;
+        flex-wrap: wrap;
+    }
+
+    .articleOption {
+        margin: 0 1%;
+        margin-bottom: 0.5rem;
+        width: 48%;
+
+
+    }
+
+    .articleOption:nth-last-child(1) {
+        /* 讓最後一個元素靠左 */
+        margin-right: auto;
+    }
+}
+
+@media (min-width: 1024px) {
+    .itemCloseState {
+        padding: auto;
+        height: 24rem;
+    }
+
+    .itemShowState {
+        padding: auto;
+        height: 24rem;
+    }
+
+    .buttonCloseState {
+        right: 0;
+    }
+
+    .buttonShowState {
+        right: calc(50% - 1.625rem);
+
+    }
+
+    .options {
+        position: relative;
+        right: auto;
+        top: auto;
+        padding: 0rem 0;
+        width: 50%;
+        height: 100%;
+        box-shadow: inset 4px -3px 0px 0px #1b697d;
+        border-radius: 0 0 0 20px;
+
+    }
+
+    .optionsBox {
+        display: flex;
+        justify-content: space-around;
+        align-content: start;
+        flex-wrap: wrap;
+        padding: 0.7rem 1.5rem;
+    }
+
+    .articleOption {
+        margin: 0;
+        margin-bottom: 0.5rem;
+        width: 100%;
+    }
+
+    .showBtn {
+        display: none;
+    }
+
+}
+
+@media (min-width: 1440px) {
+    .options {
+        width: 40%;
+    }
+}
+
+@media (min-width: 1920px) {
+    .options {
+        width: 30%;
+    }
 }
 </style>

@@ -3,15 +3,15 @@
         <div class="articleContentBox">
             <div class="title">
                 <h3>
-                    {{ title }}
+                    {{ title || '請選擇待辦事項' }}
                 </h3>
             </div>
             <div class="date">
                 <h4>
-                    設定清單日期 : {{ setDate }}
+                    設定清單日期 : {{ setDate || 'N/A' }}
                 </h4>
                 <h4>
-                    預計達成日期 : {{ date }}
+                    預計達成日期 : {{ date || 'N/A' }}
                 </h4>
             </div>
             <div class="content">
@@ -97,5 +97,37 @@ export default {
 .content {
     font-size: 1rem;
     text-indent: 2em;
+}
+
+.content p {
+    word-wrap: break-word;
+}
+
+@media (min-width: 1024px) {
+
+    .articleContent {
+
+        width: 50%;
+        border-radius: 0 0 20px 0;
+    }
+
+}
+
+@media (min-width: 1440px) {
+
+    .articleContent {
+
+        width: 60%;
+    }
+
+}
+
+@media (min-width: 1920px) {
+
+    .articleContent {
+
+        width: 70%;
+    }
+
 }
 </style>
