@@ -18,6 +18,7 @@ import calenderMainPage from './components/calendar/calenderMainPage.vue'
  * !讀取畫面
  * !刪除文章 ( 刪除時檢查清單是否完成 )
  * 行事曆
+ * 實際尺寸 1920 尺寸太大 需要修改
  */
 const url = 'https://tranquil-gorge-87619.herokuapp.com/';
 // const url = 'http://localhost:5000/#/';

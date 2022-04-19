@@ -158,6 +158,8 @@ export default {
     border-radius: 8px;
     box-sizing: border-box;
     box-shadow: 0px 0px 4px #ffffff;
+    cursor: pointer;
+
     transition: 0.1s
 }
 
@@ -169,8 +171,8 @@ export default {
 
     .setItem-enter-to,
     .setItem-leave-from {
-        opacity: 1;
-        height: 259.91px;
+        /* opacity: 1;
+        height: 259.91px; */
     }
 
 
@@ -178,27 +180,27 @@ export default {
     #setItem {
 
         top: 50%;
-        left: -12rem;
+        left: -9rem;
 
         padding: 0.4rem 1rem;
 
-        width: 12rem;
+        width: 9rem;
         background: #0084A3;
         border: 2px solid #00fff0;
 
-        border-radius: 15px;
+        border-radius: 10px;
     }
 
     .setButton {
-        margin: 0.4rem 0;
+        margin: 0.rem 0;
 
-        height: 3rem;
+        height: 2rem;
 
-        font-size: 1.8rem;
-        line-height: 3rem;
+        font-size: 1.2rem;
+        line-height: 2rem;
 
         border: 1px solid #00ffff;
-        border-radius: 20px;
+        border-radius: 10px;
         box-sizing: border-box;
         box-shadow: 0px 0px 4px #ffffff;
         transition: 0.1s

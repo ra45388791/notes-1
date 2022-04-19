@@ -185,16 +185,16 @@ body {
 @media (min-width:1920px) {
 
     .navBox {
-        width: 40rem;
+        width: 30rem;
     }
 
     #indexContent {
-        margin-left: 40rem;
+        margin-left: 30rem;
     }
 
     .mask {
-        left: 40rem;
-        width: calc(100% - 40rem);
+        left: 30rem;
+        width: calc(100% - 30rem);
     }
 }
 

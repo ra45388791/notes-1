@@ -270,6 +270,7 @@ export default {
     /* background: #0C4553; */
     border: none;
     border-radius: 100%;
+    cursor: pointer;
     transition: 0.2s;
 }
 
@@ -333,14 +334,14 @@ export default {
 
 @media (min-width:1920px) {
     .article {
-        /* width: 270px; */
-        height: 350px;
+
+        height: 290px;
         color: #fff;
 
     }
 
     .top .title {
-        font-size: 3rem;
+        font-size: 2rem;
     }
 
     .min {
@@ -348,13 +349,13 @@ export default {
     }
 
     .min .content {
-        height: 10rem;
+        height: 9.5rem;
     }
 
     .min .content p {
-        margin-top: 1rem;
-        font-size: 1.8rem;
-        line-height: 1.3em;
+        margin-top: 0.2rem;
+        font-size: 1.5rem;
+        line-height: 1.5em;
 
     }
 
@@ -363,22 +364,22 @@ export default {
     }
 
     .article .articleState .date {
-        padding: 20px 50px;
-        font-size: 2rem;
+        padding: 8.5px 16px;
+        font-size: 1.5rem;
     }
 
 
     .articleState .state {
-        width: 3rem;
-        height: 3rem;
+        width: 2.2rem;
+        height: 2.2rem;
     }
 
 
     .setButton {
-        top: 2.4rem;
+        top: 2.3rem;
         right: 3rem;
-        width: 125px;
-        height: 60px;
+        width: 7rem;
+        height: 3rem;
         border-radius: 80px;
     }
 
@@ -391,7 +392,7 @@ export default {
         top: calc(50% - 3.5px);
         width: 7px;
         height: 7px;
-        font-size: 2rem;
+        font-size: 1.6rem;
 
 
         border-radius: 30px;

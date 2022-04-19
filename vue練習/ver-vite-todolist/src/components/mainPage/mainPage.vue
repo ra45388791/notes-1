@@ -108,4 +108,13 @@ export default {
 
     }
 }
+@media (min-width: 1440px) {
+
+
+    .hintText {
+        margin-left: 30rem;
+        width: calc(100% - 30rem);
+
+    }
+}
 </style>

@@ -245,11 +245,12 @@ export default {
             let idMonth = "";
             let idDay = "";
             //如果小於10 在數字前 + 一個0
-            if (month + 1 < 10)
+
+            if (month < 10)
                 idMonth = `0${month}`;
             else
                 idMonth = `${month}`;
-            if (day + 1 < 10)
+            if (day < 10)
                 idDay = `0${day}`;
             else
                 idDay = `${day}`;
@@ -407,6 +408,7 @@ export default {
     background: rgba(255, 255, 255, 0.264);
     border: 0;
     border-radius: 100%;
+    cursor: pointer;
 }
 
 .reduce::before {
@@ -428,6 +430,8 @@ export default {
     background: rgba(255, 255, 255, 0.264);
     border: 0;
     border-radius: 100%;
+    cursor: pointer;
+
 }
 
 .plus::before {
@@ -464,6 +468,7 @@ export default {
     border-radius: 100%;
     box-shadow: 0 0 10px -5px #000;
     transition: 0.5s ease-in-out;
+    cursor: pointer;
 
 }
 
@@ -579,19 +584,19 @@ export default {
 
     /* 星期區 */
     .dayBox {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 
     .dayBox .day::before {
-        top: 4rem;
+        top: 3.5rem;
     }
 
     /* 控制器 */
     .control {
 
-        width: calc(100% - 40rem);
-        height: 8rem;
-        border: 8px solid rgb(0, 213, 255);
+        width: calc(100% - 30rem);
+        height: 7rem;
+        border: 7px solid rgb(0, 213, 255);
         border-bottom: 0;
 
     }
@@ -599,58 +604,55 @@ export default {
 
     .closeControl {
         right: 0;
-        bottom: -8rem;
+        bottom: -7rem;
     }
 
     .reduce {
         margin-right: 2rem;
-        width: 5rem;
-        height: 5rem;
+        width: 4rem;
+        height: 4rem;
     }
 
     .reduce::before {
-        content: "";
-        position: absolute;
-        left: calc(50% - 1.75rem);
-        top: calc(50% - 0.35rem);
-        width: 3.5rem;
-        height: 0.7rem;
+        left: calc(50% - 1.25rem);
+        top: calc(50% - 0.25rem);
+        width: 2.5rem;
+        height: 0.5rem;
     }
 
     .plus {
         margin-left: 2rem;
-        width: 5rem;
-        height: 5rem;
+        width: 4rem;
+        height: 4rem;
     }
 
     .plus::before {
 
-        left: calc(50% - 1.75rem);
-        top: calc(50% - 0.35rem);
-        width: 3.5rem;
-        height: 0.7rem;
+        left: calc(50% - 1.25rem);
+        top: calc(50% - 0.25rem);
+        width: 2.5rem;
+        height: 0.5rem;
     }
 
     .plus::after {
 
-        left: calc(50% - 0.35rem);
-        top: calc(50% - 1.75rem);
-        width: 0.7rem;
-        height: 3.5rem;
+        left: calc(50% - 0.25rem);
+        top: calc(50% - 1.25rem);
+        width: 0.5rem;
+        height: 2.5rem;
     }
 
     .control input {
-        font-size: 2rem;
-
+        font-size: 1.5rem;
     }
 
 
     .showControlButton button {
         position: fixed;
-        right: -4rem;
+        right: -3.5rem;
         bottom: 0rem;
-        width: 8rem;
-        height: 8rem;
+        width: 7rem;
+        height: 7rem;
         transition: 0.5s ease-in-out;
     }
 
@@ -658,21 +660,21 @@ export default {
 
         left: 1rem;
         top: calc(50% - 0.125rem);
-        width: 2.3rem;
-        height: 0.5rem;
+        width: 2rem;
+        height: 0.3rem;
         border-radius: 1px;
         background: rgb(0, 247, 255);
-        box-shadow: 0 15px 0 0 rgb(0, 247, 255), 0 -15px 0 0 rgb(0, 247, 255);
+        box-shadow: 0 10px 0 0 rgb(0, 247, 255), 0 -10px 0 0 rgb(0, 247, 255);
     }
 
     .showControlButton button::after {
-        right: 0.8rem;
+        right: 0.7rem;
         top: calc(50% - 1rem);
 
         border-top: 0rem solid rgb(0, 247, 255, 0);
-        border-bottom: 1.3rem solid rgb(0, 247, 255);
-        border-left: 1.3rem solid rgb(0, 247, 255, 0);
-        border-right: 1.3rem solid rgb(0, 247, 255, 0);
+        border-bottom: 1.2rem solid rgb(0, 247, 255);
+        border-left: 1.2rem solid rgb(0, 247, 255, 0);
+        border-right: 1.2rem solid rgb(0, 247, 255, 0);
     }
 
 

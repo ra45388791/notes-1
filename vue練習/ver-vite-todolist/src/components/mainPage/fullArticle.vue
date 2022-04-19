@@ -1,6 +1,6 @@
 <template>
-    <transition name="editOrRead" @mouseup="CLOSE_ALL_FUNCTIONS">
-        <div class="fullArticleBox">
+    <transition name="editOrRead">
+        <div class="fullArticleBox" @mouseup.self="CLOSE_ALL_FUNCTIONS">
 
             <article id="fullArticle">
                 <!-- 檢視文章選單 -->
@@ -114,7 +114,7 @@ export default {
     background: rgba(0, 0, 0, 0);
     border: none;
     border-radius: 100%;
-    transition: 0.1s;
+    /* transition: 0.1s; */
 }
 
 .buttons:active {
@@ -280,13 +280,13 @@ export default {
     }
 
     #fullArticle {
-        width: 800px;
+        width: 35rem;
         height: 90vh;
     }
 
     .article .title {
 
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
 
     .article .title h3 {
@@ -294,11 +294,11 @@ export default {
     }
 
     .article .date {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 
     .article .itemContent {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
     }
 
 }

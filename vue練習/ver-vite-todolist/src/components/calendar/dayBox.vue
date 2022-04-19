@@ -93,10 +93,10 @@ li {
 button {
     position: relative;
     margin: 0;
-    padding: 0 0.5rem;
+    padding: 0 0;
 
     width: 3rem;
-    height: 50%;
+    height: 3rem;
 
     color: #fff;
     background: rgba(51, 255, 0, 0);
@@ -118,37 +118,13 @@ button:hover {
 }
 
 button p {
+    margin: 0;
     padding: 0;
     font-size: 1.5rem;
 
 }
 
-/* 是否結案 */
-.text {
-    margin-top: 5px;
-    height: 50%;
-}
 
-p {
-    margin: 0;
-    padding: 5px 2px;
-    height: 1.6rem;
-    color: #fff;
-    font-size: 13px;
-}
-
-.upcoming {
-    color: rgb(0, 0, 0);
-    background: rgb(0, 255, 0);
-    border-radius: 5px;
-}
-
-.close {
-    color: rgb(255, 255, 255);
-    background: #f00;
-    border-radius: 5px;
-
-}
 
 /* 今日style */
 .today button {
@@ -182,7 +158,7 @@ p {
 
     button {
         width: 3.5rem;
-        height: 70%;
+        height: 3.5rem;
         border-radius: 100%;
     }
 
@@ -193,53 +169,29 @@ p {
     }
 
     button p {
-        padding: 0;
         font-size: 1.5rem;
         line-height: 3rem
     }
 
-    /* 是否結案 */
-    .text {
-        margin-top: 5px;
-        height: 30%;
-    }
 
-    p {
-        margin: 0;
-        padding: 5px 2px;
-        height: 100%;
-        color: #fff;
-        font-size: 1rem;
-    }
 }
 
 @media (min-width: 1920px) {
     li {
-        height: 7.5rem;
+        height: 6rem;
     }
 
     button {
-        width: 4.8rem;
-        height: 60%;
+        width: 5rem;
+        height: 5rem;
     }
 
     button p {
+        margin: 0;
         padding: 0;
         font-size: 2.3rem;
-        line-height: 4.3rem
+        line-height: 2.3rem
     }
 
-    .text {
-        height: 40%;
-    }
-
-    p {
-        margin: 0;
-        padding: 5px 5px;
-        height: 100%;
-        color: #fff;
-        font-size: 1.5rem;
-        line-height: 2.5rem
-    }
 }
 </style>

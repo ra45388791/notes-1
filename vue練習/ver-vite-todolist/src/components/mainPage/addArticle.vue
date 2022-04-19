@@ -280,25 +280,15 @@ export default {
 }
 
 @media (min-width:1440px) {
-    #addButton {
-        left: 9rem;
-        bottom: 1.5rem;
-
-        width: 12rem;
-        height: 3rem;
-    }
-}
-
-@media (min-width:1920px) {
     .topNav {
-        height: 6rem;
-        font-size: 3rem;
+        height: 4rem;
+        font-size: 2rem;
     }
 
     .buttons {
         margin: 0 1rem;
-        width: 60px;
-        height: 60px;
+        width: 45px;
+        height: 45px;
         background: rgba(0, 0, 0, 0);
         border: none;
         border-radius: 100%;
@@ -306,38 +296,38 @@ export default {
     }
 
     .check {
-        width: 75px;
-        height: 75px;
+        width: 55px;
+        height: 55px;
     }
 
     .content {
         display: flex;
         justify-content: center;
-        margin-top: 6rem;
+        margin-top: 4.5rem;
         width: 100vw;
-        height: calc(100vh - 6rem);
+        height: calc(100vh - 4.5rem);
     }
 
     .article {
-        width: 60rem;
+        width: 45rem;
     }
 
     #articleForm .formTitle,
     #articleForm .formDate,
     #articleForm .formContent {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 
     #articleForm .formTitle {
 
-        height: 3rem;
+        height: 2.5rem;
     }
 
     #articleForm .formDate {
         margin: 0 auto;
         margin-bottom: 0.8rem;
         padding: 0 1rem;
-        width: 15.5rem;
+        width: 12rem;
     }
 
 }

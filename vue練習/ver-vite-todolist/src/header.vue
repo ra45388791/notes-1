@@ -124,21 +124,21 @@ header .noteImage img {
 
 @media (min-width:1920px) {
     header {
-        padding: 4rem 0;
-        height: 20rem;
+        padding: 3rem 0;
+        height: 12rem;
 
     }
 
     header h1 {
-        font-size: 4.5rem;
+        font-size: 3rem;
         color: #fff;
     }
 
     header .noteImage {
         margin-right: 0rem;
         margin-bottom: 1rem;
-        width: 12rem;
-        height: 12rem;
+        width: 7rem;
+        height: 7rem;
     }
 
 }

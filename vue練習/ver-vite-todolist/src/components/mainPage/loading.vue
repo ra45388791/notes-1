@@ -132,8 +132,8 @@ export default {
 
 @media (min-width: 1920px) {
     #loading {
-        margin-left: 40rem;
-        width: calc(100% - 40rem);
+        margin-left: 30rem;
+        width: calc(100% - 30rem);
     }
 }
 </style>
