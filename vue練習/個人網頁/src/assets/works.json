@@ -52,7 +52,7 @@
     {
         "id": 1,
         "title": "氣象API應用",
-        "content": "gsdgsdfg",
+        "content": "串接政府氣象平台。",
         "image": "works/ROC_Central_Weather_Bureau/ROC_Central_Weather_Bureau.png",
         "photos": [
             {
@@ -73,7 +73,7 @@
                 "id": 0,
                 "name": "前往作品",
                 "type": "href",
-                "link": "/page/台灣天氣地圖/index.html",
+                "link": "https://uceike58443729.000webhostapp.com/page/%E6%94%BF%E5%BA%9C%E6%B0%A3%E8%B1%A1%E5%B9%B3%E5%8F%B0/index.html",
                 "icon": "works/icon/foreign.png"
             }
         ]

@@ -67,16 +67,15 @@ export default {
             if (!checkDate) return;        //檢查日期是否為過去
 
             const box = {
-                id: this.form.id,                         //  !id
+                _id: this.form._id,              //!id
                 title: title,                   //標題
                 content: content,               //內容
                 date: date,                     //結束日期
             }
-
             // 將文章推入主資料
             // this.axiosSubmit('POST', 'editArticle', box);
             this.SUBMIT_ARTICLES({
-                method: 'POST',
+                method: 'patch',
                 func: 'reviseArticle',
                 data: box
             }).then((e) => {

@@ -69,7 +69,7 @@ export default {
             if (!checkDate) return;        //檢查日期是否為過去
 
             const box = {
-                id: id,                         //id
+                _id: id,                         //id
                 title: title,                   //標題
                 content: content,               //內容
 

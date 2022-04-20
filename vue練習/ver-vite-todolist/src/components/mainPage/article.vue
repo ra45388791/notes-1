@@ -38,7 +38,7 @@
 import { mapMutations, mapActions } from "vuex";
 import ArticleSetItem from "./articleSetItem.vue";
 export default {
-    props: ["id", "state", "stateImg", "title", "content", "setDate", "date"],
+    props: ["_id", "state", "stateImg", "title", "content", "setDate", "date"],
     data() {
         return {
             itemShow: true,
@@ -74,7 +74,7 @@ export default {
         // 打開文章
         openArticle: function () {
             const box = {
-                id: this.id,
+                _id: this._id,
                 title: this.title,
                 content: this.content,
                 setDate: this.setDate,
@@ -90,12 +90,12 @@ export default {
             if (this.state === e.state) return;
 
             const box = {
-                id: this.id,
+                _id: this._id,
                 state: e.state,
                 stateImg: e.stateImg,
             }
             this.SUBMIT_ARTICLES({
-                method: 'POST',
+                method: 'PATCH',
                 func: 'chengeState',
                 data: box
             })
@@ -104,7 +104,7 @@ export default {
         editArticle: function () {
             this.CHANGE_EDIT_ARTICLE_STATE();
             const box = {
-                id: this.id,
+                _id: this._id,
                 title: this.title,
                 content: this.content,
                 setDate: this.setDate,
@@ -126,7 +126,7 @@ export default {
             this.SUBMIT_ARTICLES({
                 method: 'DELETE',
                 func: 'DELETE',
-                data: { id: this.id }
+                data: { _id: this._id }
             })
         },
 

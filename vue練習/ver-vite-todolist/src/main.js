@@ -21,7 +21,7 @@ import calenderMainPage from './components/calendar/calenderMainPage.vue'
  * !實際尺寸 1920 尺寸太大 需要修改
  */
 const url = 'https://tranquil-gorge-87619.herokuapp.com/';
-// const url = 'http://localhost:5000/#/';
+// const url = 'http://localhost:5000/';
 
 
 const store = createStore({
@@ -42,7 +42,7 @@ const store = createStore({
                 }
             },
             temporaryStorageArticle: {
-                id: '',
+                _id: '',
                 title: '',
                 content: '',
                 setDate: '',
@@ -114,7 +114,7 @@ const store = createStore({
 
             setTimeout(() => {
                 state.temporaryStorageArticle = {
-                    id: '',
+                    _id: '',
                     title: '',
                     content: '',
                     setDate: '',
