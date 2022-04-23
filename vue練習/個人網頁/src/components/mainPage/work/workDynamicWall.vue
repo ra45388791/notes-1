@@ -14,6 +14,7 @@
                     </nav>
                     <div class="message-article">
                         <div class="message-overflow">
+                            <!-- 作品介紹內文 -->
                             <div class="message-content">
                                 <h4>{{ articleData.title }}</h4>
                                 <div class="message-content-div">
@@ -21,19 +22,8 @@
                                 </div>
                             </div>
 
+                            <!-- 超連結 -->
                             <div class="superLink">
-                                <!-- <a
-                                    v-show="ishref"
-                                    :href="articleData.href"
-                                    target="_blank"
-                                    class="workButton"
-                                >
-                                    前往作品
-                                    <img
-                                        src="../../../public/works/icon/foreign.png"
-                                        alt="linkIcon"
-                                    />
-                                </a>-->
                                 <a v-for="hrefs of hrefButton" :href="hrefs.link" :key="hrefs.id" target="_blank"
                                     class="workButton">
                                     {{ hrefs.name }}
@@ -44,6 +34,11 @@
                                     {{ router.name }}
                                     <img :src="router.icon" alt="linkIcon" />
                                 </router-link>
+
+                                <a v-if="(hrefButton.length + routerButton.length) % 2 === 1" class="workButton filling"
+                                    disabled>
+                                    <!-- 如果按鈕是奇數就將這個 a 填充進去 -->
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -111,9 +106,7 @@ export default {
             }, 300)
             this.$emit("closeArticle");
         },
-        goToSuperLink(e) {
-            location.href = e;
-        }
+
     },
     components: { WorkDynamicWallPhotoBox }
 }
@@ -315,6 +308,11 @@ nav h3 {
     text-decoration: none;
 }
 
+.message .superLink .filling {
+    visibility: hidden;
+}
+
+
 @media (min-width: 425px) {
     .article {
         width: 26rem;
@@ -349,6 +347,40 @@ nav h3 {
 
     .message-article {
         height: 77%;
+    }
+}
+
+@media (min-width: 1440px) {
+    .article {
+        width: 80rem;
+        height: 35rem;
+    }
+
+    .media {
+        width: 70%;
+        height: 100%;
+    }
+
+    .message {
+        width: 30%;
+        height: 100%;
+    }
+}
+
+@media (min-width: 1920px) {
+    .article {
+        width: 100rem;
+        height: 50rem;
+    }
+
+    .media {
+        width: 70%;
+        height: 100%;
+    }
+
+    .message {
+        width: 30%;
+        height: 100%;
     }
 }
 </style>

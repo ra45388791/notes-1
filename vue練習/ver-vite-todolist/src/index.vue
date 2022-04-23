@@ -12,7 +12,6 @@
     <!-- 行事曆功能 -->
     <CalendarArticle v-show="calendarUI.calendarShow" />
 
-
     <div id="indexContent">
         <router-view></router-view>
         <transition name="mask">
@@ -103,7 +102,9 @@ body {
     position: relative;
     margin: 0;
     padding: 0;
+    
 }
+
 
 .navBox {
     position: relative;
@@ -122,7 +123,6 @@ body {
     top: 0;
     left: 0;
 
-    display: none;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
@@ -131,12 +131,10 @@ body {
 }
 
 @media (min-width: 768px) {
-
+/* 
     .mask {
         display: block;
-
-
-    }
+    } */
 }
 
 

@@ -37,6 +37,18 @@
             {
                 "id": 3,
                 "photo": "works/todolist/3.jpg"
+            },
+            {
+                "id": 4,
+                "photo": "works/todolist/4.jpg"
+            },
+            {
+                "id": 5,
+                "photo": "works/todolist/5.jpg"
+            },
+            {
+                "id": 6,
+                "photo": "works/todolist/6.jpg"
             }
         ],
         "button": [
@@ -46,40 +58,25 @@
                 "type": "href",
                 "link": "https://uceike58443729.000webhostapp.com/#/",
                 "icon": "works/icon/foreign.png"
-            }
-        ]
-    },
-    {
-        "id": 1,
-        "title": "氣象API應用",
-        "content": "串接政府氣象平台。",
-        "image": "works/ROC_Central_Weather_Bureau/ROC_Central_Weather_Bureau.png",
-        "photos": [
-            {
-                "id": 0,
-                "photo": "https://fakeimg.pl/300x900/"
             },
             {
                 "id": 1,
-                "photo": "https://fakeimg.pl/900x300/"
+                "name": "桌機設計稿",
+                "type": "href",
+                "link": "works/todolist/computer.pdf",
+                "icon": "works/icon/foreign.png"
             },
             {
                 "id": 2,
-                "photo": "https://fakeimg.pl/500x500/"
-            }
-        ],
-        "button": [
-            {
-                "id": 0,
-                "name": "前往作品",
+                "name": "手機設計稿",
                 "type": "href",
-                "link": "https://uceike58443729.000webhostapp.com/page/%E6%94%BF%E5%BA%9C%E6%B0%A3%E8%B1%A1%E5%B9%B3%E5%8F%B0/index.html",
+                "link": "works/todolist/phone.pdf",
                 "icon": "works/icon/foreign.png"
             }
         ]
     },
     {
-        "id": 2,
+        "id": 1,
         "title": "大學專題-音樂遊戲",
         "content": [
             {

@@ -463,9 +463,9 @@ export default {
     bottom: 3.7rem;
     width: 5rem;
     height: 5rem;
-    border: 1px solid rgb();
-    background: rgb(0, 166, 255);
+    /* border: 1px solid rgb(); */
     border: 0;
+    background: rgb(0, 166, 255);
     border-radius: 100%;
     box-shadow: 0 0 10px -5px #000;
     transition: 0.5s ease-in-out;
@@ -524,14 +524,15 @@ export default {
 
     .control {
         position: fixed;
-        right: 0;
+        left: 50%;
+        right: auto;
         bottom: 0;
         margin-bottom: 0px;
         padding: 0;
-        width: calc(100% - 23rem);
+        width: 23rem;
         height: 5rem;
 
-        border-radius: 20px 0 0 0;
+        border-radius: 20px 20px 0 0;
         border: 5px solid rgb(0, 213, 255);
         border-bottom: 0;
 
@@ -550,17 +551,29 @@ export default {
     }
 
     .showControlButton button {
-        position: fixed;
-        right: -2.5rem;
-        bottom: 0rem;
+        position: absolute;
+        top: calc(-2.5rem);
+        bottom: auto;
+        left: calc(50% - 2.5rem);
+        right: auto;
         width: 5rem;
-        height: 5rem;
-        transition: 0.5s ease-in-out;
+        height: 2.5rem;
+        border: 5px solid rgb(0, 213, 255);
+        border-radius: 5px;
+
+
+        transition: none;
     }
 
-
+    .showControlButton button::before {
+        left: calc(50% - 0.75rem);
+        top: calc(50% - 0.125rem);
+        width: 1.5rem;
+        height: 0.25rem;
+    }
 
     .showControlButton button::after {
+        display: none;
         right: 0.6rem;
         top: calc(50% - 0.6rem);
 
@@ -569,13 +582,23 @@ export default {
         border-left: 0.8rem solid rgb(0, 247, 255, 0);
         border-right: 0.8rem solid rgb(0, 247, 255, 0);
     }
+
+    .triggerControl {
+        transform: rotate(0deg);
+    }
+
+    .notTriggerControl {
+        transform: rotate(0deg);
+    }
 }
 
 @media (min-width: 1440px) {
 
     .control {
 
-        width: calc(100% - 30rem);
+        left: 50%;
+        width: 25rem;
+
 
     }
 
@@ -595,10 +618,11 @@ export default {
     /* 控制器 */
     .control {
 
-        width: calc(100% - 30rem);
+        /* width: calc(100% - 30rem); */
+        left: 50%;
+        width: 30rem;
         height: 7rem;
-        border: 7px solid rgb(0, 213, 255);
-        border-bottom: 0;
+
 
     }
 
@@ -647,35 +671,13 @@ export default {
         font-size: 1.5rem;
     }
 
-
     .showControlButton button {
-        position: fixed;
-        right: -3.5rem;
-        bottom: 0rem;
+        top: calc(-3rem);
+        left: calc(50% - 3.5rem);
+
         width: 7rem;
-        height: 7rem;
-        transition: 0.5s ease-in-out;
-    }
+        height: 3rem;
 
-    .showControlButton button::before {
-
-        left: 1rem;
-        top: calc(50% - 0.125rem);
-        width: 2rem;
-        height: 0.3rem;
-        border-radius: 1px;
-        background: rgb(0, 247, 255);
-        box-shadow: 0 10px 0 0 rgb(0, 247, 255), 0 -10px 0 0 rgb(0, 247, 255);
-    }
-
-    .showControlButton button::after {
-        right: 0.7rem;
-        top: calc(50% - 1rem);
-
-        border-top: 0rem solid rgb(0, 247, 255, 0);
-        border-bottom: 1.2rem solid rgb(0, 247, 255);
-        border-left: 1.2rem solid rgb(0, 247, 255, 0);
-        border-right: 1.2rem solid rgb(0, 247, 255, 0);
     }
 
 
