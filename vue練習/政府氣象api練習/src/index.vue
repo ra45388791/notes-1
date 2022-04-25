@@ -16,9 +16,12 @@
     </footer>
 </template>
 <script>
+export default {
+
+    
+}
 
 </script>
-
 
 <style>
 *,
@@ -46,7 +49,9 @@ body {
 }
 
 .router-link-active {
-    box-shadow: inset 0 -5px 0 0 #000;
+    /* box-shadow: inset 0 -5px 0 0 rgb(158, 158, 158); */
+
+    box-shadow: inset 0 -3px 0 0 rgb(81, 255, 0);
 }
 
 
@@ -59,9 +64,13 @@ body {
     padding: 0 2rem;
 
     height: 5rem;
-    background: rgb(254, 254, 254);
 
-    border-bottom: 5px solid rgb(202, 202, 202);
+    /* background: rgb(254, 254, 254); */
+    background: rgb(0, 106, 255);
+
+
+    /* border-bottom: 5px solid rgb(202, 202, 202); */
+    border-bottom: 5px solid rgb(0, 149, 255);
 }
 
 #indexNav a {
@@ -80,12 +89,15 @@ body {
 #indexNav .title {
     display: inline-block;
     width: 100%;
-    /* height: 3.5rem; */
+
     text-align: center;
 }
 
 #indexNav .title h1 {
     margin: 0;
+
+    color: #fff;
+
 }
 
 #indexNav .navBox {
@@ -97,6 +109,7 @@ body {
 
 #indexNav .navBox a {
     padding-bottom: 5px;
+    color: #fff;
     /* border-left: 2px solid rgb(64, 64, 64); */
 }
 
@@ -117,6 +130,7 @@ footer p {
     padding: 0;
     line-height: 3rem;
     text-align: center;
+    /* color: rgb(110, 110, 110); */
     color: rgb(110, 110, 110);
 }
 </style>

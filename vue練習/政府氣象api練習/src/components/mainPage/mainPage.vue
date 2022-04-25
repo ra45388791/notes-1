@@ -15,13 +15,18 @@
                         alt="">
                 </div>
             </div>
+            <div class="content">
 
-            <div class="controller">
-                <div class="weatherButton">
-                    <router-link to="adb">氣象預報</router-link>
+                <div class="title">
+                    <h2>
+                        天氣預報平台
+                    </h2>
                 </div>
-
-
+                <div class="controller">
+                    <div class="weatherButton">
+                        <router-link to="weatherPage">氣象預報</router-link>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -43,7 +48,7 @@ export default {
         const photoSetTime = setInterval(() => {
             if (vm.showPhoto === 2) vm.showPhoto = 0;
             else vm.showPhoto++;
-        }, 10000);
+        }, 5000);
     }
 
 }
@@ -99,6 +104,7 @@ export default {
     position: relative;
     width: 100%;
     height: 100%;
+    z-index: 1;
 }
 
 #mainPage .photo {
@@ -115,6 +121,25 @@ export default {
     height: 100%;
     object-fit: cover;
 }
+
+#mainPage .content {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+#mainPage .title h2 {
+    margin-top: 5rem;
+    text-align: center;
+    font-size: 3rem;
+    color: #fff;
+    text-shadow: 2px 2px 0 #000;
+}
+
 
 
 /* 按鈕 */
