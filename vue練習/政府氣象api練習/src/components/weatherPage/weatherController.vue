@@ -1,5 +1,5 @@
 <template>
-    <div class="options" :class="show ? 'itemShowState' : 'itemCloseState'">
+    <div v-if="weatherDataIsFetching" class="options" :class="show ? 'itemShowState' : 'itemCloseState'">
         <div class="optionsBox">
 
             <label for="area">
@@ -45,6 +45,8 @@
     </div>
 </template>
 <script>
+import { mapState, mapGetters, mapActions } from "vuex";
+
 export default {
     props: ['cityName', 'times'],    //接收資料
     emit: ['pushData'],      //將選中的文章推上去
@@ -52,9 +54,9 @@ export default {
         return {
             style: [],
             show: false,
-            areaValue: 0,
-            cityValue: '',
-            timeValue: 0,
+            areaValue: 0,       //地區
+            cityValue: '',      //城市
+            timeValue: 0,       //時間
         }
     },
     watch: {
@@ -65,6 +67,7 @@ export default {
                     time: this.timeValue
                 })
                 this.closeItem();
+                console.log('城市觸發');
             }
         },
         timeValue: function (newVal) {
@@ -74,10 +77,19 @@ export default {
                     time: newVal
                 })
                 this.closeItem();
+                console.log('時間觸發');
             }
         },
     },
+    mounted() {
+        this.$nextTick(function () {
+            const firstCity = this.parseCityName[this.areaValue].city[0]
+            this.cityValue = firstCity;
+        })
+    },
     computed: {
+        ...mapState(['weatherDataIsFetching']),
+
         //取得變更過後的地區+時間
         // totalData() {
         //     return `${this.areaValue}+${this.timeValue}`
@@ -179,8 +191,7 @@ export default {
                 return boxis;
             })
             //設定第一個城市值
-            const firstCity = this.parseCityName[this.areaValue].city[0]
-            this.cityValue = firstCity;
+
             return box
         },
 
@@ -275,7 +286,6 @@ export default {
     background: rgb(82, 82, 82);
     box-shadow: 0 5px 10px 0 #000;
     border-radius: 0 0 20px 20px
-
 }
 
 .controllerButton h3 {

@@ -1,5 +1,5 @@
 <template>
-    <div id="news">
+    <div v-if="weatherDataIsFetching" id="news">
         <div class="newsBox">
             <!-- 城市標題 -->
             <div class="headerBox">
@@ -8,7 +8,7 @@
 
                         <!-- 文字 -->
                         <div class="cityName" style="color:#fff">
-                            <!-- {{ cityName }} -->
+                            {{ cityName }}
                         </div>
                         <!-- 氣象圖片 -->
                         <div class="headerIcn">
@@ -19,7 +19,7 @@
                     <div class="temperature">
                         <div class="lowestTemperature">
                             <div class="lowestCount">
-                                <!-- {{ MinTData }} -->
+                                {{ minT.name }}
                             </div>
                             <div class="lowestText">
                                 最低溫度
@@ -30,7 +30,7 @@
                         </div>
                         <div class="maximumTemperature">
                             <div class="maximumCount">
-                                <!-- {{ weatherData.MaxT }} -->
+                                {{ maxT.name }}
                             </div>
                             <div class="maximumText">
                                 最高溫度
@@ -51,37 +51,81 @@
     </div>
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex";
-
-import weatherController from './weatherController.vue';
+import { mapState, mapGetters, mapActions } from "vuex";
 export default {
     //氣象資料 / 設定時間
-    props: ['CI', 'MaxT', 'MinT', 'PoP', 'Wx', 'cityName', 'setTimes'],
+    props: ['ci', 'maxT', 'minT', 'pop', 'wx', 'cityName', 'setTime'],
     data() {
         return {
+            // wxData: '',
+            // MinTData: '',
+            // MaxTData: '',
+            // CIData: '',
+            // PoPData: '',
 
         }
     },
     created() {
 
     },
-    computed: {
-        weatherData() {
-            //使用陣列取值會報錯 
-
-            return {
-                // Wx: this.Wx[this.setTimes].name,
-                // CI: this.CI[this.setTimes].name,
-                // MinT: this.MinT[this.setTimes].name,
-                // MaxT: this.MaxT[this.setTimes].name,
-                // PoP: this.PoP[this.setTimes].name,
-            }
+    mounted() {
+        this.weatherData();
+    },
+    watch: {
+        cityName(newVal) {
+            this.weatherData();
         },
-        // MinTData() { return this.MinT[this.setTimes].name }
-
+    },
+    computed: {
+        ...mapState(['weatherDataIsFetching']),
 
     },
     methods: {
+        weatherData() {
+            //使用陣列取值會報錯 
+
+            // this.wxData = this.wx[this.setTime].name;
+            // this.MinTData = this.minT[this.setTime].name;
+            // this.MaxTData = this.maxT[this.setTime].name;
+            // this.CIData = this.ci[this.setTime].name;
+            // this.PoPData = this.pop[this.setTime].name;
+
+
+            // switch (this.setTime) {
+            //     case 0:
+            //         this.wxData = this.wx.time0;
+            //         this.MinTData = this.minT.time0;
+            //         this.MaxTData = this.maxT.time0;
+            //         this.CIData = this.ci.time0;
+            //         this.PoPData = this.pop.time0;
+            //         break;
+            //     case 1:
+            //         this.wxData = this.wx.time1;
+            //         this.MinTData = this.minT.time1;
+            //         this.MaxTData = this.maxT.time1;
+            //         this.CIData = this.ci.time1;
+            //         this.PoPData = this.pop.time1;
+            //         break;
+            //     case 2:
+            //         this.wxData = this.wx.time2
+            //         this.MinTData = this.minT.time2;
+            //         this.MaxTData = this.maxT.time2;
+            //         this.CIData = this.ci.time2;
+            //         this.PoPData = this.pop.time2;
+            //         break;
+            // }
+
+
+
+            // return {
+            //     Wx: this.Wx[this.setTimes].name,
+            //     CI: this.CI[this.setTimes].name,
+            //     MinT: this.MinT[this.setTimes].name,
+            //     MaxT: this.MaxT[this.setTimes].name,
+            //     PoP: this.PoP[this.setTimes].name,
+            // }
+
+        },
 
 
     },
