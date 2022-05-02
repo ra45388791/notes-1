@@ -9,6 +9,14 @@ import index from './index.vue'
 const url = 'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-EC139BA3-6665-4AEE-9A2E-D3B8D1DF96DB&format=JSON'
 
 
+/**
+ * wx 天氣現象
+ * !maxt 最高溫度
+ * !mint 最高溫度
+ * !ci 舒適度
+ * pop 降雨機率
+ */
+
 
 
 
@@ -23,6 +31,7 @@ const store = createStore({
     getters: {
         //處理取得的原始資料
         TIDY_UP_WEATHER_DATA(state) {
+            //主資料
             const tidyUpData = state.weatherData.map((data) => {
                 //取得資料中對應的天氣因素
                 const wxData = data.weatherElement.find(e => { if (e.elementName === 'Wx') return e });         //天氣現象
@@ -93,14 +102,6 @@ const store = createStore({
                 const MaxTDataTime = parsePopMintMaxt(MaxTData);
                 const CIDataTime = parseCI(CIData);
 
-                // const times = wxData.time.map(time => {
-                //     return {
-                //         start: time.startTime,
-                //         end: time.endTime,
-                //     }
-                // })
-
-
                 //包裝
                 const box = {
                     cityName: data.locationName,                    //城市名稱                                
@@ -113,14 +114,14 @@ const store = createStore({
                 return box;
 
             })
-
+            //時間
             const times = state.time.map(e => {
                 return {
                     start: e.startTime,
                     end: e.endTime,
                 }
             })
-
+            //組合 主資料/時間
             return {
                 time: times,
                 data: tidyUpData
@@ -180,7 +181,6 @@ const router = createRouter({
 
 router.beforeEach(async (to, form) => {
     console.log(to);
-
     let data = store.getters.TIDY_UP_WEATHER_DATA;
 
     // console.log(data.time.length);
