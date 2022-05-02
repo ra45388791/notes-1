@@ -37,7 +37,7 @@
         <div @mouseup="changItemState" class="controllerButton">
             <h3>選擇縣市</h3>
             <button @mouseup="changItemState" class="showBtn" :class="show ? 'buttonShowState' : 'buttonCloseState'">
-                <div class="showControllerButton">
+                <div @mouseup="changItemState" class="showControllerButton">
                 </div>
             </button>
         </div>
@@ -67,7 +67,6 @@ export default {
                     time: this.timeValue
                 })
                 this.closeItem();
-                console.log('城市觸發');
             }
         },
         timeValue: function (newVal) {
@@ -77,7 +76,6 @@ export default {
                     time: newVal
                 })
                 this.closeItem();
-                console.log('時間觸發');
             }
         },
     },
@@ -89,11 +87,6 @@ export default {
     },
     computed: {
         ...mapState(['weatherDataIsFetching']),
-
-        //取得變更過後的地區+時間
-        // totalData() {
-        //     return `${this.areaValue}+${this.timeValue}`
-        // },
         parseCityName() {
             //取出指定區域縣市
             const northern = new RegExp(/(臺北市)|(新北市)|(基隆市)|(新竹市)|(桃園市)|(新竹縣)|(宜蘭縣)/g);
@@ -142,35 +135,15 @@ export default {
         parseTimes() {          //監聽時間參數
 
             const box = this.times.map((e, index) => {
+                const startMount = e.start.slice(5, 7);
+                const startDay = e.start.slice(8, 10);
                 const start = e.start.slice(11, 13);
+                const endMount = e.end.slice(5, 7);
+                const endDay = e.end.slice(8, 10);
                 const end = e.end.slice(11, 13);
 
-                let textStart = '';
-                let textEnd = '';
-
-                switch (start) {
-                    case '00':
-                        textStart = '早上 0 點'
-                        break;
-                    case '06':
-                        textStart = '早上 6 點'
-                        break;
-                    case '18':
-                        textStart = '晚上 6 點'
-                        break;
-                }
-                switch (end) {
-                    case '00':
-                        textEnd = '早上 0 點'
-                        break;
-                    case '06':
-                        textEnd = '早上 6 點'
-                        break;
-                    case '18':
-                        textEnd = '晚上 6 點'
-                        break;
-                }
-
+                let textStart = `${startMount}/${startDay} ${start}點`;
+                let textEnd = `${endMount}/${endDay} ${end}點`;
 
                 return {
                     id: index,
@@ -273,7 +246,7 @@ export default {
 
     width: auto;
     height: 3rem;
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
 
 

@@ -18,12 +18,46 @@
 <script>
 export default {
 
-    
+
 }
 
 </script>
 
 <style>
+/* 幻燈片 */
+.photoIn {
+    animation: photoIn 2s ease forwards;
+}
+
+.photoOut {
+    animation: photoOut 2s ease forwards;
+}
+
+@keyframes photoIn {
+    0% {
+        /* transform: translateX(100vw); */
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+        /* transform: translateX(0); */
+    }
+}
+
+@keyframes photoOut {
+    0% {
+        opacity: 1;
+        /* transform: translateX(0); */
+    }
+
+    100% {
+        opacity: 0;
+        /* transform: translateX(-100vw); */
+    }
+}
+
+
 *,
 ::after,
 ::before {
@@ -132,5 +166,10 @@ footer p {
     text-align: center;
     /* color: rgb(110, 110, 110); */
     color: rgb(110, 110, 110);
+}
+
+/* 隱藏平台自動加入標籤 */
+.disclaimer {
+    display: none;
 }
 </style>

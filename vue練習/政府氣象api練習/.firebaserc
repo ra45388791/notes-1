@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "my-notfirst-project"
+  },
+  "targets": {
+    "my-notfirst-project": {
+      "hosting": {
+        "weather": [
+          "weatherpage"
+        ]
+      }
+    }
+  }
+}

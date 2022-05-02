@@ -147,6 +147,13 @@
                 "type": "href",
                 "link": "works/musicGame/音樂遊戲譜面.pdf",
                 "icon": "works/icon/foreign.png"
+            },
+            {
+                "id": 4,
+                "name": "開發日誌",
+                "type": "href",
+                "link": "works/musicGame/開發日誌.pdf",
+                "icon": "works/icon/foreign.png"
             }
         ]
     }

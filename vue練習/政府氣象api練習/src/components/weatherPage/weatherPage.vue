@@ -3,9 +3,6 @@
         <div class="weatherPageBox">
             <weatherController :cityName="cityNames" :times="times" @pushData="getWeatherOption" />
             <newsBox v-bind="weatherData" :cityName="weather.city" :setTime="changeTime" />
-            <!-- <newsBox :ci="showWeatherData.ci" :maxT="showWeatherData.maxT" :minT="showWeatherData.minT"
-                :pop="showWeatherData.pop" :wx="showWeatherData.wx" :cityName="showWeatherData.cityName"
-                :setTime="changeTime" /> -->
         </div>
     </div>
     <div v-else class="loading">

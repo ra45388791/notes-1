@@ -1,46 +1,65 @@
 
+// function text(a, b) {
+
+//     const length = a.length > b.length ? a.length - b.length : b.length - a.length;
+//     let aa = a.split('').reverse();
+//     let bb = b.split('').reverse();
+
+//     let cc = [];
+//     for (let i = 0; i <= length; i++) {
+//         if (aa[i] && bb[i]) {
+//             cc.push(parseInt(aa[i]) + parseInt(bb[i]))
+
+//         }
+//         else if (aa[i]) {
+//             cc.push(parseInt(aa[i]))
+
+//         }
+//         else {
+//             cc.push(parseInt(bb[i]))
+
+//         }
+//     }
+//     console.log(aa);
+//     console.log(bb);
+//     console.log(cc);
+
+//     for (let i = 0; i < cc.length; i++) {
+//         if (cc[i] === 2) {
+//             cc[i] = 1;
+//             if (cc[i + 1]) cc[i + 1] += 1;
+//             else cc[i + 1] = 1;
+//         }
+//     }
+
+//     const ff = cc.reverse();
 
 
-function sss(s) {
 
 
-    if (s.length % 2 === 1) return false;
-    let total = []
-
-    s.split('').forEach(function (e) {
-        if (total.length === 0) total.push(e);
-
-        if (e === '(') total.push(')')
-        else if (e === '[') total.push(']')
-        else if (e === '{') total.push('}')
-        else if (e.length === 0 || e !== total.pop()) return false;
-        else total.pop();
-    })
-
-    if (total.length > 0) return false;
-    else return true;
-
-}
-
-const s = "({{{{}}}))"
-
-// console.log(sss(s));
+//     return ff;
+// };
 
 
+// console.log(text("11", "1"));
 
-for (let i = 0; i < 10; i++) {
-    let s = [];
-    for (let j = 0; j < i; j++) {
-        s.push('*');
+
+function aaa() {
+    let a = {
+        value: 0
+    };
+    function bbb() {
+        return this.value++;
     }
-    console.log(s.join(''))
-
+    return bbb.call(a);
 }
-for (let i = 10; i > 0; i--) {
-    let s = [];
-    for (let j = 0; j < i; j++) {
-        s.push('*');
-    }
-    console.log(s.join(''))
 
+
+if (aaa() === 0 && aaa() === 1 && aaa() === 2) {
+    console.log('成功');
 }
+
+
+console.log(aaa());
+console.log(aaa());
+console.log(aaa());
