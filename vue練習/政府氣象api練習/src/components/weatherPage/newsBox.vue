@@ -63,25 +63,25 @@
                 <div class="imgBox">
                     <!-- 晴天 -->
                     <img :class="setImage === 0 ? 'photoIn' : 'photoOut'"
-                        src="../../assets/images/weatherPage/boxBgImg/summer.jpg" alt="">
+                        src="../../assets/images/weatherPage/boxBgImg/summer.webp" alt="">
                     <!-- 有太陽的陰天 -->
                     <img :class="setImage === 1 ? 'photoIn' : 'photoOut'"
-                        src="../../assets/images/weatherPage/boxBgImg/partlyCloudy.jpg" alt="">
+                        src="../../assets/images/weatherPage/boxBgImg/partlyCloudy.webp" alt="">
                     <!-- 陰天 -->
-                    <img :class="setImage === 2 ? 'photoIn' : 'photoOut'" style="opacity: 0;"
-                        src="../../assets/images/weatherPage/boxBgImg/cloudy.jpg" alt="">
+                    <img :class="setImage === 2 ? 'photoIn' : 'photoOut'"
+                        src="../../assets/images/weatherPage/boxBgImg/cloudy.webp" alt="">
                     <!-- 下雨 -->
                     <img :class="setImage === 3 ? 'photoIn' : 'photoOut'"
-                        src="../../assets/images/weatherPage/boxBgImg/rainy.jpg" alt="">
+                        src="../../assets/images/weatherPage/boxBgImg/rainy.webp" alt="">
                     <!-- 雷雨 -->
                     <img :class="setImage === 4 ? 'photoIn' : 'photoOut'"
-                        src="../../assets/images/weatherPage/boxBgImg/thunderstorm.jpg" alt="">
+                        src="../../assets/images/weatherPage/boxBgImg/thunderstorm.webp" alt="">
                     <!-- 雪 -->
                     <img :class="setImage === 5 ? 'photoIn' : 'photoOut'"
-                        src="../../assets/images/weatherPage/boxBgImg/Snow.jpg" alt="">
+                        src="../../assets/images/weatherPage/boxBgImg/Snow.webp" alt="">
                     <!-- 起霧 -->
                     <img :class="setImage === 6 ? 'photoIn' : 'photoOut'"
-                        src="../../assets/images/weatherPage/boxBgImg/fog.jpg" alt="">
+                        src="../../assets/images/weatherPage/boxBgImg/fog.webp" alt="">
                 </div>
             </div>
             <NewsParamBox :paramName="'天氣'" :paramValue="wx.name" :setStyle="setImage" />

@@ -58,14 +58,10 @@ export default {
 
 
 <style scoped>
-
-
-
-
 #mainPage {
     position: relative;
     width: 100%;
-    height: calc(100vh - 5rem);
+    height: calc(100vh - 5rem - 3rem);
     overflow: hidden;
 }
 

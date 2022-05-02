@@ -120,14 +120,14 @@ export default {
 /* 有太陽的陰天 */
 .partlyCloudyName {
     color: #fff;
-    background: rgb(0, 221, 255);
+    background: rgb(255, 187, 0);
 }
 
 .partlyCloudyValue {
-    color: rgb(0, 221, 255);
-    border-top: 5px solid rgb(0, 221, 255);
-    border-right: 5px solid rgb(0, 221, 255);
-    border-bottom: 5px solid rgb(0, 221, 255);
+    color: rgb(255, 187, 0);
+    border-top: 5px solid rgb(255, 187, 0);
+    border-right: 5px solid rgb(255, 187, 0);
+    border-bottom: 5px solid rgb(255, 187, 0);
 
 }
 

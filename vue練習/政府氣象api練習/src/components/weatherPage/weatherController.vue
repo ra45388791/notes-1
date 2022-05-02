@@ -257,8 +257,8 @@ export default {
     width: 100%;
     height: 3.5rem;
     background: rgb(82, 82, 82);
-    box-shadow: 0 5px 10px 0 #000;
-    border-radius: 0 0 20px 20px
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.46);
+    
 }
 
 .controllerButton h3 {

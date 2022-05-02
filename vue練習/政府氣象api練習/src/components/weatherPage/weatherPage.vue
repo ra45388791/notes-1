@@ -3,7 +3,10 @@
         <div class="weatherPageBox">
             <weatherController :cityName="cityNames" :times="times" @pushData="getWeatherOption" />
             <newsBox v-bind="weatherData" :cityName="weather.city" :setTime="changeTime" />
+            <TaiwanMap :cityName="weather.city" />
         </div>
+
+
     </div>
     <div v-else class="loading">
         <!-- 暫時放著 沒甚麼用處 -->
@@ -15,20 +18,35 @@ import { mapState, mapGetters, mapActions } from "vuex";
 
 import weatherController from './weatherController.vue';
 import newsBox from './newsBox.vue';
+import TaiwanMap from "./taiwanMap.vue";
 export default {
 
     data() {
         return {
             weather: {
-                city: '',   //用戶選取的城市
+                city: '新北市',   //用戶選取的城市
                 time: 0
             },
-            weatherData: {
-                wx: '',
-                minT: '',
-                maxT: '',
-                ci: '',
-                pop: '',
+            weatherData: {  //選中的天氣參數
+                wx: {
+                    name: '晴天',
+                    value: 0
+                },
+                minT: {
+                    name: "0",
+                    value: "C"
+                },
+                maxT: {
+                    name: "0",
+                    value: "C"
+                },
+                ci: {
+                    name: "舒適"
+                },
+                pop: {
+                    name: "0",
+                    value: "%"
+                },
             }
         }
     },
@@ -99,17 +117,15 @@ export default {
                 }
         */
         getWeatherOption(e) {
-
             this.weather.city = e.city;
-
             this.weather.time = e.time;
-
             this.showWeatherData();
-
         }
 
+
+
     },
-    components: { weatherController, newsBox }
+    components: { weatherController, newsBox, TaiwanMap }
 }
 
 </script>
@@ -120,7 +136,7 @@ export default {
 #weatherPage {
     position: relative;
     width: 100vw;
-    height: calc(100vh - 5rem);
+    height: calc(100vh - 5rem - 3rem);
 }
 
 .weatherPageBox {
