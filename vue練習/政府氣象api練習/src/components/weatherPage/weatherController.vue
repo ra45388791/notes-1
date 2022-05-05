@@ -36,9 +36,8 @@
 
         <div @mouseup="changItemState" class="controllerButton">
             <h3>選擇縣市</h3>
-            <button @mouseup="changItemState" class="showBtn" :class="show ? 'buttonShowState' : 'buttonCloseState'">
-                <div @mouseup="changItemState" class="showControllerButton">
-                </div>
+            <button class="showBtn">
+
             </button>
         </div>
 
@@ -200,15 +199,6 @@ export default {
     height: 22rem;
 }
 
-.buttonCloseState {
-    transform: rotate(0deg);
-
-}
-
-.buttonShowState {
-    transform: rotate(-180deg);
-}
-
 
 /* 開始 */
 .options {
@@ -255,68 +245,46 @@ export default {
 .controllerButton {
     position: relative;
     width: 100%;
-    height: 3.5rem;
+    height: 3rem;
     background: rgb(82, 82, 82);
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.46);
-    
+
 }
 
 .controllerButton h3 {
+    display: inline-block;
+
     margin: 0;
+    width: 100%;
+    height: 100%;
     text-align: center;
     font-size: 1.5rem;
     color: #fff;
-    line-height: 4rem
+    line-height: 3.3rem
 }
+
 
 .showBtn {
     position: absolute;
-    /* rigth 動畫 */
+
     right: 1.5rem;
-    top: calc(50% - 1.25rem);
-    padding: 0.25rem;
-
-    width: 2.5rem;
-    height: 2.5rem;
-    background: rgb(255, 255, 255);
-    border-radius: 100%;
-    border: 0;
-
-    transition: 0.5s ease-in-out;
-}
-
-
-.showControllerButton {
-    width: 100%;
-    height: 100%;
-
-    /* border: 2px solid #00ffff;
-    border-radius: 100%; */
-}
-
-.showControllerButton::before {
-    content: "";
-    position: absolute;
-    left: calc(50% - 1rem);
-    top: calc(50% - 2.5px);
+    top: calc(50% - 1.75px);
+    padding: 0rem;
 
     width: 2rem;
-    height: 5px;
-    background: rgba(82, 82, 82);
+    height: 3.5px;
+    background: rgb(255, 255, 255);
+    border-radius: 25px;
+    border: 0;
+
+    box-shadow: 0 10px 0 0 #fff, 0 -10px 0 0 #fff;
+
 
 }
 
-.showControllerButton::after {
-    content: "";
-    position: absolute;
-    left: calc(50% - 2.5px);
-    top: calc(50% - 1rem);
 
-    width: 5px;
-    height: 2rem;
-    background: rgba(82, 82, 82);
 
-}
+
 
 /* @media (min-width: 768px) {
     .itemCloseState {

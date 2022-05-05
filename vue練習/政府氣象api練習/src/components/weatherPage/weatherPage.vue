@@ -2,8 +2,8 @@
     <div v-if="weatherDataIsFetching" v-bind="$attrs" id="weatherPage">
         <div class="weatherPageBox">
             <weatherController :cityName="cityNames" :times="times" @pushData="getWeatherOption" />
-            <newsBox v-bind="weatherData" :cityName="weather.city" :setTime="changeTime" />
-            <TaiwanMap :cityName="weather.city" />
+            <newsBox v-bind="weatherData" :cityName="weather.city" :setTime="changeTime" @openMap="openTaiWanMap" />
+            <TaiwanMap ref="taiwanMapTemp" :cityName="weather.city" />
         </div>
 
 
@@ -27,7 +27,7 @@ export default {
                 city: '新北市',   //用戶選取的城市
                 time: 0
             },
-            weatherData: {  //選中的天氣參數
+            weatherData: {  //預設選中的天氣參數
                 wx: {
                     name: '晴天',
                     value: 0
@@ -70,7 +70,6 @@ export default {
             })
             return box
         },
-
         changeTime() {
             return this.weather.time
         }
@@ -120,8 +119,11 @@ export default {
             this.weather.city = e.city;
             this.weather.time = e.time;
             this.showWeatherData();
+        },
+        openTaiWanMap() {
+            console.log(this.$refs);
+            this.$refs.taiwanMapTemp.openMap();
         }
-
 
 
     },

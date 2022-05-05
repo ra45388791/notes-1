@@ -15,12 +15,12 @@
             </div>
         </div>
     </transition>
-
+    <!-- 
     <button @mouseup="openMap" class="mapBtn">
         <div>
             <img src="../../assets/images/weatherPage/map/map.png" alt="">
         </div>
-    </button>
+    </button> -->
 
 </template>
 <script>
@@ -75,6 +75,7 @@ export default {
     height: 100%;
     z-index: 9;
     background: rgba(0, 0, 0, 0.5);
+
 }
 
 .taiwanMapBox {
@@ -117,7 +118,7 @@ export default {
 }
 
 
-.mapBtn {
+/* .mapBtn {
     position: absolute;
     right: 0px;
     bottom: 0px;
@@ -148,5 +149,5 @@ export default {
 .mapBtn img {
     width: 100%;
     height: 100%;
-}
+} */
 </style>

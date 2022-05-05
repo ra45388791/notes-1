@@ -2,7 +2,7 @@
     <div v-if="weatherDataIsFetching" id="news">
         <div class="newsBox">
             <!-- 城市標題 -->
-            <div class="headerBox">
+            <div @mouseup="openMap" class="headerBox">
                 <div class="headerContent">
                     <div class="cityAndIcn">
 
@@ -84,9 +84,7 @@
                         src="../../assets/images/weatherPage/boxBgImg/fog.webp" alt="">
                 </div>
             </div>
-            <NewsParamBox :paramName="'天氣'" :paramValue="wx.name" :setStyle="setImage" />
-            <NewsParamBox :paramName="'舒適度'" :paramValue="ci.name" :setStyle="setImage" />
-            <NewsParamBox :paramName="'降雨率'" :paramValue="`${pop.name}${pop.value}`" :setStyle="setImage" />
+            <NewsParamBox v-bind="newsParam" />
         </div>
 
 
@@ -99,6 +97,7 @@ import NewsParamBox from "./newsParamBox.vue";
 export default {
     //氣象資料 / 設定時間
     props: ["ci", "maxT", "minT", "pop", "wx", "cityName", "setTime"],
+    emits: ['openMap'],
     data() {
         return {
 
@@ -107,12 +106,8 @@ export default {
     created() {
     },
     mounted() {
-        this.weatherData();
     },
     watch: {
-        cityName(newVal) {
-            this.weatherData();
-        },
     },
     computed: {
         ...mapState(["weatherDataIsFetching"]),
@@ -135,46 +130,28 @@ export default {
             else if (wxValue >= 24 && wxValue <= 28 || wxValue === 32 || wxValue >= 37 && wxValue <= 41) return 6;
             // 防止沒有值時傳了空值
             else return 0;
+        },
+        newsParam() {
+            return {
+                wx: {
+                    name: '天氣',
+                    value: this.wx.name,
+                },
+                ci: {
+                    name: '舒適度',
+                    value: this.ci.name,
+                },
+                pop: {
+                    name: '降雨率',
+                    value: `${this.pop.name}${this.pop.value}`,
+                },
+                styleValue: this.setImage
+            }
         }
     },
     methods: {
-        weatherData() {
-            //使用陣列取值會報錯 
-            // this.wxData = this.wx[this.setTime].name;
-            // this.MinTData = this.minT[this.setTime].name;
-            // this.MaxTData = this.maxT[this.setTime].name;
-            // this.CIData = this.ci[this.setTime].name;
-            // this.PoPData = this.pop[this.setTime].name;
-            // switch (this.setTime) {
-            //     case 0:
-            //         this.wxData = this.wx.time0;
-            //         this.MinTData = this.minT.time0;
-            //         this.MaxTData = this.maxT.time0;
-            //         this.CIData = this.ci.time0;
-            //         this.PoPData = this.pop.time0;
-            //         break;
-            //     case 1:
-            //         this.wxData = this.wx.time1;
-            //         this.MinTData = this.minT.time1;
-            //         this.MaxTData = this.maxT.time1;
-            //         this.CIData = this.ci.time1;
-            //         this.PoPData = this.pop.time1;
-            //         break;
-            //     case 2:
-            //         this.wxData = this.wx.time2
-            //         this.MinTData = this.minT.time2;
-            //         this.MaxTData = this.maxT.time2;
-            //         this.CIData = this.ci.time2;
-            //         this.PoPData = this.pop.time2;
-            //         break;
-            // }
-            // return {
-            //     Wx: this.Wx[this.setTimes].name,
-            //     CI: this.CI[this.setTimes].name,
-            //     MinT: this.MinT[this.setTimes].name,
-            //     MaxT: this.MaxT[this.setTimes].name,
-            //     PoP: this.PoP[this.setTimes].name,
-            // }
+        openMap() {
+            this.$emit('openMap');
         },
     },
     components: { NewsParamBox }
@@ -202,6 +179,7 @@ export default {
     margin: 0 auto;
     padding-top: 2rem;
     max-width: 30rem;
+
 }
 
 .headerBox {
@@ -210,10 +188,22 @@ export default {
     padding-top: 1rem;
     width: 20rem;
     height: 15rem;
-    background: rgb(255, 255, 255);
     border-radius: 20px;
-    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.426);
+    box-shadow: 0 0px 10px 0px rgb(0, 0, 0);
+    /* border-top: 5px solid rgb(255, 255, 255);
+    border-left: 5px solid rgb(255, 255, 255);
+    border-right: 5px solid rgb(255, 255, 255);
+    border-bottom: 5px solid rgb(255, 255, 255); */
     overflow: hidden;
+}
+
+.headerBox:active {
+    /* 
+    border-top: 5px solid rgb(129, 129, 129);
+    border-left: 5px solid rgb(129, 129, 129);
+    border-right: 5px solid rgb(129, 129, 129);
+    border-bottom: 5px solid rgb(129, 129, 129); */
+
 }
 
 /* .headerBox::before {
