@@ -112,8 +112,6 @@ export default {
     height: auto;
     font-size: 1.5rem;
     text-align: center;
-    /* border-radius: 15px; */
-    /* box-shadow: 0 6px 10px -5px rgba(0, 0, 0, 0.6); */
 }
 
 .Box {
@@ -121,7 +119,6 @@ export default {
     flex-direction: column;
     padding: 1rem 0;
     color: #fff;
-    /* background: rgba(14, 127, 220); */
     transition: 0.5s
 }
 
@@ -148,8 +145,6 @@ export default {
 /* 天氣現象 */
 .Box.wxBox {
     flex: 100%;
-    /* border-bottom: solid 1px rgba(238, 238, 238); */
-    /* background: rgba(14, 127, 220); */
 
 }
 
@@ -164,11 +159,11 @@ export default {
 .Box.popBox {
     position: relative;
     flex: 4;
-    padding-top: 0.8rem;
-    background: #fff;
+    padding-top: 1rem;
+
     color: #000;
-    /* 動態設定陰影 */
-    /* box-shadow: inset 0 calc(13rem * -0.3) 0 0 rgb(71, 234, 255); */
+    background: #fff;
+
     border-right: solid 1px rgb(171, 171, 171);
     border-bottom: solid 1px rgba(171, 171, 171);
     overflow: hidden;
@@ -309,4 +304,40 @@ export default {
     }
 
 */
+
+
+@media (min-width: 1920px) {
+    .paramBox {
+        width: 25rem;
+        font-size: 2rem;
+    }
+
+    .name {
+        margin: 0;
+        margin-bottom: 0.5rem;
+        padding-left: 2rem;
+
+        font-size: 1.3rem;
+        text-align: start;
+        font-weight: normal;
+    }
+
+    .Box.wxBox {
+        height: 7rem;
+    }
+
+    .Box.ciBox {
+        height: 15rem;
+    }
+
+    .Box.popBox .popMask::before {
+        top: -17.9rem;
+        left: calc(50% - 9.5rem);
+        width: 19rem;
+        height: 19rem;
+
+        animation: popAni 7s 0s linear infinite;
+    }
+
+}
 </style>

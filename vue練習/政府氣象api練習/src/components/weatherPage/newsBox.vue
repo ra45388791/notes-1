@@ -38,10 +38,10 @@
                     <!-- 溫度 -->
                     <div class="temperature">
                         <div class="lowestTemperature">
-                            <div class="lowestCount">
+                            <div class="count">
                                 {{ minT.name }}
                             </div>
-                            <div class="lowestText">
+                            <div class="text">
                                 最低溫度
                             </div>
                         </div>
@@ -49,10 +49,10 @@
                             -
                         </div>
                         <div class="maximumTemperature">
-                            <div class="maximumCount">
+                            <div class="count">
                                 {{ maxT.name }}
                             </div>
-                            <div class="maximumText">
+                            <div class="text">
                                 最高溫度
                             </div>
                         </div>
@@ -257,7 +257,6 @@ export default {
     width: 150%;
     height: 150%;
     background: rgb(255, 255, 255);
-    /* transform: rotate(-50deg); */
     border-right: 5px solid rgb(92, 173, 255);
     border-bottom: 5px solid rgb(92, 173, 255);
     border-radius: 10px;
@@ -282,11 +281,11 @@ export default {
     font-weight: bold;
 }
 
-.lowestTemperature .lowestCount {
+.temperature .count {
     font-size: 3rem;
 }
 
-.maximumTemperature .maximumCount {
+.temperature .count {
     font-size: 3rem;
 
 }
@@ -317,19 +316,56 @@ export default {
         flex: 1;
     }
 
-    /* 
-    .newsBox {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin: 0 auto;
-        padding-top: 2rem;
-        max-width: 30rem;
-
-    } */
     .headerBox {
         animation: none;
     }
+
+}
+
+@media (min-width: 1920px) {
+    #news {
+        flex: 1;
+    }
+
+    .headerBox {
+        margin-bottom: 2rem;
+        padding-top: 2rem;
+        width: 25rem;
+        height: 20rem;
+    }
+
+    .cityName {
+        padding-left: 2rem;
+        padding-right: 0.5rem;
+
+        font-size: 2.5rem;
+    }
+
+    .headerIcn {
+        position: relative;
+
+        margin-right: 4rem;
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+
+    .headerIcn::before {
+        border-right: 6px solid rgb(92, 173, 255);
+        border-bottom: 6px solid rgb(92, 173, 255);
+    }
+
+    .temperature .count {
+        font-size: 4rem;
+    }
+
+    .temperature .text {
+        font-size: 1.2rem;
+    }
+
+
+
+
+
 
 }
 </style>

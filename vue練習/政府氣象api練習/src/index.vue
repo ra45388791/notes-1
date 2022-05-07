@@ -7,7 +7,7 @@
         </div>
         <div class="navBox">
             <router-link to="/">首頁</router-link>
-            <router-link to="weatherPage">天氣預報</router-link>
+            <router-link to="weatherPage">氣象預報</router-link>
         </div>
     </nav>
     <router-view>

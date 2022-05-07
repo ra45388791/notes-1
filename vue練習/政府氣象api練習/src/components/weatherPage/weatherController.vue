@@ -223,6 +223,10 @@ export default {
     overflow-y: scroll;
 }
 
+.optionsBox::-webkit-scrollbar {
+    display: none;
+}
+
 .optionsBox div {
     text-align: center;
 }

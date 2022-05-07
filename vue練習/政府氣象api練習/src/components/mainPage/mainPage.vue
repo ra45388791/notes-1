@@ -110,7 +110,7 @@ export default {
     padding: 0.5rem 3rem;
 
     text-align: center;
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: #fff;
     background: rgba(255, 255, 255, 0.2);
     text-shadow: 2px 2px 0 #000;
@@ -152,13 +152,51 @@ export default {
     box-shadow: inset 10rem 0px 0px 0 rgb(255, 251, 0);
 }
 
-
-
 #mainPage .controller .weatherButton a {
     text-decoration: none;
 }
 
-#mainPage .controller .weatherButton a:visited {
-    /* color: #fff; */
+
+@media (min-width: 1024px) {
+    #mainPage .title h2 {
+        display: inline-block;
+        margin-top: 2.5rem;
+
+        font-size: 2.5rem;
+    }
+
+    #mainPage .controller .weatherButton a {
+        position: absolute;
+        left: calc(50% - 4rem);
+        bottom: 15%;
+
+        width: 8rem;
+        height: 8rem;
+        font-size: 1.5rem;
+
+        line-height: 8rem;
+
+    }
+}
+
+@media (min-width: 1440px) {
+    #mainPage .title h2 {
+        display: inline-block;
+        margin-top: 3rem;
+
+        font-size: 3rem;
+    }
+
+    #mainPage .controller .weatherButton a {
+        position: absolute;
+        left: calc(50% - 5rem);
+        bottom: 10%;
+
+        width: 10rem;
+        height: 10rem;
+        font-size: 2rem;
+
+        line-height: 10rem;
+    }
 }
 </style>

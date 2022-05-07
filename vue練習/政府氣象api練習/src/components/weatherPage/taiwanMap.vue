@@ -6,7 +6,7 @@
             <div class="taiwanMapBox">
                 <nav class="mapNav">
                     <h3>
-                        目標縣市
+                        選中縣市
                     </h3>
                     <button @mouseup.self="closeMap"></button>
                 </nav>
@@ -23,20 +23,21 @@
                     <!-- 過小的區域用按鈕替代 -->
                     <div class="smallCityBtn">
                         <div class="cityBox outerIslands">
-                            <button @mouseup="checkedCity('連江縣')">連江縣</button>
-                            <button @mouseup="checkedCity('金門縣')">金門縣</button>
-                            <button @mouseup="checkedCity('澎湖縣')">澎湖縣</button>
+                            <button v-for=" city of smallCity.outerIslands"
+                                :style="cityName === city ? 'background: rgb(117, 230, 255);' : ''"
+                                @mouseup="checkedCity(city)">{{ city }}</button>
                         </div>
 
                         <div class="cityBox northernCity">
-                            <button @mouseup="checkedCity('基隆市')">基隆市</button>
-                            <button @mouseup="checkedCity('新北市')">新北市</button>
-                            <button @mouseup="checkedCity('臺北市')">臺北市</button>
+                            <button v-for=" city of smallCity.northernCity"
+                                :style="cityName === city ? 'background: rgb(117, 230, 255);' : ''"
+                                @mouseup="checkedCity(city)">{{ city }}</button>
                         </div>
 
                         <div class="cityBox chiayiCity">
-                            <button @mouseup="checkedCity('嘉義市')">嘉義市</button>
-                            <button @mouseup="checkedCity('嘉義縣')">嘉義縣</button>
+                            <button v-for=" city of smallCity.chiayiCity"
+                                :style="cityName === city ? 'background: rgb(117, 230, 255);' : ''"
+                                @mouseup="checkedCity(city)">{{ city }}</button>
                         </div>
 
                     </div>
@@ -63,7 +64,12 @@ export default {
         return {
             mapData: [],
             defaultStyle: '',           //控制地圖顯示
-            openMapState: false
+            openMapState: false,
+            smallCity: {                //面積太小的城市
+                outerIslands: ['連江縣', '金門縣', '澎湖縣'],
+                northernCity: ['基隆市', '新北市', '臺北市', '新竹市'],
+                chiayiCity: ['嘉義市', '嘉義縣']
+            },
         }
     },
     created() {
@@ -278,7 +284,9 @@ export default {
     stroke-opacity: 1;
     stroke-width: 0.5;
 
-    transition: fill 0.3s;
+    cursor: pointer;
+
+    transition: 0.5s;
 }
 
 .taiwanMapBox .land:hover {
@@ -286,16 +294,14 @@ export default {
 }
 
 .taiwanMapBox .activeMap {
-    fill: #ff0000;
+    fill: #00eaff;
     transform: translate(-0.2rem, -0.2rem);
 }
 
 .smallCityBtn .cityBox {
+    position: absolute;
     display: flex;
     flex-direction: column;
-
-    position: absolute;
-
 }
 
 .smallCityBtn button {
@@ -312,7 +318,7 @@ export default {
     border: none;
     border-radius: 10px;
     font-weight: bold;
-
+    cursor: pointer;
 }
 
 /* 離島 */
@@ -321,29 +327,26 @@ export default {
     left: 0.5rem;
 }
 
+/* 北北基 */
 .smallCityBtn .northernCity {
     top: 0.5rem;
     right: 0.5rem;
 }
 
+/* 桃園縣市 */
 .smallCityBtn .chiayiCity {
     bottom: 0.5rem;
     left: 0.5rem;
 }
-
-
-
 
 .smallCityBtn button:hover {
     background: rgb(117, 230, 255);
 
 }
 
-/* .land[id="TW-LIE"] {
-    position: relative;
-} */
-
-
+.hoverBtn {
+    background: rgb(117, 230, 255);
+}
 
 
 @media (min-width: 1024px) {
@@ -391,10 +394,41 @@ export default {
     }
 
     .mapBox {
-
         border: dashed 5px rgb(146, 239, 255);
     }
 
+
+}
+
+@media (min-width: 1920px) {
+    .taiwanMapBox {
+        height: 40rem;
+        max-width: 40rem;
+    }
+
+    .mapNav {
+        font-size: 1.8rem;
+    }
+
+    .mapNav h3 {
+        padding: 0.2rem 1.5rem;
+    }
+
+    .taiwanMapBox svg {
+        width: 334.84px;
+        height: 433.6px;
+    }
+
+    .taiwanMapBox g {
+        transform: scale(0.55)
+    }
+
+    .smallCityBtn button {
+        width: 6rem;
+        height: 2rem;
+
+        font-size: 1.3rem;
+    }
 
 }
 </style>

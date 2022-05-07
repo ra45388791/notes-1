@@ -77,6 +77,44 @@
     },
     {
         "id": 1,
+        "title": "天氣預報平台",
+        "content": [
+            {
+                "id": 0,
+                "text": "天氣預報平台"
+            }
+        ],
+        "image": "works/weather.jpg",
+        "photos": [
+            {
+                "id": 0,
+                "photo": "works/todolist/0.jpg"
+            },
+            {
+                "id": 1,
+                "photo": "works/todolist/1.jpg"
+            },
+            {
+                "id": 2,
+                "photo": "works/todolist/2.jpg"
+            },
+            {
+                "id": 3,
+                "photo": "works/todolist/3.jpg"
+            }
+        ],
+        "button": [
+            {
+                "id": 0,
+                "name": "前往作品",
+                "type": "href",
+                "link": "https://ra3991048.000webhostapp.com/#/",
+                "icon": "works/icon/foreign.png"
+            }
+        ]
+    },
+    {
+        "id": 2,
         "title": "大學專題-音樂遊戲",
         "content": [
             {
