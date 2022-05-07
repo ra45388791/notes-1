@@ -3,15 +3,15 @@
         <div class="weatherPageBox">
             <weatherController :cityName="cityNames" :times="times" @pushData="getWeatherOption" />
             <newsBox v-bind="weatherData" :cityName="weather.city" :setTime="changeTime" @openMap="openTaiWanMap" />
-            <TaiwanMap ref="taiwanMapTemp" :cityName="weather.city" />
+            <TaiwanMap ref="taiwanMapTemp" :cityName="weather.city" @pushData="getWeatherOption" />
         </div>
 
 
     </div>
-    <div v-else class="loading">
-        <!-- 暫時放著 沒甚麼用處 -->
+    <!-- <div v-else class="loading">
+        暫時放著 沒甚麼用處
         讀取中
-    </div>
+    </div> -->
 </template>
 <script>
 import { mapState, mapGetters, mapActions } from "vuex";
@@ -116,8 +116,9 @@ export default {
                 }
         */
         getWeatherOption(e) {
-            this.weather.city = e.city;
-            this.weather.time = e.time;
+            if (this.weather.city) this.weather.city = e.city;
+            if (this.weather.time) this.weather.time = e.time;
+
             this.showWeatherData();
         },
         openTaiWanMap() {
@@ -138,19 +139,23 @@ export default {
 #weatherPage {
     position: relative;
     width: 100vw;
-    height: calc(100vh - 5rem - 3rem);
+    min-height: calc(100vh - 5rem - 3rem);
 }
 
 .weatherPageBox {
     position: relative;
-    padding-top: 3.5rem;
+
+    padding: 3.5rem 0;
     width: 100%;
     height: 100%;
-    /* background: #000; */
 }
 
-.content {
-    /* background: #000; */
-    height: 100%;
+@media (min-width: 1024px) {
+    .weatherPageBox {
+        display: flex;
+        align-items: center;
+        padding-top: 0;
+    }
+
 }
 </style>

@@ -184,43 +184,34 @@ export default {
 
 .headerBox {
     position: relative;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     padding-top: 1rem;
     width: 20rem;
     height: 15rem;
     border-radius: 20px;
-    box-shadow: 0 0px 10px 0px rgb(0, 0, 0);
-    /* border-top: 5px solid rgb(255, 255, 255);
-    border-left: 5px solid rgb(255, 255, 255);
-    border-right: 5px solid rgb(255, 255, 255);
-    border-bottom: 5px solid rgb(255, 255, 255); */
+    /* box-shadow: 0 0px 10px 0px rgb(0, 0, 0); */
+    animation: headerBoxAni 3.5s ease infinite;
+
     overflow: hidden;
 }
 
-.headerBox:active {
-    /* 
-    border-top: 5px solid rgb(129, 129, 129);
-    border-left: 5px solid rgb(129, 129, 129);
-    border-right: 5px solid rgb(129, 129, 129);
-    border-bottom: 5px solid rgb(129, 129, 129); */
+@keyframes headerBoxAni {
+    0% {
+        /* box-shadow: 0 0px 0px 0px rgb(92, 92, 255); */
+        box-shadow: 0 0px 0px 0px rgb(140, 140, 140);
+    }
+
+    60% {
+        box-shadow: 0 0px 5px 15px rgba(140, 140, 140, 0);
+    }
+
+    100% {
+        box-shadow: 0 0px 5px 15px rgba(140, 140, 140, 0);
+
+    }
 
 }
 
-/* .headerBox::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    right: 0;
-
-
-
-    width: 100px;
-    height: 300px;
-    background: rgba(255, 255, 255, 0.811);
-    transform: rotate(-50deg);
-
-    z-index: 2;
-} */
 
 .headerContent {
     position: relative;
@@ -291,8 +282,6 @@ export default {
     font-weight: bold;
 }
 
-.lowestTemperature {}
-
 .lowestTemperature .lowestCount {
     font-size: 3rem;
 }
@@ -320,5 +309,27 @@ export default {
     width: 100%;
     height: 100%;
     opacity: 0;
+}
+
+
+@media (min-width: 1024px) {
+    #news {
+        flex: 1;
+    }
+
+    /* 
+    .newsBox {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        padding-top: 2rem;
+        max-width: 30rem;
+
+    } */
+    .headerBox {
+        animation: none;
+    }
+
 }
 </style>

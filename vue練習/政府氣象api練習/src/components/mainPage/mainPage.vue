@@ -97,11 +97,22 @@ export default {
     z-index: 2;
 }
 
+#mainPage .title {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
 #mainPage .title h2 {
+    display: inline-block;
     margin-top: 5rem;
+    margin-bottom: 0;
+    padding: 0.5rem 3rem;
+
     text-align: center;
     font-size: 3rem;
     color: #fff;
+    background: rgba(255, 255, 255, 0.2);
     text-shadow: 2px 2px 0 #000;
 }
 

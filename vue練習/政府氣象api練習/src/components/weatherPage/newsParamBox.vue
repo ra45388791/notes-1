@@ -51,7 +51,7 @@ export default {
                     ; (function (e) {
                         setTimeout(() => {
                             vm.popMath++;
-                        }, e * 10)
+                        }, e * 8)
                     })(i)
                 }
             } else {
@@ -59,7 +59,7 @@ export default {
                     ; (function (e) {
                         setTimeout(() => {
                             vm.popMath--;
-                        }, e * 10)
+                        }, e * 8)
                     })(i)
                 }
             }

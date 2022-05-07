@@ -10,7 +10,9 @@
             <router-link to="weatherPage">天氣預報</router-link>
         </div>
     </nav>
-    <router-view></router-view>
+    <router-view>
+
+    </router-view>
     <footer>
         <p>本網站僅作為應徵用</p>
     </footer>
@@ -72,6 +74,7 @@ html {
 body {
     margin: 0;
     padding: 0;
+    padding-top: 5rem;
 }
 
 #app {
@@ -90,21 +93,26 @@ body {
 
 
 #indexNav {
+    position: fixed;
+    left: 0;
+    top: 0;
+
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-around;
+
     margin: 0;
     padding: 0 2rem;
 
+    width: 100%;
     height: 5rem;
 
-    /* background: rgb(254, 254, 254); */
     background: rgb(0, 106, 255);
 
-
-    /* border-bottom: 5px solid rgb(202, 202, 202); */
     border-bottom: 5px solid rgb(0, 149, 255);
+
+    z-index: 99;
 }
 
 #indexNav a {
@@ -129,28 +137,19 @@ body {
 
 #indexNav .title h1 {
     margin: 0;
-
     color: #fff;
-
 }
 
 #indexNav .navBox {
 
     width: 100%;
-    /* height: 2rem; */
     text-align: center;
 }
 
 #indexNav .navBox a {
     padding-bottom: 5px;
     color: #fff;
-    /* border-left: 2px solid rgb(64, 64, 64); */
 }
-
-#indexNav .navBox a:nth-last-child(1) {
-    /* border-right: 2px solid rgb(64, 64, 64); */
-}
-
 
 footer {
     margin: 0;

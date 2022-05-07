@@ -202,14 +202,15 @@ export default {
 
 /* 開始 */
 .options {
-    position: absolute;
+    position: fixed;
     left: 0;
-    top: 0;
+    top: 5rem;
 
     width: 100%;
 
-    background: rgb(239, 239, 239);
-
+    /* background: rgb(239, 239, 239); */
+    background: rgba(0, 0, 0, 0.798);
+    color: #fff;
     transition: 0.5s ease-in-out;
     z-index: 9;
 }
@@ -246,8 +247,9 @@ export default {
     position: relative;
     width: 100%;
     height: 3rem;
-    background: rgb(82, 82, 82);
-    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.46);
+    /* background: rgb(82, 82, 82); */
+    background: rgb(3, 98, 207);
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.287);
 
 }
 
@@ -284,85 +286,45 @@ export default {
 
 
 
-
-
-/* @media (min-width: 768px) {
-    .itemCloseState {
-        padding: 0rem 1.5rem;
-        height: 0rem;
-    }
-
-    .itemShowState {
-        padding: 5px 1.5rem;
-        height: 11.5rem;
-    }
-
-    .optionsBox {
-        display: flex;
-        justify-content: space-around;
-        align-content: start;
-        flex-wrap: wrap;
-    }
-
-
-}
-
 @media (min-width: 1024px) {
     .itemCloseState {
-        padding: auto;
-        height: 24rem;
+        height: calc(100% - 5rem);
+
+        transform: translateX(-25rem);
     }
 
     .itemShowState {
-        padding: auto;
-        height: 24rem;
+        height: calc(100% - 5rem);
+        transform: translateX(0);
     }
 
-    .buttonCloseState {
-        right: 0;
-    }
-
-    .buttonShowState {
-        right: calc(50% - 1.625rem);
-
-    }
 
     .options {
-        position: relative;
-        right: auto;
-        top: auto;
-        padding: 0rem 0;
-        width: 50%;
-        height: 100%;
-        box-shadow: inset 4px -3px 0px 0px #1b697d;
-        border-radius: 0 0 0 20px;
-
+        top: 5rem;
+        width: 25rem;
+        border-right: 5px solid rgb(0, 128, 255);
     }
 
     .optionsBox {
-        display: flex;
-        justify-content: space-around;
-        align-content: start;
-        flex-wrap: wrap;
-        padding: 0.7rem 1.5rem;
+        padding-bottom: 2rem;
     }
 
+    .controllerButton {
+        position: absolute;
+        right: calc(-3rem - 5px);
+        top: 0;
+        width: 3rem;
+        height: 3rem;
+    }
 
-    .showBtn {
+    .controllerButton h3 {
         display: none;
     }
 
-}
-
-@media (min-width: 1440px) {
-    .options {
-        width: 40%;
+    .showBtn {
+        right: calc(50% - 1rem);
+        top: calc(50% - 1.75px);
+        padding: 0rem;
     }
 }
-
-@media (min-width: 1920px) {
-    .options {
-        width: 30%;
-    }
-} */
 </style>

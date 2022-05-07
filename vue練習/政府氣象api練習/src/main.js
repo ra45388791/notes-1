@@ -180,14 +180,14 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, form) => {
-    console.log(to);
+    // console.log(to);
     let data = store.getters.TIDY_UP_WEATHER_DATA;
 
     // console.log(data.time.length);
     if (data.time.length === 0 || data.data.length === 0) {
         await store.dispatch('GET_WEATHER_API_DATA');
         data = store.getters.TIDY_UP_WEATHER_DATA;
-        console.log(data);
+        // console.log(data);
     }
 
 
